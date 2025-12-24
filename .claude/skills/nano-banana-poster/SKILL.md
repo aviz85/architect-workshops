@@ -7,6 +7,28 @@ description: "Generate marketing posters using Google GenAI based on local brand
 
 Generate marketing posters with AI using Google's Gemini model, styled according to brand guidelines.
 
+## Assets
+
+Store brand assets (avatar, logo, etc.) in the `assets/` folder:
+
+```
+nano-banana-poster/
+├── assets/
+│   ├── avatar.jpg      # Personal branding avatar
+│   ├── logo.png        # Brand logo
+│   └── ...             # Other assets
+├── scripts/
+└── SKILL.md
+```
+
+**Supported formats:** `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`
+
+**To list available assets:**
+```bash
+cd scripts
+npx ts-node generate_poster.ts --list-assets
+```
+
 ## Branding Requirements
 
 **CRITICAL:** Every poster MUST include the following branding elements for consistency:
@@ -24,85 +46,116 @@ Generate marketing posters with AI using Google's Gemini model, styled according
 
 **Visual Style:** Professional, educational, tech-forward
 
-**Avatar:** The avatar image (avatar.jpg) should be incorporated when appropriate for personal branding
-
 ## Workflow
-
-Follow these steps to generate a poster:
 
 ### 1. Understand the request
 
 Identify what the user wants on the poster (topic, message, theme).
 
-### 2. Construct the prompt with mandatory branding
+### 2. Decide which assets to include
+
+Common assets to consider:
+- `avatar` - Personal branding, use for workshop announcements
+- `logo` - Brand logo, use for official materials
+
+Ask user if they want specific assets included, or suggest based on context.
+
+### 3. Construct the prompt with mandatory branding
 
 **IMPORTANT:** ALWAYS include the branding requirements in your prompt. Every prompt must include:
-- **CRITICAL LANGUAGE REQUIREMENT:** ALL text, titles, descriptions, and content MUST be in Hebrew. Emphasize this strongly in the prompt.
+- **CRITICAL LANGUAGE REQUIREMENT:** ALL text, titles, descriptions, and content MUST be in Hebrew
 - Brand name: "Aviz - The Architect"
 - Color palette: Use the exact hex values listed above (#22C55E, #374151, etc.)
 - Visual style: Professional, educational, tech-forward
 - The user's specific request
 - Any additional requirements
 
-Example prompt structure:
-```
-Create a marketing poster for [USER REQUEST]. 
-
-CRITICAL: ALL text, titles, descriptions, labels, and content MUST be in Hebrew. The entire poster should be in Hebrew language.
-
-Brand: Aviz - The Architect - Teaching non-tech people to code with AI and architectural understanding.
-
-Colors: Use #22C55E (friendly green) for primary accents, with gray tones #374151, #4B5563, #6B7280.
-
-Style: Professional, educational, tech-forward aesthetic.
-
-[Additional user requirements]
-```
-
-Example complete prompt:
+Example prompt:
 ```
 Create a marketing poster for an AI coding workshop announcement.
 
-CRITICAL: ALL text, titles, descriptions, and content MUST be in Hebrew. Every word on the poster must be in Hebrew language.
+CRITICAL: ALL text, titles, descriptions, and content MUST be in Hebrew.
 
-Brand: Aviz - The Architect - Teaching non-tech people to code with AI and architectural understanding.
+Brand: Aviz - The Architect - Teaching non-tech people to code with AI.
 
-Colors: Use #22C55E (friendly green) for primary accents and CTAs, with supporting grays #374151, #4B5563, #6B7280.
+Colors: Use #22C55E (friendly green) for primary accents, with grays #374151, #4B5563, #6B7280.
 
-Style: Professional, educational, tech-forward aesthetic with clean typography.
+Style: Professional, educational, tech-forward aesthetic.
 
-Include Hebrew text: [Hebrew text examples]
+Include the avatar image prominently for personal branding.
 ```
 
-### 3. Execute the generation script
+### 4. Execute the generation script
 
-Run the poster generation script from the scripts directory:
+Run the poster generation script:
 
+**Without assets:**
 ```bash
-cd scripts
-npx ts-node generate_poster.ts "your constructed prompt here"
+cd /home/user/architect-workshops/.claude/skills/nano-banana-poster/scripts
+npx ts-node generate_poster.ts "your prompt here"
 ```
+
+**With assets:**
+```bash
+npx ts-node generate_poster.ts --assets "avatar" "your prompt here"
+npx ts-node generate_poster.ts --assets "avatar,logo" "your prompt here"
+```
+
+**Options:**
+| Option | Description |
+|--------|-------------|
+| `--assets <names>` | Comma-separated asset names (without extension) |
+| `--list-assets` | Show available assets in assets/ folder |
 
 The script will:
-- Automatically upload the avatar image (`references/avatar.jpg`) to the Google Files API
-- Send both the avatar and prompt to Google's Gemini 3 Pro Image model
-- Generate the poster image with the avatar incorporated into the design
-- Save it as `poster_0.jpg` (or subsequent numbers if multiple images are generated) in the scripts directory
-- **Copy the generated poster to the current working directory** (where the command is executed from)
-- Clean up the uploaded avatar file from the server
-- Output any text responses from the model
+1. Find and upload specified assets from `assets/` folder
+2. Send assets + prompt to Google's Gemini 3 Pro Image model
+3. Generate the poster image
+4. Save as `poster_0.jpg` in scripts/ and current directory
+5. Clean up uploaded files from server
 
-### 4. Deliver the result
+### 5. Deliver the result
 
-Inform the user that the poster has been generated and provide the file path. The poster will be saved in both the `scripts/` directory and copied to the current working directory.
+Inform the user that the poster has been generated and provide the file path.
+
+## Examples
+
+**Workshop poster with avatar:**
+```bash
+npx ts-node generate_poster.ts --assets "avatar" "Create a workshop poster for 'Claude Code למתחילים' workshop on Thursday at 20:00. CRITICAL: All text in Hebrew. Brand: Aviz - The Architect. Colors: #22C55E primary, gray tones. Professional, educational style. Feature the avatar prominently."
+```
+
+**Generic promotional without assets:**
+```bash
+npx ts-node generate_poster.ts "Create promotional image for AI workshops. Hebrew text only. Use #22C55E green and gray tones. Professional tech style."
+```
+
+## Setup
+
+### Install dependencies
+
+```bash
+cd /home/user/architect-workshops/.claude/skills/nano-banana-poster/scripts
+npm install
+```
+
+### Configure API key
+
+Create `.env` file in scripts/:
+```
+GEMINI_API_KEY=your_api_key_here
+```
+
+### Add assets
+
+Place image files in `assets/` folder:
+- Name them descriptively: `avatar.jpg`, `logo.png`, `banner.webp`
+- Reference by name without extension: `--assets "avatar,logo"`
 
 ## Notes
 
-- The script requires a GEMINI_API_KEY environment variable, which is already configured in `scripts/.env`
-- **Avatar Auto-Upload**: The script automatically uploads `references/avatar.jpg` to Google's Files API and includes it in the generation request, then cleans it up after completion
-- Generated posters are saved with sequential filenames: `poster_0.jpg`, `poster_1.jpg`, etc.
-- The image size is 1K (1024x1024 pixels)
-- Both image and text responses from the AI model will be captured
-- If the avatar upload fails, the script continues without it and displays a warning
+- Asset names are case-sensitive
+- Script auto-detects file extensions (jpg, png, webp, etc.)
+- Generated posters are 1024x1024 pixels
+- All uploaded assets are cleaned up after generation
 - **Hebrew Content Requirement**: Always emphasize in prompts that ALL content must be in Hebrew
-- Generated images are automatically copied to the current working directory for easy access

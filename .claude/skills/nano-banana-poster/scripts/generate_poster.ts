@@ -8,12 +8,22 @@ import {
   createPartFromUri,
 } from '@google/genai';
 import mime from 'mime';
-import { writeFileSync, copyFileSync } from 'fs';
+import { writeFileSync, copyFileSync, readdirSync, existsSync } from 'fs';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 
 // Load environment variables from the script's directory
 dotenv.config({ path: path.join(__dirname, '.env') });
+
+const ASSETS_DIR = path.join(__dirname, '..', 'assets');
+const SUPPORTED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+
+interface UploadedAsset {
+  name: string;
+  uri: string;
+  mimeType: string;
+  originalName: string;
+}
 
 function saveBinaryFile(fileName: string, content: Buffer) {
   const scriptDir = __dirname;
@@ -21,12 +31,10 @@ function saveBinaryFile(fileName: string, content: Buffer) {
   const scriptFilePath = path.join(scriptDir, fileName);
   const workingDirFilePath = path.join(workingDir, fileName);
 
-  // Save to script directory (binary mode, no encoding)
   try {
     writeFileSync(scriptFilePath, content);
     console.log(`File ${scriptFilePath} saved to file system.`);
 
-    // Copy to current working directory if different from script directory
     if (scriptDir !== workingDir) {
       try {
         copyFileSync(scriptFilePath, workingDirFilePath);
@@ -40,13 +48,83 @@ function saveBinaryFile(fileName: string, content: Buffer) {
   }
 }
 
+function findAssetFile(assetName: string): string | null {
+  // Look for asset with any supported extension
+  for (const ext of SUPPORTED_EXTENSIONS) {
+    const filePath = path.join(ASSETS_DIR, `${assetName}${ext}`);
+    if (existsSync(filePath)) {
+      return filePath;
+    }
+  }
+  return null;
+}
+
+function listAvailableAssets(): string[] {
+  if (!existsSync(ASSETS_DIR)) {
+    return [];
+  }
+
+  const files = readdirSync(ASSETS_DIR);
+  const assets: string[] = [];
+
+  for (const file of files) {
+    const ext = path.extname(file).toLowerCase();
+    if (SUPPORTED_EXTENSIONS.includes(ext)) {
+      const name = path.basename(file, ext);
+      if (!assets.includes(name)) {
+        assets.push(name);
+      }
+    }
+  }
+
+  return assets;
+}
+
+function parseArgs(): { assets: string[], prompt: string } {
+  const args = process.argv.slice(2);
+  let assets: string[] = [];
+  let promptParts: string[] = [];
+
+  let i = 0;
+  while (i < args.length) {
+    if (args[i] === '--assets' && args[i + 1]) {
+      assets = args[i + 1].split(',').map(a => a.trim());
+      i += 2;
+    } else if (args[i] === '--list-assets') {
+      const available = listAvailableAssets();
+      if (available.length === 0) {
+        console.log('No assets found in assets/ folder.');
+        console.log(`Assets folder: ${ASSETS_DIR}`);
+      } else {
+        console.log('Available assets:');
+        available.forEach(a => console.log(`  - ${a}`));
+      }
+      process.exit(0);
+    } else {
+      promptParts.push(args[i]);
+      i++;
+    }
+  }
+
+  return { assets, prompt: promptParts.join(' ') };
+}
+
 async function main() {
-  // Get prompt from command-line arguments (everything after "ts-node script.ts")
-  const prompt = process.argv.slice(2).join(' ');
+  const { assets, prompt } = parseArgs();
 
   if (!prompt) {
     console.error('Error: Please provide a prompt as a command-line argument');
-    console.error('Usage: npx ts-node generate_poster.ts "your prompt here"');
+    console.error('');
+    console.error('Usage:');
+    console.error('  npx ts-node generate_poster.ts "your prompt here"');
+    console.error('  npx ts-node generate_poster.ts --assets "avatar,logo" "your prompt here"');
+    console.error('  npx ts-node generate_poster.ts --list-assets');
+    console.error('');
+    console.error('Options:');
+    console.error('  --assets <names>   Comma-separated asset names (without extension)');
+    console.error('  --list-assets      Show available assets in assets/ folder');
+    console.error('');
+    console.error('Assets are loaded from: ' + ASSETS_DIR);
     process.exit(1);
   }
 
@@ -60,27 +138,44 @@ async function main() {
     apiKey: process.env.GEMINI_API_KEY,
   });
 
-  // Upload the avatar image first
-  const avatarPath = path.join(__dirname, '..', 'references', 'avatar.jpg');
-  console.log('Uploading avatar image...');
+  // Upload requested assets
+  const uploadedAssets: UploadedAsset[] = [];
 
-  let uploadedAvatar;
-  try {
-    uploadedAvatar = await ai.files.upload({
-      file: avatarPath,
-      config: { mimeType: 'image/jpeg' },
-    });
-    console.log(`Avatar uploaded successfully: ${uploadedAvatar.name}`);
-  } catch (error) {
-    console.error('Warning: Could not upload avatar image:', error);
-    console.log('Continuing without avatar...');
+  for (const assetName of assets) {
+    const assetPath = findAssetFile(assetName);
+
+    if (!assetPath) {
+      console.error(`Warning: Asset "${assetName}" not found in assets/ folder`);
+      console.log('Available assets:', listAvailableAssets().join(', ') || 'none');
+      continue;
+    }
+
+    console.log(`Uploading asset: ${assetName} (${assetPath})`);
+
+    try {
+      const ext = path.extname(assetPath).toLowerCase();
+      const mimeType = mime.getType(assetPath) || 'image/jpeg';
+
+      const uploaded = await ai.files.upload({
+        file: assetPath,
+        config: { mimeType },
+      });
+
+      uploadedAssets.push({
+        name: uploaded.name,
+        uri: uploaded.uri,
+        mimeType: uploaded.mimeType,
+        originalName: assetName,
+      });
+
+      console.log(`  ✓ Uploaded successfully: ${uploaded.name}`);
+    } catch (error) {
+      console.error(`  ✗ Could not upload asset "${assetName}":`, error);
+    }
   }
 
   const config = {
-    responseModalities: [
-        'IMAGE',
-        'TEXT',
-    ],
+    responseModalities: ['IMAGE', 'TEXT'],
     imageConfig: {
       imageSize: '1K',
     },
@@ -88,17 +183,23 @@ async function main() {
 
   const model = 'gemini-3-pro-image-preview';
 
-  // Build content parts - include avatar if it was uploaded successfully
-  const contentParts = [];
-  if (uploadedAvatar) {
-    contentParts.push(createPartFromUri(uploadedAvatar.uri, uploadedAvatar.mimeType));
-    contentParts.push('Use this avatar image as part of the poster design for personal branding.');
+  // Build content parts - include all uploaded assets
+  const contentParts: any[] = [];
+
+  for (const asset of uploadedAssets) {
+    contentParts.push(createPartFromUri(asset.uri, asset.mimeType));
+    contentParts.push(`Use this "${asset.originalName}" image as part of the poster design.`);
   }
+
   contentParts.push(prompt);
 
   const contents = createUserContent(contentParts);
 
-  console.log(`Generating poster with prompt: "${prompt}"`);
+  console.log(`\nGenerating poster with prompt: "${prompt}"`);
+  if (uploadedAssets.length > 0) {
+    console.log(`Using assets: ${uploadedAssets.map(a => a.originalName).join(', ')}`);
+  }
+  console.log('');
 
   const response = await ai.models.generateContentStream({
     model,
@@ -117,19 +218,18 @@ async function main() {
       const fileExtension = mime.getExtension(inlineData.mimeType || '');
       const buffer = Buffer.from(inlineData.data || '', 'base64');
       saveBinaryFile(`${fileName}.${fileExtension}`, buffer);
-    }
-    else {
+    } else {
       console.log(chunk.text);
     }
   }
 
-  // Clean up: delete the uploaded avatar file
-  if (uploadedAvatar) {
+  // Clean up: delete uploaded assets from server
+  for (const asset of uploadedAssets) {
     try {
-      await ai.files.delete({ name: uploadedAvatar.name });
-      console.log('Avatar file cleaned up from server.');
+      await ai.files.delete({ name: asset.name });
+      console.log(`Cleaned up: ${asset.originalName}`);
     } catch (error) {
-      console.error('Warning: Could not delete uploaded avatar:', error);
+      console.error(`Warning: Could not delete uploaded asset "${asset.originalName}":`, error);
     }
   }
 }
