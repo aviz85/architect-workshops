@@ -7,155 +7,194 @@ description: "Generate marketing posters using Google GenAI based on local brand
 
 Generate marketing posters with AI using Google's Gemini model, styled according to brand guidelines.
 
-## Assets
-
-Store brand assets (avatar, logo, etc.) in the `assets/` folder:
+## Asset Structure
 
 ```
 nano-banana-poster/
 ├── assets/
-│   ├── avatar.jpg      # Personal branding avatar
-│   ├── logo.png        # Brand logo
-│   └── ...             # Other assets
+│   ├── brand/           # Core brand assets
+│   │   ├── avatar.jpg   # Personal branding avatar
+│   │   └── logo.png     # Brand logo
+│   └── gallery/         # Reference posters (style guides)
+│       ├── workshop-example.jpg
+│       └── workshop-example.meta.json
 ├── scripts/
+│   ├── generate_poster.ts
+│   └── .env
 └── SKILL.md
 ```
 
 **Supported formats:** `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`
 
-**To list available assets:**
+## Commands
+
 ```bash
-cd scripts
+cd /home/user/architect-workshops/.claude/skills/nano-banana-poster/scripts
+
+# Generate basic poster
+npx ts-node generate_poster.ts "your prompt"
+
+# With brand assets (incorporated into design)
+npx ts-node generate_poster.ts --assets "brand/avatar" "prompt"
+
+# With style reference (match its style)
+npx ts-node generate_poster.ts --assets "gallery/workshop-example" "prompt"
+
+# Combine brand + reference
+npx ts-node generate_poster.ts --assets "brand/avatar,gallery/workshop-example" "prompt"
+
+# Save result to gallery for future reference
+npx ts-node generate_poster.ts --save-to-gallery "workshop-2025-01" "prompt"
+
+# List available assets
 npx ts-node generate_poster.ts --list-assets
 ```
 
+## The Reference Loop
+
+```
+Generate Poster → Evaluate → Save Good Ones → Use as Style References → Generate Better
+```
+
+**Key concept:** Gallery images are used as **STYLE GUIDES** - the AI matches their visual style, composition, and aesthetic.
+
+### Workflow
+
+1. **Generate first poster** with brand assets
+2. **If good**, save to gallery: `--save-to-gallery "name"`
+3. **Future generations** use it as reference: `--assets "gallery/name"`
+4. **Each iteration** builds on previous success
+
 ## Branding Requirements
 
-**CRITICAL:** Every poster MUST include the following branding elements for consistency:
+**CRITICAL:** Every poster MUST include these branding elements:
 
 **Brand Name:** Aviz - The Architect
 
 **Mission:** Teaching non-tech people how to use AI to create code with understanding of the architecture
 
-**Language Requirement:** ALL content MUST be in Hebrew. Every poster, text, and graphic element must be in Hebrew.
+**Language:** ALL content MUST be in Hebrew
 
-**Color Palette (use these exact hex values):**
-- Primary Green: #22C55E (Friendly Green - use for accents, CTAs, highlights)
+**Color Palette:**
+- Primary Green: #22C55E (Friendly Green)
 - Gray Scale: #374151, #4B5563, #6B7280, #9CA3AF, #111827
 - Secondary Greens: #16A34A, #158235, #166534, #14532D
 
 **Visual Style:** Professional, educational, tech-forward
 
-## Workflow
+## Prompt Construction
 
 ### 1. Understand the request
+What does the user want? (workshop announcement, testimonial, promo)
 
-Identify what the user wants on the poster (topic, message, theme).
+### 2. Decide on assets
+- **Brand assets** (`brand/avatar`, `brand/logo`) - incorporate into design
+- **Gallery references** (`gallery/...`) - match their style
 
-### 2. Decide which assets to include
+### 3. Build the prompt
 
-Common assets to consider:
-- `avatar` - Personal branding, use for workshop announcements
-- `logo` - Brand logo, use for official materials
+Always include:
+- Hebrew language requirement
+- Brand name
+- Color palette
+- Visual style
+- Specific request
 
-Ask user if they want specific assets included, or suggest based on context.
-
-### 3. Construct the prompt with mandatory branding
-
-**IMPORTANT:** ALWAYS include the branding requirements in your prompt. Every prompt must include:
-- **CRITICAL LANGUAGE REQUIREMENT:** ALL text, titles, descriptions, and content MUST be in Hebrew
-- Brand name: "Aviz - The Architect"
-- Color palette: Use the exact hex values listed above (#22C55E, #374151, etc.)
-- Visual style: Professional, educational, tech-forward
-- The user's specific request
-- Any additional requirements
-
-Example prompt:
+**Example prompt:**
 ```
-Create a marketing poster for an AI coding workshop announcement.
+Create a workshop announcement poster for "Claude Code למתחילים".
 
-CRITICAL: ALL text, titles, descriptions, and content MUST be in Hebrew.
+CRITICAL: ALL text MUST be in Hebrew.
 
-Brand: Aviz - The Architect - Teaching non-tech people to code with AI.
+Brand: Aviz - The Architect
+Colors: #22C55E primary green, grays #374151, #4B5563, #6B7280
+Style: Professional, educational, tech-forward
 
-Colors: Use #22C55E (friendly green) for primary accents, with grays #374151, #4B5563, #6B7280.
+Workshop details:
+- Title: Claude Code למתחילים
+- Date: יום חמישי, 20:00
+- Platform: Zoom
 
-Style: Professional, educational, tech-forward aesthetic.
-
-Include the avatar image prominently for personal branding.
+Make it eye-catching and modern. Include the avatar prominently.
 ```
 
-### 4. Execute the generation script
+### 4. Execute
 
-Run the poster generation script:
-
-**Without assets:**
+**First time (no references):**
 ```bash
-cd /home/user/architect-workshops/.claude/skills/nano-banana-poster/scripts
-npx ts-node generate_poster.ts "your prompt here"
+npx ts-node generate_poster.ts --assets "brand/avatar" --save-to-gallery "workshop-claude-code" "prompt"
 ```
 
-**With assets:**
+**With existing reference:**
 ```bash
-npx ts-node generate_poster.ts --assets "avatar" "your prompt here"
-npx ts-node generate_poster.ts --assets "avatar,logo" "your prompt here"
+npx ts-node generate_poster.ts --assets "brand/avatar,gallery/workshop-claude-code" "prompt"
 ```
 
-**Options:**
-| Option | Description |
-|--------|-------------|
-| `--assets <names>` | Comma-separated asset names (without extension) |
-| `--list-assets` | Show available assets in assets/ folder |
+## Gallery Metadata
 
-The script will:
-1. Find and upload specified assets from `assets/` folder
-2. Send assets + prompt to Google's Gemini 3 Pro Image model
-3. Generate the poster image
-4. Save as `poster_0.jpg` in scripts/ and current directory
-5. Clean up uploaded files from server
+When saving to gallery, a `.meta.json` file is created:
 
-### 5. Deliver the result
+```json
+{
+  "name": "workshop-claude-code",
+  "createdAt": "2025-01-15T10:30:00.000Z",
+  "prompt": "The prompt used...",
+  "assets": ["brand/avatar"]
+}
+```
 
-Inform the user that the poster has been generated and provide the file path.
+This helps you remember what worked.
 
 ## Examples
 
-**Workshop poster with avatar:**
+### Workshop Announcement (First Time)
 ```bash
-npx ts-node generate_poster.ts --assets "avatar" "Create a workshop poster for 'Claude Code למתחילים' workshop on Thursday at 20:00. CRITICAL: All text in Hebrew. Brand: Aviz - The Architect. Colors: #22C55E primary, gray tones. Professional, educational style. Feature the avatar prominently."
+npx ts-node generate_poster.ts \
+  --assets "brand/avatar" \
+  --save-to-gallery "workshop-ai-intro" \
+  "Create workshop poster for 'מבוא ל-AI'. Hebrew only. Brand: Aviz - The Architect. Colors: #22C55E green, gray tones. Professional tech style. Thursday 20:00 on Zoom."
 ```
 
-**Generic promotional without assets:**
+### Workshop Announcement (Using Reference)
 ```bash
-npx ts-node generate_poster.ts "Create promotional image for AI workshops. Hebrew text only. Use #22C55E green and gray tones. Professional tech style."
+npx ts-node generate_poster.ts \
+  --assets "brand/avatar,gallery/workshop-ai-intro" \
+  "Create workshop poster for 'Claude Code למתחילים'. Same style as reference. Hebrew only. Thursday 20:00."
+```
+
+### Testimonial Poster
+```bash
+npx ts-node generate_poster.ts \
+  --save-to-gallery "testimonial-style" \
+  "Create testimonial poster. Quote: 'הסדנה שינתה לי את הדרך'. Hebrew. Brand colors. Professional."
 ```
 
 ## Setup
 
-### Install dependencies
-
+### 1. Install dependencies
 ```bash
 cd /home/user/architect-workshops/.claude/skills/nano-banana-poster/scripts
 npm install
 ```
 
-### Configure API key
-
-Create `.env` file in scripts/:
+### 2. Configure API key
+Create `scripts/.env`:
 ```
 GEMINI_API_KEY=your_api_key_here
 ```
 
-### Add assets
-
-Place image files in `assets/` folder:
-- Name them descriptively: `avatar.jpg`, `logo.png`, `banner.webp`
-- Reference by name without extension: `--assets "avatar,logo"`
+### 3. Add brand assets
+Put your avatar and logo in `assets/brand/`:
+```
+assets/brand/avatar.jpg
+assets/brand/logo.png
+```
 
 ## Notes
 
-- Asset names are case-sensitive
-- Script auto-detects file extensions (jpg, png, webp, etc.)
+- Gallery references are treated as **style guides** (match visual style)
+- Brand assets are **incorporated** into the design (show in poster)
+- Metadata captures what worked for future reference
 - Generated posters are 1024x1024 pixels
-- All uploaded assets are cleaned up after generation
-- **Hebrew Content Requirement**: Always emphasize in prompts that ALL content must be in Hebrew
+- All uploaded files are cleaned up from server after generation
+- Hebrew is mandatory - emphasize in every prompt
