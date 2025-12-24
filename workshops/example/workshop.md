@@ -85,6 +85,62 @@
 
 ---
 
+## Pipeline
+
+### POC (Proof of Concept)
+- [ ] Idea defined
+- [ ] POC built
+- [ ] Wow effect identified
+
+**POC Notes:** [What I built, repo link, what's the wow]
+
+### Sneak Peeks
+| # | Date | Platform | Link | Notes |
+|---|------|----------|------|-------|
+| 1 | | | | |
+| 2 | | | | |
+| 3 | | | | |
+
+### Poster & Marketing
+- [ ] Poster created
+- [ ] Facebook: [Group 1 name]
+- [ ] Facebook: [Group 2 name]
+- [ ] WhatsApp broadcast
+- [ ] WhatsApp: [Group 1 name]
+- [ ] WhatsApp: [Group 2 name]
+- [ ] Additional excitement posts
+
+**Marketing Notes:** [What worked, reach, engagement]
+
+### Workshop Delivery
+- [ ] Workshop delivered
+
+**Attendance:**
+| Metric | Count |
+|--------|-------|
+| WhatsApp Group Size | |
+| First 15 min | |
+| Peak | |
+| Last 15 min | |
+
+### Post-Workshop
+- [ ] Transcript added
+- [ ] Summary written
+- [ ] Testimonials collected
+- [ ] Follow-up sent
+
+---
+
+## Content
+
+### Summary
+[Key takeaways and highlights from the workshop]
+
+### Transcript
+[Full transcript or link to transcript file: `assets/transcript.md`]
+
+---
+
 ## Notes
 
 [Any additional notes, reminders, or post-workshop reflections]
