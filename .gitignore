@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Generated images/posters
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+poster_*.jpg
+poster_*.jpeg
+poster_*.png
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Claude skills (keep structure but ignore generated content)
+.claude/skills/**/scripts/node_modules/
+.claude/skills/**/scripts/poster_*.jpg
+.claude/skills/**/scripts/poster_*.jpeg
+.claude/skills/**/scripts/poster_*.png
+
