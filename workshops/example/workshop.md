@@ -65,8 +65,9 @@
 
 | File | Description |
 |------|-------------|
+| `presentation-plan.md` | Presentation blueprint (Hebrew, RTL) |
 | `assets/poster.png` | Workshop promotional poster |
-| `assets/slides.pdf` | Presentation slides |
+| `assets/slides.pdf` | Final presentation slides |
 | `assets/...` | [Other materials] |
 
 ---
@@ -100,6 +101,11 @@
 | 1 | | | | |
 | 2 | | | | |
 | 3 | | | | |
+
+### Presentation
+- [ ] Content outline reviewed
+- [ ] Presentation plan created (`presentation-plan.md`)
+- [ ] Slides created via NotebookLM Studio (manual step)
 
 ### Poster & Marketing
 - [ ] Poster created
