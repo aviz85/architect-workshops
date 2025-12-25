@@ -1,0 +1,20 @@
+{
+  "name": "whatsapp-send-message",
+  "version": "1.0.0",
+  "description": "Send WhatsApp messages using Green API",
+  "main": "send_message.ts",
+  "scripts": {
+    "start": "ts-node send_message.ts"
+  },
+  "keywords": ["whatsapp", "green-api", "messaging"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@green-api/whatsapp-api-client": "^0.3.46",
+    "@types/node": "^22.0.0",
+    "dotenv": "^16.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
