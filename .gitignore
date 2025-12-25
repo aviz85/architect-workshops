@@ -10,15 +10,24 @@ package-lock.json
 .env.local
 .env.*.local
 
-# Generated images/posters
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.webp
+# Generated images/posters (in scripts folders)
 poster_*.jpg
 poster_*.jpeg
 poster_*.png
+
+# But ALLOW brand assets and gallery references
+!.claude/skills/**/assets/**/*.jpg
+!.claude/skills/**/assets/**/*.jpeg
+!.claude/skills/**/assets/**/*.png
+!.claude/skills/**/assets/**/*.gif
+!.claude/skills/**/assets/**/*.webp
+
+# And allow workshop assets
+!workshops/**/assets/**/*.jpg
+!workshops/**/assets/**/*.jpeg
+!workshops/**/assets/**/*.png
+!workshops/**/assets/**/*.gif
+!workshops/**/assets/**/*.webp
 
 # OS files
 .DS_Store
