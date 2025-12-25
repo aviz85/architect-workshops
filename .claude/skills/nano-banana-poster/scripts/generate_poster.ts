@@ -22,8 +22,9 @@ const BRAND_FOLDER_NAME = 'image-references';
 const REPO_ROOT = path.resolve(__dirname, '..', '..', '..', '..');
 const SKILL_DIR = path.resolve(__dirname, '..');
 const SEARCH_LOCATIONS = [
-  path.join(REPO_ROOT, BRAND_FOLDER_NAME),           // /brand/
-  path.join(SKILL_DIR, 'assets', BRAND_FOLDER_NAME), // skill/assets/brand/
+  path.join(REPO_ROOT, BRAND_FOLDER_NAME),           // /image-references/
+  path.join(SKILL_DIR, 'references'),                // skill/references/ (avatar, brand assets)
+  path.join(SKILL_DIR, 'assets', BRAND_FOLDER_NAME), // skill/assets/image-references/
   path.join(SKILL_DIR, 'assets'),                    // skill/assets/
   path.join(SKILL_DIR, 'assets', 'gallery'),         // skill/assets/gallery/
 ];
@@ -203,6 +204,7 @@ function listAllAssets(): { name: string; location: string; fullPath: string }[]
 
   // Scan with descriptive location names
   scanDir(path.join(REPO_ROOT, BRAND_FOLDER_NAME), 'image-references (root)');
+  scanDir(path.join(SKILL_DIR, 'references'), 'references');
   scanDir(path.join(SKILL_DIR, 'assets', BRAND_FOLDER_NAME), 'image-references (skill)');
   scanDir(path.join(SKILL_DIR, 'assets', 'gallery'), 'gallery');
   scanDir(path.join(SKILL_DIR, 'assets'), 'assets');

@@ -97,6 +97,46 @@ When you use `--assets "poster-example"`:
 
 **Visual Style:** Professional, educational, tech-forward
 
+## Visual Hooks with Avatar (CRITICAL)
+
+**We believe in GREAT VISUAL HOOKS for marketing.** When using the avatar, always create bold, exciting imagery:
+
+### Avatar Action Guidelines
+
+The avatar (The Architect) should NEVER be static or boring. Always show him:
+
+**Doing something WILD and EXCITING:**
+- Surfing on a wave of code
+- Conducting an orchestra of floating screens/browsers
+- Riding a rocket made of AI symbols
+- Wrestling with a giant robot/AI entity
+- Standing on top of a mountain of tech, arms raised triumphantly
+- Shooting lasers of knowledge from his hands
+- Flying through a digital universe
+
+**With EXCITING EXPRESSIONS:**
+- Big confident smile
+- Eyes full of wonder/excitement
+- Dynamic poses (not standing still)
+- Arms gesturing dramatically
+- Looking like a superhero/wizard of tech
+
+**The Hook Formula:**
+```
+AVATAR + DRAMATIC ACTION + TOPIC VISUAL = ATTENTION-GRABBING POSTER
+```
+
+**Examples by topic:**
+- **Browser automation:** Avatar as puppet master controlling floating browser windows
+- **AI intro:** Avatar opening a glowing treasure chest of AI tools
+- **Coding:** Avatar surfing on a wave of colorful code
+- **Automation:** Avatar as a conductor with robot arms doing tasks
+
+**ALWAYS specify in the prompt:**
+1. What ACTION the avatar is doing
+2. What EXPRESSION he should have
+3. How the action RELATES to the workshop topic
+
 ## Prompt Construction
 
 ### 1. Understand the request
