@@ -12,8 +12,9 @@ This repository manages workshops by **Aviz - The Architect** - educational tech
 
 ## Workshop Lifecycle
 
-### 1. Ideation
-- Browse `workshop-ideas.md` for topic inspiration
+### 1. Ideation (`workshop-ideation` skill)
+- Brainstorm new ideas through guided discussion
+- Add ideas to `workshop-ideas.md` backlog
 - Topics range from AI tools, coding assistants, automation, to business applications
 
 ### 2. Creation (`workshop-creator` skill)
@@ -61,6 +62,7 @@ architect-workshops/
 
 | Skill | Purpose |
 |-------|---------|
+| `workshop-ideation` | Brainstorm and add ideas to backlog |
 | `workshop-creator` | Create new workshop with folder structure |
 | `workshop-updates` | Track pipeline progress, attendance, follow-ups |
 | `nano-banana-poster` | Generate promotional posters |
@@ -92,6 +94,9 @@ All workshop presentations must follow these rules:
 ## Quick Commands
 
 ```bash
+# Brainstorm new workshop ideas
+/workshop-ideation
+
 # Create a new workshop
 /workshop-creator
 
