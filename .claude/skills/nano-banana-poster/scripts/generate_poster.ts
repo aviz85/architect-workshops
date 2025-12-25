@@ -15,8 +15,8 @@ import * as path from 'path';
 // Load environment variables from the script's directory
 dotenv.config({ path: path.join(__dirname, '.env') });
 
-// Special folder name for brand assets - searched recursively
-const BRAND_FOLDER_NAME = 'brand';
+// Special folder name for image references - searched recursively
+const BRAND_FOLDER_NAME = 'image-references';
 
 // Search locations (in priority order)
 const REPO_ROOT = path.resolve(__dirname, '..', '..', '..', '..');
@@ -202,8 +202,8 @@ function listAllAssets(): { name: string; location: string; fullPath: string }[]
   }
 
   // Scan with descriptive location names
-  scanDir(path.join(REPO_ROOT, BRAND_FOLDER_NAME), 'brand (root)');
-  scanDir(path.join(SKILL_DIR, 'assets', BRAND_FOLDER_NAME), 'brand (skill)');
+  scanDir(path.join(REPO_ROOT, BRAND_FOLDER_NAME), 'image-references (root)');
+  scanDir(path.join(SKILL_DIR, 'assets', BRAND_FOLDER_NAME), 'image-references (skill)');
   scanDir(path.join(SKILL_DIR, 'assets', 'gallery'), 'gallery');
   scanDir(path.join(SKILL_DIR, 'assets'), 'assets');
 

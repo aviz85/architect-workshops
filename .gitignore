@@ -15,7 +15,12 @@ poster_*.jpg
 poster_*.jpeg
 poster_*.png
 
-# But ALLOW brand assets and gallery references
+# But ALLOW image references and gallery
+!image-references/**/*.jpg
+!image-references/**/*.jpeg
+!image-references/**/*.png
+!image-references/**/*.gif
+!image-references/**/*.webp
 !.claude/skills/**/assets/**/*.jpg
 !.claude/skills/**/assets/**/*.jpeg
 !.claude/skills/**/assets/**/*.png

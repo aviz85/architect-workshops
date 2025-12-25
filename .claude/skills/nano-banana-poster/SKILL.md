@@ -12,8 +12,8 @@ Generate marketing posters with AI using Google's Gemini model, styled according
 The script searches for assets by name (without extension) in multiple locations:
 
 **Search order (first match wins):**
-1. `/brand/` - Global brand folder at repo root
-2. `skill/assets/brand/` - Skill-specific brand assets
+1. `/image-references/` - Global folder at repo root
+2. `skill/assets/image-references/` - Skill-specific references
 3. `skill/assets/` - General skill assets
 4. `skill/assets/gallery/` - Reference posters
 
@@ -21,13 +21,14 @@ The script searches for assets by name (without extension) in multiple locations
 
 ```
 architect-workshops/
-├── brand/                    # 1. Global brand assets (avatar, logo)
+├── image-references/         # 1. Global image references (avatar, logo, posters)
 │   ├── avatar.jpg
-│   └── logo.png
+│   ├── logo.png
+│   └── poster-example.jpg
 └── .claude/skills/nano-banana-poster/
     └── assets/
-        ├── brand/            # 2. Skill-specific brand
-        └── gallery/          # 3. Reference posters
+        ├── image-references/ # 2. Skill-specific references
+        └── gallery/          # 3. Saved reference posters
             ├── workshop-example.jpg
             └── workshop-example.meta.json
 ```
