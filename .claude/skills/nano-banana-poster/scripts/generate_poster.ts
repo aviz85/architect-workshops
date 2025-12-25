@@ -15,8 +15,20 @@ import * as path from 'path';
 // Load environment variables from the script's directory
 dotenv.config({ path: path.join(__dirname, '.env') });
 
-const ASSETS_DIR = path.join(__dirname, '..', 'assets');
-const GALLERY_DIR = path.join(ASSETS_DIR, 'gallery');
+// Special folder name for brand assets - searched recursively
+const BRAND_FOLDER_NAME = 'brand';
+
+// Search locations (in priority order)
+const REPO_ROOT = path.resolve(__dirname, '..', '..', '..', '..');
+const SKILL_DIR = path.resolve(__dirname, '..');
+const SEARCH_LOCATIONS = [
+  path.join(REPO_ROOT, BRAND_FOLDER_NAME),           // /brand/
+  path.join(SKILL_DIR, 'assets', BRAND_FOLDER_NAME), // skill/assets/brand/
+  path.join(SKILL_DIR, 'assets'),                    // skill/assets/
+  path.join(SKILL_DIR, 'assets', 'gallery'),         // skill/assets/gallery/
+];
+
+const GALLERY_DIR = path.join(SKILL_DIR, 'assets', 'gallery');
 const SUPPORTED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
 
 interface UploadedAsset {
@@ -25,6 +37,7 @@ interface UploadedAsset {
   mimeType: string;
   originalName: string;
   isReference: boolean;
+  foundAt: string;
 }
 
 interface GalleryMetadata {
@@ -61,7 +74,6 @@ function saveBinaryFile(fileName: string, content: Buffer, additionalPaths: stri
       }
     }
 
-    // Save to additional paths (e.g., gallery)
     for (const additionalPath of additionalPaths) {
       try {
         const dir = path.dirname(additionalPath);
@@ -85,6 +97,9 @@ function saveBinaryFile(fileName: string, content: Buffer, additionalPaths: stri
 function saveGalleryMetadata(name: string, metadata: GalleryMetadata) {
   const metaPath = path.join(GALLERY_DIR, `${name}.meta.json`);
   try {
+    if (!existsSync(GALLERY_DIR)) {
+      mkdirSync(GALLERY_DIR, { recursive: true });
+    }
     writeFileSync(metaPath, JSON.stringify(metadata, null, 2));
     console.log(`Metadata saved: ${metaPath}`);
   } catch (err) {
@@ -92,54 +107,107 @@ function saveGalleryMetadata(name: string, metadata: GalleryMetadata) {
   }
 }
 
-function findAssetFile(assetName: string): string | null {
-  // Support nested paths like "brand/avatar" or "gallery/example"
-  for (const ext of SUPPORTED_EXTENSIONS) {
-    const filePath = path.join(ASSETS_DIR, `${assetName}${ext}`);
-    if (existsSync(filePath)) {
-      return filePath;
-    }
+// Search for an image file recursively in a directory
+function findImageInDir(dir: string, imageName: string): string | null {
+  if (!existsSync(dir)) {
+    return null;
   }
+
+  try {
+    const entries = readdirSync(dir, { withFileTypes: true });
+
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+
+      if (entry.isFile()) {
+        const ext = path.extname(entry.name).toLowerCase();
+        const nameWithoutExt = path.basename(entry.name, ext);
+
+        if (SUPPORTED_EXTENSIONS.includes(ext) && nameWithoutExt === imageName) {
+          return fullPath;
+        }
+      } else if (entry.isDirectory() && !entry.name.startsWith('.')) {
+        // Recurse into subdirectories
+        const found = findImageInDir(fullPath, imageName);
+        if (found) {
+          return found;
+        }
+      }
+    }
+  } catch (err) {
+    // Silently continue if directory can't be read
+  }
+
   return null;
 }
 
-function listAssetsRecursive(dir: string, prefix: string = ''): string[] {
-  if (!existsSync(dir)) {
-    return [];
-  }
-
-  const assets: string[] = [];
-  const entries = readdirSync(dir, { withFileTypes: true });
-
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
-    const relativeName = prefix ? `${prefix}/${entry.name}` : entry.name;
-
-    if (entry.isDirectory()) {
-      // Recurse into subdirectories
-      assets.push(...listAssetsRecursive(fullPath, relativeName));
-    } else {
-      const ext = path.extname(entry.name).toLowerCase();
-      if (SUPPORTED_EXTENSIONS.includes(ext)) {
-        const nameWithoutExt = relativeName.replace(ext, '');
-        if (!assets.includes(nameWithoutExt)) {
-          assets.push(nameWithoutExt);
+// Find an asset by name, searching all locations
+function findAsset(assetName: string): { path: string; location: string } | null {
+  // If it's a path with /, search directly
+  if (assetName.includes('/')) {
+    for (const location of SEARCH_LOCATIONS) {
+      for (const ext of SUPPORTED_EXTENSIONS) {
+        const filePath = path.join(location, '..', `${assetName}${ext}`);
+        if (existsSync(filePath)) {
+          return { path: filePath, location };
         }
       }
     }
   }
 
-  return assets;
+  // Search each location recursively
+  for (const location of SEARCH_LOCATIONS) {
+    const found = findImageInDir(location, assetName);
+    if (found) {
+      return { path: found, location };
+    }
+  }
+
+  return null;
 }
 
-function listAvailableAssets(): { brand: string[], gallery: string[], other: string[] } {
-  const all = listAssetsRecursive(ASSETS_DIR);
+// List all available assets from all locations
+function listAllAssets(): { name: string; location: string; fullPath: string }[] {
+  const assets: { name: string; location: string; fullPath: string }[] = [];
+  const seen = new Set<string>();
 
-  const brand = all.filter(a => a.startsWith('brand/'));
-  const gallery = all.filter(a => a.startsWith('gallery/'));
-  const other = all.filter(a => !a.startsWith('brand/') && !a.startsWith('gallery/'));
+  function scanDir(dir: string, locationName: string) {
+    if (!existsSync(dir)) return;
 
-  return { brand, gallery, other };
+    try {
+      const entries = readdirSync(dir, { withFileTypes: true });
+
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+
+        if (entry.isFile()) {
+          const ext = path.extname(entry.name).toLowerCase();
+          const nameWithoutExt = path.basename(entry.name, ext);
+
+          if (SUPPORTED_EXTENSIONS.includes(ext) && !seen.has(nameWithoutExt)) {
+            seen.add(nameWithoutExt);
+            assets.push({
+              name: nameWithoutExt,
+              location: locationName,
+              fullPath,
+            });
+          }
+        } else if (entry.isDirectory() && !entry.name.startsWith('.')) {
+          scanDir(fullPath, `${locationName}/${entry.name}`);
+        }
+      }
+    } catch (err) {
+      // Silently continue
+    }
+  }
+
+  // Scan with descriptive location names
+  scanDir(path.join(REPO_ROOT, BRAND_FOLDER_NAME), 'brand (root)');
+  scanDir(path.join(SKILL_DIR, 'assets', BRAND_FOLDER_NAME), 'brand (skill)');
+  scanDir(path.join(SKILL_DIR, 'assets', 'gallery'), 'gallery');
+  scanDir(path.join(SKILL_DIR, 'assets'), 'assets');
+
+  return assets;
 }
 
 function parseArgs(): ParsedArgs {
@@ -189,22 +257,21 @@ function parseArgs(): ParsedArgs {
 }
 
 function showUsage() {
-  console.error('Usage:');
-  console.error('  npx ts-node generate_poster.ts "your prompt here"');
-  console.error('  npx ts-node generate_poster.ts --assets "brand/avatar,gallery/example" "prompt"');
-  console.error('  npx ts-node generate_poster.ts --save-to-gallery "workshop-2025-01" "prompt"');
-  console.error('  npx ts-node generate_poster.ts --list-assets');
-  console.error('');
-  console.error('Options:');
-  console.error('  --assets <names>         Comma-separated asset paths (e.g., brand/avatar, gallery/example)');
-  console.error('  --save-to-gallery <name> Save generated poster to gallery with metadata');
-  console.error('  --list-assets            Show all available assets');
-  console.error('');
-  console.error('Asset folders:');
-  console.error('  assets/brand/    - Core brand assets (avatar, logo)');
-  console.error('  assets/gallery/  - Reference posters from previous generations');
-  console.error('');
-  console.error(`Assets directory: ${ASSETS_DIR}`);
+  console.log('Usage:');
+  console.log('  npx ts-node generate_poster.ts "your prompt here"');
+  console.log('  npx ts-node generate_poster.ts --assets "avatar,logo" "prompt"');
+  console.log('  npx ts-node generate_poster.ts --save-to-gallery "workshop-name" "prompt"');
+  console.log('  npx ts-node generate_poster.ts --list-assets');
+  console.log('');
+  console.log('Options:');
+  console.log('  --assets <names>         Asset names to include (e.g., avatar, logo)');
+  console.log('  --save-to-gallery <name> Save generated poster to gallery');
+  console.log('  --list-assets            Show all available assets');
+  console.log('');
+  console.log('Asset search locations (in order):');
+  SEARCH_LOCATIONS.forEach((loc, i) => {
+    console.log(`  ${i + 1}. ${loc}`);
+  });
 }
 
 async function main() {
@@ -212,33 +279,29 @@ async function main() {
 
   // Handle --list-assets
   if (args.listAssets) {
-    const { brand, gallery, other } = listAvailableAssets();
+    const assets = listAllAssets();
 
     console.log('=== Available Assets ===\n');
 
-    if (brand.length > 0) {
-      console.log('Brand assets:');
-      brand.forEach(a => console.log(`  ${a}`));
-      console.log('');
-    }
+    if (assets.length === 0) {
+      console.log('No assets found.\n');
+      console.log('Add images to any of these locations:');
+      SEARCH_LOCATIONS.forEach(loc => console.log(`  - ${loc}`));
+    } else {
+      // Group by location
+      const byLocation = new Map<string, string[]>();
+      for (const asset of assets) {
+        if (!byLocation.has(asset.location)) {
+          byLocation.set(asset.location, []);
+        }
+        byLocation.get(asset.location)!.push(asset.name);
+      }
 
-    if (gallery.length > 0) {
-      console.log('Gallery references:');
-      gallery.forEach(a => console.log(`  ${a}`));
-      console.log('');
-    }
-
-    if (other.length > 0) {
-      console.log('Other assets:');
-      other.forEach(a => console.log(`  ${a}`));
-      console.log('');
-    }
-
-    if (brand.length === 0 && gallery.length === 0 && other.length === 0) {
-      console.log('No assets found.');
-      console.log(`\nAdd images to: ${ASSETS_DIR}`);
-      console.log('  - brand/    for avatar, logo, etc.');
-      console.log('  - gallery/  for reference posters');
+      for (const [location, names] of byLocation) {
+        console.log(`${location}:`);
+        names.forEach(name => console.log(`  - ${name}`));
+        console.log('');
+      }
     }
 
     process.exit(0);
@@ -266,25 +329,26 @@ async function main() {
   const uploadedAssets: UploadedAsset[] = [];
 
   for (const assetName of args.assets) {
-    const assetPath = findAssetFile(assetName);
+    const found = findAsset(assetName);
 
-    if (!assetPath) {
-      console.error(`Warning: Asset "${assetName}" not found`);
-      const { brand, gallery } = listAvailableAssets();
-      if (brand.length > 0 || gallery.length > 0) {
-        console.log('Available:', [...brand, ...gallery].join(', '));
+    if (!found) {
+      console.warn(`⚠ Warning: Asset "${assetName}" not found - skipping`);
+      const available = listAllAssets();
+      if (available.length > 0) {
+        console.log(`  Available: ${available.map(a => a.name).join(', ')}`);
       }
-      continue;
+      continue; // Don't block, just skip
     }
 
-    const isReference = assetName.startsWith('gallery/');
+    const isReference = found.location.includes('gallery');
     console.log(`Uploading ${isReference ? 'reference' : 'asset'}: ${assetName}`);
+    console.log(`  Found at: ${found.path}`);
 
     try {
-      const mimeType = mime.getType(assetPath) || 'image/jpeg';
+      const mimeType = mime.getType(found.path) || 'image/jpeg';
 
       const uploaded = await ai.files.upload({
-        file: assetPath,
+        file: found.path,
         config: { mimeType },
       });
 
@@ -294,11 +358,13 @@ async function main() {
         mimeType: uploaded.mimeType,
         originalName: assetName,
         isReference,
+        foundAt: found.path,
       });
 
       console.log(`  ✓ Uploaded: ${uploaded.name}`);
     } catch (error) {
       console.error(`  ✗ Failed to upload "${assetName}":`, error);
+      // Continue anyway, don't block
     }
   }
 
@@ -311,17 +377,15 @@ async function main() {
 
   const model = 'gemini-3-pro-image-preview';
 
-  // Build content parts with context-aware instructions
+  // Build content parts
   const contentParts: any[] = [];
 
   for (const asset of uploadedAssets) {
     contentParts.push(createPartFromUri(asset.uri, asset.mimeType));
 
     if (asset.isReference) {
-      // Gallery references are style guides
-      contentParts.push(`Use this reference image "${asset.originalName}" as a STYLE GUIDE. Match its visual style, composition, and aesthetic in the new poster.`);
+      contentParts.push(`Use this reference image "${asset.originalName}" as a STYLE GUIDE. Match its visual style, composition, and aesthetic.`);
     } else {
-      // Brand assets should be incorporated into the design
       contentParts.push(`Incorporate this "${asset.originalName}" image into the poster design.`);
     }
   }
@@ -362,7 +426,6 @@ async function main() {
 
       const fileName = `poster_${fileIndex++}.${fileExtension}`;
 
-      // If saving to gallery, also save there
       const additionalPaths: string[] = [];
       if (args.saveToGallery) {
         const galleryFileName = fileIndex === 1
@@ -391,10 +454,10 @@ async function main() {
     saveGalleryMetadata(args.saveToGallery, metadata);
 
     console.log(`\n✓ Saved to gallery: ${args.saveToGallery}`);
-    console.log(`  Use as reference: --assets "gallery/${args.saveToGallery}"`);
+    console.log(`  Use as reference: --assets "${args.saveToGallery}"`);
   }
 
-  // Clean up: delete uploaded assets from server
+  // Clean up
   for (const asset of uploadedAssets) {
     try {
       await ai.files.delete({ name: asset.name });

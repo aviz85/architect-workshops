@@ -7,24 +7,34 @@ description: "Generate marketing posters using Google GenAI based on local brand
 
 Generate marketing posters with AI using Google's Gemini model, styled according to brand guidelines.
 
-## Asset Structure
+## Asset Search System
+
+The script searches for assets by name (without extension) in multiple locations:
+
+**Search order (first match wins):**
+1. `/brand/` - Global brand folder at repo root
+2. `skill/assets/brand/` - Skill-specific brand assets
+3. `skill/assets/` - General skill assets
+4. `skill/assets/gallery/` - Reference posters
+
+**Example:** `--assets "avatar"` will find `avatar.jpg` or `avatar.png` in any of these locations.
 
 ```
-nano-banana-poster/
-├── assets/
-│   ├── brand/           # Core brand assets
-│   │   ├── avatar.jpg   # Personal branding avatar
-│   │   └── logo.png     # Brand logo
-│   └── gallery/         # Reference posters (style guides)
-│       ├── workshop-example.jpg
-│       └── workshop-example.meta.json
-├── scripts/
-│   ├── generate_poster.ts
-│   └── .env
-└── SKILL.md
+architect-workshops/
+├── brand/                    # 1. Global brand assets (avatar, logo)
+│   ├── avatar.jpg
+│   └── logo.png
+└── .claude/skills/nano-banana-poster/
+    └── assets/
+        ├── brand/            # 2. Skill-specific brand
+        └── gallery/          # 3. Reference posters
+            ├── workshop-example.jpg
+            └── workshop-example.meta.json
 ```
 
 **Supported formats:** `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`
+
+**Non-blocking:** If an asset is not found, it warns but continues generating.
 
 ## Commands
 
@@ -34,19 +44,14 @@ cd /home/user/architect-workshops/.claude/skills/nano-banana-poster/scripts
 # Generate basic poster
 npx ts-node generate_poster.ts "your prompt"
 
-# With brand assets (incorporated into design)
-npx ts-node generate_poster.ts --assets "brand/avatar" "prompt"
-
-# With style reference (match its style)
-npx ts-node generate_poster.ts --assets "gallery/workshop-example" "prompt"
-
-# Combine brand + reference
-npx ts-node generate_poster.ts --assets "brand/avatar,gallery/workshop-example" "prompt"
+# With assets (just use the name, no path needed)
+npx ts-node generate_poster.ts --assets "avatar" "prompt"
+npx ts-node generate_poster.ts --assets "avatar,logo" "prompt"
 
 # Save result to gallery for future reference
 npx ts-node generate_poster.ts --save-to-gallery "workshop-2025-01" "prompt"
 
-# List available assets
+# List all available assets
 npx ts-node generate_poster.ts --list-assets
 ```
 
@@ -56,14 +61,23 @@ npx ts-node generate_poster.ts --list-assets
 Generate Poster → Evaluate → Save Good Ones → Use as Style References → Generate Better
 ```
 
-**Key concept:** Gallery images are used as **STYLE GUIDES** - the AI matches their visual style, composition, and aesthetic.
+**Key concept:**
+- **Brand assets** (found in `/brand/` or `assets/brand/`) → incorporated INTO design
+- **Gallery images** (found in `assets/gallery/`) → used as STYLE GUIDES
+
+### How It Works
+
+When you use `--assets "poster-example"`:
+1. Script searches all locations recursively
+2. If found in `gallery/` → treated as style reference
+3. If found elsewhere → incorporated into design
+4. **Not found?** Just warns and continues
 
 ### Workflow
 
-1. **Generate first poster** with brand assets
-2. **If good**, save to gallery: `--save-to-gallery "name"`
-3. **Future generations** use it as reference: `--assets "gallery/name"`
-4. **Each iteration** builds on previous success
+1. **Generate first poster:** `--assets "avatar" --save-to-gallery "workshop-style"`
+2. **Future posters:** `--assets "avatar,workshop-style"` (finds avatar + gallery reference)
+3. **Each iteration** builds on previous success
 
 ## Branding Requirements
 
