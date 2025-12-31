@@ -108,6 +108,25 @@ function saveGalleryMetadata(name: string, metadata: GalleryMetadata) {
   }
 }
 
+// Get versioned gallery name - adds -v2, -v3 etc. if name already exists
+function getVersionedGalleryName(baseName: string, extension: string): string {
+  const basePath = path.join(GALLERY_DIR, `${baseName}.${extension}`);
+
+  if (!existsSync(basePath)) {
+    return baseName;
+  }
+
+  // Find next available version
+  let version = 2;
+  while (existsSync(path.join(GALLERY_DIR, `${baseName}-v${version}.${extension}`))) {
+    version++;
+  }
+
+  const versionedName = `${baseName}-v${version}`;
+  console.log(`Gallery name "${baseName}" exists, using "${versionedName}"`);
+  return versionedName;
+}
+
 // Search for an image file recursively in a directory
 function findImageInDir(dir: string, imageName: string): string | null {
   if (!existsSync(dir)) {
@@ -373,7 +392,7 @@ async function main() {
   const config = {
     responseModalities: ['IMAGE', 'TEXT'],
     imageConfig: {
-      imageSize: '1K',
+      aspectRatio: '3:2',
     },
   };
 
@@ -429,11 +448,16 @@ async function main() {
       const fileName = `poster_${fileIndex++}.${fileExtension}`;
 
       const additionalPaths: string[] = [];
+      let actualGalleryName = args.saveToGallery;
       if (args.saveToGallery) {
+        // Get versioned name to avoid overwriting
+        actualGalleryName = getVersionedGalleryName(args.saveToGallery, fileExtension);
         const galleryFileName = fileIndex === 1
-          ? `${args.saveToGallery}.${fileExtension}`
-          : `${args.saveToGallery}_${fileIndex}.${fileExtension}`;
+          ? `${actualGalleryName}.${fileExtension}`
+          : `${actualGalleryName}_${fileIndex}.${fileExtension}`;
         additionalPaths.push(path.join(GALLERY_DIR, galleryFileName));
+        // Store for metadata
+        (args as any)._actualGalleryName = actualGalleryName;
       }
 
       const savedPath = saveBinaryFile(fileName, buffer, additionalPaths);
@@ -447,16 +471,17 @@ async function main() {
 
   // Save gallery metadata
   if (args.saveToGallery && generatedFiles.length > 0) {
+    const actualName = (args as any)._actualGalleryName || args.saveToGallery;
     const metadata: GalleryMetadata = {
-      name: args.saveToGallery,
+      name: actualName,
       createdAt: new Date().toISOString(),
       prompt: args.prompt,
       assets: args.assets,
     };
-    saveGalleryMetadata(args.saveToGallery, metadata);
+    saveGalleryMetadata(actualName, metadata);
 
-    console.log(`\n✓ Saved to gallery: ${args.saveToGallery}`);
-    console.log(`  Use as reference: --assets "${args.saveToGallery}"`);
+    console.log(`\n✓ Saved to gallery: ${actualName}`);
+    console.log(`  Use as reference: --assets "${actualName}"`);
   }
 
   // Clean up

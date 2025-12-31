@@ -245,11 +245,44 @@ assets/brand/avatar.jpg
 assets/brand/logo.png
 ```
 
+## Auto-Copy to Workshop (CRITICAL)
+
+**ALWAYS copy the generated poster to the workshop assets folder immediately after generation.**
+
+When generating a poster for a workshop:
+1. Generate the poster using the script
+2. **IMMEDIATELY copy** the result to the workshop folder:
+   ```bash
+   cp /path/to/scripts/poster_0.jpg /path/to/workshops/YYYY-MM-DD-workshop-name/assets/poster.jpg
+   ```
+3. If generating multiple variations, copy the user's chosen version
+
+**Example workflow:**
+```bash
+# 1. Generate poster
+npx ts-node generate_poster.ts --assets "avatar" --save-to-gallery "workshop-name" "prompt"
+
+# 2. ALWAYS copy to workshop assets (don't ask, just do it)
+cp poster_0.jpg ../../../../../../workshops/2026-01-01-workshop-name/assets/poster.jpg
+```
+
+**DO NOT ask the user if they want to copy. ALWAYS copy automatically.**
+
+## Versioning
+
+- Gallery saves automatically add version suffix if name exists (`-v2`, `-v3`, etc.)
+- Previous versions are preserved, never overwritten
+- When generating multiple variations, they save as separate versions
+
+## Default Settings
+
+- **Aspect Ratio:** 3:2 (horizontal) - optimized for social media and presentations
+- **Format:** JPG
+
 ## Notes
 
 - Gallery references are treated as **style guides** (match visual style)
 - Brand assets are **incorporated** into the design (show in poster)
 - Metadata captures what worked for future reference
-- Generated posters are 1024x1024 pixels
 - All uploaded files are cleaned up from server after generation
 - Hebrew is mandatory - emphasize in every prompt

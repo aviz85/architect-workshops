@@ -13,7 +13,7 @@ Create new workshops with proper folder structure and documentation.
 |-------|----------|-------------|
 | **Date** | ✅ Required | Workshop date (YYYY-MM-DD format) |
 | **Topic** | ⭐ Recommended | Workshop topic/title |
-| **Time** | Optional | Start time (HH:MM) |
+| **Time** | ✅ Required | Start time (HH:MM) - ALWAYS ask for this! |
 | **Duration** | Optional | Length of workshop |
 | **WhatsApp Link** | Optional | Group invitation link |
 | **WhatsApp Group ID** | Optional | Green API group ID (format: xxxxx@g.us) |
@@ -32,7 +32,9 @@ cat /home/user/architect-workshops/workshop-ideas.md
 ```
 
 Example prompt:
-> "What date is the workshop? Do you have a topic in mind, or should I suggest from the ideas list?"
+> "What date and time is the workshop? (Date required, Time required - e.g., 21:00). Do you have a topic in mind, or should I suggest from the ideas list?"
+
+**CRITICAL: Always confirm the exact time with the user. Default is 21:00 but MUST be verified.**
 
 ### 2. Create Workshop Folder
 
