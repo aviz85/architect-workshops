@@ -1,0 +1,2326 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Claudeability Simulator - 8-Bit Edition</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0f0f23;
+            font-family: 'Press Start 2P', monospace;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            z-index: 1000;
+        }
+
+        .crt-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 999;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(180deg, #1a1a2e 0%, #0f0f23 100%);
+            border-bottom: 4px solid #00ff88;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #00ff88;
+            text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88, 0 0 30px #00ff88;
+            animation: glow 2s ease-in-out infinite alternate;
+            margin-bottom: 10px;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88; }
+            to { text-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88, 0 0 60px #00ff88; }
+        }
+
+        .subtitle {
+            font-size: 10px;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 12px;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.1s;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .btn-start {
+            background: #00ff88;
+            color: #000;
+            box-shadow: 0 4px 0 #00aa55, 0 0 20px rgba(0,255,136,0.5);
+        }
+
+        .btn-start:hover {
+            background: #33ffaa;
+        }
+
+        .btn-pause {
+            background: #ffaa00;
+            color: #000;
+            box-shadow: 0 4px 0 #aa7700;
+        }
+
+        .btn-reset {
+            background: #ff4444;
+            color: #fff;
+            box-shadow: 0 4px 0 #aa2222;
+        }
+
+        .btn-sound {
+            background: #4444ff;
+            color: #fff;
+            box-shadow: 0 4px 0 #2222aa;
+        }
+
+        .btn-info {
+            background: #ff44ff;
+            color: #fff;
+            box-shadow: 0 4px 0 #aa22aa;
+        }
+
+        .btn-info:hover {
+            background: #ff66ff;
+        }
+
+        /* Info Modal - Retro Style */
+        .info-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .info-overlay.visible {
+            display: flex;
+        }
+
+        .info-modal {
+            background: #1a1a2e;
+            border: 6px solid #00ff88;
+            border-radius: 8px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 0 40px #00ff88, inset 0 0 60px rgba(0, 255, 136, 0.1);
+            animation: modal-appear 0.3s ease;
+        }
+
+        @keyframes modal-appear {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .info-header {
+            background: linear-gradient(180deg, #00aa55 0%, #008844 100%);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #00ff88;
+        }
+
+        .info-header h2 {
+            font-size: 18px;
+            color: #fff;
+            text-shadow: 2px 2px 0 #005522;
+            margin: 0;
+        }
+
+        .info-close {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ff4444;
+            color: #fff;
+            border: none;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 0 3px 0 #aa2222;
+            font-family: 'Press Start 2P', monospace;
+        }
+
+        .info-close:hover {
+            background: #ff6666;
+        }
+
+        .info-content {
+            padding: 25px;
+            direction: rtl;
+            text-align: right;
+        }
+
+        .info-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(0, 255, 136, 0.05);
+            border: 3px solid #333;
+            border-radius: 8px;
+        }
+
+        .info-section h3 {
+            font-size: 14px;
+            color: #00ff88;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #333;
+        }
+
+        .info-section p {
+            font-size: 10px;
+            line-height: 2;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .info-highlight {
+            background: linear-gradient(90deg, rgba(0,255,136,0.2), transparent);
+            padding: 15px;
+            border-right: 4px solid #00ff88;
+            margin: 15px 0;
+            font-size: 11px;
+            color: #88ffaa;
+        }
+
+        .info-comparison {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .info-box {
+            flex: 1;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .info-box.bad {
+            background: rgba(255, 68, 68, 0.1);
+            border: 3px solid #ff4444;
+        }
+
+        .info-box.good {
+            background: rgba(0, 255, 136, 0.1);
+            border: 3px solid #00ff88;
+        }
+
+        .info-box h4 {
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .info-box.bad h4 { color: #ff6666; }
+        .info-box.good h4 { color: #88ffaa; }
+
+        .info-box p {
+            font-size: 9px;
+            line-height: 1.8;
+        }
+
+        .info-emoji {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .info-footer {
+            text-align: center;
+            padding: 20px;
+            background: #0f0f1f;
+            border-top: 3px solid #333;
+            font-size: 9px;
+            color: #666;
+        }
+
+        .info-footer a {
+            color: #00ff88;
+            text-decoration: none;
+        }
+
+        .main-container {
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .scenario {
+            flex: 1;
+            min-width: 450px;
+            max-width: 580px;
+            background: #1a1a2e;
+            border: 4px solid;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .scenario.bad {
+            border-color: #ff4444;
+        }
+
+        .scenario.good {
+            border-color: #00ff88;
+        }
+
+        .scenario-header {
+            position: relative;
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .scenario.bad .scenario-header {
+            background: linear-gradient(180deg, #4a1a1a 0%, #2a0a0a 100%);
+            color: #ff6666;
+        }
+
+        .scenario.good .scenario-header {
+            background: linear-gradient(180deg, #1a4a2a 0%, #0a2a1a 100%);
+            color: #88ffaa;
+        }
+
+        .scenario-title {
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .scenario-subtitle {
+            font-size: 8px;
+            opacity: 0.7;
+        }
+
+        .game-area {
+            position: relative;
+            height: 420px;
+            background: #0a0a1a;
+            border-top: 2px solid #333;
+            border-bottom: 2px solid #333;
+            overflow: hidden;
+        }
+
+        /* ========== MANAGER LAYER ========== */
+        .manager-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 180px;
+            background: linear-gradient(180deg, #2a2a5a 0%, #1a1a4a 100%);
+            border-bottom: 6px solid #555;
+            padding: 10px;
+        }
+
+        .manager-layer-title {
+            font-size: 8px;
+            color: #aaa;
+            text-align: center;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .manager-workspace {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            height: 150px;
+        }
+
+        .manager-character {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 80px;
+        }
+
+        .manager {
+            width: 60px;
+            height: 80px;
+            position: relative;
+        }
+
+        .manager-status {
+            font-size: 7px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-top: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .manager-status.busy {
+            background: #ff4444;
+            color: #fff;
+            animation: status-pulse 0.5s ease infinite;
+        }
+
+        .manager-status.working {
+            background: #4488ff;
+            color: #fff;
+        }
+
+        .manager-status.available {
+            background: #00ff88;
+            color: #000;
+        }
+
+        .manager-status.syncing {
+            background: #ffaa00;
+            color: #000;
+            animation: status-pulse 0.3s ease infinite;
+        }
+
+        .manager-status.interrupted {
+            background: #ff00ff;
+            color: #fff;
+            animation: status-pulse 0.2s ease infinite;
+        }
+
+        @keyframes status-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+
+        .manager-task-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .current-task-label {
+            font-size: 7px;
+            color: #ffaa00;
+            text-transform: uppercase;
+        }
+
+        .current-task-box {
+            background: #333355;
+            border: 3px solid #4488ff;
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-height: 60px;
+            box-shadow: 0 0 20px rgba(68, 136, 255, 0.3);
+        }
+
+        .current-task-box.interrupted {
+            border-color: #ff00ff;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            animation: interrupt-flash 0.3s ease infinite;
+        }
+
+        @keyframes interrupt-flash {
+            0%, 100% { background: #333355; }
+            50% { background: #442244; }
+        }
+
+        .current-task-icon {
+            font-size: 32px;
+            animation: task-work 0.5s ease infinite;
+        }
+
+        @keyframes task-work {
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.1); }
+        }
+
+        .current-task-info {
+            flex: 1;
+        }
+
+        .current-task-name {
+            font-size: 9px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .current-task-progress {
+            height: 14px;
+            background: #222;
+            border: 2px solid #444;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .current-task-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4488ff, #66aaff);
+            transition: width 0.1s linear;
+            box-shadow: 0 0 10px #4488ff;
+        }
+
+        .current-task-progress-fill.interrupted {
+            background: linear-gradient(90deg, #ff00ff, #ff66ff);
+        }
+
+        .task-queue-label {
+            font-size: 7px;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .task-queue {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .queue-task {
+            width: 36px;
+            height: 36px;
+            background: #444466;
+            border: 2px solid #666688;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .queue-task.done {
+            opacity: 0.3;
+            transform: scale(0.8);
+            background: #333;
+            border-color: #444;
+        }
+
+        .queue-task.next {
+            border-color: #4488ff;
+            box-shadow: 0 0 10px rgba(68, 136, 255, 0.5);
+        }
+
+        .interrupt-counter {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 0, 255, 0.9);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 8px;
+            z-index: 50;
+        }
+
+        .sync-counter {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 255, 136, 0.9);
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 8px;
+            z-index: 50;
+        }
+
+        /* ========== AGENT LAYER ========== */
+        .agent-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 230px;
+        }
+
+        .agent-layer-title {
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            font-size: 8px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 20;
+        }
+
+        .platform {
+            position: absolute;
+            bottom: 40px;
+            left: 10px;
+            right: 10px;
+            height: 20px;
+            background: repeating-linear-gradient(
+                90deg,
+                #8B4513 0px,
+                #8B4513 20px,
+                #A0522D 20px,
+                #A0522D 40px
+            );
+            border-top: 4px solid #CD853F;
+            image-rendering: pixelated;
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: repeating-linear-gradient(
+                90deg,
+                #228B22 0px,
+                #228B22 30px,
+                #2E8B2E 30px,
+                #2E8B2E 60px
+            );
+        }
+
+        .agent {
+            position: absolute;
+            bottom: 60px;
+            width: 40px;
+            height: 40px;
+            transition: left 0.15s linear;
+            z-index: 10;
+        }
+
+        .speech-bubble {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            color: #000;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 100;
+            border: 3px solid #ff4444;
+        }
+
+        .speech-bubble.sync {
+            border-color: #00ff88;
+            background: #e0ffe0;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: #fff;
+        }
+
+        .speech-bubble.visible {
+            opacity: 1;
+            animation: bubble-bounce 0.5s ease infinite;
+        }
+
+        @keyframes bubble-bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .task-item {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.2s;
+        }
+
+        .task-item.reachable {
+            bottom: 65px;
+        }
+
+        .task-item.unreachable {
+            bottom: 130px;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .task-item.unreachable::before {
+            content: '⬆️';
+            position: absolute;
+            font-size: 10px;
+            bottom: -18px;
+            animation: arrow-bounce 0.5s ease infinite;
+        }
+
+        .task-item.unreachable::after {
+            content: '🔒';
+            position: absolute;
+            font-size: 10px;
+            top: -12px;
+            right: -8px;
+        }
+
+        @keyframes arrow-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(3px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .task-item.collected {
+            animation: collect 0.3s ease forwards;
+        }
+
+        @keyframes collect {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        /* Help beam animation */
+        .help-beam {
+            position: absolute;
+            width: 40px;
+            height: 0;
+            background: linear-gradient(180deg, #ff00ff, #00ff88);
+            opacity: 0;
+            z-index: 5;
+            border-radius: 20px;
+            box-shadow: 0 0 20px #ff00ff, 0 0 40px #00ff88;
+        }
+
+        .help-beam.active {
+            opacity: 0.8;
+            animation: beam-down 0.6s ease forwards;
+        }
+
+        .help-beam.sync {
+            background: linear-gradient(180deg, #00ff88, #4488ff);
+            box-shadow: 0 0 20px #00ff88, 0 0 40px #4488ff;
+        }
+
+        @keyframes beam-down {
+            0% { height: 0; top: 180px; }
+            100% { height: 80px; top: 100px; }
+        }
+
+        .stats-panel {
+            padding: 15px;
+            background: #0f0f1f;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 10px;
+        }
+
+        .stat-label {
+            color: #888;
+        }
+
+        .stat-value {
+            font-size: 14px;
+        }
+
+        .scenario.bad .stat-value {
+            color: #ff6666;
+        }
+
+        .scenario.good .stat-value {
+            color: #88ffaa;
+        }
+
+        .progress-bar {
+            height: 16px;
+            background: #222;
+            border: 2px solid #444;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            transition: width 0.3s;
+        }
+
+        .progress-fill.work {
+            background: linear-gradient(90deg, #00aa55, #00ff88);
+        }
+
+        .efficiency-display {
+            text-align: center;
+            padding: 15px;
+            background: #0a0a15;
+            border-top: 2px solid #333;
+        }
+
+        .efficiency-label {
+            font-size: 10px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        .efficiency-value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .scenario.bad .efficiency-value {
+            color: #ff4444;
+            text-shadow: 0 0 10px #ff4444;
+        }
+
+        .scenario.good .efficiency-value {
+            color: #00ff88;
+            text-shadow: 0 0 10px #00ff88;
+        }
+
+        .timer-display {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            padding: 6px 10px;
+            border: 2px solid;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .scenario.bad .timer-display {
+            border-color: #ff4444;
+            color: #ff6666;
+        }
+
+        .scenario.good .timer-display {
+            border-color: #00ff88;
+            color: #88ffaa;
+        }
+
+        .status-indicator {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 8px;
+            z-index: 50;
+        }
+
+        .status-indicator.working {
+            background: #00aa55;
+            color: #fff;
+            animation: status-blink 1s ease infinite;
+        }
+
+        .status-indicator.idle {
+            background: #ff4444;
+            color: #fff;
+            animation: status-blink 0.5s ease infinite;
+        }
+
+        .status-indicator.syncing {
+            background: #ffaa00;
+            color: #000;
+            animation: status-blink 0.3s ease infinite;
+        }
+
+        @keyframes status-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Pixel art agent */
+        .pixel-agent {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .pixel-agent .body {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            left: 4px;
+            top: 4px;
+            background: #00aaff;
+            border-radius: 50%;
+            border: 3px solid #0088cc;
+        }
+
+        .pixel-agent .eye {
+            position: absolute;
+            width: 8px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+            top: 10px;
+        }
+
+        .pixel-agent .eye.left { left: 8px; }
+        .pixel-agent .eye.right { right: 8px; }
+
+        .pixel-agent .pupil {
+            position: absolute;
+            width: 4px;
+            height: 5px;
+            background: #000;
+            border-radius: 50%;
+            top: 3px;
+            right: 1px;
+        }
+
+        .pixel-agent.idle .pupil {
+            animation: look-up 1s ease infinite;
+        }
+
+        @keyframes look-up {
+            0%, 100% { top: 0; }
+            50% { top: -2px; }
+        }
+
+        .pixel-agent .mouth {
+            position: absolute;
+            width: 12px;
+            height: 6px;
+            background: #000;
+            border-radius: 0 0 6px 6px;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .pixel-agent.idle .mouth {
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        /* Pixel art manager */
+        .pixel-manager {
+            width: 60px;
+            height: 80px;
+            position: relative;
+        }
+
+        .pixel-manager .head {
+            position: absolute;
+            width: 36px;
+            height: 36px;
+            background: #ffcc99;
+            border-radius: 50%;
+            top: 0;
+            left: 12px;
+            border: 3px solid #cc9966;
+        }
+
+        .pixel-manager .hair {
+            position: absolute;
+            width: 30px;
+            height: 12px;
+            background: #4a3728;
+            top: 2px;
+            left: 15px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .pixel-manager .eyes {
+            position: absolute;
+            top: 14px;
+            left: 18px;
+            width: 24px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .pixel-manager .eye {
+            width: 6px;
+            height: 6px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        .pixel-manager .body-suit {
+            position: absolute;
+            width: 48px;
+            height: 42px;
+            background: #2a2a5a;
+            top: 34px;
+            left: 6px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .pixel-manager .tie {
+            position: absolute;
+            width: 10px;
+            height: 24px;
+            background: #ff4444;
+            top: 36px;
+            left: 25px;
+            clip-path: polygon(50% 0%, 100% 15%, 70% 100%, 30% 100%, 0% 15%);
+        }
+
+        .pixel-manager .arms {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 60px;
+        }
+
+        .pixel-manager .arm {
+            position: absolute;
+            width: 8px;
+            height: 25px;
+            background: #2a2a5a;
+            border-radius: 4px;
+        }
+
+        .pixel-manager .arm.left {
+            left: 0;
+            transform-origin: top center;
+        }
+
+        .pixel-manager .arm.right {
+            right: 0;
+            transform-origin: top center;
+        }
+
+        .pixel-manager.working .arm.left {
+            animation: arm-work-left 0.4s ease infinite;
+        }
+
+        .pixel-manager.working .arm.right {
+            animation: arm-work-right 0.4s ease infinite;
+        }
+
+        @keyframes arm-work-left {
+            0%, 100% { transform: rotate(-15deg); }
+            50% { transform: rotate(-30deg); }
+        }
+
+        @keyframes arm-work-right {
+            0%, 100% { transform: rotate(15deg); }
+            50% { transform: rotate(30deg); }
+        }
+
+        .pixel-manager.working::after {
+            content: '⌨️';
+            position: absolute;
+            font-size: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -5px;
+        }
+
+        .pixel-manager.syncing::after {
+            content: '🤝';
+            position: absolute;
+            font-size: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -5px;
+            animation: sync-pulse 0.3s ease infinite;
+        }
+
+        @keyframes sync-pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+        }
+
+        .summary-panel {
+            text-align: center;
+            padding: 20px;
+            background: #1a1a2e;
+            margin: 20px auto;
+            max-width: 900px;
+            border: 4px solid #00ff88;
+            border-radius: 8px;
+        }
+
+        .summary-title {
+            font-size: 16px;
+            color: #00ff88;
+            margin-bottom: 20px;
+        }
+
+        .comparison {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .comparison-item {
+            text-align: center;
+        }
+
+        .comparison-label {
+            font-size: 10px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .comparison-value {
+            font-size: 32px;
+        }
+
+        .comparison-value.bad { color: #ff4444; }
+        .comparison-value.good { color: #00ff88; }
+
+        .vs {
+            font-size: 24px;
+            color: #ffaa00;
+            align-self: center;
+        }
+
+        .insight-text {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,255,136,0.1);
+            border: 2px solid #00ff88;
+            border-radius: 4px;
+            font-size: 10px;
+            line-height: 1.8;
+            color: #aaffcc;
+        }
+
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .speed-control label {
+            font-size: 10px;
+            color: #888;
+        }
+
+        .speed-control input { width: 100px; }
+
+        .speed-value {
+            font-size: 12px;
+            color: #00ff88;
+            min-width: 40px;
+        }
+
+        .waiting-indicator {
+            position: absolute;
+            top: 185px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 0, 255, 0.9);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 8px;
+            opacity: 0;
+            z-index: 60;
+            white-space: nowrap;
+        }
+
+        .waiting-indicator.visible {
+            opacity: 1;
+            animation: waiting-flash 0.5s ease infinite;
+        }
+
+        .waiting-indicator.sync {
+            background: rgba(0, 255, 136, 0.9);
+            color: #000;
+        }
+
+        @keyframes waiting-flash {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 0.6; }
+        }
+
+        .legend {
+            text-align: center;
+            padding: 20px;
+            font-size: 10px;
+            color: #666;
+        }
+
+        .legend-items {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-icon { font-size: 20px; }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="crt-effect"></div>
+
+    <header>
+        <h1>🎮 CLAUDEABILITY SIMULATOR</h1>
+        <div class="subtitle">TIME HORIZON & SYNC MEETING VISUALIZATION</div>
+        <div class="controls">
+            <button class="btn-start" onclick="startSimulation()">▶ START</button>
+            <button class="btn-pause" onclick="togglePause()">⏸ PAUSE</button>
+            <button class="btn-reset" onclick="resetSimulation()">↺ RESET</button>
+            <button class="btn-sound" onclick="toggleSound()">🔊 SOUND</button>
+            <button class="btn-info" onclick="openInfo()">❓ ABOUT</button>
+        </div>
+        <div class="speed-control">
+            <label>SPEED:</label>
+            <input type="range" min="0.5" max="3" step="0.5" value="1" onchange="setSpeed(this.value)">
+            <span class="speed-value" id="speedValue">1x</span>
+        </div>
+        <div class="speed-control">
+            <label>🔒 BLOCKED:</label>
+            <input type="range" min="0" max="50" step="5" value="20" onchange="setBlockedRate(this.value)">
+            <span class="speed-value" id="blockedValue">20%</span>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- BAD SCENARIO -->
+        <div class="scenario bad" id="badScenario">
+            <div class="scenario-header">
+                <div class="scenario-title">❌ NON-CLAUDEABLE</div>
+                <div class="scenario-subtitle">Agent waits for manager to be free</div>
+                <div class="timer-display" id="badTimer">00:00</div>
+            </div>
+            <div class="game-area" id="badGameArea">
+                <div class="interrupt-counter" id="badInterruptCounter">🚫 BLOCKS: 0</div>
+
+                <div class="manager-layer">
+                    <div class="manager-layer-title">👔 MANAGER (HUMAN) - OWN WORK</div>
+                    <div class="manager-workspace">
+                        <div class="manager-character">
+                            <div class="manager" id="badManager">
+                                <div class="pixel-manager working">
+                                    <div class="hair"></div>
+                                    <div class="head">
+                                        <div class="eyes">
+                                            <div class="eye"></div>
+                                            <div class="eye"></div>
+                                        </div>
+                                    </div>
+                                    <div class="body-suit"></div>
+                                    <div class="tie"></div>
+                                    <div class="arms">
+                                        <div class="arm left"></div>
+                                        <div class="arm right"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="manager-status working" id="badManagerStatus">💼 WORKING</div>
+                        </div>
+                        <div class="manager-task-area">
+                            <div class="current-task-label">📌 MANAGER'S OWN TASK:</div>
+                            <div class="current-task-box" id="badCurrentTask">
+                                <div class="current-task-icon" id="badCurrentTaskIcon">📊</div>
+                                <div class="current-task-info">
+                                    <div class="current-task-name" id="badCurrentTaskName">Strategic planning...</div>
+                                    <div class="current-task-progress">
+                                        <div class="current-task-progress-fill" id="badManagerProgress" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="task-queue-label">📋 MANAGER'S QUEUE:</div>
+                            <div class="task-queue" id="badTaskQueue"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="waiting-indicator" id="badWaiting">⚠️ MANAGER INTERRUPTED!</div>
+
+                <div class="agent-layer">
+                    <div class="agent-layer-title">🤖 AGENT (CLAUDE) - TIME HORIZON</div>
+                    <div class="platform"></div>
+                    <div class="ground"></div>
+                    <div class="agent" id="badAgent" style="left: 20px;">
+                        <div class="pixel-agent">
+                            <div class="body">
+                                <div class="eye left"><div class="pupil"></div></div>
+                                <div class="eye right"><div class="pupil"></div></div>
+                                <div class="mouth"></div>
+                            </div>
+                        </div>
+                        <div class="speech-bubble" id="badBubble">צריך עזרה! 😰</div>
+                    </div>
+                    <div id="badTasks"></div>
+                    <div class="help-beam" id="badHelpBeam"></div>
+                </div>
+
+                <div class="status-indicator working" id="badStatus">WORKING</div>
+            </div>
+            <div class="stats-panel">
+                <div class="stat-row">
+                    <span class="stat-label">🎯 SCORE:</span>
+                    <span class="stat-value" id="badScore">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">⏱ AGENT WORK:</span>
+                    <span class="stat-value" id="badWorkTime">0s</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">💤 AGENT IDLE:</span>
+                    <span class="stat-value" id="badIdleTime">0s</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">🚨 INTERRUPTS:</span>
+                    <span class="stat-value" id="badBlocks">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">📊 MGR TASKS DONE:</span>
+                    <span class="stat-value" id="badMgrTasks">0</span>
+                </div>
+            </div>
+            <div class="efficiency-display">
+                <div class="efficiency-label">AGENT EFFICIENCY</div>
+                <div class="efficiency-value" id="badEfficiency">100%</div>
+            </div>
+        </div>
+
+        <!-- GOOD SCENARIO -->
+        <div class="scenario good" id="goodScenario">
+            <div class="scenario-header">
+                <div class="scenario-title">✅ CLAUDEABLE</div>
+                <div class="scenario-subtitle">Sync only at end of time horizon</div>
+                <div class="timer-display" id="goodTimer">00:00</div>
+            </div>
+            <div class="game-area" id="goodGameArea">
+                <div class="sync-counter" id="goodSyncCounter">🤝 SYNCS: 0</div>
+
+                <div class="manager-layer">
+                    <div class="manager-layer-title">👔 MANAGER (HUMAN) - OWN WORK</div>
+                    <div class="manager-workspace">
+                        <div class="manager-character">
+                            <div class="manager" id="goodManager">
+                                <div class="pixel-manager working">
+                                    <div class="hair"></div>
+                                    <div class="head">
+                                        <div class="eyes">
+                                            <div class="eye"></div>
+                                            <div class="eye"></div>
+                                        </div>
+                                    </div>
+                                    <div class="body-suit"></div>
+                                    <div class="tie"></div>
+                                    <div class="arms">
+                                        <div class="arm left"></div>
+                                        <div class="arm right"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="manager-status working" id="goodManagerStatus">💼 WORKING</div>
+                        </div>
+                        <div class="manager-task-area">
+                            <div class="current-task-label">📌 MANAGER'S OWN TASK:</div>
+                            <div class="current-task-box" id="goodCurrentTask">
+                                <div class="current-task-icon" id="goodCurrentTaskIcon">📊</div>
+                                <div class="current-task-info">
+                                    <div class="current-task-name" id="goodCurrentTaskName">Strategic planning...</div>
+                                    <div class="current-task-progress">
+                                        <div class="current-task-progress-fill" id="goodManagerProgress" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="task-queue-label">📋 MANAGER'S QUEUE:</div>
+                            <div class="task-queue" id="goodTaskQueue"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="waiting-indicator sync" id="goodWaiting">🤝 SYNC MEETING</div>
+
+                <div class="agent-layer">
+                    <div class="agent-layer-title">🤖 AGENT (CLAUDE) - TIME HORIZON</div>
+                    <div class="platform"></div>
+                    <div class="ground"></div>
+                    <div class="agent" id="goodAgent" style="left: 20px;">
+                        <div class="pixel-agent">
+                            <div class="body">
+                                <div class="eye left"><div class="pupil"></div></div>
+                                <div class="eye right"><div class="pupil"></div></div>
+                                <div class="mouth"></div>
+                            </div>
+                        </div>
+                        <div class="speech-bubble sync" id="goodBubble">סיימתי! 🤝</div>
+                    </div>
+                    <div id="goodTasks"></div>
+                    <div class="help-beam sync" id="goodHelpBeam"></div>
+                </div>
+
+                <div class="status-indicator working" id="goodStatus">WORKING</div>
+            </div>
+            <div class="stats-panel">
+                <div class="stat-row">
+                    <span class="stat-label">🎯 SCORE:</span>
+                    <span class="stat-value" id="goodScore">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">⏱ AGENT WORK:</span>
+                    <span class="stat-value" id="goodWorkTime">0s</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">💤 AGENT IDLE:</span>
+                    <span class="stat-value" id="goodIdleTime">0s</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">🤝 SYNCS:</span>
+                    <span class="stat-value" id="goodSyncs">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">📊 MGR TASKS DONE:</span>
+                    <span class="stat-value" id="goodMgrTasks">0</span>
+                </div>
+            </div>
+            <div class="efficiency-display">
+                <div class="efficiency-label">AGENT EFFICIENCY</div>
+                <div class="efficiency-value" id="goodEfficiency">100%</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="summary-panel">
+        <div class="summary-title">📊 REAL-TIME COMPARISON</div>
+        <div class="comparison">
+            <div class="comparison-item">
+                <div class="comparison-label">NON-CLAUDEABLE</div>
+                <div class="comparison-value bad" id="summaryBadInterrupts">0</div>
+                <div class="comparison-label">BLOCKS (IDLE TIME)</div>
+            </div>
+            <div class="vs">VS</div>
+            <div class="comparison-item">
+                <div class="comparison-label">CLAUDEABLE</div>
+                <div class="comparison-value good" id="summaryGoodSyncs">0</div>
+                <div class="comparison-label">SYNCS</div>
+            </div>
+        </div>
+        <div class="insight-text" id="insightText">
+            🎯 לחץ START כדי להתחיל<br><br>
+            <strong>שמאל:</strong> הסוכן נתקע ומחכה שהמנהל יסיים את המשימה הנוכחית שלו<br>
+            <strong>ימין:</strong> הסוכן עובד ברצף, סנכרון מתוכנן רק בסוף כל Time Horizon
+        </div>
+    </div>
+
+    <div class="legend">
+        <div>THE KEY INSIGHT</div>
+        <div class="legend-items">
+            <div class="legend-item">
+                <span class="legend-icon">🚫</span>
+                <span>Block = Agent waits for manager</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-icon">🤝</span>
+                <span>Sync = Planned meeting at horizon end</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-icon">⏰</span>
+                <span>Time Horizon = ~1 hour of agent work</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== AUDIO ENGINE ==========
+        class AudioEngine {
+            constructor() {
+                this.ctx = null;
+                this.enabled = true;
+                this.musicPlaying = false;
+            }
+
+            init() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+            }
+
+            playTone(freq, duration, type = 'square', volume = 0.1) {
+                if (!this.enabled || !this.ctx) return;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = type;
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(volume, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + duration);
+            }
+
+            collect() {
+                this.playTone(523, 0.1);
+                setTimeout(() => this.playTone(659, 0.1), 50);
+                setTimeout(() => this.playTone(784, 0.15), 100);
+            }
+
+            interrupt() {
+                this.playTone(200, 0.2, 'sawtooth', 0.1);
+                setTimeout(() => this.playTone(150, 0.2, 'sawtooth', 0.1), 100);
+                setTimeout(() => this.playTone(100, 0.3, 'sawtooth', 0.08), 200);
+            }
+
+            sync() {
+                this.playTone(392, 0.1, 'triangle');
+                setTimeout(() => this.playTone(494, 0.1, 'triangle'), 100);
+                setTimeout(() => this.playTone(587, 0.15, 'triangle'), 200);
+                setTimeout(() => this.playTone(784, 0.2, 'triangle'), 300);
+            }
+
+            managerComplete() {
+                this.playTone(440, 0.1, 'triangle', 0.05);
+            }
+
+            complete() {
+                [523, 587, 659, 784, 880, 1047].forEach((note, i) => {
+                    setTimeout(() => this.playTone(note, 0.15, 'square', 0.08), i * 80);
+                });
+            }
+
+            startMusic() {
+                if (!this.enabled || !this.ctx || this.musicPlaying) return;
+                this.musicPlaying = true;
+                this.playMusicLoop();
+            }
+
+            playMusicLoop() {
+                if (!this.musicPlaying || !this.enabled) return;
+                const melody = [
+                    { note: 262, dur: 0.15 }, { note: 294, dur: 0.15 },
+                    { note: 330, dur: 0.15 }, { note: 262, dur: 0.15 },
+                    { note: 330, dur: 0.15 }, { note: 294, dur: 0.15 },
+                    { note: 262, dur: 0.3 }, { note: 0, dur: 0.15 },
+                ];
+                let time = 0;
+                melody.forEach(({ note, dur }) => {
+                    if (note > 0) {
+                        setTimeout(() => {
+                            if (this.musicPlaying && this.enabled) {
+                                this.playTone(note, dur * 0.9, 'square', 0.03);
+                            }
+                        }, time * 1000);
+                    }
+                    time += dur;
+                });
+                setTimeout(() => this.playMusicLoop(), time * 1000);
+            }
+
+            stopMusic() { this.musicPlaying = false; }
+            toggle() {
+                this.enabled = !this.enabled;
+                if (!this.enabled) this.stopMusic();
+                return this.enabled;
+            }
+        }
+
+        const audio = new AudioEngine();
+
+        // ========== GAME STATE ==========
+        const TASK_ICONS = ['⭐', '💎', '🔮', '🍕', '🎁', '💰', '🏆', '🎪'];
+        const AGENT_QUESTIONS = [
+            'צריך אישור! 🔑',
+            'מה הסיסמה? 🔐',
+            'איפה הקובץ? 📁',
+            'מי הלקוח? 🤔',
+            'איזה פורמט? 📋',
+            'לאיזה מייל? 📧',
+            'מה התקציב? 💰',
+            'באיזה צבע? 🎨',
+            'מה העדיפות? ⚡',
+            'צריך גישה! 🚪'
+        ];
+        const MANAGER_TASKS = [
+            { icon: '📊', name: 'Strategic planning...' },
+            { icon: '📈', name: 'Reviewing metrics...' },
+            { icon: '📋', name: 'Writing proposal...' },
+            { icon: '💼', name: 'Client presentation...' },
+            { icon: '📧', name: 'Important emails...' },
+            { icon: '🎯', name: 'Setting OKRs...' },
+            { icon: '📝', name: 'Documentation...' },
+            { icon: '🗓️', name: 'Quarterly review...' }
+        ];
+
+        let gameState = {
+            running: false,
+            paused: false,
+            speed: 1,
+            blockedRate: 0.20,
+            simTime: 0,
+            maxTime: 60,
+
+            bad: {
+                score: 0,
+                workTime: 0,
+                idleTime: 0,
+                interrupts: 0,
+                syncs: 0,
+                agentX: 20,
+                isIdle: false,
+                waitingForHelp: false,
+                waitingForSync: false,
+                isSyncing: false,
+                syncTimer: 0,
+                blockedTaskIndex: -1,
+                currentQuestion: '',
+                tasks: [],
+                managerTasks: [],
+                managerTaskIndex: 0,
+                managerProgress: 0,
+                managerTaskDuration: 4,
+                managerTasksCompleted: 0,
+                isHelping: false,
+                helpingTimer: 0
+            },
+
+            good: {
+                score: 0,
+                workTime: 0,
+                idleTime: 0,
+                syncs: 0,
+                agentX: 20,
+                isIdle: false,
+                waitingForSync: false,
+                tasks: [],
+                managerTasks: [],
+                managerTaskIndex: 0,
+                managerProgress: 0,
+                managerTaskDuration: 4,
+                managerTasksCompleted: 0,
+                isSyncing: false,
+                syncTimer: 0
+            }
+        };
+
+        // ========== INITIALIZATION ==========
+        function initTasks() {
+            const taskSpacing = 50;
+            const numTasks = 10;
+
+            // BAD scenario - 35% unreachable
+            gameState.bad.tasks = [];
+            for (let i = 0; i < numTasks; i++) {
+                gameState.bad.tasks.push({
+                    x: 40 + i * taskSpacing,
+                    icon: TASK_ICONS[Math.floor(Math.random() * TASK_ICONS.length)],
+                    reachable: Math.random() >= gameState.blockedRate,
+                    collected: false
+                });
+            }
+
+            // GOOD scenario - all reachable
+            gameState.good.tasks = [];
+            for (let i = 0; i < numTasks; i++) {
+                gameState.good.tasks.push({
+                    x: 40 + i * taskSpacing,
+                    icon: TASK_ICONS[Math.floor(Math.random() * TASK_ICONS.length)],
+                    reachable: true,
+                    collected: false
+                });
+            }
+
+            // Manager tasks for BOTH scenarios
+            ['bad', 'good'].forEach(type => {
+                gameState[type].managerTasks = [];
+                for (let i = 0; i < 6; i++) {
+                    const task = MANAGER_TASKS[Math.floor(Math.random() * MANAGER_TASKS.length)];
+                    gameState[type].managerTasks.push({ ...task, done: false });
+                }
+                gameState[type].managerTaskDuration = 3 + Math.random() * 2;
+            });
+
+            renderTasks();
+            renderManagerTasks('bad');
+            renderManagerTasks('good');
+        }
+
+        function renderTasks() {
+            ['bad', 'good'].forEach(type => {
+                const container = document.getElementById(`${type}Tasks`);
+                container.innerHTML = '';
+                gameState[type].tasks.forEach((task, i) => {
+                    if (!task.collected) {
+                        const el = document.createElement('div');
+                        el.className = `task-item ${task.reachable ? 'reachable' : 'unreachable'}`;
+                        el.style.left = task.x + 'px';
+                        el.textContent = task.icon;
+                        container.appendChild(el);
+                    }
+                });
+            });
+        }
+
+        function renderManagerTasks(type) {
+            const queue = document.getElementById(`${type}TaskQueue`);
+            queue.innerHTML = '';
+            gameState[type].managerTasks.forEach((task, i) => {
+                const el = document.createElement('div');
+                el.className = 'queue-task' +
+                    (task.done ? ' done' : '') +
+                    (i === gameState[type].managerTaskIndex + 1 ? ' next' : '');
+                el.textContent = task.icon;
+                queue.appendChild(el);
+            });
+
+            if (gameState[type].managerTaskIndex < gameState[type].managerTasks.length) {
+                const current = gameState[type].managerTasks[gameState[type].managerTaskIndex];
+                document.getElementById(`${type}CurrentTaskIcon`).textContent = current.icon;
+                document.getElementById(`${type}CurrentTaskName`).textContent = current.name;
+            }
+        }
+
+        // ========== GAME LOOP ==========
+        let lastTime = 0;
+
+        function gameLoop(timestamp) {
+            if (!gameState.running) return;
+            if (!lastTime) lastTime = timestamp;
+            const delta = (timestamp - lastTime) / 1000 * gameState.speed;
+            lastTime = timestamp;
+
+            if (!gameState.paused) {
+                gameState.simTime += delta;
+                updateBadScenario(delta);
+                updateGoodScenario(delta);
+                updateUI();
+
+                if (gameState.simTime >= gameState.maxTime) {
+                    endSimulation();
+                    return;
+                }
+            }
+            requestAnimationFrame(gameLoop);
+        }
+
+        function updateBadScenario(delta) {
+            const state = gameState.bad;
+            const agent = document.getElementById('badAgent');
+            const bubble = document.getElementById('badBubble');
+            const status = document.getElementById('badStatus');
+            const pixelAgent = agent.querySelector('.pixel-agent');
+            const managerPixel = document.getElementById('badManager').querySelector('.pixel-manager');
+            const managerStatus = document.getElementById('badManagerStatus');
+            const waitingIndicator = document.getElementById('badWaiting');
+            const taskBox = document.getElementById('badCurrentTask');
+            const progressFill = document.getElementById('badManagerProgress');
+
+            // Manager is HELPING the agent (takes 1.5-2 seconds)
+            if (state.isHelping) {
+                state.helpingTimer += delta;
+                state.idleTime += delta; // Agent still idle while being helped
+
+                managerPixel.classList.remove('working');
+                managerPixel.classList.add('syncing');
+                managerStatus.textContent = '🆘 HELPING...';
+                managerStatus.className = 'manager-status syncing';
+                waitingIndicator.textContent = '🤝 MANAGER IS HELPING...';
+
+                if (state.helpingTimer >= 1.5) {
+                    // Done helping
+                    provideHelp('bad');
+                    state.isHelping = false;
+                    state.helpingTimer = 0;
+
+                    // Resume working on next task
+                    managerPixel.classList.add('working');
+                    managerPixel.classList.remove('syncing');
+                    managerStatus.textContent = '💼 WORKING';
+                    managerStatus.className = 'manager-status working';
+                }
+                return; // Manager can't do their own work while helping
+            }
+
+            // Manager is SYNCING at end of time horizon
+            if (state.isSyncing) {
+                state.syncTimer += delta;
+                state.idleTime += delta;
+
+                managerPixel.classList.remove('working');
+                managerPixel.classList.add('syncing');
+                managerStatus.textContent = '🤝 SYNCING...';
+                managerStatus.className = 'manager-status syncing';
+                waitingIndicator.textContent = '🤝 SYNC MEETING IN PROGRESS...';
+                waitingIndicator.classList.add('visible');
+
+                if (state.syncTimer >= 1.5) {
+                    // Sync complete
+                    state.syncs++;
+                    audio.sync();
+
+                    // Show beam animation
+                    const beam = document.getElementById('badHelpBeam');
+                    beam.style.left = '250px';
+                    beam.classList.add('active');
+                    setTimeout(() => beam.classList.remove('active'), 600);
+
+                    state.waitingForSync = false;
+                    state.isSyncing = false;
+                    state.syncTimer = 0;
+                    state.isIdle = false;
+                    state.agentX = 20;
+                    regenerateTasks('bad');
+
+                    managerPixel.classList.add('working');
+                    managerPixel.classList.remove('syncing');
+                    managerStatus.textContent = '💼 WORKING';
+                    managerStatus.className = 'manager-status working';
+                    bubble.classList.remove('visible');
+                    waitingIndicator.classList.remove('visible');
+                }
+                return; // Manager can't do their own work while syncing
+            }
+
+            // Manager works on their own tasks (only when not helping)
+            if (state.managerTaskIndex < state.managerTasks.length) {
+                state.managerProgress += (delta / state.managerTaskDuration) * 100;
+                progressFill.style.width = Math.min(state.managerProgress, 100) + '%';
+
+                if (state.managerProgress >= 100) {
+                    state.managerTasks[state.managerTaskIndex].done = true;
+                    state.managerTasksCompleted++;
+                    state.managerTaskIndex++;
+                    state.managerProgress = 0;
+                    state.managerTaskDuration = 3 + Math.random() * 2;
+                    audio.managerComplete();
+                    renderManagerTasks('bad');
+
+                    // Manager finished task - NOW check if agent needs help or sync
+                    if (state.waitingForHelp) {
+                        // Start helping (takes time!)
+                        state.isHelping = true;
+                        state.helpingTimer = 0;
+                    } else if (state.waitingForSync) {
+                        // Start sync meeting
+                        state.isSyncing = true;
+                        state.syncTimer = 0;
+                    }
+                }
+            }
+
+            // Agent logic - waiting for help (blocked) or waiting for sync (end of horizon)
+            if (state.isIdle || state.waitingForSync) {
+                state.idleTime += delta;
+                pixelAgent.classList.add('idle');
+                status.className = 'status-indicator idle';
+                status.textContent = state.waitingForSync ? 'SYNC MEETING' : 'WAITING...';
+                bubble.classList.add('visible');
+                bubble.textContent = state.currentQuestion;
+                waitingIndicator.classList.add('visible');
+
+                if (!state.isHelping && !state.isSyncing) {
+                    const waitType = state.waitingForSync ? 'SYNC' : 'HELP';
+                    waitingIndicator.textContent = `⏳ WAITING FOR ${waitType} (${Math.round(100 - state.managerProgress)}% left)`;
+                }
+
+            } else {
+                state.workTime += delta;
+                pixelAgent.classList.remove('idle');
+                status.className = 'status-indicator working';
+                status.textContent = 'WORKING';
+                bubble.classList.remove('visible');
+                waitingIndicator.classList.remove('visible');
+
+                // Move agent
+                state.agentX += 60 * delta;
+                agent.style.left = state.agentX + 'px';
+
+                // Check for tasks
+                const nextIdx = state.tasks.findIndex(t => !t.collected && t.x <= state.agentX + 20);
+                if (nextIdx !== -1) {
+                    const task = state.tasks[nextIdx];
+                    if (task.reachable) {
+                        collectTask('bad', task);
+                    } else {
+                        // Agent is BLOCKED - must wait for manager to finish current task!
+                        state.isIdle = true;
+                        state.waitingForHelp = true;
+                        state.blockedTaskIndex = nextIdx;
+                        state.currentQuestion = AGENT_QUESTIONS[Math.floor(Math.random() * AGENT_QUESTIONS.length)];
+                        state.interrupts++;
+                        audio.interrupt();
+                        document.getElementById('badInterruptCounter').textContent = `🚫 BLOCKS: ${state.interrupts}`;
+                    }
+                }
+
+                // End of horizon - need sync meeting (same as good scenario)
+                if (state.agentX > 520 && !state.waitingForSync) {
+                    state.waitingForSync = true;
+                    state.currentQuestion = 'סיימתי! צריך סנכרון 🤝';
+                }
+            }
+        }
+
+        function updateGoodScenario(delta) {
+            const state = gameState.good;
+            const agent = document.getElementById('goodAgent');
+            const bubble = document.getElementById('goodBubble');
+            const status = document.getElementById('goodStatus');
+            const pixelAgent = agent.querySelector('.pixel-agent');
+            const managerPixel = document.getElementById('goodManager').querySelector('.pixel-manager');
+            const managerStatus = document.getElementById('goodManagerStatus');
+            const waitingIndicator = document.getElementById('goodWaiting');
+
+            // Manager works uninterrupted on own tasks
+            if (!state.isSyncing && state.managerTaskIndex < state.managerTasks.length) {
+                state.managerProgress += (delta / state.managerTaskDuration) * 100;
+                document.getElementById('goodManagerProgress').style.width = Math.min(state.managerProgress, 100) + '%';
+
+                if (state.managerProgress >= 100) {
+                    state.managerTasks[state.managerTaskIndex].done = true;
+                    state.managerTasksCompleted++;
+                    state.managerTaskIndex++;
+                    state.managerProgress = 0;
+                    state.managerTaskDuration = 3 + Math.random() * 2;
+                    audio.managerComplete();
+                    renderManagerTasks('good');
+
+                    // Manager finished task - check if agent waiting for sync
+                    if (state.waitingForSync) {
+                        state.isSyncing = true;
+                        state.syncTimer = 0;
+                    }
+                }
+            }
+
+            // Manager is syncing with agent (takes ~1.5 seconds - same as helping)
+            if (state.isSyncing) {
+                state.syncTimer += delta;
+                state.idleTime += delta;
+
+                managerPixel.classList.remove('working');
+                managerPixel.classList.add('syncing');
+                managerStatus.textContent = '🤝 SYNCING...';
+                managerStatus.className = 'manager-status syncing';
+                waitingIndicator.textContent = '🤝 SYNC MEETING IN PROGRESS...';
+
+                if (state.syncTimer >= 1.5) {
+                    // Sync complete - give new tasks
+                    state.syncs++;
+                    audio.sync();
+                    document.getElementById('goodSyncCounter').textContent = `🤝 SYNCS: ${state.syncs}`;
+
+                    // Show beam animation
+                    const beam = document.getElementById('goodHelpBeam');
+                    beam.style.left = '250px';
+                    beam.classList.add('active');
+                    setTimeout(() => beam.classList.remove('active'), 600);
+
+                    state.waitingForSync = false;
+                    state.isSyncing = false;
+                    state.syncTimer = 0;
+                    state.agentX = 20;
+                    regenerateTasks('good');
+
+                    managerPixel.classList.add('working');
+                    managerPixel.classList.remove('syncing');
+                    managerStatus.textContent = '💼 WORKING';
+                    managerStatus.className = 'manager-status working';
+                    bubble.classList.remove('visible');
+                    waitingIndicator.classList.remove('visible');
+                }
+                return; // Manager can't work during sync
+            }
+
+            // Agent waiting for sync to start
+            if (state.waitingForSync) {
+                state.idleTime += delta;
+                pixelAgent.classList.add('idle');
+                status.className = 'status-indicator syncing';
+                status.textContent = 'SYNC MEETING';
+                bubble.classList.add('visible');
+                bubble.textContent = 'סיימתי הכל! 🤝';
+                waitingIndicator.classList.add('visible');
+                waitingIndicator.textContent = `⏳ WAITING FOR SYNC (${Math.round(100 - state.managerProgress)}% left)`;
+
+            } else {
+                state.workTime += delta;
+                pixelAgent.classList.remove('idle');
+                status.className = 'status-indicator working';
+                status.textContent = 'WORKING';
+                bubble.classList.remove('visible');
+                waitingIndicator.classList.remove('visible');
+
+                // Move agent
+                state.agentX += 60 * delta;
+                agent.style.left = state.agentX + 'px';
+
+                // Collect tasks
+                const task = state.tasks.find(t => !t.collected && t.x <= state.agentX + 20);
+                if (task) {
+                    collectTask('good', task);
+                }
+
+                // End of horizon - need sync meeting
+                if (state.agentX > 520) {
+                    state.waitingForSync = true;
+                }
+            }
+        }
+
+        function collectTask(type, task) {
+            task.collected = true;
+            gameState[type].score += 10;
+            audio.collect();
+
+            const taskEl = document.querySelector(`#${type}Tasks .task-item[style*="left: ${task.x}px"]`);
+            if (taskEl) {
+                taskEl.classList.add('collected');
+                setTimeout(() => taskEl.remove(), 300);
+            }
+        }
+
+        function provideHelp(type) {
+            const state = gameState[type];
+            const blockedTask = state.tasks[state.blockedTaskIndex];
+
+            if (blockedTask) {
+                const beam = document.getElementById(`${type}HelpBeam`);
+                beam.style.left = (blockedTask.x + 5) + 'px';
+                beam.classList.add('active');
+
+                setTimeout(() => {
+                    beam.classList.remove('active');
+                    blockedTask.reachable = true;
+
+                    const taskEl = document.querySelector(`#${type}Tasks .task-item[style*="left: ${blockedTask.x}px"]`);
+                    if (taskEl) taskEl.className = 'task-item reachable';
+
+                    collectTask(type, blockedTask);
+                    state.isIdle = false;
+                    state.waitingForHelp = false;
+                    state.blockedTaskIndex = -1;
+                }, 500);
+            }
+        }
+
+        function regenerateTasks(type) {
+            const numTasks = 10;
+            const taskSpacing = 50;
+
+            gameState[type].tasks = [];
+            for (let i = 0; i < numTasks; i++) {
+                const isUnreachable = type === 'bad' && Math.random() < gameState.blockedRate;
+                gameState[type].tasks.push({
+                    x: 40 + i * taskSpacing,
+                    icon: TASK_ICONS[Math.floor(Math.random() * TASK_ICONS.length)],
+                    reachable: !isUnreachable,
+                    collected: false
+                });
+            }
+
+            // Refresh manager tasks
+            gameState[type].managerTasks = [];
+            for (let i = 0; i < 6; i++) {
+                const task = MANAGER_TASKS[Math.floor(Math.random() * MANAGER_TASKS.length)];
+                gameState[type].managerTasks.push({ ...task, done: false });
+            }
+            gameState[type].managerTaskIndex = 0;
+            gameState[type].managerProgress = 0;
+            gameState[type].managerTaskDuration = 3 + Math.random() * 2;
+
+            renderTasks();
+            renderManagerTasks(type);
+        }
+
+        function updateUI() {
+            ['bad', 'good'].forEach(type => {
+                const state = gameState[type];
+                const total = state.workTime + state.idleTime;
+                const eff = total > 0 ? Math.round((state.workTime / total) * 100) : 100;
+
+                document.getElementById(`${type}Timer`).textContent = formatTime(gameState.simTime);
+                document.getElementById(`${type}Score`).textContent = state.score;
+                document.getElementById(`${type}WorkTime`).textContent = Math.round(state.workTime) + 's';
+                document.getElementById(`${type}IdleTime`).textContent = Math.round(state.idleTime) + 's';
+                document.getElementById(`${type}Efficiency`).textContent = eff + '%';
+
+                if (type === 'bad') {
+                    document.getElementById('badBlocks').textContent = state.interrupts;
+                    document.getElementById('badMgrTasks').textContent = state.managerTasksCompleted;
+                } else {
+                    document.getElementById('goodSyncs').textContent = state.syncs;
+                    document.getElementById('goodMgrTasks').textContent = state.managerTasksCompleted;
+                }
+            });
+
+            document.getElementById('summaryBadInterrupts').textContent = gameState.bad.interrupts;
+            document.getElementById('summaryGoodSyncs').textContent = gameState.good.syncs;
+
+            if (gameState.simTime > 3) {
+                const mgrDiff = gameState.good.managerTasksCompleted - gameState.bad.managerTasksCompleted;
+                const idleDiff = Math.round(gameState.bad.idleTime - gameState.good.idleTime);
+                document.getElementById('insightText').innerHTML = `
+                    📊 <strong>בזמן אמת:</strong><br><br>
+                    🔴 <strong>לא-קלודבילי:</strong> ${gameState.bad.interrupts} חסימות | זמן המתנה: ${Math.round(gameState.bad.idleTime)}s<br>
+                    🟢 <strong>קלודבילי:</strong> ${gameState.good.syncs} סנכרונים | זמן המתנה: ${Math.round(gameState.good.idleTime)}s<br><br>
+                    ⏳ <strong>הפרש זמן מבוזבז:</strong> <span style="color:#ff4444">${idleDiff}s</span> יותר בצד הלא-קלודבילי<br>
+                    💡 <strong>הסוכן מחכה שהמנהל יסיים - לא יכול להפריע!</strong>
+                `;
+            }
+        }
+
+        function formatTime(s) {
+            const m = Math.floor(s / 60);
+            const sec = Math.floor(s % 60);
+            return `${m.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+        }
+
+        // ========== CONTROLS ==========
+        function startSimulation() {
+            if (gameState.running) return;
+            audio.init();
+            audio.startMusic();
+            gameState.running = true;
+            gameState.paused = false;
+            lastTime = 0;
+            initTasks();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function togglePause() {
+            gameState.paused = !gameState.paused;
+            document.querySelector('.btn-pause').textContent = gameState.paused ? '▶ RESUME' : '⏸ PAUSE';
+        }
+
+        function resetSimulation() {
+            gameState.running = false;
+            gameState.paused = false;
+            gameState.simTime = 0;
+
+            ['bad', 'good'].forEach(type => {
+                const isBad = type === 'bad';
+                gameState[type] = {
+                    score: 0, workTime: 0, idleTime: 0,
+                    interrupts: 0, syncs: 0,
+                    agentX: 20, isIdle: false,
+                    waitingForHelp: false, waitingForSync: false,
+                    isSyncing: false, syncTimer: 0,
+                    blockedTaskIndex: -1,
+                    currentQuestion: '',
+                    tasks: [], managerTasks: [],
+                    managerTaskIndex: 0, managerProgress: 0,
+                    managerTaskDuration: 4, managerTasksCompleted: 0,
+                    isHelping: false, helpingTimer: 0
+                };
+
+                document.getElementById(`${type}Agent`).style.left = '20px';
+                document.getElementById(`${type}Bubble`).classList.remove('visible');
+                document.getElementById(`${type}Timer`).textContent = '00:00';
+                document.getElementById(`${type}Score`).textContent = '0';
+                document.getElementById(`${type}WorkTime`).textContent = '0s';
+                document.getElementById(`${type}IdleTime`).textContent = '0s';
+                document.getElementById(`${type}Efficiency`).textContent = '100%';
+                document.getElementById(`${type}Tasks`).innerHTML = '';
+                document.getElementById(`${type}TaskQueue`).innerHTML = '';
+                document.getElementById(`${type}ManagerProgress`).style.width = '0%';
+                document.getElementById(`${type}Waiting`).classList.remove('visible');
+
+                const mgr = document.getElementById(`${type}Manager`).querySelector('.pixel-manager');
+                mgr.classList.add('working');
+                mgr.classList.remove('syncing');
+                document.getElementById(`${type}ManagerStatus`).textContent = '💼 WORKING';
+                document.getElementById(`${type}ManagerStatus`).className = 'manager-status working';
+            });
+
+            document.getElementById('badBlocks').textContent = '0';
+            document.getElementById('badMgrTasks').textContent = '0';
+            document.getElementById('badInterruptCounter').textContent = '🚫 BLOCKS: 0';
+            document.getElementById('badCurrentTask').classList.remove('interrupted');
+            document.getElementById('badManagerProgress').classList.remove('interrupted');
+
+            document.getElementById('goodSyncs').textContent = '0';
+            document.getElementById('goodMgrTasks').textContent = '0';
+            document.getElementById('goodSyncCounter').textContent = '🤝 SYNCS: 0';
+
+            document.getElementById('summaryBadInterrupts').textContent = '0';
+            document.getElementById('summaryGoodSyncs').textContent = '0';
+            document.getElementById('insightText').innerHTML = `
+                🎯 לחץ START כדי להתחיל<br><br>
+                <strong>שמאל:</strong> הסוכן נתקע ומחכה שהמנהל יסיים את המשימה הנוכחית שלו<br>
+                <strong>ימין:</strong> הסוכן עובד ברצף, סנכרון מתוכנן רק בסוף כל Time Horizon
+            `;
+            document.querySelector('.btn-pause').textContent = '⏸ PAUSE';
+            audio.stopMusic();
+        }
+
+        function toggleSound() {
+            audio.init();
+            const enabled = audio.toggle();
+            document.querySelector('.btn-sound').textContent = enabled ? '🔊 SOUND' : '🔇 MUTED';
+        }
+
+        function setSpeed(v) {
+            gameState.speed = parseFloat(v);
+            document.getElementById('speedValue').textContent = v + 'x';
+        }
+
+        function setBlockedRate(v) {
+            gameState.blockedRate = parseFloat(v) / 100;
+            document.getElementById('blockedValue').textContent = v + '%';
+        }
+
+        function endSimulation() {
+            gameState.running = false;
+            audio.stopMusic();
+            audio.complete();
+
+            const badEff = Math.round((gameState.bad.workTime / (gameState.bad.workTime + gameState.bad.idleTime)) * 100);
+            const goodEff = Math.round((gameState.good.workTime / (gameState.good.workTime + gameState.good.idleTime)) * 100);
+
+            document.getElementById('insightText').innerHTML = `
+                🏆 <strong>סימולציה הסתיימה!</strong><br><br>
+                📊 <strong>תוצאות:</strong><br>
+                • לא-קלודבילי: ${gameState.bad.interrupts} חסימות | המתנה: ${Math.round(gameState.bad.idleTime)}s | יעילות ${badEff}%<br>
+                • קלודבילי: ${gameState.good.syncs} סנכרונים | המתנה: ${Math.round(gameState.good.idleTime)}s | יעילות ${goodEff}%<br><br>
+                💡 <strong>המסקנה:</strong><br>
+                כשהסוכן נחסם, הוא חייב לחכות שהמנהל יסיים את המשימה שלו.<br>
+                זה זמן מבוזבז לחלוטין - הסוכן לא עושה כלום!<br><br>
+                🎯 <strong>קלודביליות = משימות שהסוכן יכול להשלים לבד, בלי להמתין</strong>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', initTasks);
+
+        // ========== INFO MODAL ==========
+        function openInfo() {
+            document.getElementById('infoOverlay').classList.add('visible');
+        }
+
+        function closeInfo() {
+            document.getElementById('infoOverlay').classList.remove('visible');
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeInfo();
+        });
+    </script>
+
+    <!-- INFO MODAL -->
+    <div class="info-overlay" id="infoOverlay" onclick="if(event.target === this) closeInfo()">
+        <div class="info-modal">
+            <button class="info-close" onclick="closeInfo()">✕</button>
+            <div class="info-header">
+                <h2>🎮 WHAT IS CLAUDEABILITY?</h2>
+            </div>
+            <div class="info-content" style="direction: ltr; text-align: left;">
+                <div class="info-section">
+                    <h3>📖 THE STORY</h3>
+                    <p>
+                        Imagine you have a brilliant assistant who can work for about an hour completely on their own. They're fast, they're smart, and they never get tired. There's just one catch: every time they hit a task they can't complete alone, they have to stop... and wait for you.
+                    </p>
+                    <p>
+                        Now here's where it gets interesting. You're not sitting around waiting for them to call. You're busy with your own important work - strategic planning, client calls, writing proposals. When your assistant needs help, they can't just tap you on the shoulder. They have to wait until you finish what you're doing.
+                    </p>
+                    <p>
+                        This is the reality of working with AI agents like Claude Code. The agent has what we call a "Time Horizon" - roughly an hour of autonomous work capacity. But if even a single task requires human input - a password, an approval, access to a system - the entire production line grinds to a halt.
+                    </p>
+                </div>
+
+                <div class="info-section">
+                    <h3>🎬 WHAT YOU'RE WATCHING</h3>
+                    <p>
+                        On the left, you see chaos. Some tasks float in the air, locked and unreachable. The agent runs into them, gets blocked, and has to cry for help. But the manager is deep in their own work! The agent waits... and waits... until the manager finishes their current task and can finally assist. Then it happens again. And again.
+                    </p>
+                    <p>
+                        On the right, you see flow. Every single task is within reach. The agent moves smoothly from one to the next, collecting them all. Only when the entire batch is complete does the agent pause for a quick sync meeting - a planned, predictable moment of coordination.
+                    </p>
+                </div>
+
+                <div class="info-section">
+                    <h3>💡 THE INSIGHT</h3>
+                    <p>
+                        Here's the beautiful twist: the time cost of "helping" and "syncing" is exactly the same - about 1.5 seconds each. The difference isn't in the cost of coordination. It's in the frequency and predictability.
+                    </p>
+                    <p>
+                        Random interruptions destroy focus. They fragment the manager's work into tiny, inefficient pieces. But a planned sync at the end of each time horizon? That's just good teamwork. The manager can schedule around it. The agent maximizes productive work time. Everyone wins.
+                    </p>
+                </div>
+
+                <div class="info-section">
+                    <h3>🚀 THE LESSON</h3>
+                    <p>
+                        "Claudeability" means designing your tasks so the AI agent can complete them end-to-end without getting stuck. Give them access upfront. Prepare credentials before you start. Define clear boundaries. Think of it like packing everything your assistant needs before sending them on a mission - because once they're out there, every "quick question" costs you both dearly.
+                    </p>
+                </div>
+
+                <div class="info-footer">
+                    🎓 From the workshop "Claude Code Amaleh" by <a href="https://github.com/aviz" target="_blank">Aviz - The Architect</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
