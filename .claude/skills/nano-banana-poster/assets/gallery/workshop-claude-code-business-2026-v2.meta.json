@@ -1,9 +1,0 @@
-{
-  "name": "workshop-claude-code-business-2026-v2",
-  "createdAt": "2025-12-25T17:15:02.688Z",
-  "prompt": "Create an attention-grabbing workshop poster for \"Claude Code for Business\".\n\nCRITICAL: ALL text MUST be in Hebrew.\n\n=== VISUAL HOOK (MOST IMPORTANT) ===\nShow the avatar (The Architect) as a POWERFUL BUSINESS WIZARD:\n- He is standing on top of a mountain made of business documents, charts, and spreadsheets\n- His hands are raised, CONDUCTING an orchestra of floating terminal windows, emails, and reports that are being created automatically around him\n- Robots/AI assistants are flying around him doing tasks (sending emails, creating documents)\n- His expression: confident smile, eyes glowing with power, like a CEO who just automated his entire company\n- Dynamic pose - arms spread wide controlling the automation chaos\n- Behind him: a giant clock showing time being saved (arrows spinning backwards)\n\n=== WORKSHOP DETAILS ===\nTitle (Hebrew): \"Claude Code for Business\"\nSubtitle (Hebrew): \"שימוש ב-Claude Code לקידום העסק\"\nDate: 12.01.2026 (show in Hebrew format)\nTime: יום חמישי, 20:00\nPlatform: Zoom\nDuration: 2-3 שעות\n\n=== KEY BENEFITS TO SHOW (Hebrew) ===\n- חיסכון של 10+ שעות בשבוע\n- אוטומציה של משימות חוזרות\n- יצירת תוכן עסקי\n- ניתוח נתונים\n\n=== BRAND REQUIREMENTS ===\nBrand: Aviz - The Architect (אביץ - האדריכל)\nPrimary Color: #22C55E (bright green)\nSecondary Colors: #374151, #4B5563, #6B7280 (gray tones)\nStyle: Professional yet exciting, tech-forward, educational\n\n=== COMPOSITION ===\n- Avatar should be LARGE and CENTRAL (the hero of the poster)\n- Terminal/CLI aesthetic with green text on dark backgrounds for code elements\n- Business icons (briefcase, charts, emails) floating around\n- Modern, clean typography for Hebrew text\n- Make it look like the avatar has SUPERPOWERS for business automation",
-  "assets": [
-    "avatar",
-    "workshop-claude-app-2025"
-  ]
-}
