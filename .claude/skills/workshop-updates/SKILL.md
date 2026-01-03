@@ -10,7 +10,7 @@ Track progress through the workshop pipeline stages: POC, sneak peeks, marketing
 ## Pipeline Stages
 
 ```
-POC → Sneak Peeks → Poster → Marketing → Delivery → Post-Workshop
+POC → Sneak Peeks → Poster → Marketing → Delivery → Post-Workshop → Thank You
 ```
 
 | Stage | What to Track |
@@ -21,6 +21,7 @@ POC → Sneak Peeks → Poster → Marketing → Delivery → Post-Workshop
 | **Marketing** | Checklist of groups/channels posted to |
 | **Delivery** | Attendance metrics |
 | **Post-Workshop** | Transcript, summary, testimonials |
+| **Thank You** | Thank you poster, appreciation post |
 
 ## Workflow
 
@@ -54,6 +55,7 @@ Common updates:
 | "workshop done" | Ask for attendance metrics |
 | "add transcript" | Add transcript content or link |
 | "add testimonial" | Add to testimonials section |
+| "create thank you" | Generate thank you poster with nano-banana-poster |
 
 ### 4. Update the File
 
@@ -75,6 +77,7 @@ After updating, suggest what's next in the pipeline:
 | Marketing done | "All set for workshop day!" |
 | Workshop delivered | "Let's capture attendance metrics" |
 | Metrics captured | "Want to add transcript/summary?" |
+| Summary done | "Create a thank you poster?" |
 
 ## Example Interactions
 
@@ -112,6 +115,29 @@ After updating, suggest what's next in the pipeline:
    - "How many stayed till end?"
 3. Fill attendance table
 4. Suggest: "Want to add transcript or summary later?"
+
+---
+
+**User:** "Create thank you poster"
+
+**Assistant:**
+1. Use `nano-banana-poster` skill with `avatar-boss` reference
+2. Generate celebratory poster with text:
+   - "תודה לכולם!"
+   - "היה מדהים!"
+3. Save to workshop assets folder
+4. Suggest: "Want to post it to the WhatsApp group?"
+
+Example command:
+```bash
+cd ~/.claude/skills/nano-banana-poster/scripts
+npx ts-node generate_poster.ts --assets "avatar-boss" --save-to-gallery "thanks-[workshop-name]" "
+Create a THANK YOU poster with the character from reference.
+POSE: Open arms, warm smile, surrounded by hearts and confetti.
+TEXT (Hebrew): תודה לכולם! / היה מדהים!
+STYLE: 3D Pixar, celebratory, green accents, warm glow
+"
+```
 
 ## Quick Commands
 

@@ -97,6 +97,23 @@ When you use `--assets "poster-example"`:
 
 **Visual Style:** Professional, educational, tech-forward
 
+## Avatar Options
+
+Two avatar styles are available in `references/`:
+
+| Avatar | File | Style | Best For |
+|--------|------|-------|----------|
+| **Boss Avatar** | `avatar-boss.png` | Professional 3D character in dark suit with green tie | Workshop posters - powerful, aspirational imagery. Sitting on throne, legs crossed, money flying, confident smirk. |
+| **Original Avatar** | `avatar.jpg` | Casual style | General marketing, lighter content |
+
+**To switch avatars:** Edit `generate_poster.ts` line ~53 to point to the desired avatar file.
+
+**Boss Avatar poses that work well:**
+- Sitting in boss chair, legs crossed, mischievous smirk
+- On a throne with money/dollars flying around
+- In office with screens showing AI/tech working autonomously
+- The "I know something you don't" confident expression
+
 ## Visual Hooks with Avatar (CRITICAL)
 
 **We believe in GREAT VISUAL HOOKS for marketing.** When using the avatar, always create bold, exciting imagery:

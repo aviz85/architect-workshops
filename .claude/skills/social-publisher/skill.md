@@ -7,6 +7,56 @@ description: "Publish content to multiple social media platforms (Facebook, Inst
 
 Publish content to multiple social media platforms from a single command.
 
+## Workflow: Content Adaptation
+
+When the user provides a message to publish, **ALWAYS**:
+
+1. **Adapt the message for each platform** based on these rules:
+2. **Present all versions** to the user for approval
+3. **Ask which platforms** to publish to
+4. **Publish** only after confirmation
+
+### Platform Adaptation Rules
+
+| Platform | Max Length | Tone | Format |
+|----------|------------|------|--------|
+| **Facebook** | 2000+ chars | Personal, storytelling | Full paragraphs, emojis OK |
+| **LinkedIn** | 1300 chars | Professional, insights | Business value, no slang |
+| **Twitter/X** | 280 chars | Punchy, hook | One key insight, hashtag optional |
+| **Instagram** | 2200 chars | Casual, visual | Emojis, hashtags at end |
+| **YouTube** | 5000 chars | Descriptive | Timestamps, links |
+
+### Adaptation Examples
+
+**Original message about AI agents:**
+
+**Facebook:**
+> אם העבודה שלכם קשורה למחשב - תעצרו.
+> [Full story, personal experience, emotional]
+> זה מבחן טורינג של הסוכנים. 🤖
+
+**LinkedIn:**
+> The "Agent Turing Test" - Can AI agents truly replace human workers?
+> [Professional insight, business implications]
+> After a week of intensive work with autonomous agents, I've seen tasks completed end-to-end without intervention.
+> The productivity implications are significant.
+
+**Twitter/X:**
+> שבוע עם סוכני AI אוטונומיים.
+> התפוקה? אולי פי 10.
+> המפתח: משימות מקצה לקצה.
+> זה מבחן טורינג החדש. 🤖
+
+**Instagram:**
+> 🤖 מבחן טורינג של הסוכנים
+>
+> לא "האם זה נשמע אנושי?"
+> אלא "האם זה מועיל כמו עובד?"
+>
+> התשובה: כן. וזה קורה עכשיו.
+>
+> #AI #Automation #Productivity #AIAgents #ClaudeCode
+
 ## Supported Platforms
 
 | Platform | API | Features |
@@ -14,6 +64,8 @@ Publish content to multiple social media platforms from a single command.
 | **Facebook** | Ayrshare | Posts, images, links |
 | **Instagram** | Ayrshare | Posts, images, reels |
 | **LinkedIn** | Ayrshare | Posts, images, articles |
+| **Twitter/X** | Ayrshare | Tweets, threads |
+| **YouTube** | Ayrshare | Community posts |
 | **WhatsApp** | Green API | Messages, images to groups |
 
 ## Setup
@@ -27,16 +79,10 @@ npm install
 
 ### 2. Configure APIs
 
-Copy `.env.example` to `.env`:
-
-```bash
-cp .env.example .env
-```
-
-Fill in credentials:
+Create `.env` file:
 
 ```env
-# Ayrshare (for FB, IG, LinkedIn)
+# Ayrshare (for FB, IG, LinkedIn, Twitter, YouTube)
 AYRSHARE_API_KEY=your_ayrshare_api_key
 
 # Green API (for WhatsApp)
@@ -44,43 +90,45 @@ GREEN_API_INSTANCE_ID=your_instance_id
 GREEN_API_TOKEN=your_api_token
 ```
 
-### Getting Credentials
-
-**Ayrshare:**
-1. Sign up at [ayrshare.com](https://www.ayrshare.com/)
-2. Connect your social accounts (FB, IG, LinkedIn)
-3. Copy API key from dashboard
-
-**Green API:**
-1. Sign up at [green-api.com](https://green-api.com/)
-2. Create instance and scan QR code
-3. Copy Instance ID and API Token
-
 ## Usage
 
-### Publish to All Platforms
+### Standard Flow (Recommended)
 
-```bash
-npx ts-node publish.ts --all --message "Your message" --image "/path/to/image.jpg"
+User provides a message, Claude:
+1. Adapts for all platforms
+2. Shows formatted versions
+3. Asks which to publish
+4. Publishes selected
+
+Example:
+```
+User: תפרסם את זה: "הגעתי ל-10x productivity השבוע עם סוכני AI"
+
+Claude: הנה הגרסאות לכל פלטפורמה:
+
+📘 **Facebook:**
+הגעתי ל-10x productivity השבוע עם סוכני AI...
+[expanded version]
+
+💼 **LinkedIn:**
+This week I achieved 10x productivity using AI agents...
+[professional version]
+
+🐦 **Twitter/X:**
+10x productivity עם סוכני AI.
+לא הייפ. מציאות. 🚀
+
+📸 **Instagram:**
+🚀 10x productivity
+[visual version with hashtags]
+
+לאיזה פלטפורמות לשלוח?
 ```
 
-### Publish to Specific Platforms
+### Direct Publish (Skip Adaptation)
 
 ```bash
-# Facebook only
-npx ts-node publish.ts --facebook --message "Post text"
-
-# Instagram only (requires image)
-npx ts-node publish.ts --instagram --message "Caption" --image "/path/to/image.jpg"
-
-# LinkedIn only
-npx ts-node publish.ts --linkedin --message "Professional update"
-
-# WhatsApp group
-npx ts-node publish.ts --whatsapp --group "GROUP_ID" --message "Message text"
-
-# Multiple platforms
-npx ts-node publish.ts --facebook --linkedin --message "Cross-post"
+npx ts-node publish.ts --facebook --message "Your message" --no-adapt
 ```
 
 ### Options
@@ -91,132 +139,51 @@ npx ts-node publish.ts --facebook --linkedin --message "Cross-post"
 | `--facebook` | Publish to Facebook |
 | `--instagram` | Publish to Instagram (requires image) |
 | `--linkedin` | Publish to LinkedIn |
+| `--twitter` | Publish to Twitter/X |
 | `--whatsapp` | Send to WhatsApp |
 | `--message <text>` | Post/message text |
 | `--image <path>` | Image file path |
 | `--group <id>` | WhatsApp group ID |
-| `--link <url>` | Link to include |
 | `--dry-run` | Preview without posting |
-| `--schedule <time>` | Schedule for later (ISO format) |
 
-## Workshop Marketing Workflow
+## Response Format
 
-### 1. Prepare Content
+When presenting adapted content, use this format:
 
-Read marketing copy from workshop:
-```bash
-cat /path/to/workshops/YYYY-MM-DD/marketing.md
 ```
+📱 **גרסאות מותאמות לפרסום:**
 
-### 2. Publish Facebook Post
+---
 
-```bash
-npx ts-node publish.ts \
-  --facebook \
-  --message "הפוסט שלך כאן..." \
-  --image "/path/to/poster.jpg"
-```
+📘 **Facebook** (מוכן לשליחה)
+[content]
 
-### 3. Publish to LinkedIn
+---
 
-```bash
-npx ts-node publish.ts \
-  --linkedin \
-  --message "הפוסט המקצועי..."
-```
+💼 **LinkedIn** (מוכן לשליחה)
+[content]
 
-### 4. Send to WhatsApp Group
+---
 
-```bash
-npx ts-node publish.ts \
-  --whatsapp \
-  --group "120363xxx@g.us" \
-  --message "ההודעה לקבוצה..." \
-  --image "/path/to/poster.jpg"
-```
+🐦 **Twitter/X** (280 תווים)
+[content]
 
-### 5. Batch Publish (All at Once)
+---
 
-```bash
-npx ts-node publish.ts \
-  --facebook \
-  --linkedin \
-  --message "Your message" \
-  --image "/path/to/poster.jpg"
-```
+📸 **Instagram** (דורש תמונה)
+[content]
 
-## Platform-Specific Notes
+---
 
-### Facebook
-- Images are optional
-- Links auto-generate previews
-- Best times: 9am, 1pm, 3pm
-
-### Instagram
-- **Image is required**
-- Square (1:1) or portrait (4:5) recommended
-- Hashtags can be included in message
-
-### LinkedIn
-- Professional tone recommended
-- Images increase engagement 2x
-- Best for B2B content
-
-### WhatsApp
-- Group ID format: `XXXXXXXXXX@g.us`
-- Images sent separately from text
-- Rate limits apply for bulk
-
-## Error Handling
-
-The script will:
-1. Validate credentials before posting
-2. Check image exists if specified
-3. Report success/failure per platform
-4. Continue to next platform on failure
-
-## Examples
-
-### Workshop Announcement (All Platforms)
-
-```bash
-npx ts-node publish.ts \
-  --facebook \
-  --linkedin \
-  --message "🚀 סדנה חדשה: קלוד קוד אמאל׳ה
-
-ה-\$100 הכי מנוצלים אי פעם.
-
-יום חמישי 1.1.26 | 21:00 | Zoom | 50 ש״ח
-
-קישור בתגובה הראשונה 👇" \
-  --image "/path/to/poster.jpg"
-```
-
-### WhatsApp Reminder
-
-```bash
-npx ts-node publish.ts \
-  --whatsapp \
-  --group "120363xxx@g.us" \
-  --message "🔔 תזכורת! הסדנה היום ב-21:00
-
-נתראה שם! 🚀"
+**לאיזה פלטפורמות לשלוח?**
+1. כולם
+2. Facebook + LinkedIn
+3. Twitter בלבד
+4. אחר (ציין)
 ```
 
 ## Integration with Other Skills
 
-This skill works well with:
-- **marketing-copy**: Generate content, then publish
+- **marketing-copy**: Generate content, then adapt and publish
 - **nano-banana-poster**: Generate poster, then publish with image
 - **workshop-updates**: Mark "published" in pipeline
-
-## Troubleshooting
-
-| Issue | Solution |
-|-------|----------|
-| "Invalid API key" | Check .env file, regenerate key |
-| "Image not found" | Use absolute path |
-| "Rate limited" | Wait and retry, or schedule |
-| "Account not connected" | Re-authorize in Ayrshare dashboard |
-| "WhatsApp not authorized" | Rescan QR code in Green API |

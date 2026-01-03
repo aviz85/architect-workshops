@@ -112,6 +112,14 @@ All workshop presentations must follow these rules:
 
 ## Brand Assets
 
-- **Avatar:** `.claude/skills/nano-banana-poster/references/avatar.jpg`
+### Avatars
+
+| Avatar | File | Use For |
+|--------|------|---------|
+| **Boss Avatar** | `.claude/skills/nano-banana-poster/references/avatar-boss.png` | Workshop posters - professional 3D character in dark suit with green tie. Use for powerful, aspirational imagery (sitting on throne, money flying, etc.) |
+| **Original Avatar** | `.claude/skills/nano-banana-poster/references/avatar.jpg` | General use |
+
+### Other Assets
+
 - **Gallery:** `.claude/skills/nano-banana-poster/assets/gallery/` (reference posters)
 - **Colors:** Green (#22C55E), gray tones, professional tech aesthetic
