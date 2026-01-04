@@ -30,12 +30,12 @@
 
 ### The Crazy Agent - AI That Works FOR You
 
-This workshop is designed to be accessible even for people without technical background. We start with 6 mind-blowing real-world examples, then reveal the simple method behind them all.
+This workshop is designed to be accessible even for people without technical background. We start with 7 mind-blowing real-world examples, then reveal the simple method behind them all.
 
 ### What You'll Learn
 
 **The Mind-Blow**
-- 6 real case studies of autonomous AI completing complex tasks
+- 7 real case studies of autonomous AI completing complex tasks
 - What's possible when AI works independently for extended periods
 
 **The Paradigm Shift**
@@ -56,7 +56,7 @@ This workshop is designed to be accessible even for people without technical bac
 
 ## Overview
 
-A beginner-friendly workshop that makes advanced AI agents accessible to everyone. Instead of diving into technical details, we start with 5 jaw-dropping real-world examples that demonstrate what's possible. Then we reveal the surprisingly simple method behind it all.
+A beginner-friendly workshop that makes advanced AI agents accessible to everyone. Instead of diving into technical details, we start with 7 jaw-dropping real-world examples that demonstrate what's possible. Then we reveal the surprisingly simple method behind it all.
 
 The key insight: Claude Code isn't just another AI assistant - it's an agent that can work autonomously for extended periods. Understanding this difference changes everything.
 
@@ -74,10 +74,10 @@ The key insight: Claude Code isn't just another AI assistant - it's an agent tha
 
 ## Agenda (90 min)
 
-### Part 1: Mind-Blown - 6 Case Studies (15-20 min)
+### Part 1: Mind-Blown - 7 Case Studies (15-20 min)
 **Goal:** Hook the audience with jaw-dropping results before explaining the method
 
-6 real examples of crazy things done with Claude Code:
+7 real examples of crazy things done with Claude Code:
 
 1. **This Workshop System** (Meta!)
    - Skills for poster generation, WhatsApp automation, marketing copy
@@ -114,6 +114,12 @@ The key insight: Claude Code isn't just another AI assistant - it's an agent tha
    - Creates GitHub repo, enables Pages, returns live URL
    - Demos, prototypes, visualizations - instantly shareable
    - No manual setup, no config files, just "publish this"
+
+7. **GTD Task Manager** - מערכת ניהול משימות בפרומפט אחד
+   - ביקשתי "מערכת ניהול משימות" - קלוד הציע מערכת מבוססת GTD
+   - בנה מערכת מלאה עם כל הפקודות והסקילים
+   - Inbox, Next Actions, Projects, Contexts - הכל עובד
+   - דוגמה מושלמת ל"תן לקלוד להציע" במקום לתכנן מראש
 
 Key message: "All of this is possible thanks to ONE technique I'm about to show you"
 
