@@ -120,6 +120,7 @@ The key insight: Claude Code isn't just another AI assistant - it's an agent tha
    - בנה מערכת מלאה עם כל הפקודות והסקילים
    - Inbox, Next Actions, Projects, Contexts - הכל עובד
    - דוגמה מושלמת ל"תן לקלוד להציע" במקום לתכנן מראש
+   - [הסבר על המערכת](https://aviz85.github.io/claude-tasks/)
 
 Key message: "All of this is possible thanks to ONE technique I'm about to show you"
 
