@@ -38,31 +38,16 @@ export default function WatchPage() {
           </p>
         </div>
 
-        <a
-          href={RECORDING_LINK}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="payment-btn"
-          style={{
-            background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '12px'
-          }}
-        >
-          🎥 צפה בהקלטה
-        </a>
-
         <div style={{
-          background: 'rgba(107, 114, 128, 0.1)',
-          border: '1px solid rgba(107, 114, 128, 0.3)',
+          background: 'rgba(251, 191, 36, 0.1)',
+          border: '1px solid rgba(251, 191, 36, 0.3)',
           borderRadius: '12px',
           padding: '16px',
-          marginTop: '20px',
+          marginBottom: '20px',
           textAlign: 'center'
         }}>
-          <p style={{ color: '#9CA3AF', fontSize: '14px', marginBottom: '8px' }}>
-            🔑 קוד גישה להקלטה:
+          <p style={{ color: '#FBBF24', fontSize: '16px', fontWeight: 'bold', marginBottom: '12px' }}>
+            🔑 על מנת לצפות בסרטון יש להכניס את הסיסמא:
           </p>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
             <code style={{
@@ -92,6 +77,21 @@ export default function WatchPage() {
             </button>
           </div>
         </div>
+
+        <a
+          href={RECORDING_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="payment-btn"
+          style={{
+            background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '12px'
+          }}
+        >
+          🎥 צפה בהקלטה
+        </a>
 
         <div className="info-box" style={{ marginTop: '32px', textAlign: 'center' }}>
           <h3>📅 פרטי הסדנה</h3>
