@@ -1,0 +1,8 @@
+{
+  "name": "boss-minimal-claude",
+  "createdAt": "2026-01-01T15:43:05.462Z",
+  "prompt": "\nCreate a marketing poster featuring the EXACT same tough businessman character from the reference.\n\nCHARACTER: Same bald tough businessman, confident expression, suit\nPOSE: Walking towards camera confidently, money flying\n\nTEXT ONLY:\nTop: קלוד קוד אמאל׳ה\\!\nBottom: היום | זום | 21:00\n\nMINIMAL TEXT - no other text on the poster\\!\n\nSTYLE: Dark background, green accents (#22C55E), dramatic lighting\n",
+  "assets": [
+    "workshop-claude-code-amaleh-2026-final-v9"
+  ]
+}

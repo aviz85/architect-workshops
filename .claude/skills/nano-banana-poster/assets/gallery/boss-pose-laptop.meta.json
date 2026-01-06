@@ -1,0 +1,8 @@
+{
+  "name": "boss-pose-laptop",
+  "createdAt": "2026-01-01T15:40:51.406Z",
+  "prompt": "\nCreate a marketing poster featuring the EXACT same tough businessman character from the reference image.\n\nCRITICAL - CHARACTER CONSISTENCY:\n- Same face, same tough/confident expression, same style\n- Bald/short hair, strong jaw, determined eyes\n- Professional suit\n\nPOSE: Leaning on a desk with laptop showing code/AI, one hand on laptop, looking at viewer with knowing smirk. Money and tech elements floating around.\n\nTEXT AT BOTTOM (Hebrew):\nהיום | זום | 21:00\n\nSTYLE:\n- Dark dramatic background\n- Money + tech/code elements\n- Bright green accent (#22C55E)\n- Professional, powerful vibe\n",
+  "assets": [
+    "workshop-claude-code-amaleh-2026-final-v9"
+  ]
+}

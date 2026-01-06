@@ -1,0 +1,8 @@
+{
+  "name": "boss-pose-pointing",
+  "createdAt": "2026-01-01T15:40:00.521Z",
+  "prompt": "\nCreate a marketing poster featuring the EXACT same tough businessman character from the reference image.\n\nCRITICAL - CHARACTER CONSISTENCY:\n- Same face, same tough/confident expression, same style\n- Bald/short hair, strong jaw, determined eyes\n- Professional suit\n\nPOSE: Pointing directly at the viewer with confidence, like 'I want YOU' uncle sam style but more business/money oriented. Money flying around him.\n\nTEXT AT BOTTOM (Hebrew):\nהיום | זום | 21:00\n\nSTYLE:\n- Dark dramatic background\n- Money/gold elements\n- Bright green accent (#22C55E)\n- Professional, powerful vibe\n",
+  "assets": [
+    "workshop-claude-code-amaleh-2026-final-v9"
+  ]
+}

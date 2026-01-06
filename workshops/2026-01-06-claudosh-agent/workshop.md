@@ -13,7 +13,7 @@
 | **Time** | 21:00 |
 | **Duration** | 1.5 hours |
 | **Platform** | Zoom |
-| **Zoom Link** | [יתווסף] |
+| **Zoom Link** | https://us06web.zoom.us/j/85374512520?pwd=SeNeeFB4Uznkjq0zImONKbSGkri7iD.1 |
 
 ### WhatsApp Group
 

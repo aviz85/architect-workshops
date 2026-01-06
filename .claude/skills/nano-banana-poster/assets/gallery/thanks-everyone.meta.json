@@ -1,0 +1,8 @@
+{
+  "name": "thanks-everyone",
+  "createdAt": "2026-01-01T21:31:19.555Z",
+  "prompt": "\nCreate a THANK YOU poster using the EXACT character from the reference - bearded man in dark suit with green tie, 3D Pixar style.\n\nPOSE: Standing with open arms welcoming, big warm smile, surrounded by floating hearts, stars, and confetti. Grateful, appreciative expression.\n\nTEXT (Hebrew, large and prominent):\nתודה לכולם\\! 🙏\nהיה מדהים\\!\n\nSTYLE: 3D Pixar style, celebratory mood, warm colors with green accents (#22C55E), confetti, sparkles, dark background with warm glow\n",
+  "assets": [
+    "avatar-boss"
+  ]
+}

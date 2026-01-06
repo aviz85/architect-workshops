@@ -2,6 +2,7 @@
 
 // Zoom link for Tuesday workshop
 const ZOOM_LINK = 'https://us06web.zoom.us/j/85374512520?pwd=SeNeeFB4Uznkjq0zImONKbSGkri7iD.1'
+const YOUTUBE_LINK = 'https://www.youtube.com/watch?v=cUzOW5YdUuk'
 
 export default function WatchPage() {
   return (
@@ -23,24 +24,43 @@ export default function WatchPage() {
             🎯 התשלום אושר!
           </p>
           <p style={{ color: '#9CA3AF', fontSize: '14px' }}>
-            הקישור לזום מוכן - נתראה בסדנה!
+            הקישורים מוכנים - נתראה בסדנה!
           </p>
         </div>
 
-        <a
-          href={ZOOM_LINK}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="payment-btn"
-          style={{
-            background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '12px'
-          }}
-        >
-          🎥 כניסה לזום - יום שלישי 21:00
-        </a>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
+          <a
+            href={ZOOM_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="payment-btn"
+            style={{
+              background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '12px'
+            }}
+          >
+            🎥 כניסה לזום
+          </a>
+
+          <a
+            href={YOUTUBE_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="payment-btn"
+            style={{
+              background: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '12px'
+            }}
+          >
+            ▶️ צפייה בשידור חי ביוטיוב
+          </a>
+        </div>
 
         <div className="info-box" style={{ marginTop: '32px', textAlign: 'center' }}>
           <h3>📅 פרטים</h3>

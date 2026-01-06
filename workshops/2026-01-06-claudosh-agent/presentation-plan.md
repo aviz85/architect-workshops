@@ -3,7 +3,7 @@
 **Language:** Hebrew (עברית)
 **Layout Direction:** RTL (Right-to-Left)
 **Duration:** ~90 minutes
-**Slides:** 10
+**Slides:** 11
 
 ---
 
@@ -143,10 +143,29 @@
 - לא עוד "תענה לי על שאלה"
 - עכשיו "תעשה לי פרויקט"
 
+### Real Story: The GPT That Hit a Wall
+**סיפור אמיתי: בניתי GPT ללקוח**
+
+הלקוח רצה סוכן שיעזור לו בעבודה. בניתי לו GPT מותאם אישית.
+אחרי שבוע הוא חזר אליי:
+
+> "זה עובד טוב, אבל אני רוצה להמשיך לדייק אותו.
+> ללמד אותו את ההרגלים שלי. לשפר אותו בעצמי."
+
+**עם GPT - אי אפשר.** הלקוח תלוי בי לכל שינוי.
+
+**עם Claude Code - הלקוח עצמאי:**
+- משנה את ה-CLAUDE.md בעצמו
+- מוסיף סקילים לפי הצורך
+- מדייק ומשפר בלי לחכות לאף אחד
+
+**זו המהפכה: הכלי שגדל איתך.**
+
 ### Speaker Notes
 - זה לא עוד צ'אטבוט משופר
 - זו דרך חדשה לעבוד עם מחשבים
 - המהפכה היא שהAI יכול לעבוד לבד לזמן ארוך
+- הסיפור על GPT ממחיש את ההבדל - עם Claude Code אתה לא תלוי באף אחד
 
 ---
 
@@ -269,7 +288,66 @@
 
 ---
 
-## Slide 9: What's The Price?
+## Slide 9: Pro Tip - Let Claude Build Your System
+
+**Direction:** RTL - content flows from right to left
+
+### Title
+טריק מטורף: תנו לקלוד לבנות לכם מערכת
+
+### Subtitle
+הוא יודע לקרוא את התיעוד של עצמו!
+
+### Visual Concept
+- Mind-blown emoji or visual
+- Claude building a system diagram
+- Documents, commands, and skills flowing together
+
+### The Magic Trick
+**בקשו מקלוד להשתמש ב-claude-code-guide כדי לבנות לכם מערכת שלמה**
+
+דוגמה:
+> "אני רוצה מערכת ניהול משימות. תשתמש ב-claude-code-guide כדי להבין איך לבנות את זה נכון עם כל הכלים של Claude Code"
+
+### What Claude Builds For You
+| רכיב | מה זה עושה |
+|------|-----------|
+| **CLAUDE.md** | הוראות הפרויקט |
+| **פקודות מותאמות** | קיצורי דרך לפעולות נפוצות |
+| **סקילים** | יכולות שאפשר לקרוא שוב ושוב |
+| **תיעוד** | הסברים על איך להשתמש |
+
+### Real Example - Task Management System
+```
+"בנה לי מערכת ניהול משימות בסגנון GTD"
+           ↓
+קלוד קורא את claude-code-guide
+           ↓
+מבין מה הכלים הזמינים
+           ↓
+בונה מערכת שלמה:
+  📁 CLAUDE.md עם הוראות
+  ⚡ פקודות: /inbox, /next, /done
+  🛠️ סקילים: עיבוד משימות, דוחות
+           ↓
+🎉 מערכת עובדת תוך דקות!
+```
+
+### Why This Works
+- **קלוד מכיר את עצמו** - יודע מה הכלים שלו
+- **בונה בצורה נכונה** - לפי Best Practices
+- **חוסך לכם זמן** - לא צריך לקרוא תיעוד
+- **מערכת מותאמת** - בדיוק למה שאתם צריכים
+
+### Speaker Notes
+- זה טריק מתקדם שחוסך המון זמן
+- במקום לקרוא תיעוד - תנו לקלוד לעשות את זה
+- הוא יבנה מערכת שלמה עם כל הרכיבים
+- דוגמה חיה: מערכת ניהול משימות GTD שבניתי ככה
+
+---
+
+## Slide 10: What's The Price?
 
 **Direction:** RTL - content flows from right to left
 
@@ -338,7 +416,7 @@
 
 ---
 
-## Slide 10: Your Turn!
+## Slide 11: Your Turn!
 
 **Direction:** RTL - content flows from right to left
 

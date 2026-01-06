@@ -173,7 +173,14 @@ Left column has subtle red tint, items with X marks. Right column has green glow
 **Headline (Top-right, green):**
 "קלודביליות"
 
-**Definition (Center, large white text):**
+**Key Insight (Center, large, emphasized):**
+להכשיר סוכן = כמו להכשיר עובד חדש
+צריך לבנות לו מסלול ריצה
+
+**The Simple Principle (Center, green box, bold):**
+פרויקט = תיקייה = מסלול ריצה
+
+**Definition (Below, white text):**
 היכולת של משימה להיות מבוצעת
 על ידי קלוד קוד
 מקצה לקצה
@@ -182,13 +189,13 @@ Left column has subtle red tint, items with X marks. Right column has green glow
 **Visual diagram (Below definition):**
 
 ```
-[משימה] ──→ [קלוד קוד] ──→ [תוצאה]
-              ↑
-         ללא צווארי בקבוק
+[תיקייה/פרויקט] ──→ [קלוד קוד רץ] ──→ [תוצאה]
+                        ↑
+              כל מה שהוא צריך בפנים
 ```
 
 **Warning box (Bottom, orange/yellow accent):**
-⚠️ ברגע שצריך להתערב - יש צוואר בקבוק ואין האצלה אמיתית
+⚠️ מספיק פרט אחד שהוא תלוי בכם = צוואר בקבוק = אין האצלה אמיתית
 
 **Layout:**
 - Headline top-right with green glow

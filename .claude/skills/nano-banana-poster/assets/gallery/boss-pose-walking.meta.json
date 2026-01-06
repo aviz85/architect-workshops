@@ -1,0 +1,8 @@
+{
+  "name": "boss-pose-walking",
+  "createdAt": "2026-01-01T15:41:17.000Z",
+  "prompt": "\nCreate a marketing poster featuring the EXACT same tough businessman character from the reference image.\n\nCRITICAL - CHARACTER CONSISTENCY:\n- Same face, same tough/confident expression, same style\n- Bald/short hair, strong jaw, determined eyes\n- Professional suit\n\nPOSE: Walking confidently towards the viewer, like he owns the place. Money raining down around him. Dramatic lighting from behind.\n\nTEXT AT BOTTOM (Hebrew):\nהיום | זום | 21:00\n\nSTYLE:\n- Dark dramatic background\n- Money rain effect\n- Bright green accent (#22C55E)\n- Professional, powerful vibe\n",
+  "assets": [
+    "workshop-claude-code-amaleh-2026-final-v9"
+  ]
+}
