@@ -72,7 +72,7 @@ export default function LandingPage() {
 
   return (
     <div className="container">
-      <div className="thank-you-container" style={{ alignItems: 'center', textAlign: 'center' }}>
+      <div className="thank-you-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
         <img
           src="/morning-after-workshop.jpg"
           alt="סדנאות עם אביץ"
