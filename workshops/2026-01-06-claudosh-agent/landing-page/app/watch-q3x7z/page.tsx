@@ -1,7 +1,8 @@
 'use client'
 
-// Zoom link for Tuesday workshop
-const ZOOM_LINK = 'https://us06web.zoom.us/j/85374512520?pwd=SeNeeFB4Uznkjq0zImONKbSGkri7iD.1'
+// Recording link
+const RECORDING_LINK = 'https://us06web.zoom.us/rec/share/q46dutNhYJLDYeQW0R6TwzX9BQtLFYlOlkPLYUMiuajoNS1_h0kOSboqf-QETMcH.NLJw2Ko3VMZKEjd1'
+const RECORDING_PASSCODE = 'L952Hs+*'
 const YOUTUBE_LINK = 'https://www.youtube.com/watch?v=cUzOW5YdUuk'
 
 export default function WatchPage() {
@@ -14,23 +15,23 @@ export default function WatchPage() {
         </p>
 
         <div style={{
-          background: 'rgba(251, 191, 36, 0.1)',
-          border: '1px solid rgba(251, 191, 36, 0.3)',
+          background: 'rgba(34, 197, 94, 0.1)',
+          border: '1px solid rgba(34, 197, 94, 0.3)',
           borderRadius: '12px',
           padding: '20px',
           marginBottom: '24px'
         }}>
-          <p style={{ color: '#FBBF24', fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
-            🎯 התשלום אושר!
+          <p style={{ color: '#22C55E', fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
+            🎬 ההקלטה מוכנה!
           </p>
           <p style={{ color: '#9CA3AF', fontSize: '14px' }}>
-            הקישורים מוכנים - נתראה בסדנה!
+            צפייה נעימה
           </p>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
           <a
-            href={ZOOM_LINK}
+            href={RECORDING_LINK}
             target="_blank"
             rel="noopener noreferrer"
             className="payment-btn"
@@ -42,8 +43,29 @@ export default function WatchPage() {
               gap: '12px'
             }}
           >
-            🎥 כניסה לזום
+            🎥 צפייה בהקלטה (Zoom)
           </a>
+
+          <div style={{
+            background: 'rgba(59, 130, 246, 0.1)',
+            border: '1px solid rgba(59, 130, 246, 0.3)',
+            borderRadius: '8px',
+            padding: '12px',
+            textAlign: 'center'
+          }}>
+            <p style={{ color: '#9CA3AF', fontSize: '14px', marginBottom: '4px' }}>
+              סיסמה להקלטה:
+            </p>
+            <p style={{
+              color: '#3B82F6',
+              fontSize: '20px',
+              fontWeight: 'bold',
+              fontFamily: 'monospace',
+              letterSpacing: '2px'
+            }}>
+              {RECORDING_PASSCODE}
+            </p>
+          </div>
 
           <a
             href={YOUTUBE_LINK}
@@ -58,16 +80,14 @@ export default function WatchPage() {
               gap: '12px'
             }}
           >
-            ▶️ צפייה בשידור חי ביוטיוב
+            ▶️ צפייה ביוטיוב
           </a>
         </div>
 
         <div className="info-box" style={{ marginTop: '32px', textAlign: 'center' }}>
-          <h3>📅 פרטים</h3>
+          <h3>📅 הסדנה התקיימה</h3>
           <p style={{ color: '#9CA3AF', marginTop: '12px' }}>
-            יום שלישי, 6.1.26 בשעה 21:00
-            <br />
-            ההקלטה תהיה זמינה אחרי הסדנה
+            יום שלישי, 6.1.26
           </p>
         </div>
 
