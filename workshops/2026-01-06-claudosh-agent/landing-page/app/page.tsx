@@ -72,7 +72,19 @@ export default function LandingPage() {
 
   return (
     <div className="container">
-      <div className="thank-you-container">
+      <div className="thank-you-container" style={{ alignItems: 'center', textAlign: 'center' }}>
+        <img
+          src="/morning-after-workshop.jpg"
+          alt="סדנאות עם אביץ"
+          style={{
+            width: '100%',
+            maxWidth: '500px',
+            borderRadius: '16px',
+            marginBottom: '24px',
+            boxShadow: '0 10px 40px rgba(0,0,0,0.3)'
+          }}
+        />
+
         <h1 className="thank-you-title">סדנאות עם אביץ - הארכיטקט</h1>
 
         <div style={{
@@ -81,7 +93,9 @@ export default function LandingPage() {
           borderRadius: '12px',
           padding: '24px',
           marginBottom: '32px',
-          textAlign: 'center'
+          textAlign: 'center',
+          width: '100%',
+          maxWidth: '400px'
         }}>
           <p style={{ color: '#FBBF24', fontSize: '20px', fontWeight: 'bold', marginBottom: '8px' }}>
             אין סדנאות פתוחות כרגע
