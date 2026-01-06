@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>התקנת Claude Code - מדריך צעד אחר צעד</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      min-height: 100vh;
+      color: #fff;
+      direction: rtl;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      color: #22C55E;
+      margin-bottom: 10px;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      margin: 20px 0;
+    }
+
+    .progress-text {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+
+    .progress-bar {
+      background: #2d2d44;
+      border-radius: 20px;
+      height: 12px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, #22C55E, #4ade80);
+      height: 100%;
+      border-radius: 20px;
+      transition: width 0.5s ease;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 30px 0;
+    }
+
+    @media (max-width: 900px) {
+      .main-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Video Section */
+    .video-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .video-placeholder {
+      background: #2d2d44;
+      border-radius: 16px;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed #444;
+    }
+
+    .video-placeholder svg {
+      width: 80px;
+      height: 80px;
+      fill: #666;
+      margin-bottom: 15px;
+    }
+
+    .video-placeholder span {
+      color: #888;
+      font-size: 1.1rem;
+    }
+
+    /* Instructions Section */
+    .instructions-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .step-title {
+      font-size: 1.8rem;
+      color: #22C55E;
+      margin-bottom: 25px;
+      line-height: 1.4;
+    }
+
+    .instructions-list {
+      list-style: none;
+    }
+
+    .instructions-list li {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px 20px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .instructions-list li:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .step-number {
+      background: #22C55E;
+      color: #1a1a2e;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .important-note {
+      background: rgba(234, 179, 8, 0.15) !important;
+      border: 1px solid rgba(234, 179, 8, 0.3);
+    }
+
+    .important-note .step-number {
+      background: #eab308;
+    }
+
+    /* Code Block */
+    .code-block {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .code-block pre {
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 1rem;
+      color: #4ade80;
+      overflow-x: auto;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #22C55E;
+      color: #1a1a2e;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      background: #4ade80;
+      transform: scale(1.05);
+    }
+
+    .copy-btn.copied {
+      background: #3b82f6;
+    }
+
+    /* Navigation */
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 0;
+      gap: 20px;
+    }
+
+    .nav-btn {
+      padding: 16px 40px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-next {
+      background: linear-gradient(135deg, #22C55E, #16a34a);
+      color: white;
+      flex: 1;
+      max-width: 300px;
+    }
+
+    .btn-next:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+    }
+
+    .btn-back {
+      background: transparent;
+      color: #888;
+      border: 2px solid #444;
+    }
+
+    .btn-back:hover {
+      border-color: #666;
+      color: #fff;
+    }
+
+    .btn-back:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* Celebration Screen */
+    .celebration {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .celebration.active {
+      display: block;
+    }
+
+    .celebration-emoji {
+      font-size: 6rem;
+      margin-bottom: 30px;
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .celebration h2 {
+      font-size: 2.5rem;
+      color: #22C55E;
+      margin-bottom: 20px;
+    }
+
+    .celebration p {
+      font-size: 1.3rem;
+      color: #ccc;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.8;
+    }
+
+    .btn-restart {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: white;
+      padding: 16px 40px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-restart:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+    }
+
+    /* Step Content Container */
+    .step-content {
+      display: none;
+    }
+
+    .step-content.active {
+      display: contents;
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>התקנת Claude Code על Windows</h1>
+    </header>
+
+    <div class="progress-container" id="progressContainer">
+      <div class="progress-text">שלב <span id="currentStep">1</span> מתוך <span id="totalSteps">12</span></div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 8.33%"></div>
+      </div>
+    </div>
+
+    <main class="main-content" id="mainContent">
+      <div class="video-section">
+        <div class="video-placeholder">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <span>Video Placeholder</span>
+        </div>
+      </div>
+
+      <div class="instructions-section" id="instructionsSection">
+        <!-- Steps will be injected here -->
+      </div>
+    </main>
+
+    <nav class="navigation" id="navigation">
+      <button class="nav-btn btn-back" id="btnBack" disabled>חזור</button>
+      <button class="nav-btn btn-next" id="btnNext">ביצעתי, לשלב הבא</button>
+    </nav>
+
+    <div class="celebration" id="celebration">
+      <div class="celebration-emoji">🎉</div>
+      <h2>מזל טוב!</h2>
+      <p>סיימת להתקין את Claude Code בהצלחה!<br>עכשיו אתה מוכן להתחיל לעבוד עם הכלי החזק ביותר לפיתוח עם AI.</p>
+      <button class="nav-btn btn-restart" id="btnRestart">התחל מחדש</button>
+    </div>
+  </div>
+
+  <canvas class="confetti" id="confetti"></canvas>
+
+  <script>
+    const steps = [
+      {
+        title: "שלב 1: הורדת התוכנה הבסיסית (Node.js)",
+        instructions: [
+          { text: "פתחו דפדפן וחפשו בגוגל: Node js", important: false },
+          { text: "היכנסו לתוצאה הראשונה (nodejs.org).", important: false },
+          { text: "הורידו את גרסת ה-LTS (הכפתור השמאל הירוק).", important: false },
+          { text: "פתחו את הקובץ שירד.", important: false }
+        ]
+      },
+      {
+        title: "שלב 2: התקנת Node.js",
+        instructions: [
+          { text: "באשף ההתקנה, לחצו Next ואשרו את התנאים.", important: false },
+          { text: "השאירו את כל ההגדרות כברירת מחדל.", important: false },
+          { text: "חשוב מאוד: במסך 'Tools for Native Modules' אל תסמנו את התיבה! השאירו אותה ריקה.", important: true },
+          { text: "לחצו Install ואז Finish.", important: false }
+        ]
+      },
+      {
+        title: "שלב 3: פתיחת הטרמינל",
+        instructions: [
+          { text: "לחצו על מקש ה-Windows במקלדת.", important: false },
+          { text: "הקלידו: cmd", important: false },
+          { text: "לחצו Enter כדי לפתוח את החלון השחור.", important: false }
+        ]
+      },
+      {
+        title: "שלב 4: התקנת Claude Code",
+        instructions: [
+          { text: "העתיקו את הפקודה למטה.", important: false },
+          { text: "הדביקו אותה בחלון השחור ולחצו Enter.", important: false }
+        ],
+        code: "npm install -g @anthropic-ai/claude-code"
+      },
+      {
+        title: "שלב 5: הורדת Git",
+        instructions: [
+          { text: "חזרו לגוגל וחפשו: git scm", important: false },
+          { text: "היכנסו לתוצאה הראשונה ולחצו על 'Download for Windows'.", important: false },
+          { text: "בחרו באפשרות: 64-bit Git for Windows Setup.", important: false }
+        ]
+      },
+      {
+        title: "שלב 6: התקנת Git",
+        instructions: [
+          { text: "הפעילו את הקובץ שהורדתם.", important: false },
+          { text: "לחצו Next שוב ושוב (אין צורך לשנות הגדרות).", important: false },
+          { text: "בסיום לחצו Install.", important: false }
+        ]
+      },
+      {
+        title: "שלב 7: יצירת תיקיית עבודה",
+        instructions: [
+          { text: "גשו לשולחן העבודה.", important: false },
+          { text: "צרו תיקייה חדשה (קליק ימני > חדש > תיקייה).", important: false },
+          { text: "תנו לתיקייה שם באנגלית, למשל: test", important: false }
+        ]
+      },
+      {
+        title: "שלב 8: הפעלת התוכנה",
+        instructions: [
+          { text: "חזרו לחלון השחור (CMD).", important: false },
+          { text: "כתבו cd וגררו את התיקייה שיצרתם לתוך החלון (כדי להעתיק את המיקום שלה).", important: false },
+          { text: "לחצו Enter.", important: false },
+          { text: "כעת כתבו: claude ולחצו Enter.", important: false }
+        ]
+      },
+      {
+        title: "שלב 9: הגדרות ראשוניות",
+        instructions: [
+          { text: "בחרו ערכת נושא (למשל Dark Mode) עם החצים ולחצו Enter.", important: false },
+          { text: "בחרו באפשרות השנייה: Claude account with subscription ולחצו Enter.", important: false }
+        ]
+      },
+      {
+        title: "שלב 10: אישור חיבור",
+        instructions: [
+          { text: "בדפדפן שנפתח, לחצו על כפתור Authorize.", important: false },
+          { text: "הערה: נדרש מנוי בתשלום (Pro).", important: true },
+          { text: "כשתופיע ההודעה \"You're all set up\", סגרו את הדפדפן.", important: false }
+        ]
+      },
+      {
+        title: "שלב 11: אישור תנאים סופי",
+        instructions: [
+          { text: "חזרו לחלון השחור.", important: false },
+          { text: "לחצו Enter כדי לאשר את תנאי השימוש.", important: false },
+          { text: "זהו! אפשר להתחיל לעבוד.", important: false }
+        ]
+      },
+      {
+        title: "בונוס: הגדרות פרטיות",
+        instructions: [
+          { text: "גשו לאתר claude.ai", important: false },
+          { text: "לחצו על האייקון שלכם > Settings > Privacy.", important: false },
+          { text: "כבו את המתג: Help improve Claude כדי שהמידע שלכם יישאר פרטי.", important: true }
+        ]
+      }
+    ];
+
+    let currentStepIndex = 0;
+
+    const instructionsSection = document.getElementById('instructionsSection');
+    const progressFill = document.getElementById('progressFill');
+    const currentStepEl = document.getElementById('currentStep');
+    const btnBack = document.getElementById('btnBack');
+    const btnNext = document.getElementById('btnNext');
+    const celebration = document.getElementById('celebration');
+    const mainContent = document.getElementById('mainContent');
+    const navigation = document.getElementById('navigation');
+    const progressContainer = document.getElementById('progressContainer');
+    const confettiCanvas = document.getElementById('confetti');
+
+    function renderStep(index) {
+      const step = steps[index];
+
+      let html = `<h2 class="step-title">${step.title}</h2>`;
+      html += '<ul class="instructions-list">';
+
+      step.instructions.forEach((instruction, i) => {
+        const importantClass = instruction.important ? 'important-note' : '';
+        html += `
+          <li class="${importantClass}">
+            <span class="step-number">${i + 1}</span>
+            <span>${instruction.text}</span>
+          </li>
+        `;
+      });
+
+      html += '</ul>';
+
+      if (step.code) {
+        html += `
+          <div class="code-block">
+            <button class="copy-btn" onclick="copyCode('${step.code}', this)">העתק</button>
+            <pre>${step.code}</pre>
+          </div>
+        `;
+      }
+
+      instructionsSection.innerHTML = html;
+
+      // Update progress
+      const progress = ((index + 1) / steps.length) * 100;
+      progressFill.style.width = `${progress}%`;
+      currentStepEl.textContent = index + 1;
+
+      // Update buttons
+      btnBack.disabled = index === 0;
+      btnNext.textContent = index === steps.length - 1 ? 'סיום!' : 'ביצעתי, לשלב הבא';
+    }
+
+    function copyCode(code, btn) {
+      navigator.clipboard.writeText(code).then(() => {
+        btn.textContent = 'הועתק!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'העתק';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function showCelebration() {
+      mainContent.style.display = 'none';
+      navigation.style.display = 'none';
+      progressContainer.style.display = 'none';
+      celebration.classList.add('active');
+      launchConfetti();
+    }
+
+    function launchConfetti() {
+      const ctx = confettiCanvas.getContext('2d');
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+
+      const particles = [];
+      const colors = ['#22C55E', '#4ade80', '#3b82f6', '#eab308', '#ec4899'];
+
+      for (let i = 0; i < 150; i++) {
+        particles.push({
+          x: Math.random() * confettiCanvas.width,
+          y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+          size: Math.random() * 10 + 5,
+          speedY: Math.random() * 3 + 2,
+          speedX: Math.random() * 2 - 1,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+
+        let activeParticles = 0;
+        particles.forEach(p => {
+          if (p.y < confettiCanvas.height + 50) {
+            activeParticles++;
+            p.y += p.speedY;
+            p.x += p.speedX;
+            p.rotation += 5;
+
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation * Math.PI / 180);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size / 2);
+            ctx.restore();
+          }
+        });
+
+        if (activeParticles > 0) {
+          requestAnimationFrame(animate);
+        }
+      }
+
+      animate();
+    }
+
+    btnNext.addEventListener('click', () => {
+      if (currentStepIndex < steps.length - 1) {
+        currentStepIndex++;
+        renderStep(currentStepIndex);
+      } else {
+        showCelebration();
+      }
+    });
+
+    btnBack.addEventListener('click', () => {
+      if (currentStepIndex > 0) {
+        currentStepIndex--;
+        renderStep(currentStepIndex);
+      }
+    });
+
+    document.getElementById('btnRestart').addEventListener('click', () => {
+      currentStepIndex = 0;
+      mainContent.style.display = 'grid';
+      navigation.style.display = 'flex';
+      progressContainer.style.display = 'block';
+      celebration.classList.remove('active');
+      renderStep(0);
+    });
+
+    // Initialize
+    renderStep(0);
+  </script>
+</body>
+</html>
