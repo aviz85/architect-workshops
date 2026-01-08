@@ -10,6 +10,56 @@ This repository manages workshops by **Aviz - The Architect** - educational tech
 - **Marketing:** WhatsApp groups, Facebook communities
 - **Style:** Professional, educational, tech-forward with green (#22C55E) accent colors
 
+---
+
+## Proactive Workshop Reminders (IMPORTANT)
+
+**At the start of EVERY conversation**, Claude should:
+
+1. Check today's date and time
+2. Scan `workshops/*/workshop.md` for upcoming/recent workshops
+3. Remind the user about relevant procedures based on timing
+
+### Procedure Timeline
+
+| Timing | Procedure | Command/Action |
+|--------|-----------|----------------|
+| **1 week before** | Marketing push - poster, publish to groups | `/nano-banana-poster`, `/social-publisher` |
+| **3-4 days before** | Reminders in groups, sneak peeks | `workshop-updates` |
+| **2 days before** | Final prep - presentation ready? POC ready? | Check pipeline status |
+| **Day of (morning)** | Pre-live checklist, final prep | `/live-prep` |
+| **1 hour before** | Clean desktop, open Zoom | `/live-prep` |
+| **Immediately after** | Document metrics, hot impressions | `/workshop-end` |
+| **1-2 days after** | Thank you poster, follow-up | `/workshop-thank-you` |
+| **1 week after** | Collect testimonials, transcript | `workshop-updates` |
+
+### How to Check
+
+```bash
+# List workshops by date
+ls workshops/ | grep -E "^[0-9]{4}-[0-9]{2}-[0-9]{2}"
+```
+
+Then compare with today's date and alert the user:
+
+**Example reminders:**
+
+> "Today is 2026-01-13 - you have a workshop today at 21:00!
+> Want to run `/live-prep` to prepare?"
+
+> "Yesterday's workshop (2026-01-12) - have you run `/workshop-end` to document?"
+
+> "Workshop in 3 days (2026-01-16) - is poster and marketing ready?"
+
+### Reminder Priority
+
+1. **Day of workshop** - TOP PRIORITY - remind immediately!
+2. **Day after workshop** - remind about `/workshop-end` if not run
+3. **2 days before** - check everything is ready
+4. **1 week before** - push marketing if not started
+
+---
+
 ## Workshop Lifecycle
 
 ### 1. Ideation (`workshop-ideation` skill)
@@ -44,6 +94,8 @@ architect-workshops/
 ├── CLAUDE.md                 # This file - project instructions
 ├── workshop-ideas.md         # Topic backlog
 ├── image-references/         # Global brand assets (avatar, logo)
+├── future-concepts/          # Detailed concepts not yet scheduled
+│   └── concept-name.md       # In-depth workshop concept
 ├── workshops/
 │   ├── example/              # Template workshop
 │   └── YYYY-MM-DD-topic/     # Individual workshops
@@ -57,6 +109,16 @@ architect-workshops/
     ├── presentation-architect/
     └── whatsapp-*/
 ```
+
+### Future Concepts Folder
+
+The `future-concepts/` folder contains detailed workshop concepts that are:
+- More developed than a single line in `workshop-ideas.md`
+- Not yet scheduled for a specific date
+- Include full agenda, target audience, POC ideas
+- Marked as "Concept" status in the ideas table
+
+When ready to schedule, move concept content to a new workshop folder in `workshops/`.
 
 ## Available Skills
 
@@ -93,6 +155,21 @@ All workshop presentations must follow these rules:
 
 ## Quick Commands
 
+### Workshop Management Commands
+
+```bash
+# End of broadcast - document metrics and impressions
+/workshop-end
+
+# 1-2 days after - thank you poster and follow-up
+/workshop-thank-you
+
+# Pre-broadcast prep - clean desktop
+/live-prep
+```
+
+### Skills (contextual, come up during work)
+
 ```bash
 # Brainstorm new workshop ideas
 /workshop-ideation
@@ -109,6 +186,13 @@ All workshop presentations must follow these rules:
 # Create presentation blueprint
 /presentation-architect
 ```
+
+### Command vs Skill
+
+| Type | When | Examples |
+|------|------|----------|
+| **Command** | Clear trigger point - "I need to do X now" | `/workshop-end`, `/live-prep` |
+| **Skill** | Comes up during flow of other work | `workshop-updates`, `nano-banana-poster` |
 
 ## Brand Assets
 

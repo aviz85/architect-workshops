@@ -1,0 +1,18 @@
+{
+  "name": "claudosh-beginner-scripts",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "add": "ts-node add-paid-participant.ts add",
+    "list": "ts-node add-paid-participant.ts list"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.2"
+  }
+}
