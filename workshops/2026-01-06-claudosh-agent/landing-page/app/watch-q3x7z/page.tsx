@@ -91,6 +91,41 @@ export default function WatchPage() {
           </p>
         </div>
 
+        {/* Beginner Workshop Promo */}
+        <div style={{
+          marginTop: '32px',
+          background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%)',
+          border: '2px solid rgba(34, 197, 94, 0.4)',
+          borderRadius: '16px',
+          padding: '24px',
+          textAlign: 'center'
+        }}>
+          <p style={{ color: '#22C55E', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px', letterSpacing: '1px' }}>
+            הסדנה הבאה
+          </p>
+          <h3 style={{ color: '#fff', fontSize: '20px', marginBottom: '12px' }}>
+            קלודוש הסוכן - מתחילים בקטן!
+          </h3>
+          <p style={{ color: '#9CA3AF', fontSize: '14px', marginBottom: '16px' }}>
+            יום שלישי, 13.1.26 בשעה 21:00
+          </p>
+          <a
+            href="https://claudosh.master-x.co.il/watch-x7m3p"
+            className="payment-btn"
+            style={{
+              background: 'linear-gradient(135deg, #22C55E 0%, #16A34A 100%)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              fontSize: '16px',
+              padding: '12px 24px'
+            }}
+          >
+            לפרטים והרשמה
+          </a>
+        </div>
+
         <p className="small-note" style={{ marginTop: '24px' }}>
           בעיות טכניות? פנו לאביץ בוואטסאפ:{' '}
           <a
