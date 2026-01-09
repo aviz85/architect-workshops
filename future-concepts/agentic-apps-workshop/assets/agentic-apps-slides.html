@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Agentic Apps - בניית אפליקציות ללא קוד מסורתי</title>
+</head>
+<body>
+
+<!-- Slide 1: Cover -->
+<section>
+    <h1>Agentic Apps</h1>
+    <p>בניית אפליקציות שלמות ללא קוד מסורתי</p>
+    <p>בנה אפליקציה שלמה ב-60 דקות - בלי לכתוב שורת קוד</p>
+    <p>Aviz - The Architect | סדנת Zoom | 3 שעות</p>
+</section>
+
+<!-- Slide 2: Pain -->
+<section>
+    <h2>המציאות של היום</h2>
+    <ul>
+        <li>פיתוח אפליקציות לוקח חודשים ועולה עשרות אלפי שקלים</li>
+        <li>צריך מפתחים לכל שינוי קטן</li>
+        <li>כלים פנימיים נשארים ברשימת ה-TODO לנצח</li>
+        <li>הפער בין הרעיון לביצוע - עצום</li>
+    </ul>
+    <div class="quote">"רציתי רק CRM פשוט לעסק... קיבלתי הצעה ל-50,000 ש״ח ו-3 חודשי פיתוח"</div>
+</section>
+
+<!-- Slide 3: Promise -->
+<section>
+    <h2>מה אם היה אפשר אחרת?</h2>
+    <ul>
+        <li>לבנות כלים פנימיים בשעות, לא שבועות</li>
+        <li>שליטה מלאה בלי תלות במפתחים</li>
+        <li>אפליקציות שהצוות יכול להבין ולשנות</li>
+        <li>אפס תשתיות - אפס כאבי ראש</li>
+    </ul>
+    <div class="quote">היום תלמדו לבנות אפליקציות שלמות עם Claude Code</div>
+</section>
+
+<!-- Slide 4: The Key Insight -->
+<section>
+    <h1>The Agent IS the Engine</h1>
+    <p>הסוכן הוא המנוע של האפליקציה</p>
+    <p>באפליקציה קלאסית, אנחנו כותבים אלגוריתמים ותנאים.</p>
+    <p>ב-Agentic App, מסמכים כתובים מחליפים את הקוד.</p>
+    <p>הסוכן הופך למנוע שמריץ את האפליקציה.</p>
+    <div class="quote">Documents Replace Algorithms - מסמכים מחליפים אלגוריתמים</div>
+</section>
+
+<!-- Slide 5: Comparison -->
+<section>
+    <h2>שתי גישות - שתי מציאויות</h2>
+    <div class="tech-card">
+        <h3>Classic App</h3>
+        <p>Runtime: Node.js, Python</p>
+        <p>לוגיקה: אלגוריתמים, if/else</p>
+        <p>מסד נתונים: PostgreSQL</p>
+        <p>ממשק: React, Vue</p>
+    </div>
+    <div class="tech-card">
+        <h3>Agentic App</h3>
+        <p>Runtime: Claude Code Agent</p>
+        <p>לוגיקה: Skills, Commands</p>
+        <p>מסד נתונים: קבצי Markdown</p>
+        <p>ממשק: Chat / UI עטיפה</p>
+    </div>
+</section>
+
+<!-- Slide 6: Flow -->
+<section>
+    <h2>מה קורה כשלוחצים על כפתור?</h2>
+    <p>Classic App:</p>
+    <p>Button Click → Call Function → Execute Code → Update DB</p>
+    <p>Agentic App:</p>
+    <p>Button Click → Send /command → Agent Decides → Update Docs</p>
+    <div class="quote">הסוכן מקבל החלטות - לא רק מבצע פקודות</div>
+</section>
+
+<!-- Slide 7: Extended Comparison -->
+<section>
+    <h2>כל מה שהכרתם - בגרסה חדשה</h2>
+    <ul>
+        <li>קונפיגורציה: config.yaml → CLAUDE.md</li>
+        <li>ספריות: npm packages → Skills</li>
+        <li>API Endpoints: REST routes → /commands</li>
+        <li>Background Jobs: Cron → Sub-agents</li>
+        <li>Deployment: Docker, K8s → cd folder</li>
+        <li>זמן בנייה: שבועות-חודשים → שעות-ימים</li>
+    </ul>
+</section>
+
+<!-- Slide 8: Why Business -->
+<section>
+    <h2>למה בעלי עסקים צריכים לדעת את זה?</h2>
+    <div class="tech-card">
+        <div class="tech-icon">⚡</div>
+        <h3>Speed to Market</h3>
+        <p>בנה כלי פנימי בשעות, לא שבועות</p>
+    </div>
+    <div class="tech-card">
+        <div class="tech-icon">📄</div>
+        <h3>Living Documentation</h3>
+        <p>הקוד הוא התיעוד - כולם יכולים לקרוא</p>
+    </div>
+    <div class="tech-card">
+        <div class="tech-icon">☁️</div>
+        <h3>Zero Infrastructure</h3>
+        <p>אין שרתים, אין דאטאבייס, אין DevOps</p>
+    </div>
+    <div class="tech-card">
+        <div class="tech-icon">🎨</div>
+        <h3>UI When Needed</h3>
+        <p>התחל בצ׳אט, הוסף ממשק כשמוכן</p>
+    </div>
+</section>
+
+<!-- Slide 9: Section - Building Blocks -->
+<section>
+    <h1>חלק 2: אבני הבניין</h1>
+    <p>5 רכיבים שמרכיבים אפליקציה שלמה</p>
+    <ul>
+        <li>CLAUDE.md - החוקה</li>
+        <li>Skills - יכולות אוטומטיות</li>
+        <li>Commands - פעולות מפורשות</li>
+        <li>Agents - תהליכים מורכבים</li>
+        <li>Data Files - המידע</li>
+    </ul>
+</section>
+
+<!-- Slide 10: CLAUDE.md -->
+<section>
+    <h2>CLAUDE.md - החוקה של האפליקציה</h2>
+    <p>קובץ אחד שמגדיר הכל:</p>
+    <ul>
+        <li>מי האפליקציה ומה היא עושה</li>
+        <li>חוקים והנחיות התנהגות</li>
+        <li>קונפיגורציה והגדרות</li>
+        <li>קשרים בין רכיבים</li>
+    </ul>
+    <div class="quote">אנלוגיה: config.yaml + README + business rules</div>
+</section>
+
+<!-- Slide 11: Skills -->
+<section>
+    <h2>Skills - יכולות אוטומטיות</h2>
+    <p>Skills הם "ספריות" של הסוכן:</p>
+    <ul>
+        <li>פעולות מורכבות ארוזות ומוכנות</li>
+        <li>הסוכן מפעיל אותן אוטומטית כשצריך</li>
+        <li>אפשר לשתף Skills בין פרויקטים</li>
+        <li>כמו npm packages - אבל בשפה טבעית</li>
+    </ul>
+    <div class="quote">אנלוגיה: npm/pip packages, middleware</div>
+</section>
+
+<!-- Slide 12: Commands -->
+<section>
+    <h2>Commands - פעולות מפורשות</h2>
+    <p>Commands הם ה-API של האפליקציה:</p>
+    <ul>
+        <li>פקודות שהמשתמש מפעיל במפורש</li>
+        <li>מתחילות ב-/ (slash)</li>
+        <li>כל כפתור ב-UI = פקודה</li>
+        <li>פשוטות ליצירה ולשינוי</li>
+    </ul>
+    <div class="quote">אנלוגיה: REST API endpoints</div>
+</section>
+
+<!-- Slide 13: Agents -->
+<section>
+    <h2>Agents - תהליכים מורכבים</h2>
+    <p>Agents הם "עובדים" שמבצעים משימות:</p>
+    <ul>
+        <li>תהליכים שרצים ברקע</li>
+        <li>מפעילים skills ו-commands</li>
+        <li>יכולים לקבל החלטות</li>
+        <li>מושלמים למשימות מורכבות</li>
+    </ul>
+    <div class="quote">אנלוגיה: Background workers, cron jobs</div>
+</section>
+
+<!-- Slide 14: Data Files -->
+<section>
+    <h2>Data Files - המידע של האפליקציה</h2>
+    <p>קבצי Markdown = מסד נתונים:</p>
+    <ul>
+        <li>קריאים לבני אדם</li>
+        <li>גרסאות ב-Git</li>
+        <li>קלים לעריכה ידנית</li>
+        <li>הסוכן קורא וכותב אותם</li>
+    </ul>
+    <div class="quote">אנלוגיה: PostgreSQL, MongoDB - אבל קריא!</div>
+</section>
+
+<!-- Slide 15: Summary Table -->
+<section>
+    <h2>5 רכיבים = אפליקציה שלמה</h2>
+    <ul>
+        <li>CLAUDE.md → חוקה + הגדרות (config + README)</li>
+        <li>Skills → יכולות אוטומטיות (ספריות, middleware)</li>
+        <li>Commands → פעולות מפורשות (API endpoints)</li>
+        <li>Agents → תהליכים מורכבים (background workers)</li>
+        <li>Data Files → מצב האפליקציה (database)</li>
+    </ul>
+    <div class="quote">עכשיו נראה את זה בפעולה!</div>
+</section>
+
+<!-- Slide 16: Break -->
+<section>
+    <h1>☕ הפסקה</h1>
+    <p>15 דקות</p>
+    <div class="quote">💡 בזמן ההפסקה חשבו: איזה כלי פנימי הייתם רוצים לבנות לעסק שלכם?</div>
+</section>
+
+<!-- Slide 17: Live Build -->
+<section>
+    <h1>חלק 3: Live Build</h1>
+    <p>CRM לעסק קטן - 60 דקות מאפס לאפליקציה עובדת</p>
+    <div class="stat-box">
+        <div class="stat-number">✅</div>
+        <div class="stat-label">ניהול לקוחות</div>
+    </div>
+    <div class="stat-box">
+        <div class="stat-number">✅</div>
+        <div class="stat-label">תיעוד אינטראקציות</div>
+    </div>
+    <div class="stat-box">
+        <div class="stat-number">✅</div>
+        <div class="stat-label">תזכורות follow-up</div>
+    </div>
+    <div class="stat-box">
+        <div class="stat-number">✅</div>
+        <div class="stat-label">ניתוח לקוחות</div>
+    </div>
+</section>
+
+<!-- Slide 18: Project Structure -->
+<section>
+    <h2>מבנה הפרויקט שלנו</h2>
+    <ul>
+        <li>my-crm/CLAUDE.md - הגדרת המערכת והחוקים</li>
+        <li>.claude/commands/ - פקודות משתמש</li>
+        <li>.claude/skills/ - יכולות אוטומטיות</li>
+        <li>.claude/agents/ - תהליכים מורכבים</li>
+        <li>data/customers/ - תיקיות לקוחות</li>
+        <li>data/interactions.md - לוג אינטראקציות</li>
+    </ul>
+    <div class="quote">כל שורה = רכיב שלמדנו!</div>
+</section>
+
+<!-- Slide 19: Step 1 -->
+<section>
+    <h2>שלב 1: יצירת CLAUDE.md</h2>
+    <p>הגדרת המערכת:</p>
+    <ul>
+        <li>Purpose: מערכת CRM לניהול לקוחות</li>
+        <li>Rules: לקוח חדש = Active, 7 ימים = follow-up</li>
+        <li>Data Structure: /data/customers/, interactions.md</li>
+        <li>Commands: /add-customer, /log-interaction, /followup</li>
+    </ul>
+</section>
+
+<!-- Slide 20: Step 2 -->
+<section>
+    <h2>שלב 2: יצירת /add-customer</h2>
+    <p>מה הפקודה עושה:</p>
+    <ul>
+        <li>מקבלת שם ואימייל</li>
+        <li>יוצרת קובץ לקוח חדש</li>
+        <li>מוסיפה תאריך יצירה</li>
+        <li>מגדירה סטטוס Active</li>
+    </ul>
+    <div class="quote">Usage: /add-customer [שם] [אימייל]</div>
+</section>
+
+<!-- Slide 21: Step 3 -->
+<section>
+    <h2>שלב 3: יצירת /log-interaction</h2>
+    <p>מה הפקודה עושה:</p>
+    <ul>
+        <li>מתעדת שיחה עם לקוח</li>
+        <li>מעדכנת את קובץ הלקוח</li>
+        <li>מוסיפה לטבלת האינטראקציות</li>
+        <li>מאפסת את ספירת ה-follow-up</li>
+    </ul>
+    <div class="quote">Types: Call, Email, Meeting, Note</div>
+</section>
+
+<!-- Slide 22: Step 4 -->
+<section>
+    <h2>שלב 4: יצירת /followup</h2>
+    <p>מה הפקודה עושה:</p>
+    <ul>
+        <li>סורקת את כל הלקוחות</li>
+        <li>מזהה לקוחות ללא אינטראקציה 7+ ימים</li>
+        <li>מציגה רשימה מתועדפת</li>
+        <li>מציעה פעולות המשך</li>
+    </ul>
+</section>
+
+<!-- Slide 23: Step 5 -->
+<section>
+    <h2>שלב 5: יצירת customer-analysis skill</h2>
+    <p>מה ה-Skill עושה:</p>
+    <ul>
+        <li>מנתח היסטוריית לקוח</li>
+        <li>מחשב ציון מעורבות (0-100)</li>
+        <li>מזהה דפוסים</li>
+        <li>מפיק דו"ח מסכם</li>
+    </ul>
+</section>
+
+<!-- Slide 24: Step 6 -->
+<section>
+    <h2>שלב 6: יצירת weekly-review agent</h2>
+    <p>מה ה-Agent עושה:</p>
+    <ul>
+        <li>רץ אוטומטית כל שבוע (יום ראשון 09:00)</li>
+        <li>מרכז נתונים מכל הלקוחות</li>
+        <li>מייצר דו"ח שבועי</li>
+        <li>מזהה לקוחות בסיכון</li>
+    </ul>
+</section>
+
+<!-- Slide 25: Agent SDK Section -->
+<section>
+    <h1>חלק 4: הוספת UI</h1>
+    <p>Agent SDK - כשצ׳אט לא מספיק</p>
+</section>
+
+<!-- Slide 26: When UI -->
+<section>
+    <h2>מתי להוסיף UI?</h2>
+    <div class="tech-card">
+        <h3>CLI מספיק כש...</h3>
+        <p>המשתמש טכני</p>
+        <p>כלים פנימיים אישיים</p>
+        <p>פרוטוטייפים מהירים</p>
+    </div>
+    <div class="tech-card">
+        <h3>צריך UI כש...</h3>
+        <p>משתפים עם לא-טכניים</p>
+        <p>צריך דשבורדים ודוחות</p>
+        <p>בונים מוצר ללקוחות</p>
+    </div>
+</section>
+
+<!-- Slide 27: SDK Basics -->
+<section>
+    <h2>Agent SDK - הבסיס</h2>
+    <p>Agent SDK מאפשר:</p>
+    <ul>
+        <li>לחבר UI (React, Vue, HTML) לסוכן</li>
+        <li>לשלוח /commands מכפתורים</li>
+        <li>לקרוא data files ולהציג בדשבורד</li>
+        <li>הסוכן נשאר המוח - UI רק עטיפה</li>
+    </ul>
+    <div class="quote">כפתור → /command → סוכן מחליט → תוצאה</div>
+</section>
+
+<!-- Slide 28: Examples -->
+<section>
+    <h2>דוגמאות מהעולם האמיתי</h2>
+    <div class="tech-card">
+        <div class="tech-icon">📋</div>
+        <h3>מערכת ניהול משימות</h3>
+        <p>tasks folder + commands</p>
+    </div>
+    <div class="tech-card">
+        <div class="tech-icon">🎓</div>
+        <h3>מערכת ניהול סדנאות</h3>
+        <p>architect-workshops</p>
+    </div>
+    <div class="tech-card">
+        <div class="tech-icon">💬</div>
+        <h3>בוט שירות לקוחות</h3>
+        <p>skills + agents</p>
+    </div>
+    <div class="tech-card">
+        <div class="tech-icon">📦</div>
+        <h3>מערכת ניהול מלאי</h3>
+        <p>data files + commands</p>
+    </div>
+</section>
+
+<!-- Slide 29: When NOT -->
+<section>
+    <h2>מתי זה לא מתאים?</h2>
+    <ul>
+        <li>❌ מערכות עם דרישות real-time קשיחות</li>
+        <li>❌ מערכות עם מיליוני רשומות</li>
+        <li>❌ מערכות עם דרישות compliance מחמירות</li>
+        <li>❌ מערכות שצריכות לרוץ offline</li>
+    </ul>
+    <div class="quote">💡 במקרים אלה - התחל עם Agentic App כ-POC, ואז בנה פתרון מלא</div>
+</section>
+
+<!-- Slide 30: Key Takeaways -->
+<section>
+    <h2>מה למדנו היום?</h2>
+    <div class="impact-item">
+        <div class="impact-number">1</div>
+        <span>The Agent is the Engine - הסוכן מחליף את הלוגיקה</span>
+    </div>
+    <div class="impact-item">
+        <div class="impact-number">2</div>
+        <span>Documents Replace Algorithms - מסמכים במקום קוד</span>
+    </div>
+    <div class="impact-item">
+        <div class="impact-number">3</div>
+        <span>Speed Over Perfection - עדיף MVP מהיר</span>
+    </div>
+    <div class="impact-item">
+        <div class="impact-number">4</div>
+        <span>Human-Readable State - כל המידע קריא</span>
+    </div>
+    <div class="impact-item">
+        <div class="impact-number">5</div>
+        <span>Composable Architecture - רכיבים שמשתלבים</span>
+    </div>
+</section>
+
+<!-- Slide 31: CTA -->
+<section>
+    <h2>מה עכשיו?</h2>
+    <div class="impact-item">
+        <div class="impact-number">1</div>
+        <span>בחרו כלי פנימי אחד שאתם צריכים</span>
+    </div>
+    <div class="impact-item">
+        <div class="impact-number">2</div>
+        <span>התחילו עם CLAUDE.md פשוט</span>
+    </div>
+    <div class="impact-item">
+        <div class="impact-number">3</div>
+        <span>הוסיפו command אחד</span>
+    </div>
+    <div class="impact-item">
+        <div class="impact-number">4</div>
+        <span>בנו בהדרגה</span>
+    </div>
+    <div class="quote">האפליקציה הראשונה שלכם מחכה - התחילו היום!</div>
+</section>
+
+<!-- Slide 32: Closing -->
+<section>
+    <h1>תודה!</h1>
+    <p>Aviz - The Architect</p>
+    <p>🌐 aviz.dev | 📧 hello@aviz.dev | 💬 WhatsApp Community</p>
+    <div class="quote">בנו משהו מדהים! 🚀</div>
+</section>
+
+</body>
+</html>

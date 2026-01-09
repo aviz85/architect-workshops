@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Apps - בניית אפליקציות ללא קוד מסורתי</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #22C55E;
+            --primary-glow: rgba(34, 197, 94, 0.4);
+            --primary-dark: #166534;
+            --secondary: #1E293B;
+            --accent: #F97316;
+            --accent-glow: rgba(249, 115, 22, 0.4);
+            --bg-dark: #0F172A;
+            --bg-darker: #020617;
+            --text-light: #F8FAFC;
+            --text-gray: #94A3B8;
+            --text-dim: #64748B;
+            --teal-dark: #134E4A;
+            --border: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            direction: rtl;
+        }
+
+        /* Presentation Container */
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Slide Base */
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 60px 80px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            overflow: hidden;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Backgrounds */
+        .bg-gradient {
+            background: radial-gradient(ellipse at center, var(--bg-dark) 0%, var(--bg-darker) 100%);
+        }
+
+        .bg-gradient-green {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--teal-dark) 100%);
+        }
+
+        .bg-grid {
+            background-image:
+                radial-gradient(ellipse at center, var(--bg-dark) 0%, var(--bg-darker) 100%),
+                linear-gradient(rgba(34, 197, 94, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 197, 94, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 50px 50px, 50px 50px;
+        }
+
+        /* Animated Background Elements */
+        .bg-orbs {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary-glow);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: rgba(34, 197, 94, 0.2);
+            bottom: -50px;
+            left: -50px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 200px;
+            height: 200px;
+            background: var(--accent-glow);
+            top: 50%;
+            left: 50%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.9); }
+            75% { transform: translate(20px, 30px) scale(1.05); }
+        }
+
+        /* Stars Background */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        h4 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            color: var(--text-gray);
+        }
+
+        .text-primary { color: var(--primary); }
+        .text-accent { color: var(--accent); }
+        .text-white { color: var(--text-light); }
+        .text-gray { color: var(--text-gray); }
+        .text-dim { color: var(--text-dim); }
+
+        /* Glow Effects */
+        .glow-text {
+            text-shadow: 0 0 40px var(--primary-glow), 0 0 80px rgba(34, 197, 94, 0.2);
+        }
+
+        .glow-box {
+            box-shadow: 0 0 40px var(--primary-glow), 0 0 80px rgba(34, 197, 94, 0.1);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            font-family: 'Fira Code', monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: -20px 0 0 var(--accent), -40px 0 0 #EF4444;
+        }
+
+        .code-block .keyword { color: #818CF8; }
+        .code-block .string { color: var(--primary); }
+        .code-block .comment { color: var(--text-dim); }
+        .code-block .function { color: #F472B6; }
+        .code-block .number { color: var(--accent); }
+
+        /* Cards */
+        .card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-green {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(30, 41, 59, 0.5) 100%);
+        }
+
+        .card-orange {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(30, 41, 59, 0.5) 100%);
+        }
+
+        /* Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            font-size: 1.25rem;
+        }
+
+        .comparison-table th {
+            background: var(--secondary);
+            padding: 20px 24px;
+            text-align: right;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .comparison-table td {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table .col-classic {
+            background: rgba(55, 65, 81, 0.3);
+        }
+
+        .comparison-table .col-agentic {
+            background: rgba(22, 101, 52, 0.2);
+            color: var(--primary);
+        }
+
+        .comparison-table .highlight-row td {
+            background: rgba(34, 197, 94, 0.2);
+            font-weight: 700;
+        }
+
+        /* Lists */
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            font-size: 1.5rem;
+            padding: 12px 0;
+            padding-right: 40px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-list.pain li::before {
+            background: #EF4444;
+        }
+
+        .feature-list.check li::before {
+            background: var(--primary);
+        }
+
+        /* Buttons & Pills */
+        .pill {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .grid-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* Flex Utilities */
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-4 { gap: 1rem; }
+        .gap-8 { gap: 2rem; }
+        .grow { flex-grow: 1; }
+
+        /* Spacing */
+        .mt-4 { margin-top: 1rem; }
+        .mt-8 { margin-top: 2rem; }
+        .mt-12 { margin-top: 3rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-8 { margin-bottom: 2rem; }
+
+        /* Section Divider */
+        .section-label {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        /* Icon Boxes */
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 30px var(--primary-glow);
+        }
+
+        /* Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.25rem;
+            padding: 24px 32px;
+            border-radius: 12px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid var(--border);
+        }
+
+        .flow-diagram.classic {
+            border-color: var(--text-dim);
+        }
+
+        .flow-diagram.agentic {
+            border-color: var(--primary);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .flow-step {
+            padding: 12px 20px;
+            border-radius: 8px;
+            background: var(--secondary);
+            white-space: nowrap;
+        }
+
+        .flow-arrow {
+            color: var(--text-dim);
+            font-size: 1.5rem;
+        }
+
+        .flow-diagram.agentic .flow-arrow {
+            color: var(--primary);
+        }
+
+        /* Folder Tree */
+        .folder-tree {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            background: var(--secondary);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .folder-tree .folder { color: #818CF8; }
+        .folder-tree .file { color: var(--primary); }
+        .folder-tree .comment { color: var(--text-dim); font-style: italic; }
+
+        /* Animations */
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .animate-in {
+            animation: slideInRight 0.6s ease forwards;
+        }
+
+        .animate-up {
+            animation: slideInUp 0.6s ease forwards;
+        }
+
+        .slide.active .animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .slide.active .animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .slide.active .animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .slide.active .animate-delay-4 { animation-delay: 0.4s; opacity: 0; }
+        .slide.active .animate-delay-5 { animation-delay: 0.5s; opacity: 0; }
+        .slide.active .animate-delay-6 { animation-delay: 0.6s; opacity: 0; }
+
+        /* Navigation */
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 16px;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 12px 24px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn {
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            background: transparent;
+            color: var(--text-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .slide-counter {
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 1rem;
+            color: var(--text-gray);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        /* Cover Slide Special */
+        .cover-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cover-slide h1 {
+            font-size: 6rem;
+            font-family: 'Fira Code', monospace;
+            font-weight: 700;
+        }
+
+        .cover-slide .tagline {
+            font-size: 2rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 2rem auto;
+        }
+
+        .presenter-info {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: var(--text-dim);
+        }
+
+        /* Section Slide */
+        .section-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .section-slide .section-number {
+            font-size: 8rem;
+            font-weight: 900;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Break Slide */
+        .break-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .break-slide .coffee-icon {
+            font-size: 8rem;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        /* Closing Slide */
+        .closing-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .closing-slide h1 {
+            font-size: 7rem;
+        }
+
+        /* CTA Box */
+        .cta-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 48px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: 0 20px 60px var(--primary-glow);
+        }
+
+        .cta-box h3 {
+            color: white;
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav-controls, .progress-bar { display: none; }
+            .slide {
+                display: block !important;
+                opacity: 1 !important;
+                transform: none !important;
+                position: relative;
+                page-break-after: always;
+                height: auto;
+                min-height: 100vh;
+            }
+            .bg-orbs, .stars { display: none; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .slide { padding: 40px 60px; }
+            h1 { font-size: 3.5rem; }
+            h2 { font-size: 2.75rem; }
+            h3 { font-size: 2rem; }
+            p { font-size: 1.25rem; }
+        }
+
+        /* Keyboard Hint */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-dim);
+            font-size: 0.875rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body:not(.navigated) .keyboard-hint {
+            opacity: 1;
+            animation: fadeIn 1s ease 2s forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+
+    <div class="presentation">
+        <!-- Slide 1: Cover -->
+        <div class="slide cover-slide bg-gradient active" data-slide="1">
+            <div class="bg-orbs">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+            </div>
+            <div class="stars" id="stars-1"></div>
+
+            <h1 class="text-primary glow-text animate-in">Agentic Apps</h1>
+            <h2 class="text-white animate-in animate-delay-1">בניית אפליקציות שלמות ללא קוד מסורתי</h2>
+            <p class="tagline animate-in animate-delay-2">בנה אפליקציה שלמה ב-60 דקות - בלי לכתוב שורת קוד</p>
+
+            <div class="presenter-info animate-in animate-delay-3">
+                <p>Aviz - The Architect</p>
+                <p>סדנת Zoom | 3 שעות</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Pain -->
+        <div class="slide bg-grid" data-slide="2">
+            <div class="bg-orbs">
+                <div class="orb orb-2"></div>
+            </div>
+
+            <h2 class="animate-in">המציאות של היום</h2>
+
+            <div class="grid-2 grow items-center mt-8">
+                <div>
+                    <ul class="feature-list pain animate-in animate-delay-1">
+                        <li>פיתוח אפליקציות לוקח חודשים ועולה עשרות אלפי שקלים</li>
+                        <li>צריך מפתחים לכל שינוי קטן</li>
+                        <li>כלים פנימיים נשארים ברשימת ה-TODO לנצח</li>
+                        <li>הפער בין הרעיון לביצוע - עצום</li>
+                    </ul>
+                </div>
+                <div class="animate-in animate-delay-2">
+                    <div class="card card-orange">
+                        <p style="font-size: 1.75rem; font-style: italic; color: var(--text-light);">
+                            "רציתי רק CRM פשוט לעסק... קיבלתי הצעה ל-50,000 ש״ח ו-3 חודשי פיתוח"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Promise -->
+        <div class="slide bg-gradient-green" data-slide="3">
+            <div class="bg-orbs">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-3"></div>
+            </div>
+
+            <h2 class="animate-in">מה אם היה אפשר אחרת?</h2>
+
+            <div class="grow flex flex-col justify-center">
+                <ul class="feature-list check animate-in animate-delay-1" style="max-width: 700px;">
+                    <li class="text-primary">לבנות כלים פנימיים בשעות, לא שבועות</li>
+                    <li class="text-primary">שליטה מלאה בלי תלות במפתחים</li>
+                    <li class="text-primary">אפליקציות שהצוות יכול להבין ולשנות</li>
+                    <li class="text-primary">אפס תשתיות - אפס כאבי ראש</li>
+                </ul>
+
+                <div class="cta-box animate-in animate-delay-2" style="max-width: 800px;">
+                    <h3>היום תלמדו לבנות אפליקציות שלמות עם Claude Code</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: The Key Insight -->
+        <div class="slide bg-gradient" data-slide="4">
+            <div class="bg-orbs">
+                <div class="orb orb-1"></div>
+            </div>
+
+            <div class="grow flex flex-col justify-center items-center text-center">
+                <h1 class="text-primary glow-text animate-in" style="font-family: 'Fira Code', monospace; font-size: 5rem;">
+                    The Agent IS the Engine
+                </h1>
+                <h2 class="text-white animate-in animate-delay-1 mt-4">הסוכן הוא המנוע של האפליקציה</h2>
+
+                <p class="animate-in animate-delay-2 mt-8" style="max-width: 800px; font-size: 1.75rem;">
+                    באפליקציה קלאסית, אנחנו כותבים אלגוריתמים ותנאים.<br>
+                    ב-Agentic App, מסמכים כתובים מחליפים את הקוד.<br>
+                    הסוכן הופך למנוע שמריץ את האפליקציה.
+                </p>
+
+                <div class="card card-green animate-in animate-delay-3 mt-12" style="max-width: 600px;">
+                    <h3 class="text-primary" style="font-family: 'Fira Code', monospace;">Documents Replace Algorithms</h3>
+                    <p class="text-white">מסמכים מחליפים אלגוריתמים</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Comparison Table -->
+        <div class="slide bg-grid" data-slide="5">
+            <h2 class="animate-in">שתי גישות - שתי מציאויות</h2>
+
+            <div class="grow flex items-center mt-8">
+                <table class="comparison-table animate-in animate-delay-1">
+                    <thead>
+                        <tr>
+                            <th>שכבה</th>
+                            <th class="col-classic">Classic App</th>
+                            <th class="col-agentic">Agentic App</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Runtime</td>
+                            <td class="col-classic">Node.js, Python, JVM</td>
+                            <td class="col-agentic">Claude Code Agent</td>
+                        </tr>
+                        <tr>
+                            <td>לוגיקה</td>
+                            <td class="col-classic">אלגוריתמים, if/else, loops</td>
+                            <td class="col-agentic">Skills, Commands, Rules</td>
+                        </tr>
+                        <tr>
+                            <td>מסד נתונים</td>
+                            <td class="col-classic">PostgreSQL, MongoDB</td>
+                            <td class="col-agentic">קבצי Markdown</td>
+                        </tr>
+                        <tr>
+                            <td>ממשק משתמש</td>
+                            <td class="col-classic">React, Vue, HTML/CSS</td>
+                            <td class="col-agentic">Chat / UI עטיפה</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Slide 6: Flow Comparison -->
+        <div class="slide bg-gradient" data-slide="6">
+            <h2 class="animate-in">מה קורה כשלוחצים על כפתור?</h2>
+
+            <div class="grow flex flex-col justify-center gap-8">
+                <div>
+                    <p class="text-dim mb-4 animate-in animate-delay-1">Classic App:</p>
+                    <div class="flow-diagram classic animate-in animate-delay-1">
+                        <span class="flow-step">Button Click</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step">Call Function</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step">Execute Code</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step">Update DB</span>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="text-primary mb-4 animate-in animate-delay-2">Agentic App:</p>
+                    <div class="flow-diagram agentic animate-in animate-delay-2">
+                        <span class="flow-step">Button Click</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step">/command</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step" style="background: var(--primary-dark); color: white;">Agent Decides</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step">Update Docs</span>
+                    </div>
+                </div>
+
+                <div class="card card-green animate-in animate-delay-3 mt-8" style="max-width: 600px;">
+                    <h4 class="text-primary">הסוכן מקבל החלטות - לא רק מבצע פקודות</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Extended Comparison -->
+        <div class="slide bg-grid" data-slide="7">
+            <h2 class="animate-in">כל מה שהכרתם - בגרסה חדשה</h2>
+
+            <div class="grow flex items-center mt-4">
+                <table class="comparison-table animate-in animate-delay-1" style="font-size: 1.1rem;">
+                    <thead>
+                        <tr>
+                            <th>היבט</th>
+                            <th class="col-classic">Classic App</th>
+                            <th class="col-agentic">Agentic App</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>קונפיגורציה</td>
+                            <td class="col-classic">config.yaml, .env</td>
+                            <td class="col-agentic">CLAUDE.md</td>
+                        </tr>
+                        <tr>
+                            <td>ספריות</td>
+                            <td class="col-classic">npm, pip packages</td>
+                            <td class="col-agentic">Skills</td>
+                        </tr>
+                        <tr>
+                            <td>API Endpoints</td>
+                            <td class="col-classic">REST routes</td>
+                            <td class="col-agentic">/commands</td>
+                        </tr>
+                        <tr>
+                            <td>Background Jobs</td>
+                            <td class="col-classic">Cron, queues</td>
+                            <td class="col-agentic">Sub-agents</td>
+                        </tr>
+                        <tr>
+                            <td>Deployment</td>
+                            <td class="col-classic">Docker, K8s, CI/CD</td>
+                            <td class="col-agentic"><code>cd folder</code></td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td>זמן בנייה</td>
+                            <td class="col-classic">שבועות עד חודשים</td>
+                            <td class="col-agentic">שעות עד ימים</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="text-primary animate-in animate-delay-2 mt-4" style="font-size: 1.5rem;">שימו לב לשורה האחרונה</p>
+        </div>
+
+        <!-- Slide 8: Why for Business -->
+        <div class="slide bg-gradient-green" data-slide="8">
+            <h2 class="animate-in">למה בעלי עסקים צריכים לדעת את זה?</h2>
+
+            <div class="grid-2x2 grow mt-8">
+                <div class="card animate-in animate-delay-1">
+                    <div class="icon-box">⚡</div>
+                    <h3 class="text-primary">Speed to Market</h3>
+                    <p>בנה כלי פנימי בשעות, לא שבועות</p>
+                </div>
+
+                <div class="card animate-in animate-delay-2">
+                    <div class="icon-box">📄</div>
+                    <h3 class="text-primary">Living Documentation</h3>
+                    <p>הקוד הוא התיעוד - כולם יכולים לקרוא</p>
+                </div>
+
+                <div class="card animate-in animate-delay-3">
+                    <div class="icon-box">☁️</div>
+                    <h3 class="text-primary">Zero Infrastructure</h3>
+                    <p>אין שרתים, אין דאטאבייס, אין DevOps</p>
+                </div>
+
+                <div class="card animate-in animate-delay-4">
+                    <div class="icon-box">🎨</div>
+                    <h3 class="text-primary">UI When Needed</h3>
+                    <p>התחל בצ׳אט, הוסף ממשק כשמוכן</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Section - Building Blocks -->
+        <div class="slide section-slide bg-gradient" data-slide="9">
+            <div class="bg-orbs">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+            </div>
+            <span class="section-number">2</span>
+
+            <p class="section-label animate-in">חלק 2</p>
+            <h1 class="animate-in animate-delay-1">אבני הבניין של Agentic App</h1>
+            <p class="animate-in animate-delay-2" style="font-size: 2rem; color: var(--text-gray);">5 רכיבים שמרכיבים אפליקציה שלמה</p>
+
+            <div class="flex gap-8 mt-12 animate-in animate-delay-3">
+                <div class="pill">CLAUDE.md</div>
+                <div class="pill">Skills</div>
+                <div class="pill">Commands</div>
+                <div class="pill">Agents</div>
+                <div class="pill">Data Files</div>
+            </div>
+        </div>
+
+        <!-- Slide 10: CLAUDE.md -->
+        <div class="slide bg-grid" data-slide="10">
+            <div class="flex gap-4 items-center animate-in">
+                <h2 class="text-primary" style="font-family: 'Fira Code', monospace;">CLAUDE.md</h2>
+                <span class="pill">החוקה של האפליקציה</span>
+            </div>
+
+            <div class="grid-2 grow mt-8">
+                <div>
+                    <p class="animate-in animate-delay-1" style="font-size: 1.5rem; line-height: 2;">
+                        קובץ אחד שמגדיר הכל:
+                    </p>
+                    <ul class="feature-list check animate-in animate-delay-2" style="margin-top: 1rem;">
+                        <li>מי האפליקציה ומה היא עושה</li>
+                        <li>חוקים והנחיות התנהגות</li>
+                        <li>קונפיגורציה והגדרות</li>
+                        <li>קשרים בין רכיבים</li>
+                    </ul>
+
+                    <div class="card mt-8 animate-in animate-delay-3">
+                        <p class="text-dim">אנלוגיה:</p>
+                        <p class="text-white">config.yaml + README + business rules</p>
+                    </div>
+                </div>
+
+                <div class="code-block animate-in animate-delay-2" style="font-size: 1rem;">
+<span class="comment"># My CRM App</span>
+
+<span class="keyword">## Purpose</span>
+מערכת ניהול לקוחות לעסק קטן
+
+<span class="keyword">## Rules</span>
+- תמיד שמור על נימוס בתקשורת
+- אל תמחק לקוחות - סמן כלא פעילים
+- שלח תזכורת follow-up אחרי 7 ימים
+
+<span class="keyword">## Structure</span>
+- <span class="string">/data/customers</span> - תיקיות לקוחות
+- <span class="string">/data/interactions.md</span> - לוג שיחות
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Skills -->
+        <div class="slide bg-gradient" data-slide="11">
+            <div class="flex gap-4 items-center animate-in">
+                <h2 class="text-primary" style="font-family: 'Fira Code', monospace;">Skills</h2>
+                <span class="pill">יכולות אוטומטיות</span>
+            </div>
+
+            <div class="grid-2 grow mt-8">
+                <div>
+                    <p class="animate-in animate-delay-1" style="font-size: 1.5rem; line-height: 2;">
+                        Skills הם "ספריות" של הסוכן:
+                    </p>
+                    <ul class="feature-list check animate-in animate-delay-2" style="margin-top: 1rem;">
+                        <li>פעולות מורכבות ארוזות ומוכנות</li>
+                        <li>הסוכן מפעיל אותן אוטומטית כשצריך</li>
+                        <li>אפשר לשתף Skills בין פרויקטים</li>
+                        <li>כמו npm packages - אבל בשפה טבעית</li>
+                    </ul>
+
+                    <div class="card mt-8 animate-in animate-delay-3">
+                        <p class="text-dim">אנלוגיה:</p>
+                        <p class="text-white">npm/pip packages, middleware</p>
+                    </div>
+                </div>
+
+                <div class="folder-tree animate-in animate-delay-2">
+<span class="folder">.claude/skills/customer-analysis/</span>
+
+├── <span class="file">skill.md</span>
+│   <span class="comment">"כשמבקשים ניתוח לקוח:</span>
+│   <span class="comment"> 1. קרא את כל האינטראקציות</span>
+│   <span class="comment"> 2. חשב ציון מעורבות</span>
+│   <span class="comment"> 3. זהה דפוסי רכישה</span>
+│   <span class="comment"> 4. צור דו״ח מסכם"</span>
+│
+└── <span class="folder">templates/</span>
+    └── <span class="file">report-template.md</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Commands -->
+        <div class="slide bg-grid" data-slide="12">
+            <div class="flex gap-4 items-center animate-in">
+                <h2 class="text-primary" style="font-family: 'Fira Code', monospace;">Commands</h2>
+                <span class="pill">פעולות מפורשות</span>
+            </div>
+
+            <div class="grid-2 grow mt-8">
+                <div>
+                    <p class="animate-in animate-delay-1" style="font-size: 1.5rem; line-height: 2;">
+                        Commands הם ה-API של האפליקציה:
+                    </p>
+                    <ul class="feature-list check animate-in animate-delay-2" style="margin-top: 1rem;">
+                        <li>פקודות שהמשתמש מפעיל במפורש</li>
+                        <li>מתחילות ב-/ (slash)</li>
+                        <li>כל כפתור ב-UI = פקודה</li>
+                        <li>פשוטות ליצירה ולשינוי</li>
+                    </ul>
+
+                    <div class="card mt-8 animate-in animate-delay-3">
+                        <p class="text-dim">אנלוגיה:</p>
+                        <p class="text-white">REST API endpoints</p>
+                    </div>
+                </div>
+
+                <div class="code-block animate-in animate-delay-2" style="background: #000; border-color: var(--primary);">
+<span class="string">$ /add-customer</span> שם אימייל
+<span class="comment">→ הוסף לקוח חדש למערכת</span>
+
+<span class="string">$ /log-interaction</span> לקוח סוג תוכן
+<span class="comment">→ תעד שיחה עם לקוח</span>
+
+<span class="string">$ /followup</span>
+<span class="comment">→ הצג לקוחות שצריכים follow-up</span>
+
+<span class="string">$ /analyze-customer</span> לקוח
+<span class="comment">→ נתח לקוח והפק דו״ח</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Agents -->
+        <div class="slide bg-gradient" data-slide="13">
+            <div class="flex gap-4 items-center animate-in">
+                <h2 class="text-primary" style="font-family: 'Fira Code', monospace;">Agents</h2>
+                <span class="pill">תהליכים מורכבים</span>
+            </div>
+
+            <div class="grid-2 grow mt-8">
+                <div>
+                    <p class="animate-in animate-delay-1" style="font-size: 1.5rem; line-height: 2;">
+                        Agents הם "עובדים" שמבצעים משימות:
+                    </p>
+                    <ul class="feature-list check animate-in animate-delay-2" style="margin-top: 1rem;">
+                        <li>תהליכים שרצים ברקע</li>
+                        <li>מפעילים skills ו-commands</li>
+                        <li>יכולים לקבל החלטות</li>
+                        <li>מושלמים למשימות מורכבות</li>
+                    </ul>
+
+                    <div class="card mt-8 animate-in animate-delay-3">
+                        <p class="text-dim">אנלוגיה:</p>
+                        <p class="text-white">Background workers, cron jobs</p>
+                    </div>
+                </div>
+
+                <div class="code-block animate-in animate-delay-2">
+<span class="comment"># Weekly Review Agent</span>
+
+<span class="keyword">## Trigger</span>
+כל יום ראשון בבוקר
+
+<span class="keyword">## Tasks</span>
+<span class="number">1.</span> סרוק את כל הלקוחות
+<span class="number">2.</span> זהה לקוחות ללא אינטראקציה בשבוע
+<span class="number">3.</span> צור רשימת follow-up מתועדפת
+<span class="number">4.</span> שלח סיכום למנהל
+
+<span class="keyword">## Output</span>
+<span class="string">/data/reports/weekly-YYYY-MM-DD.md</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Data Files -->
+        <div class="slide bg-grid" data-slide="14">
+            <div class="flex gap-4 items-center animate-in">
+                <h2 class="text-primary" style="font-family: 'Fira Code', monospace;">Data Files</h2>
+                <span class="pill">המידע של האפליקציה</span>
+            </div>
+
+            <div class="grid-2 grow mt-8">
+                <div>
+                    <p class="animate-in animate-delay-1" style="font-size: 1.5rem; line-height: 2;">
+                        קבצי Markdown = מסד נתונים:
+                    </p>
+                    <ul class="feature-list check animate-in animate-delay-2" style="margin-top: 1rem;">
+                        <li>קריאים לבני אדם</li>
+                        <li>גרסאות ב-Git</li>
+                        <li>קלים לעריכה ידנית</li>
+                        <li>הסוכן קורא וכותב אותם</li>
+                    </ul>
+
+                    <div class="card mt-8 animate-in animate-delay-3">
+                        <p class="text-dim">אנלוגיה:</p>
+                        <p class="text-white">PostgreSQL, MongoDB - אבל קריא!</p>
+                    </div>
+                </div>
+
+                <div class="folder-tree animate-in animate-delay-2">
+<span class="folder">/data/</span>
+├── <span class="folder">customers/</span>
+│   ├── <span class="file">acme-corp.md</span>
+│   │   <span class="comment">"# ACME Corp</span>
+│   │   <span class="comment"> Status: Active</span>
+│   │   <span class="comment"> Contact: john@acme.com</span>
+│   │   <span class="comment"> Score: 85"</span>
+│   │
+│   └── <span class="file">beta-inc.md</span>
+│
+└── <span class="file">interactions.md</span>
+    <span class="comment">"| Date | Customer | Type |</span>
+    <span class="comment"> | 2024-01-15 | ACME | Call |</span>
+    <span class="comment"> | 2024-01-16 | Beta | Email |"</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Summary Table -->
+        <div class="slide bg-gradient-green" data-slide="15">
+            <h2 class="animate-in">5 רכיבים = אפליקציה שלמה</h2>
+
+            <div class="grow flex items-center mt-8">
+                <table class="comparison-table animate-in animate-delay-1">
+                    <thead>
+                        <tr>
+                            <th>רכיב</th>
+                            <th>תפקיד</th>
+                            <th>אנלוגיה</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-primary" style="font-family: 'Fira Code', monospace;">CLAUDE.md</td>
+                            <td>חוקה + הגדרות</td>
+                            <td>config + README</td>
+                        </tr>
+                        <tr>
+                            <td class="text-primary" style="font-family: 'Fira Code', monospace;">Skills</td>
+                            <td>יכולות אוטומטיות</td>
+                            <td>ספריות, middleware</td>
+                        </tr>
+                        <tr>
+                            <td class="text-primary" style="font-family: 'Fira Code', monospace;">Commands</td>
+                            <td>פעולות מפורשות</td>
+                            <td>API endpoints</td>
+                        </tr>
+                        <tr>
+                            <td class="text-primary" style="font-family: 'Fira Code', monospace;">Agents</td>
+                            <td>תהליכים מורכבים</td>
+                            <td>background workers</td>
+                        </tr>
+                        <tr>
+                            <td class="text-primary" style="font-family: 'Fira Code', monospace;">Data Files</td>
+                            <td>מצב האפליקציה</td>
+                            <td>database</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cta-box animate-in animate-delay-2" style="max-width: 500px; align-self: center;">
+                <h3>עכשיו נראה את זה בפעולה!</h3>
+            </div>
+        </div>
+
+        <!-- Slide 16: Break -->
+        <div class="slide break-slide bg-gradient" data-slide="16">
+            <div class="bg-orbs">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+            </div>
+
+            <div class="coffee-icon animate-in">☕</div>
+            <h1 class="animate-in animate-delay-1">הפסקה</h1>
+            <h2 class="text-primary animate-in animate-delay-2">15 דקות</h2>
+
+            <div class="card mt-12 animate-in animate-delay-3" style="max-width: 600px;">
+                <p style="font-size: 1.5rem;">💡 בזמן ההפסקה חשבו:</p>
+                <p class="text-primary" style="font-size: 1.75rem; margin-top: 1rem;">
+                    איזה כלי פנימי הייתם רוצים לבנות לעסק שלכם?
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 17: Live Build Intro -->
+        <div class="slide section-slide bg-gradient" data-slide="17">
+            <div class="bg-orbs">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-3"></div>
+            </div>
+            <span class="section-number">3</span>
+
+            <p class="section-label animate-in">חלק 3</p>
+            <h1 class="text-primary animate-in animate-delay-1">Live Build: CRM לעסק קטן</h1>
+            <p class="animate-in animate-delay-2" style="font-size: 2rem; color: var(--text-gray);">60 דקות מאפס לאפליקציה עובדת</p>
+
+            <div class="grid-4 mt-12 animate-in animate-delay-3" style="max-width: 800px;">
+                <div class="card" style="text-align: center; padding: 20px;">
+                    <p class="text-primary">✅</p>
+                    <p>ניהול לקוחות</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 20px;">
+                    <p class="text-primary">✅</p>
+                    <p>תיעוד אינטראקציות</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 20px;">
+                    <p class="text-primary">✅</p>
+                    <p>תזכורות follow-up</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 20px;">
+                    <p class="text-primary">✅</p>
+                    <p>ניתוח לקוחות</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18: Project Structure -->
+        <div class="slide bg-grid" data-slide="18">
+            <h2 class="animate-in">מבנה הפרויקט שלנו</h2>
+
+            <div class="grow flex items-center justify-center">
+                <div class="folder-tree animate-in animate-delay-1" style="font-size: 1.2rem; max-width: 700px;">
+<span class="folder">my-crm/</span>
+├── <span class="file">CLAUDE.md</span>           <span class="comment"># הגדרת המערכת והחוקים</span>
+├── <span class="folder">.claude/</span>
+│   ├── <span class="folder">commands/</span>       <span class="comment"># פקודות משתמש</span>
+│   │   ├── <span class="file">add-customer.md</span>
+│   │   ├── <span class="file">log-interaction.md</span>
+│   │   └── <span class="file">followup.md</span>
+│   ├── <span class="folder">skills/</span>         <span class="comment"># יכולות אוטומטיות</span>
+│   │   └── <span class="folder">customer-analysis/</span>
+│   └── <span class="folder">agents/</span>         <span class="comment"># תהליכים מורכבים</span>
+│       └── <span class="file">weekly-review.md</span>
+└── <span class="folder">data/</span>
+    ├── <span class="folder">customers/</span>      <span class="comment"># תיקיות לקוחות</span>
+    └── <span class="file">interactions.md</span> <span class="comment"># לוג אינטראקציות</span>
+                </div>
+            </div>
+
+            <p class="text-primary animate-in animate-delay-2 mt-4" style="text-align: center; font-size: 1.5rem;">
+                כל שורה = רכיב שלמדנו!
+            </p>
+        </div>
+
+        <!-- Slide 19-24: Build Steps (placeholder for live demo) -->
+        <div class="slide bg-gradient" data-slide="19">
+            <p class="section-label animate-in">שלב 1 מתוך 6</p>
+            <h2 class="animate-in animate-delay-1">יצירת CLAUDE.md</h2>
+
+            <div class="grow flex items-center">
+                <div class="code-block animate-in animate-delay-2" style="width: 100%; font-size: 1.1rem;">
+<span class="comment"># My CRM - מערכת ניהול לקוחות</span>
+
+<span class="keyword">## Purpose</span>
+מערכת CRM פשוטה לניהול לקוחות ומעקב אחרי אינטראקציות.
+
+<span class="keyword">## Business Rules</span>
+- לקוח חדש מקבל סטטוס "Active"
+- אחרי 7 ימים ללא אינטראקציה - סמן ל-follow-up
+- אל תמחק לקוחות - סמן כ-"Inactive"
+- כל אינטראקציה נרשמת עם תאריך וסוג
+
+<span class="keyword">## Data Structure</span>
+- <span class="string">/data/customers/</span> - קובץ לכל לקוח
+- <span class="string">/data/interactions.md</span> - טבלת אינטראקציות
+
+<span class="keyword">## Available Commands</span>
+- <span class="function">/add-customer</span> - הוספת לקוח חדש
+- <span class="function">/log-interaction</span> - תיעוד אינטראקציה
+- <span class="function">/followup</span> - רשימת לקוחות ל-follow-up
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-grid" data-slide="20">
+            <p class="section-label animate-in">שלב 2 מתוך 6</p>
+            <h2 class="animate-in animate-delay-1">יצירת /add-customer</h2>
+
+            <div class="grid-2 grow mt-8">
+                <div class="animate-in animate-delay-2">
+                    <h3 class="text-primary mb-4">מה הפקודה עושה:</h3>
+                    <ul class="feature-list check">
+                        <li>מקבלת שם ואימייל</li>
+                        <li>יוצרת קובץ לקוח חדש</li>
+                        <li>מוסיפה תאריך יצירה</li>
+                        <li>מגדירה סטטוס Active</li>
+                    </ul>
+                </div>
+
+                <div class="code-block animate-in animate-delay-3">
+<span class="comment"># Add Customer Command</span>
+
+<span class="keyword">## Usage</span>
+<span class="function">/add-customer</span> [שם] [אימייל]
+
+<span class="keyword">## Steps</span>
+<span class="number">1.</span> צור קובץ חדש:
+   <span class="string">/data/customers/[שם].md</span>
+<span class="number">2.</span> הוסף פרטים:
+   - Name: [שם]
+   - Email: [אימייל]
+   - Status: Active
+   - Created: [תאריך היום]
+<span class="number">3.</span> אשר למשתמש
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-gradient" data-slide="21">
+            <p class="section-label animate-in">שלב 3 מתוך 6</p>
+            <h2 class="animate-in animate-delay-1">יצירת /log-interaction</h2>
+
+            <div class="grid-2 grow mt-8">
+                <div class="animate-in animate-delay-2">
+                    <h3 class="text-primary mb-4">מה הפקודה עושה:</h3>
+                    <ul class="feature-list check">
+                        <li>מתעדת שיחה עם לקוח</li>
+                        <li>מעדכנת את קובץ הלקוח</li>
+                        <li>מוסיפה לטבלת האינטראקציות</li>
+                        <li>מאפסת את ספירת ה-follow-up</li>
+                    </ul>
+                </div>
+
+                <div class="code-block animate-in animate-delay-3">
+<span class="comment"># Log Interaction Command</span>
+
+<span class="keyword">## Usage</span>
+<span class="function">/log-interaction</span> [לקוח] [סוג] [תוכן]
+
+<span class="keyword">## Interaction Types</span>
+- Call (שיחה)
+- Email (מייל)
+- Meeting (פגישה)
+- Note (הערה)
+
+<span class="keyword">## Steps</span>
+<span class="number">1.</span> הוסף שורה ל-interactions.md
+<span class="number">2.</span> עדכן Last Contact בקובץ הלקוח
+<span class="number">3.</span> אשר למשתמש
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-grid" data-slide="22">
+            <p class="section-label animate-in">שלב 4 מתוך 6</p>
+            <h2 class="animate-in animate-delay-1">יצירת /followup</h2>
+
+            <div class="grid-2 grow mt-8">
+                <div class="animate-in animate-delay-2">
+                    <h3 class="text-primary mb-4">מה הפקודה עושה:</h3>
+                    <ul class="feature-list check">
+                        <li>סורקת את כל הלקוחות</li>
+                        <li>מזהה לקוחות ללא אינטראקציה</li>
+                        <li>מציגה רשימה מתועדפת</li>
+                        <li>מציעה פעולות המשך</li>
+                    </ul>
+                </div>
+
+                <div class="code-block animate-in animate-delay-3">
+<span class="comment"># Follow-up Command</span>
+
+<span class="keyword">## Usage</span>
+<span class="function">/followup</span>
+
+<span class="keyword">## Logic</span>
+<span class="number">1.</span> קרא את כל קבצי הלקוחות
+<span class="number">2.</span> חשב ימים מאז Last Contact
+<span class="number">3.</span> סנן לקוחות עם 7+ ימים
+<span class="number">4.</span> מיין לפי ימים (יורד)
+
+<span class="keyword">## Output Format</span>
+| לקוח | ימים | סוג אחרון |
+| ACME | <span class="number">12</span> | Call |
+| Beta | <span class="number">8</span> | Email |
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-gradient" data-slide="23">
+            <p class="section-label animate-in">שלב 5 מתוך 6</p>
+            <h2 class="animate-in animate-delay-1">יצירת customer-analysis skill</h2>
+
+            <div class="grid-2 grow mt-8">
+                <div class="animate-in animate-delay-2">
+                    <h3 class="text-primary mb-4">מה ה-Skill עושה:</h3>
+                    <ul class="feature-list check">
+                        <li>מנתח היסטוריית לקוח</li>
+                        <li>מחשב ציון מעורבות</li>
+                        <li>מזהה דפוסים</li>
+                        <li>מפיק דו"ח מסכם</li>
+                    </ul>
+                </div>
+
+                <div class="code-block animate-in animate-delay-3">
+<span class="comment"># Customer Analysis Skill</span>
+
+<span class="keyword">## When to Use</span>
+כשהמשתמש מבקש "נתח לקוח" או
+"תן לי מידע על לקוח"
+
+<span class="keyword">## Analysis Steps</span>
+<span class="number">1.</span> קרא את כל האינטראקציות
+<span class="number">2.</span> חשב:
+   - סה"כ אינטראקציות
+   - ממוצע אינטראקציות/חודש
+   - סוג אינטראקציה נפוץ
+<span class="number">3.</span> חשב ציון מעורבות (0-100)
+<span class="number">4.</span> צור דו"ח מסכם
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-grid" data-slide="24">
+            <p class="section-label animate-in">שלב 6 מתוך 6</p>
+            <h2 class="animate-in animate-delay-1">יצירת weekly-review agent</h2>
+
+            <div class="grid-2 grow mt-8">
+                <div class="animate-in animate-delay-2">
+                    <h3 class="text-primary mb-4">מה ה-Agent עושה:</h3>
+                    <ul class="feature-list check">
+                        <li>רץ אוטומטית כל שבוע</li>
+                        <li>מרכז נתונים מכל הלקוחות</li>
+                        <li>מייצר דו"ח שבועי</li>
+                        <li>מזהה לקוחות בסיכון</li>
+                    </ul>
+                </div>
+
+                <div class="code-block animate-in animate-delay-3">
+<span class="comment"># Weekly Review Agent</span>
+
+<span class="keyword">## Trigger</span>
+כל יום ראשון ב-09:00
+
+<span class="keyword">## Tasks</span>
+<span class="number">1.</span> סרוק /data/customers/
+<span class="number">2.</span> הפעל customer-analysis על כולם
+<span class="number">3.</span> זהה:
+   - לקוחות ללא פעילות
+   - לקוחות עם ציון יורד
+   - הזדמנויות מכירה
+<span class="number">4.</span> צור דו"ח:
+   <span class="string">/data/reports/week-XX.md</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 25: Agent SDK Section -->
+        <div class="slide section-slide bg-gradient" data-slide="25">
+            <div class="bg-orbs">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+            </div>
+            <span class="section-number">4</span>
+
+            <p class="section-label animate-in">חלק 4</p>
+            <h1 class="animate-in animate-delay-1">הוספת UI עם Agent SDK</h1>
+            <p class="animate-in animate-delay-2" style="font-size: 2rem; color: var(--text-gray);">כשצ׳אט לא מספיק</p>
+        </div>
+
+        <!-- Slide 26: When UI -->
+        <div class="slide bg-grid" data-slide="26">
+            <h2 class="animate-in">מתי להוסיף UI?</h2>
+
+            <div class="grid-2 grow mt-8">
+                <div class="card animate-in animate-delay-1">
+                    <h3 class="text-white mb-4">✅ CLI מספיק כש...</h3>
+                    <ul class="feature-list" style="font-size: 1.25rem;">
+                        <li>המשתמש טכני</li>
+                        <li>כלים פנימיים אישיים</li>
+                        <li>פרוטוטייפים מהירים</li>
+                        <li>אוטומציות ברקע</li>
+                    </ul>
+                </div>
+
+                <div class="card card-green animate-in animate-delay-2">
+                    <h3 class="text-primary mb-4">🎨 צריך UI כש...</h3>
+                    <ul class="feature-list" style="font-size: 1.25rem;">
+                        <li>משתפים עם משתמשים לא טכניים</li>
+                        <li>צריך דשבורדים ודוחות</li>
+                        <li>בונים מוצר ללקוחות</li>
+                        <li>רוצים חוויה ויזואלית</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 27: SDK Basics -->
+        <div class="slide bg-gradient" data-slide="27">
+            <h2 class="animate-in">Agent SDK - הבסיס</h2>
+
+            <div class="grid-2 grow mt-8">
+                <div class="animate-in animate-delay-1">
+                    <p style="font-size: 1.5rem; line-height: 2;">
+                        Agent SDK מאפשר:
+                    </p>
+                    <ul class="feature-list check" style="margin-top: 1rem;">
+                        <li>לחבר UI (React, Vue, HTML) לסוכן</li>
+                        <li>לשלוח /commands מכפתורים</li>
+                        <li>לקרוא data files ולהציג בדשבורד</li>
+                        <li>הסוכן נשאר המוח - UI רק עטיפה</li>
+                    </ul>
+                </div>
+
+                <div class="code-block animate-in animate-delay-2">
+<span class="keyword">from</span> <span class="string">claude_agent_sdk</span> <span class="keyword">import</span> query
+
+<span class="keyword">async def</span> <span class="function">add_customer</span>(name, email):
+    result = <span class="keyword">await</span> query(
+        prompt=<span class="string">f"/add-customer {name} {email}"</span>,
+        options={
+            <span class="string">"working_directory"</span>: <span class="string">"./my-crm"</span>
+        }
+    )
+    <span class="keyword">return</span> result
+                </div>
+            </div>
+
+            <div class="card card-green animate-in animate-delay-3 mt-8" style="max-width: 600px; align-self: center;">
+                <p class="text-primary" style="font-family: 'Fira Code', monospace; font-size: 1.25rem;">
+                    כפתור → /command → סוכן מחליט → תוצאה
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 28: Real Examples -->
+        <div class="slide bg-grid" data-slide="28">
+            <h2 class="animate-in">דוגמאות מהעולם האמיתי</h2>
+
+            <div class="grid-2x2 grow mt-8">
+                <div class="card animate-in animate-delay-1">
+                    <div class="icon-box">📋</div>
+                    <h3 class="text-primary">מערכת ניהול משימות</h3>
+                    <p>tasks folder + commands</p>
+                </div>
+
+                <div class="card animate-in animate-delay-2">
+                    <div class="icon-box">🎓</div>
+                    <h3 class="text-primary">מערכת ניהול סדנאות</h3>
+                    <p>architect-workshops</p>
+                </div>
+
+                <div class="card animate-in animate-delay-3">
+                    <div class="icon-box">💬</div>
+                    <h3 class="text-primary">בוט שירות לקוחות</h3>
+                    <p>skills + agents</p>
+                </div>
+
+                <div class="card animate-in animate-delay-4">
+                    <div class="icon-box">📦</div>
+                    <h3 class="text-primary">מערכת ניהול מלאי</h3>
+                    <p>data files + commands</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 29: When NOT -->
+        <div class="slide bg-gradient" data-slide="29">
+            <h2 class="animate-in">מתי זה לא מתאים?</h2>
+
+            <div class="grow flex flex-col justify-center" style="max-width: 800px; margin: 0 auto;">
+                <ul class="animate-in animate-delay-1" style="list-style: none; font-size: 1.75rem;">
+                    <li style="padding: 16px 0; padding-right: 50px; position: relative;">
+                        <span style="position: absolute; right: 0; color: #EF4444; font-size: 2rem;">✗</span>
+                        מערכות עם דרישות real-time קשיחות
+                    </li>
+                    <li style="padding: 16px 0; padding-right: 50px; position: relative;">
+                        <span style="position: absolute; right: 0; color: #EF4444; font-size: 2rem;">✗</span>
+                        מערכות עם מיליוני רשומות
+                    </li>
+                    <li style="padding: 16px 0; padding-right: 50px; position: relative;">
+                        <span style="position: absolute; right: 0; color: #EF4444; font-size: 2rem;">✗</span>
+                        מערכות עם דרישות compliance מחמירות
+                    </li>
+                    <li style="padding: 16px 0; padding-right: 50px; position: relative;">
+                        <span style="position: absolute; right: 0; color: #EF4444; font-size: 2rem;">✗</span>
+                        מערכות שצריכות לרוץ offline
+                    </li>
+                </ul>
+
+                <div class="card card-green animate-in animate-delay-2 mt-12">
+                    <p style="font-size: 1.5rem;">
+                        💡 במקרים אלה - התחל עם Agentic App כ-POC, ואז בנה פתרון מלא
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 30: Key Takeaways -->
+        <div class="slide bg-gradient-green" data-slide="30">
+            <h2 class="animate-in">מה למדנו היום?</h2>
+
+            <div class="grow flex flex-col justify-center gap-4 mt-8" style="max-width: 900px; margin: 0 auto;">
+                <div class="card animate-in animate-delay-1" style="display: flex; align-items: center; gap: 24px;">
+                    <span class="text-primary" style="font-size: 3rem; font-weight: 900; opacity: 0.5;">1</span>
+                    <div>
+                        <h4 class="text-primary" style="font-family: 'Fira Code', monospace;">The Agent is the Engine</h4>
+                        <p style="font-size: 1.25rem;">הסוכן מחליף את הלוגיקה התכנותית</p>
+                    </div>
+                </div>
+
+                <div class="card animate-in animate-delay-2" style="display: flex; align-items: center; gap: 24px;">
+                    <span class="text-primary" style="font-size: 3rem; font-weight: 900; opacity: 0.5;">2</span>
+                    <div>
+                        <h4 class="text-primary" style="font-family: 'Fira Code', monospace;">Documents Replace Algorithms</h4>
+                        <p style="font-size: 1.25rem;">מסמכים כתובים במקום קוד</p>
+                    </div>
+                </div>
+
+                <div class="card animate-in animate-delay-3" style="display: flex; align-items: center; gap: 24px;">
+                    <span class="text-primary" style="font-size: 3rem; font-weight: 900; opacity: 0.5;">3</span>
+                    <div>
+                        <h4 class="text-primary" style="font-family: 'Fira Code', monospace;">Speed Over Perfection</h4>
+                        <p style="font-size: 1.25rem;">עדיף MVP מהיר שאפשר לשפר</p>
+                    </div>
+                </div>
+
+                <div class="card animate-in animate-delay-4" style="display: flex; align-items: center; gap: 24px;">
+                    <span class="text-primary" style="font-size: 3rem; font-weight: 900; opacity: 0.5;">4</span>
+                    <div>
+                        <h4 class="text-primary" style="font-family: 'Fira Code', monospace;">Human-Readable State</h4>
+                        <p style="font-size: 1.25rem;">כל המידע קריא ונגיש</p>
+                    </div>
+                </div>
+
+                <div class="card animate-in animate-delay-5" style="display: flex; align-items: center; gap: 24px;">
+                    <span class="text-primary" style="font-size: 3rem; font-weight: 900; opacity: 0.5;">5</span>
+                    <div>
+                        <h4 class="text-primary" style="font-family: 'Fira Code', monospace;">Composable Architecture</h4>
+                        <p style="font-size: 1.25rem;">רכיבים שמשתלבים בקלות</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 31: CTA -->
+        <div class="slide bg-gradient" data-slide="31">
+            <div class="bg-orbs">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-3"></div>
+            </div>
+
+            <div class="grow flex flex-col justify-center items-center text-center">
+                <h1 class="animate-in">מה עכשיו?</h1>
+
+                <div class="animate-in animate-delay-1 mt-8" style="text-align: right; max-width: 600px;">
+                    <p style="font-size: 2rem; margin-bottom: 1rem;">
+                        <span class="text-primary">1️⃣</span> בחרו כלי פנימי אחד שאתם צריכים
+                    </p>
+                    <p style="font-size: 2rem; margin-bottom: 1rem;">
+                        <span class="text-primary">2️⃣</span> התחילו עם CLAUDE.md פשוט
+                    </p>
+                    <p style="font-size: 2rem; margin-bottom: 1rem;">
+                        <span class="text-primary">3️⃣</span> הוסיפו command אחד
+                    </p>
+                    <p style="font-size: 2rem;">
+                        <span class="text-primary">4️⃣</span> בנו בהדרגה
+                    </p>
+                </div>
+
+                <div class="cta-box animate-in animate-delay-2 mt-12" style="max-width: 700px;">
+                    <h3 style="font-size: 2.25rem;">האפליקציה הראשונה שלכם מחכה - התחילו היום!</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 32: Closing -->
+        <div class="slide closing-slide bg-gradient" data-slide="32">
+            <div class="bg-orbs">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+            </div>
+            <div class="stars" id="stars-32"></div>
+
+            <h1 class="text-primary glow-text animate-in">תודה!</h1>
+            <h2 class="text-white animate-in animate-delay-1 mt-4">Aviz - The Architect</h2>
+
+            <div class="animate-in animate-delay-2 mt-12" style="display: flex; gap: 32px; color: var(--text-gray);">
+                <span>🌐 aviz.dev</span>
+                <span>📧 hello@aviz.dev</span>
+                <span>💬 WhatsApp Community</span>
+            </div>
+
+            <div class="card card-green animate-in animate-delay-3 mt-12">
+                <h3 class="text-primary" style="font-size: 2rem;">בנו משהו מדהים! 🚀</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="prevSlide()">←</button>
+        <div class="slide-counter">
+            <span id="current">1</span> / <span id="total">32</span>
+        </div>
+        <button class="nav-btn" onclick="nextSlide()">→</button>
+    </div>
+
+    <div class="keyboard-hint">
+        לחץ על מקשי החצים או רווח לניווט
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 32;
+
+        // Generate stars for cover and closing slides
+        function generateStars(containerId, count = 50) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(star);
+            }
+        }
+
+        generateStars('stars-1', 60);
+        generateStars('stars-32', 60);
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+
+            slides[currentSlide - 1].classList.add('active');
+
+            document.getElementById('current').textContent = currentSlide;
+            document.getElementById('progress').style.width = (currentSlide / totalSlides * 100) + '%';
+
+            document.body.classList.add('navigated');
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'Home') {
+                currentSlide = 1;
+                showSlide(currentSlide);
+            } else if (e.key === 'End') {
+                currentSlide = totalSlides;
+                showSlide(currentSlide);
+            }
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                nextSlide();
+            } else if (touchEndX - touchStartX > 50) {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

@@ -219,10 +219,10 @@ Key message: "All of this is possible thanks to ONE technique I'm about to show 
 **Attendance:**
 | Metric | Count |
 |--------|-------|
-| WhatsApp Group Size | |
-| First 15 min | |
-| Peak | |
-| Last 15 min | |
+| WhatsApp Group Size | TBD |
+| Start (Zoom) | ~100 |
+| YouTube Live | Additional |
+| End | 30-40 |
 
 ### Post-Workshop
 - [ ] Transcript added

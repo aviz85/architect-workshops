@@ -1,6 +1,6 @@
 ---
 name: morning-invoice
-description: "Create invoices using Morning (Green Invoice) API. Use when user asks to 'create invoice', 'generate invoices', 'batch invoices', or wants to create tax invoices for workshop participants."
+description: "Create invoices via Morning API. Use for: create invoice, batch invoices, tax invoices."
 ---
 
 # Morning Invoice Skill

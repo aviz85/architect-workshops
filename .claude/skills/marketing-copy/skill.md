@@ -1,6 +1,6 @@
 ---
 name: marketing-copy
-description: "Generate marketing copy for workshops. Use when the user asks to 'write marketing posts', 'create promotional content', 'write copy for Facebook/WhatsApp', or similar requests for workshop promotion."
+description: "Generate workshop marketing copy. Use for: write posts, promotional content, Facebook/WhatsApp copy."
 ---
 
 # Marketing Copy Generator
@@ -115,3 +115,13 @@ Generate copy in markdown format:
 4. **Include specifics** - Numbers, examples, details
 5. **End with clear CTA** - Always tell them what to do next
 6. **Save to workshop** - All content saved to workshop's marketing.md file
+
+## Templates
+
+See `references/templates.md` for proven post templates based on aviz's writing style.
+
+| Template | Energy | Best For |
+|----------|--------|----------|
+| `big-announcement` | High | Launches, major reveals |
+
+When writing, consider which template fits the situation and follow its structure.

@@ -17,6 +17,7 @@ A collection of potential workshop topics for "Aviz - The Architect".
 | בניית בוט לטלגרם                | יצירת בוט עם AI                         | Intermediate | 3 hours  | Available |
 | Web Scraping עם AI              | איסוף מידע מאתרים בעזרת AI              | Intermediate | 2 hours  | Available |
 | Claude for Chrome               | שליטה בדפדפן עם AI                      | Intermediate | 2 hours  | Planned   |
+| **Agentic Apps לעסקים**         | בניית אפליקציות שלמות עם Claude Code primitives - ללא קוד מסורתי | Advanced     | 3 hours  | Concept   |
 
 ## How to Use
 
@@ -27,6 +28,7 @@ When creating a new workshop, you can pick an idea from this table or suggest a 
 - **Planned** - Already scheduled for a specific date
 - **Done** - Workshop completed
 - **Draft** - Idea needs more development
+- **Concept** - Detailed concept in `future-concepts/` folder, not yet scheduled
 
 ---
 

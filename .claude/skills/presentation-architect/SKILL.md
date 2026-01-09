@@ -1,6 +1,6 @@
 ---
 name: presentation-architect
-description: "Transform high-level ideas or briefs into fully structured presentation scripts saved as Markdown files, describing presentations slide by slide with exhaustive detail. Use this skill when users request: (1) Creating presentation blueprints or scripts, (2) Structuring slide decks from concepts, (3) Designing presentation narratives with detailed specifications for content, layout, typography, and visuals, or (4) Creating presentation documentation for designers or presenters."
+description: "Create presentation blueprints (Markdown). Use for: slide deck scripts, presentation structure, visual specs."
 ---
 
 # Presentation Architect

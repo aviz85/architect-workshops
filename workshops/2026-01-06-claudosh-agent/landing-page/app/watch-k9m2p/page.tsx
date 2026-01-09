@@ -91,7 +91,7 @@ export default function WatchPage() {
           </p>
         </div>
 
-        {/* Beginner Workshop Promo */}
+        {/* Beginner Workshop Access */}
         <div style={{
           marginTop: '32px',
           background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%)',
@@ -101,12 +101,13 @@ export default function WatchPage() {
           textAlign: 'center'
         }}>
           <p style={{ color: '#22C55E', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px', letterSpacing: '1px' }}>
-            הסדנה הבאה
+            בונוס למשתתפים!
           </p>
           <h3 style={{ color: '#fff', fontSize: '20px', marginBottom: '12px' }}>
             קלודוש הסוכן - מתחילים בקטן!
           </h3>
           <p style={{ color: '#9CA3AF', fontSize: '14px', marginBottom: '16px' }}>
+            כמשתתף בסדנה, יש לך גישה גם לסדנה הבאה!<br/>
             יום שלישי, 13.1.26 בשעה 21:00
           </p>
           <a
@@ -122,7 +123,7 @@ export default function WatchPage() {
               padding: '12px 24px'
             }}
           >
-            לפרטים והרשמה
+            לעמוד הסדנה
           </a>
         </div>
 
