@@ -2,6 +2,16 @@
 
 This repository manages workshops by **Aviz - The Architect** - educational tech workshops delivered in Hebrew via Zoom.
 
+## Documentation Language Rule
+
+**All documentation, skills, and commands must be written in English**, except for:
+- Workshop content delivered to participants (agenda items, slide text)
+- Marketing materials and messages (WhatsApp, Facebook posts)
+- Hebrew phrases in templates that go to end users
+- Workshop titles and topic names
+
+This keeps the codebase consistent and maintainable while allowing Hebrew where it matters - the actual content.
+
 ## Project Overview
 
 - **Brand:** Aviz - The Architect
