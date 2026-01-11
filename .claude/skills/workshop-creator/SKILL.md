@@ -65,11 +65,72 @@ Then edit the file to fill in the collected details. Leave unknown fields with p
 
 If the workshop topic came from `workshop-ideas.md`, update its status to "Planned".
 
-### 5. Offer Poster Creation
+### 5. Workshop Avatar
 
-After creating the workshop, ask if the user wants to generate a promotional poster using the `nano-banana-poster` skill.
+**Every workshop needs an avatar IMAGE** - a CHARACTER SHEET showing the character from multiple angles on black background.
 
-### 6. Offer Presentation Creation
+**Ask the user:**
+> "What avatar for this workshop?
+> - **Use existing** - Copy from another workshop (Boss/Baby Boss/other)
+> - **Create new** - Design a new character"
+
+---
+
+**Option A: Copy from existing workshop**
+
+```bash
+# List available avatars
+ls workshops/*/assets/avatar.jpg
+
+# Copy from another workshop
+cp workshops/2026-01-01-claude-code-amaleh/assets/avatar.jpg \
+   workshops/YYYY-MM-DD-new/assets/avatar.jpg
+```
+
+**Existing avatars:**
+| Workshop | Character | File |
+|----------|-----------|------|
+| `2026-01-01-claude-code-amaleh` | Boss (adult, beard, suit) | `avatar.jpg` |
+| `2026-01-13-claudosh-beginner` | Baby Boss (baby in suit) | `avatar.jpg` |
+
+---
+
+**Option B: Create new character sheet**
+
+1. **Generate using nano-banana-image:**
+   ```bash
+   cd ~/.claude/skills/nano-banana-image/scripts
+   npx ts-node generate_poster.ts "[PROMPT]"
+   ```
+
+2. **Character Sheet Prompt Template:**
+   ```
+   CHARACTER SHEET showing [CHARACTER] from multiple angles.
+
+   LAYOUT: Multiple views arranged together:
+   - Full body front view
+   - Full body side/profile view
+   - Face close-up
+   - Action pose
+
+   CHARACTER: [Describe the character - appearance, outfit, expression, personality]
+   STYLE: [Art style - 3D CGI / illustration / cartoon / etc.]
+   BACKGROUND: [Background color/style]
+   ```
+
+3. **Save:**
+   ```bash
+   cp ~/.claude/skills/nano-banana-image/scripts/poster_0.jpg \
+      workshops/YYYY-MM-DD-name/assets/avatar.jpg
+   ```
+
+**Note:** Everything is flexible - style, background, outfit, character type. Match to the workshop theme.
+
+### 6. Offer Poster Creation
+
+After creating the avatar, offer to generate promotional posters using the `nano-banana-poster` skill with the new avatar.
+
+### 7. Offer Presentation Creation
 
 After discussing the poster, offer to create a presentation script using the `presentation-architect` skill.
 
