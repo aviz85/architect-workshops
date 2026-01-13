@@ -12,6 +12,7 @@ Create new workshops with proper folder structure and documentation.
 | Field | Required | Description |
 |-------|----------|-------------|
 | **Date** | ✅ Required | Workshop date (YYYY-MM-DD format) |
+| **Day** | 🤖 Auto-calculated | Day of week - always calculate from Date, never guess |
 | **Topic** | ⭐ Recommended | Workshop topic/title |
 | **Time** | ✅ Required | Start time (HH:MM) - ALWAYS ask for this! |
 | **Duration** | Optional | Length of workshop |
