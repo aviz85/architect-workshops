@@ -12,6 +12,10 @@ This repository manages workshops by **Aviz - The Architect** - educational tech
 
 This keeps the codebase consistent and maintainable while allowing Hebrew where it matters - the actual content.
 
+## Auto-Commit Rule
+
+**Commit and push after every change.** Don't batch changes - each meaningful edit gets its own commit immediately.
+
 ## Project Overview
 
 - **Brand:** Aviz - The Architect
