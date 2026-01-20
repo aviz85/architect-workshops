@@ -91,6 +91,17 @@
         .step-title {
             font-size: 1.3rem;
             font-weight: 600;
+            flex-grow: 1;
+        }
+
+        .step-time {
+            background: #333;
+            color: var(--text-muted);
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            white-space: nowrap;
         }
 
         .step-content {
@@ -298,6 +309,7 @@
         <header>
             <h1>🚀 קלודוש - מצב חללית</h1>
             <p class="subtitle">מדריך מעשי לבניית Agentic App עם Claude Code</p>
+            <p class="subtitle" style="margin-top: 0.5rem; color: var(--green);">⏱️ משך כולל: שעה וחצי (90 דקות)</p>
         </header>
 
         <!-- STEP 1 -->
@@ -305,6 +317,7 @@
             <div class="step-header">
                 <div class="step-number">1</div>
                 <div class="step-title">יצירת תיקיית הפרויקט</div>
+                <span class="step-time">1 דק׳</span>
             </div>
             <div class="step-content">
                 <p>נתחיל ביצירת תיקייה חדשה על שולחן העבודה בשם <code>my-crm</code>:</p>
@@ -321,6 +334,7 @@
             <div class="step-header">
                 <div class="step-number">2</div>
                 <div class="step-title">יצירת קיצור דרך ל-Claude Code</div>
+                <span class="step-time">3 דק׳</span>
             </div>
             <div class="step-content">
                 <p>ניצור קיצור דרך שיפתח את Claude Code ישירות בתיקייה שלנו:</p>
@@ -352,6 +366,7 @@
             <div class="step-header">
                 <div class="step-number">3</div>
                 <div class="step-title">הגדרת הרשאות מנהל</div>
+                <span class="step-time">2 דק׳</span>
             </div>
             <div class="step-content">
                 <p>נגדיר שהקיצור יפעל עם הרשאות מנהל:</p>
@@ -375,6 +390,7 @@
             <div class="step-header">
                 <div class="step-number">4</div>
                 <div class="step-title">הורדת נתוני ה-CRM</div>
+                <span class="step-time">2 דק׳</span>
             </div>
             <div class="step-content">
                 <p>הורידו את קובץ נתוני הלקוחות לתוך תיקיית <code>my-crm</code>:</p>
@@ -404,6 +420,7 @@
             <div class="step-header">
                 <div class="step-number">5</div>
                 <div class="step-title">הפעלת Claude Code ולמידה על Primitives</div>
+                <span class="step-time">8 דק׳</span>
             </div>
             <div class="step-content">
                 <p>פתחו את Claude Code דרך הקיצור שיצרנו, ובקשו ממנו ללמוד על היכולות:</p>
@@ -431,6 +448,7 @@
             <div class="step-header">
                 <div class="step-number">6</div>
                 <div class="step-title">יצירת CLAUDE.md - קובץ הכללים</div>
+                <span class="step-time">7 דק׳</span>
             </div>
             <div class="step-content">
                 <p>ניצור קובץ כללים שילמד את Claude Code איך לעבוד בפרויקט שלנו:</p>
@@ -480,6 +498,7 @@
             <div class="step-header">
                 <div class="step-number">7</div>
                 <div class="step-title">התקנת Skill: HTML to PDF</div>
+                <span class="step-time">10 דק׳</span>
             </div>
             <div class="step-content">
                 <p>נתקין skill שמאפשר יצירת מסמכי PDF מ-HTML:</p>
@@ -516,6 +535,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
             <div class="step-header">
                 <div class="step-number">8</div>
                 <div class="step-title">יצירת הצעת מחיר ראשונה</div>
+                <span class="step-time">8 דק׳</span>
             </div>
             <div class="step-content">
                 <p>נשתמש ב-skill שהתקנו כדי ליצור הצעת מחיר ללקוח מה-CRM:</p>
@@ -543,6 +563,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
             <div class="step-header">
                 <div class="step-number">9</div>
                 <div class="step-title">יצירת Skill מותאם אישית להצעות מחיר</div>
+                <span class="step-time">12 דק׳</span>
             </div>
             <div class="step-content">
                 <p>נייצר skill משלנו שייצור הצעות מחיר בדיוק כמו שאנחנו רוצים:</p>
@@ -577,6 +598,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
             <div class="step-header">
                 <div class="step-number">10</div>
                 <div class="step-title">הוספת לוגו לחברה</div>
+                <span class="step-time">5 דק׳</span>
             </div>
             <div class="step-content">
                 <p>הורידו את הלוגו והוסיפו אותו לפרויקט:</p>
@@ -610,6 +632,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
             <div class="step-header">
                 <div class="step-number">11</div>
                 <div class="step-title">יצירת פרויקט המוצרים</div>
+                <span class="step-time">5 דק׳</span>
             </div>
             <div class="step-content">
                 <p>ניצור פרויקט חדש לניהול המוצרים שלנו:</p>
@@ -632,6 +655,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
             <div class="step-header">
                 <div class="step-number">12</div>
                 <div class="step-title">הגדרת פרויקט המוצרים</div>
+                <span class="step-time">5 דק׳</span>
             </div>
             <div class="step-content">
                 <p>פתחו Claude Code בתיקיית my-products והגדירו את הפרויקט:</p>
@@ -661,6 +685,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
             <div class="step-header">
                 <div class="step-number">13</div>
                 <div class="step-title">הסוכן שמחבר הכל - המלצות חכמות</div>
+                <span class="step-time">18 דק׳</span>
             </div>
             <div class="step-content">
                 <p><strong>זה הרגע הקסום!</strong> ניצור agent שמסתכל על ה-CRM ועל המוצרים ומייצר המלצות מותאמות אישית.</p>
@@ -710,6 +735,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
             <div class="step-header">
                 <div class="step-number">🎁</div>
                 <div class="step-title">בונוס: שליחת הודעות מותאמות</div>
+                <span class="step-time">4 דק׳</span>
             </div>
             <div class="step-content">
                 <p>אם יש לכם skill לשליחת וואטסאפ, אפשר לחבר הכל:</p>
