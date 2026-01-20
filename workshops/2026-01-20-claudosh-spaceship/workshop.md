@@ -123,7 +123,7 @@
 | File | Description |
 |------|-------------|
 | `presentation-plan.md` | Presentation blueprint (Hebrew, RTL) |
-| `assets/poster.png` | Workshop promotional poster |
+| `assets/poster_v2_1.jpg` | **WINNER** - Info poster with flying character, dramatic effects. Great pain/value messaging! |
 | `assets/slides.pdf` | Final presentation slides |
 
 ---
