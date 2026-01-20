@@ -61,6 +61,22 @@ cp poster_0.jpg /Users/aviz/architect-workshops/workshops/YYYY-MM-DD-name/assets
 
 **BORING = FORBIDDEN.** Every poster must be CINEMATIC, BLOCKBUSTER quality.
 
+**Aviz's Style Preferences (ALWAYS apply):**
+- **Expression:** EXTREME, POWERFUL - roaring, triumphant, fierce eyes, mouth open with intensity
+- **Action:** EXPLOSIVE - conducting screens like orchestra, commanding, conquering
+- **Effects:** Maximum lens flares, particles, lightning, green (#22C55E) energy explosions
+- **Quality:** Marvel/Avengers blockbuster level, professional, mind-blowing
+- **Aspect Ratio:** 3:2 for marketing posters (ALWAYS, unless user specifies otherwise)
+- **Vibe:** Like sitting in a spaceship command center orchestrating everything
+
+**FAVORITE STYLE - "Breaking Through" (Poster 5 style):**
+- **Cinematic motion:** Character BURSTING through, not static
+- **Coming at viewer:** Everything explodes TOWARD the viewer - screens, shards, energy
+- **Shattered elements:** Broken screens, glass shards, particles flying outward
+- **Fourth wall break:** Feels like character is breaking out of the poster
+- **Dynamic energy:** Movement, chaos, controlled explosion
+- This style creates the most IMPACT - use when maximum wow is needed
+
 **Expression:** INTENSE emotion (shock, excitement, triumph - never neutral)
 **Action:** EXPLOSIVE (bursting, surfing, riding rockets, conducting screens)
 **Effects:** Lens flares, particles, lightning, green energy glows

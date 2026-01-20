@@ -11,6 +11,7 @@
 |-------|-------|
 | **Title** | [Workshop Title Here] |
 | **Date** | [YYYY-MM-DD] |
+| **Day** | [calculated from date] |
 | **Time** | [HH:MM] |
 | **Duration** | [e.g., 2 hours] |
 | **Platform** | Zoom |

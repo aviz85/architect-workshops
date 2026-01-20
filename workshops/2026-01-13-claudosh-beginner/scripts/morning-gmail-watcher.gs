@@ -62,6 +62,12 @@ function checkMorningEmails() {
   for (const thread of threads) {
     const messages = thread.getMessages();
     for (const message of messages) {
+      // Skip if not from Morning sender (prevents duplicate processing in threads)
+      const sender = message.getFrom();
+      if (!sender.includes(MORNING_SENDER)) {
+        continue;
+      }
+
       const body = message.getPlainBody();
       const subject = message.getSubject();
 

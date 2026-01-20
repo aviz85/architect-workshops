@@ -1,7 +1,8 @@
 'use client'
 
-// Zoom link for the workshop
-const ZOOM_LINK = 'https://us06web.zoom.us/j/81637723179?pwd=Rdhjj55bbTnmN9vtP2wDxNIuJp6820.1'
+// Recording link
+const RECORDING_LINK = 'https://us06web.zoom.us/rec/share/B3XCe_SyNHkO-CI7ta9lgoWsMYYfd3FmN7Frvn6Y_mQF3-7tBcQFz_8wkTT7g23z.OTnw5CG0YsDE99_w?startTime=1768331220000'
+const RECORDING_PASSCODE = '1.6b@E3p'
 
 export default function WatchPage() {
   return (
@@ -20,16 +21,16 @@ export default function WatchPage() {
           marginBottom: '24px'
         }}>
           <p style={{ color: '#22C55E', fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
-            🎬 הסדנה מתחילה!
+            🎬 ההקלטה מוכנה!
           </p>
           <p style={{ color: '#9CA3AF', fontSize: '14px' }}>
-            יום שלישי, 13.1.26 בשעה 21:00
+            צפייה נעימה
           </p>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
           <a
-            href={ZOOM_LINK}
+            href={RECORDING_LINK}
             target="_blank"
             rel="noopener noreferrer"
             className="payment-btn"
@@ -38,21 +39,38 @@ export default function WatchPage() {
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '12px',
-              fontSize: '20px'
+              gap: '12px'
             }}
           >
-            🎥 כניסה לזום
+            🎥 צפייה בהקלטה (Zoom)
           </a>
+
+          <div style={{
+            background: 'rgba(59, 130, 246, 0.1)',
+            border: '1px solid rgba(59, 130, 246, 0.3)',
+            borderRadius: '8px',
+            padding: '12px',
+            textAlign: 'center'
+          }}>
+            <p style={{ color: '#9CA3AF', fontSize: '14px', marginBottom: '4px' }}>
+              סיסמה להקלטה:
+            </p>
+            <p style={{
+              color: '#3B82F6',
+              fontSize: '20px',
+              fontWeight: 'bold',
+              fontFamily: 'monospace',
+              letterSpacing: '2px'
+            }}>
+              {RECORDING_PASSCODE}
+            </p>
+          </div>
         </div>
 
         <div className="info-box" style={{ marginTop: '32px', textAlign: 'center' }}>
-          <h3>📅 פרטי הסדנה</h3>
+          <h3>📅 הסדנה התקיימה</h3>
           <p style={{ color: '#9CA3AF', marginTop: '12px' }}>
-            יום שלישי, 13.1.26 | 21:00 | 90 דקות
-          </p>
-          <p style={{ color: '#9CA3AF', marginTop: '8px', fontSize: '14px' }}>
-            למתחילים מוחלטים - אפס רקע טכני נדרש!
+            יום שני, 13.1.26
           </p>
         </div>
 

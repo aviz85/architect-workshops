@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "39b62bf5605fad6d",
+        "id": "b7fbb389a878c937",
         "type": "tabs",
         "children": [
           {
-            "id": "9495e3179ef81a23",
+            "id": "162cae3a08e02ccc",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "output_577a1e89-394f-4b2f-8530-99b1d7a4bae2_with_images.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "output_577a1e89-394f-4b2f-8530-99b1d7a4bae2_with_images"
+              "title": "New tab"
             }
           }
         ]
@@ -183,10 +179,10 @@
       "bases:Create new base": false
     }
   },
-  "active": "9495e3179ef81a23",
+  "active": "162cae3a08e02ccc",
   "lastOpenFiles": [
-    "workshop-ideas.md",
     "output_577a1e89-394f-4b2f-8530-99b1d7a4bae2_with_images.md",
+    "workshop-ideas.md",
     "workshops/2026-01-12-claude-code-business/assets/poster.jpg",
     "workshops/2026-01-12-claude-code-business/workshop.md",
     "SKILL.md",

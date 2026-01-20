@@ -1,0 +1,6 @@
+{
+  "env": {
+    "NEXT_PUBLIC_SUPABASE_URL": "https://lrhdriqwteyeelvxipet.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_6YMv8AL3R0UJd5PcM8KotA__6WjqHMX"
+  }
+}

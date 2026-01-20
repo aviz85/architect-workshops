@@ -20,6 +20,13 @@ const WORKSHOPS: Record<string, {
   watchPageUrl: string
   zoomLink: string
 }> = {
+  'מצב חללית': {
+    dbName: 'claudosh-spaceship-2026-01-20',
+    title: 'קלודוש - מצב חללית',
+    date: 'יום שלישי 20.1.26 בשעה 21:00',
+    watchPageUrl: 'https://chat.whatsapp.com/EjJQbYq0kaIDrFKyOLPcpK',
+    zoomLink: 'https://us06web.zoom.us/j/84183944103?pwd=TJGnkLd1lue0JbBVFPgz4va0PXnHZv.1',
+  },
   'מתחילים בקטן': {
     dbName: 'claudosh-beginner-2026-01-13',
     title: 'קלודוש הסוכן - מתחילים בקטן!',
@@ -147,7 +154,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Find workshop by keyword
-    let workshop = WORKSHOPS['מתחילים בקטן'] // Default
+    let workshop = WORKSHOPS['מצב חללית'] // Default to current workshop
     if (workshopKeyword) {
       for (const [key, value] of Object.entries(WORKSHOPS)) {
         if (workshopKeyword.includes(key)) {

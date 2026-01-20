@@ -40,15 +40,52 @@ function setup() {
 }
 
 /**
+ * Get set of already processed email+workshop combinations
+ */
+function getProcessedSet() {
+  var props = PropertiesService.getScriptProperties();
+  var data = props.getProperty('processedEmails');
+  return data ? JSON.parse(data) : {};
+}
+
+/**
+ * Mark email+workshop as processed
+ */
+function markAsProcessed(email, workshop) {
+  var key = email + '|' + workshop;
+  var processed = getProcessedSet();
+  processed[key] = Date.now();
+
+  // Clean old entries (older than 7 days)
+  var weekAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+  for (var k in processed) {
+    if (processed[k] < weekAgo) {
+      delete processed[k];
+    }
+  }
+
+  PropertiesService.getScriptProperties().setProperty('processedEmails', JSON.stringify(processed));
+}
+
+/**
+ * Check if email+workshop was already processed
+ */
+function wasAlreadyProcessed(email, workshop) {
+  var key = email + '|' + workshop;
+  var processed = getProcessedSet();
+  return processed.hasOwnProperty(key);
+}
+
+/**
  * Main function - checks for unprocessed Morning emails
  */
 function checkMorningEmails() {
-  const query = 'from:' + MORNING_SENDER + ' -label:' + PROCESSED_LABEL + ' newer_than:1d';
-  const threads = GmailApp.search(query, 0, 10);
+  var query = 'from:' + MORNING_SENDER + ' newer_than:1d';
+  var threads = GmailApp.search(query, 0, 10);
 
-  Logger.log('Found ' + threads.length + ' unprocessed Morning emails');
+  Logger.log('Found ' + threads.length + ' Morning emails to check');
 
-  const processedLabel = GmailApp.getUserLabelByName(PROCESSED_LABEL);
+  var processedLabel = GmailApp.getUserLabelByName(PROCESSED_LABEL);
 
   for (var i = 0; i < threads.length; i++) {
     var thread = threads[i];
@@ -63,20 +100,29 @@ function checkMorningEmails() {
         var parsed = parsePaymentEmail(body);
 
         if (parsed) {
-          Logger.log('Processing: ' + parsed.name + ' (' + parsed.email + ')');
-
           // Extract workshop keyword from email
           var workshopMatch = body.match(/סדנת[״"]([^״"]+)[״"]/);
           var workshopKeyword = workshopMatch ? workshopMatch[1] : '';
 
+          // Check if already processed (prevents duplicates!)
+          if (wasAlreadyProcessed(parsed.email, workshopKeyword)) {
+            Logger.log('SKIP (already processed): ' + parsed.name + ' (' + parsed.email + ')');
+            continue;
+          }
+
+          Logger.log('Processing: ' + parsed.name + ' (' + parsed.email + ') for ' + workshopKeyword);
+
           // Call webhook
           var result = callWebhook(parsed.name, parsed.email, parsed.phone, workshopKeyword);
           Logger.log('Webhook result: ' + JSON.stringify(result));
+
+          // Mark as processed IMMEDIATELY after successful webhook
+          markAsProcessed(parsed.email, workshopKeyword);
         }
       }
     }
 
-    // Mark thread as processed
+    // Also add label (backup)
     thread.addLabel(processedLabel);
   }
 }
