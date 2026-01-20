@@ -125,12 +125,32 @@
 | `presentation-plan.md` | Presentation blueprint (Hebrew, RTL) |
 | `assets/poster_v2_1.jpg` | **WINNER** - Info poster with flying character, dramatic effects. Great pain/value messaging! |
 | `assets/slides.pdf` | Final presentation slides |
+| `assets/zoom_chat.txt` | Zoom chat log with testimonials |
+| `assets/poster_discussion_v4.jpg` | Discussion group announcement poster |
 
 ---
 
 ## Recommendations & Testimonials
 
-> Add participant feedback after the workshop
+**From Zoom Chat (20.01.2026):**
+
+> "וואוו, אני בהלם שאשכרה יצר לי הצעת מחיר ליוסי כהן ב PDF!!" - moshfit
+
+> "אביץ אתה נהדר ומדהים ומקדים את זמנך. תודה על פקיחת העינים" - Elad Refoua
+
+> "mind-blowing workshop!! Thank you so much!!" - Einat
+
+> "היה מצוין, כרגיל!" - Dan Shalev
+
+> "סדנה נהדרת. תענוג" - MonitorCl
+
+> "תודה רבה - היה מצוין" - ew
+
+**Questions raised (for future content):**
+- AWS migration guide requested (Elad)
+- How to teach Claude about niche platforms (זוהרת)
+- Cursor vs Claude Code comparison (Uri BD)
+- autoclaude research (Eyal Meir)
 
 ---
 
@@ -193,7 +213,8 @@
 - [ ] Transcript added
 - [ ] Summary written
 - [ ] Testimonials collected
-- [ ] Follow-up sent
+- [x] Follow-up sent (thank you + recording to discussion group)
+- [x] Discussion group opened: https://chat.whatsapp.com/DdTgzdh2jVgBOOKmPgWyEd
 
 ---
 
