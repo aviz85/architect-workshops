@@ -10,7 +10,7 @@
 | **Date** | 2026-01-20 |
 | **Day** | יום שלישי (Tuesday) |
 | **Time** | 21:00 |
-| **Duration** | 1.5 hours (until 22:30) |
+| **Duration** | ~2 hours (until 23:00) |
 | **Price** | ₪90 |
 | **Platform** | Zoom |
 | **Zoom Link** | https://us06web.zoom.us/j/84183944103?pwd=TJGnkLd1lue0JbBVFPgz4va0PXnHZv.1 |
