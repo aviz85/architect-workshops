@@ -167,15 +167,27 @@
 **Marketing Notes:** [What worked, reach, engagement]
 
 ### Workshop Delivery
-- [ ] Workshop delivered
+- [x] Workshop delivered
 
 **Attendance:**
 | Metric | Count |
 |--------|-------|
-| WhatsApp Group Size | |
-| First 15 min | |
-| Peak | |
-| Last 15 min | |
+| WhatsApp Group Size | ~50 |
+| Peak | 40-60 |
+
+**Hot Impressions (20.01.2026):**
+
+✅ **What Worked:**
+- Live demos - POC / live coding
+- The content itself - informative and valuable
+
+⚠️ **To Improve:**
+- Wasn't fully fluent in delivery
+- Pace leadership wasn't clear enough
+- Last-minute preparation - not as polished as needed
+- One person left disappointed early (thought I wasn't experienced enough in workshop delivery)
+
+💬 **Overall:** Mixed reactions - some great feedback alongside the critique. Good learning experience!
 
 ### Post-Workshop
 - [ ] Transcript added
