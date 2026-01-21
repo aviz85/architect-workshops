@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code - דף עזר | Cheatsheet</title>
+    <style>
+        :root {
+            --green: #22C55E;
+            --green-dark: #16A34A;
+            --bg: #0f0f0f;
+            --card: #1a1a1a;
+            --border: #333;
+            --text: #e5e5e5;
+            --text-muted: #888;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--card) 0%, #252525 100%);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--green);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--green);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section:hover {
+            border-color: var(--green);
+        }
+
+        h2 {
+            color: var(--green);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.1rem;
+            margin-top: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h3:first-child {
+            margin-top: 0;
+        }
+
+        p {
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .concept {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .concept-title {
+            color: var(--green);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .concept-desc {
+            color: var(--text);
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 0.8rem;
+            text-align: right;
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--green);
+            color: #000;
+            font-weight: 600;
+        }
+
+        td {
+            background: #0a0a0a;
+        }
+
+        code {
+            background: #333;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9em;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .code-block {
+            background: #0a0a0a;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .code-block code {
+            background: none;
+            padding: 0;
+        }
+
+        .note {
+            background: #2a2a1a;
+            border-right: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--green);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 Claude Code - דף עזר</h1>
+            <p class="subtitle">Cheatsheet</p>
+            <a href="index.html" class="back-link">← חזרה למדריך</a>
+        </header>
+
+        <!-- Basic Concepts -->
+        <div class="section">
+            <h2>מושגים בסיסיים</h2>
+
+            <div class="concept">
+                <div class="concept-title">Project (פרויקט)</div>
+                <p class="concept-desc">תיקייה שמכילה מסמכים והגדרות עבור הסוכן Claude Code.</p>
+            </div>
+
+            <div class="concept">
+                <div class="concept-title">Knowledge Base (בסיס ידע)</div>
+                <p class="concept-desc">מסמכים שנמצאים בתוך התיקייה ומנוהלים על ידי Claude Code.</p>
+            </div>
+
+            <div class="concept">
+                <div class="concept-title">Skills</div>
+                <p class="concept-desc">פרומפטים עבור Claude Code שנטענים באופן דינאמי לפי ההקשר. עוזרים לנו לנהל את חלון ההקשר בצורה אופטימלית.</p>
+            </div>
+
+            <div class="concept">
+                <div class="concept-title">Slash Commands</div>
+                <p class="concept-desc">כאשר אנו רוצים לכפות על קלוד פרומפט באופן ידני - גם כשאין הקשר רלוונטי.</p>
+            </div>
+
+            <div class="concept">
+                <div class="concept-title">Agents / Subagents</div>
+                <p class="concept-desc">הפעלה של חלון קונטקסט נפרד שמקבל פרומפט ופועל במקביל. עד שהוא משלים את המשימה - מחזיר את הפלט לשיחה הראשית.</p>
+            </div>
+
+            <div class="concept">
+                <div class="concept-title">Hooks</div>
+                <p class="concept-desc">עיתויים (אירועים) במהלך העבודה של Claude Code שניתן להצמיד אליהם הפעלה של סקריפטים. יכולים לבצע דברים או להתנות את המשך העבודה בבדיקה מסוימת.</p>
+                <div class="note">ישנם שני hooks שמאפשרים ביצוע של פרומפט, הקשורים לגמר המענה של קלוד.</div>
+            </div>
+
+            <div class="concept">
+                <div class="concept-title">Claude Code Guide</div>
+                <p class="concept-desc">סוכן שמגיע מובנה, שמסוגל לתת מענה מעודכן לגבי היכולות של Claude Code. נדרש כאשר רוצים להשתמש בפיצ'רים של Claude Code בתוך השיחה.</p>
+            </div>
+        </div>
+
+        <!-- Important Commands -->
+        <div class="section">
+            <h2>פקודות חשובות</h2>
+
+            <table>
+                <tr>
+                    <th>פקודה</th>
+                    <th>תיאור</th>
+                </tr>
+                <tr>
+                    <td><code>/skills</code></td>
+                    <td>מציג את רשימת הסקילז שטעונים כרגע</td>
+                </tr>
+                <tr>
+                    <td><code>/resume</code></td>
+                    <td>חזרה להקשר שיחה קיימת</td>
+                </tr>
+                <tr>
+                    <td><code>/exit</code></td>
+                    <td>יציאה - חשוב כדי לאפס את המערכת</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Special Command -->
+        <div class="section">
+            <h2>פקודת הפעלה מיוחדת</h2>
+
+            <div class="code-block">
+                <code>claude --dangerously-skip-permissions</code>
+            </div>
+
+            <p>מאפשרת לקלוד לרוץ ללא מגבלות של בקשת רשות.</p>
+        </div>
+
+        <!-- add-skill Commands -->
+        <div class="section">
+            <h2>התקנת Skills עם add-skill</h2>
+
+            <table>
+                <tr>
+                    <th>פקודה</th>
+                    <th>תיאור</th>
+                </tr>
+                <tr>
+                    <td><code>npx add-skill &lt;repo&gt; --list</code></td>
+                    <td>הצגת כל ה-skills הזמינים</td>
+                </tr>
+                <tr>
+                    <td><code>npx add-skill &lt;repo&gt; -s &lt;skill&gt;</code></td>
+                    <td>התקנת skill (פרויקט)</td>
+                </tr>
+                <tr>
+                    <td><code>npx add-skill &lt;repo&gt; -s &lt;skill&gt; -g</code></td>
+                    <td>התקנת skill (גלובלי)</td>
+                </tr>
+                <tr>
+                    <td><code>npx add-skill &lt;repo&gt; -y</code></td>
+                    <td>דילוג על אישורים</td>
+                </tr>
+            </table>
+
+            <h3>דוגמה מלאה:</h3>
+            <div class="code-block">
+                <code>npx add-skill aviz85/claude-skills-library -s html-to-pdf -y</code>
+            </div>
+        </div>
+
+        <!-- skills.sh Directory -->
+        <div class="section">
+            <h2>🌐 skills.sh - ספריית Skills ציבורית</h2>
+
+            <p>ספריה ציבורית עם אלפי skills מוכנים לשימוש: <a href="https://skills.sh" target="_blank" style="color: var(--green)">skills.sh</a></p>
+
+            <table>
+                <tr>
+                    <th>פקודה</th>
+                    <th>תיאור</th>
+                </tr>
+                <tr>
+                    <td><code>npx skills add &lt;owner/repo&gt;</code></td>
+                    <td>התקנת skill מ-skills.sh</td>
+                </tr>
+            </table>
+
+            <h3>דוגמאות פופולריות:</h3>
+            <div class="code-block">
+                <code>npx skills add anthropics/claude-code-best-practices</code>
+            </div>
+            <div class="code-block">
+                <code>npx skills add vercel-labs/ai-sdk-preview-rag</code>
+            </div>
+
+            <div class="note">
+                שימו לב: הפקודה היא <code>npx skills add</code> (לא add-skill) כשמתקינים מ-skills.sh
+            </div>
+        </div>
+
+        <footer>
+            <p>🚀 קלודוש - מצב חללית | 20.01.2026</p>
+            <p><a href="index.html">← חזרה למדריך</a></p>
+        </footer>
+    </div>
+</body>
+</html>

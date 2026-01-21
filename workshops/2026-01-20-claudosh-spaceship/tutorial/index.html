@@ -310,6 +310,7 @@
             <h1>🚀 קלודוש - מצב חללית</h1>
             <p class="subtitle">מדריך מעשי לבניית Agentic App עם Claude Code</p>
             <p class="subtitle" style="margin-top: 0.5rem; color: var(--green);">⏱️ משך כולל: שעה וחצי (90 דקות)</p>
+            <a href="cheatsheet.html" style="display: inline-block; margin-top: 1rem; background: var(--green); color: #000; padding: 0.5rem 1.2rem; border-radius: 8px; text-decoration: none; font-weight: 600;">📋 דף עזר | Cheatsheet</a>
         </header>
 
         <!-- STEP 1 -->
@@ -344,14 +345,27 @@
                     <li>בשדה Location הכניסו:</li>
                 </ol>
 
+                <p><strong>אופציה 1: PowerShell (מומלץ)</strong></p>
                 <div class="code-block">
                     <button class="copy-btn" onclick="copyCode(this)">העתק</button>
                     <pre>powershell.exe -NoExit -Command "cd '$env:USERPROFILE\Desktop\my-crm'; claude --dangerously-skip-permissions"</pre>
                 </div>
 
+                <p><strong>אופציה 2: CMD</strong></p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+                    <pre>cmd.exe /k "cd /d %USERPROFILE%\Desktop\my-crm && claude --dangerously-skip-permissions"</pre>
+                </div>
+
+                <p><strong>אופציה 3: נתיב ידני</strong> (אם האופציות למעלה לא עובדות)</p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+                    <pre>cmd.exe /k "cd /d C:\Users\YOUR_USERNAME\Desktop\my-crm && claude --dangerously-skip-permissions"</pre>
+                </div>
+
                 <div class="tip">
                     <div class="tip-label">💡 טיפ</div>
-                    <p>משתנה הסביבה <code>$env:USERPROFILE</code> מצביע אוטומטית לתיקיית המשתמש שלכם!</p>
+                    <p>באופציה 3, החליפו את <code>YOUR_USERNAME</code> בשם המשתמש שלכם (למשל: <code>C:\Users\David\Desktop\my-crm</code>)</p>
                 </div>
 
                 <ol start="4">
@@ -428,15 +442,17 @@
                 <div class="prompt-block">
                     <span class="prompt-label">PROMPT</span>
                     <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-                    <pre>אני רוצה לבנות "Agentic App" - אפליקציה שמופעלת על ידי Claude Code.
+                    <pre>I want to build an "Agentic App" - an application powered by Claude Code.
 
-לפני שנתחיל, אני צריך שתלמד על הפרימיטיבים של Claude Code:
-1. Skills - מה זה ואיך יוצרים
-2. Commands - פקודות מותאמות אישית
-3. Agents - סוכנים שרצים ברקע
-4. CLAUDE.md - קובץ הכללים
+Notice the xlsx file in the folder - this is our CRM data. We'll build the app around it.
 
-השתמש ב-claude-code-guide agent כדי ללמוד על כל אחד מהם ותן לי סיכום קצר.</pre>
+Before we start, I need you to learn about Claude Code primitives:
+1. Skills - what they are and how to create them
+2. Commands - custom commands
+3. Agents - background running agents
+4. CLAUDE.md - the rules file
+
+Use the claude-code-guide agent to learn about each one and give me a short summary.</pre>
                 </div>
 
                 <p>Claude Code ישתמש ב-agent פנימי כדי ללמוד על היכולות ויסכם לכם.</p>
@@ -456,30 +472,30 @@
                 <div class="prompt-block">
                     <span class="prompt-label">PROMPT</span>
                     <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-                    <pre>צור קובץ CLAUDE.md לפרויקט שלנו עם הכללים הבאים:
+                    <pre>Create a CLAUDE.md file for our project with the following rules:
 
 # My CRM - Business Management System
 
 ## Project Overview
-מערכת ניהול לקוחות לעסק שמוכר קורסים וסדנאות בתחום ה-AI.
+Customer management system for a business selling AI courses and workshops.
 
 ## Data Files
-- `mock_crm_data.xlsx` - נתוני לקוחות ורכישות
+- `mock_crm_data.xlsx` - customer and purchase data
 
 ## Rules
-1. כל המסמכים יהיו בעברית
-2. עיצוב מקצועי ונקי
-3. שמירת קבצים בתיקיית `documents/`
+1. All documents should be in Hebrew
+2. Professional and clean design
+3. Save files in the `documents/` folder
 
 ## Claude Code Learning Rule
-**חשוב מאוד:** בכל פעם שמדברים על אחד מהנושאים הבאים של Claude Code:
+**Very important:** Every time we discuss any of the following Claude Code topics:
 - Skills
 - Commands
 - Agents
 - CLAUDE.md
 - Hooks
 
-עליך להשתמש ב-`claude-code-guide` agent כדי לקבל מידע מדויק ועדכני לפני שאתה עונה או מבצע.</pre>
+You must use the `claude-code-guide` agent to get accurate and up-to-date information before you answer or execute.</pre>
                 </div>
 
                 <div class="tip">
@@ -506,15 +522,15 @@
                 <div class="prompt-block">
                     <span class="prompt-label">PROMPT</span>
                     <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-                    <pre>התקן את ה-skill של html-to-pdf מספריית aviz85.
+                    <pre>Install the html-to-pdf skill from the aviz85 library.
 
-הריצו את הפקודה הבאה בטרמינל:
+Run the following command in the terminal:
 npx add-skill aviz85/claude-skills-library -s html-to-pdf -y
 
-אחרי ההתקנה, התקן את ה-dependencies:
+After installation, install the dependencies:
 cd .claude/skills/html-to-pdf && npm install
 
-ואז תסביר לי איך להשתמש ב-skill הזה.</pre>
+Then explain how to use this skill.</pre>
                 </div>
 
                 <p>פקודות נוספות שימושיות:</p>
@@ -527,6 +543,23 @@ npx add-skill aviz85/claude-skills-library --list
 # להתקין skill גלובלי (לכל הפרויקטים)
 npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
                 </div>
+
+                <div class="tip">
+                    <div class="tip-label">🌐 skills.sh - ספריית Skills ציבורית</div>
+                    <p>אפשר להתקין skills גם מ-<a href="https://skills.sh" target="_blank" style="color: var(--green)">skills.sh</a> - ספריה ציבורית עם אלפי skills מוכנים לשימוש:</p>
+                </div>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+                    <pre># התקנה מ-skills.sh (פורמט: owner/repo)
+npx skills add vercel-labs/ai-sdk-preview-rag
+
+# דוגמאות פופולריות:
+npx skills add anthropics/claude-code-best-practices
+npx skills add vercel/ai-chatbot</pre>
+                </div>
+
+                <p style="font-size: 0.9rem; color: var(--text-muted);">בקרו ב-<a href="https://skills.sh" target="_blank" style="color: var(--green)">skills.sh</a> לראות את כל ה-skills הזמינים (22K+ התקנות לחלקם!)</p>
             </div>
         </div>
 
@@ -543,17 +576,17 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
                 <div class="prompt-block">
                     <span class="prompt-label">PROMPT</span>
                     <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-                    <pre>קרא את קובץ ה-CRM ומצא לקוח שמתאים לקורס AI למתחילים.
+                    <pre>Read the CRM file and find a customer suitable for the AI Beginners course.
 
-צור לו הצעת מחיר מקצועית בעברית שכוללת:
-- פרטי הלקוח
-- תיאור המוצר
-- מחיר והנחה אפשרית
-- תנאי תשלום
-- תוקף ההצעה
+Create a professional quotation in Hebrew that includes:
+- Customer details
+- Product description
+- Price and possible discount
+- Payment terms
+- Quotation validity
 
-השתמש ב-html-to-pdf skill כדי ליצור PDF מעוצב.
-שמור את הקובץ בתיקיית documents/</pre>
+Use the html-to-pdf skill to create a styled PDF.
+Save the file in the documents/ folder</pre>
                 </div>
             </div>
         </div>
@@ -571,24 +604,24 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
                 <div class="prompt-block">
                     <span class="prompt-label">PROMPT</span>
                     <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-                    <pre>צור skill חדש בשם "create-quotation" שייצור הצעות מחיר.
+                    <pre>Create a new skill called "create-quotation" that generates quotations.
 
-לפני שאתה יוצר, השתמש ב-claude-code-guide agent כדי ללמוד איך ליצור skill נכון.
+Before you create it, use the claude-code-guide agent to learn how to create a skill correctly.
 
-הSkill צריך:
-1. לקבל שם לקוח ומוצר
-2. לקרוא את פרטי הלקוח מה-CRM
-3. ליצור HTML מעוצב עם:
-   - כותרת "הצעת מחיר"
-   - תאריך ומספר הצעה
-   - פרטי לקוח
-   - טבלת מוצרים ומחירים
-   - סה"כ לתשלום
-   - תנאים והגבלות
-4. להשתמש ב-html-to-pdf skill ליצירת ה-PDF
-5. לשמור בתיקיית documents/quotations/
+The skill should:
+1. Accept customer name and product
+2. Read customer details from the CRM
+3. Create styled HTML with:
+   - "Quotation" header
+   - Date and quotation number
+   - Customer details
+   - Products and prices table
+   - Total amount
+   - Terms and conditions
+4. Use the html-to-pdf skill to create the PDF
+5. Save in documents/quotations/ folder
 
-העיצוב: צבעים ירוקים (#22C55E), פונט נקי, RTL</pre>
+Design: green colors (#22C55E), clean font, RTL</pre>
                 </div>
             </div>
         </div>
@@ -612,13 +645,13 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
                 <div class="prompt-block">
                     <span class="prompt-label">PROMPT</span>
                     <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-                    <pre>עדכן את ה-skill של create-quotation כך שישתמש בלוגו:
+                    <pre>Update the create-quotation skill to use the logo:
 
-1. הלוגו נמצא ב: assets/company_logo.png
-2. הוסף את הלוגו בראש כל הצעת מחיר
-3. עדכן את ה-CLAUDE.md עם נתיב הלוגו
+1. The logo is at: assets/company_logo.png
+2. Add the logo at the top of every quotation
+3. Update CLAUDE.md with the logo path
 
-בדוק שהכל עובד על ידי יצירת הצעת מחיר חדשה.</pre>
+Test that everything works by creating a new quotation.</pre>
                 </div>
             </div>
         </div>
@@ -663,14 +696,14 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
                 <div class="prompt-block">
                     <span class="prompt-label">PROMPT</span>
                     <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-                    <pre>זהו פרויקט לניהול קטלוג המוצרים שלנו.
+                    <pre>This is a project for managing our product catalog.
 
-צור CLAUDE.md עם:
-- תיאור הפרויקט (קטלוג קורסים וסדנאות AI)
-- מבנה התיקיות (products/ עם תת-תיקייה לכל מוצר)
-- כל מוצר מכיל product.md ו-ad.jpg
+Create CLAUDE.md with:
+- Project description (AI courses and workshops catalog)
+- Folder structure (products/ with a subfolder for each product)
+- Each product contains product.md and ad.jpg
 
-סרוק את המוצרים הקיימים ותן לי סיכום של מה יש לנו.</pre>
+Scan the existing products and give me a summary of what we have.</pre>
                 </div>
             </div>
         </div>
@@ -695,22 +728,22 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
                 <div class="prompt-block">
                     <span class="prompt-label">PROMPT</span>
                     <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-                    <pre>צור skill חדש בשם "generate-recommendations" שעושה את הדבר הבא:
+                    <pre>Create a new skill called "generate-recommendations" that does the following:
 
-1. קורא את נתוני הלקוחות מ-mock_crm_data.xlsx
-2. קורא את קטלוג המוצרים מתיקיית my-products (השתמש ב-/add-dir להוסיף אותה)
-3. לכל לקוח, מנתח:
-   - מה הוא כבר קנה (היסטוריית רכישות)
-   - מה תחומי העניין שלו (פרופיל מורחב)
-   - מה הסטטוס שלו (VIP? ליד חדש?)
-4. מייצר המלצות מותאמות אישית:
-   - איזה מוצר להציע לו (upsale)
-   - הודעת וואטסאפ מותאמת בעברית
-   - סיבה להמלצה
+1. Read customer data from mock_crm_data.xlsx
+2. Read the product catalog from the my-products folder (use /add-dir to add it)
+3. For each customer, analyze:
+   - What they already bought (purchase history)
+   - Their interests (extended profile)
+   - Their status (VIP? New lead?)
+4. Generate personalized recommendations:
+   - Which product to offer (upsale)
+   - Personalized WhatsApp message in Hebrew
+   - Reason for recommendation
 
-לפני שאתה יוצר את ה-skill, השתמש ב-claude-code-guide agent כדי ללמוד איך ליצור skill שמשתמש ב-/add-dir לעבודה חוצת פרויקטים.
+Before creating the skill, use the claude-code-guide agent to learn how to create a skill that uses /add-dir for cross-project work.
 
-הפלט: קובץ recommendations.md עם טבלה של כל הלקוחות וההמלצות שלהם.</pre>
+Output: recommendations.md file with a table of all customers and their recommendations.</pre>
                 </div>
 
                 <div class="tip">
@@ -725,7 +758,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
                     <button class="copy-btn" onclick="copyCode(this)">העתק</button>
                     <pre>/generate-recommendations
 
-הרץ את הסוכן וצור המלצות לכל הלקוחות.</pre>
+Run the agent and generate recommendations for all customers.</pre>
                 </div>
             </div>
         </div>
@@ -743,10 +776,10 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g</pre>
                 <div class="prompt-block">
                     <span class="prompt-label">PROMPT</span>
                     <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-                    <pre>קרא את קובץ ההמלצות שיצרנו.
-בחר 3 לקוחות VIP והצג לי את ההודעות המותאמות שלהם.
+                    <pre>Read the recommendations file we created.
+Pick 3 VIP customers and show me their personalized messages.
 
-(רק להצגה - בלי לשלוח באמת!)</pre>
+(Just for display - don't actually send!)</pre>
                 </div>
             </div>
         </div>
