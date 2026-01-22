@@ -33,7 +33,9 @@ Save both files to the current directory.
 
 ---
 
-## 2. Windows Shortcut Setup (Alternative)
+## 2. Windows Shortcut Setup (Manual Fallback)
+
+> **Note:** This step is optional if you completed step 1. Use only if the registry method doesn't work.
 
 **Option 1: PowerShell (Recommended)**
 ```
