@@ -112,7 +112,8 @@
 
 | Description | URL |
 |-------------|-----|
-| [Resource name] | [URL] |
+| **Tutorial Guide** | https://aviz85.github.io/claudosh-spaceship-tutorial/ |
+| Tutorial Repo | https://github.com/aviz85/claudosh-spaceship-tutorial |
 
 ---
 
