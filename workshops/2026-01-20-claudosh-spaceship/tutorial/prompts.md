@@ -8,28 +8,14 @@ All prompts used in the workshop tutorial, ready for copy-paste.
 
 After installing Claude Code, add it to your Windows context menu so you can right-click any folder and open Claude Code directly.
 
-```
-Add "Open With Claude Code" to my Windows right-click context menu.
+**Download:** [add_claude_context_menu.bat](https://aviz85.github.io/claudosh-spaceship-tutorial/add_claude_context_menu.bat)
 
-Create a .bat file that modifies the registry to add:
-1. "Open With Claude Code" - when right-clicking ON a folder
-2. "Open With Claude Code" - when right-clicking on empty space INSIDE a folder
-3. "Open With Claude Code (Admin)" - with administrator privileges (UAC shield icon)
+**Steps:**
+1. Download the BAT file
+2. Right-click → Run as administrator
+3. Done! Now you can right-click any folder → "Open With Claude Code"
 
-Requirements:
-- PowerShell window should open at the folder path
-- The `claude` command should run automatically
-- Use -NoExit so the window stays open
-- The BAT file must be run as administrator
-
-Also create a second BAT file to remove these entries if needed.
-
-Save both files to the current directory.
-```
-
-**After Claude creates the files:**
-1. Right-click `add_claude_context_menu.bat` → Run as administrator
-2. Done! Now you can right-click any folder → "Open With Claude Code"
+**Remove:** [remove_claude_context_menu.bat](https://aviz85.github.io/claudosh-spaceship-tutorial/remove_claude_context_menu.bat)
 
 ---
 
