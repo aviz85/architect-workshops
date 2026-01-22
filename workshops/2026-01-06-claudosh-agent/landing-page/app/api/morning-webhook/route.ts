@@ -21,9 +21,9 @@ const WORKSHOPS: Record<string, {
   zoomLink: string
 }> = {
   'מצב חללית': {
-    dbName: 'claudosh-spaceship-2026-01-20',
+    dbName: 'claudosh-spaceship-2026-01-29',
     title: 'קלודוש - מצב חללית',
-    date: 'יום שלישי 20.1.26 בשעה 21:00',
+    date: 'יום חמישי 29.1.26 בשעה 21:00',
     watchPageUrl: 'https://chat.whatsapp.com/EjJQbYq0kaIDrFKyOLPcpK',
     zoomLink: 'https://us06web.zoom.us/j/84183944103?pwd=TJGnkLd1lue0JbBVFPgz4va0PXnHZv.1',
   },
