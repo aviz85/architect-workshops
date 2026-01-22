@@ -1,19 +1,19 @@
 ---
 name: workshop-marketing-poster
-description: "Generate workshop marketing posters and presentation slides. PRIORITY: Use this skill (not nano-banana-image) for any workshop poster, promotional image, marketing visual, or presentation slide related to architect-workshops."
+description: "Generate workshop marketing posters and presentation slides. PRIORITY: Use this skill for any workshop poster, promotional image, marketing visual, or presentation slide related to architect-workshops."
 ---
 
 # Workshop Marketing Poster Generator
 
 Generate EPIC marketing posters and presentation slides for Architect workshops.
 
-**IMPORTANT:** This is the PRIMARY skill for workshop visuals. Use this instead of `nano-banana-image` for:
+**IMPORTANT:** This is the PRIMARY skill for workshop visuals. Use this for:
 - Workshop promotional posters
 - Presentation slides
 - Marketing materials
 - Any visual content for workshops
 
-**Uses:** Global `nano-banana-image` skill for image generation + workshop-specific assets.
+**Uses:** Global `image-generation` skill for image generation + workshop-specific assets.
 
 ## Available Avatars
 
@@ -27,7 +27,7 @@ Generate EPIC marketing posters and presentation slides for Architect workshops.
 ### For Posters with Avatar Character
 
 ```bash
-cd ~/.claude/skills/nano-banana-image/scripts
+cd ~/.claude/skills/image-generation/scripts
 
 # Use workshop avatar as reference
 npx ts-node generate_poster.ts --aspect 16:9 --assets "/Users/aviz/architect-workshops/workshops/YYYY-MM-DD-name/assets/avatar.jpg" "[PROMPT]"
@@ -39,7 +39,7 @@ cp poster_0.jpg /Users/aviz/architect-workshops/workshops/YYYY-MM-DD-name/assets
 ### For Generic Slides (No Avatar)
 
 ```bash
-cd ~/.claude/skills/nano-banana-image/scripts
+cd ~/.claude/skills/image-generation/scripts
 
 # No --assets flag = no character reference
 npx ts-node generate_poster.ts --aspect 16:9 "[PROMPT]"
