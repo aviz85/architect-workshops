@@ -4,18 +4,52 @@ All prompts used in the workshop tutorial, ready for copy-paste.
 
 ---
 
-## 1. Windows Shortcut Setup for Claude Code
+## 1. Windows Right-Click Integration (Registry)
 
-**Shortcut Target:**
+After installing Claude Code, add it to your Windows context menu so you can right-click any folder and open Claude Code directly.
+
+```
+Add "Open With Claude Code" to my Windows right-click context menu.
+
+Create a .bat file that modifies the registry to add:
+1. "Open With Claude Code" - when right-clicking ON a folder
+2. "Open With Claude Code" - when right-clicking on empty space INSIDE a folder
+3. "Open With Claude Code (Admin)" - with administrator privileges (UAC shield icon)
+
+Requirements:
+- PowerShell window should open at the folder path
+- The `claude` command should run automatically
+- Use -NoExit so the window stays open
+- The BAT file must be run as administrator
+
+Also create a second BAT file to remove these entries if needed.
+
+Save both files to the current directory.
+```
+
+**After Claude creates the files:**
+1. Right-click `add_claude_context_menu.bat` → Run as administrator
+2. Done! Now you can right-click any folder → "Open With Claude Code"
+
+---
+
+## 2. Windows Shortcut Setup (Alternative)
+
+**Option 1: PowerShell (Recommended)**
 ```
 powershell.exe -NoExit -Command "cd '$env:USERPROFILE\Desktop\my-crm'; claude --dangerously-skip-permissions"
 ```
 
-The `$env:USERPROFILE` variable automatically points to the user's folder (e.g., `C:\Users\John`).
+**Option 2: CMD**
+```
+cmd.exe /k "cd /d %USERPROFILE%\Desktop\my-crm && claude --dangerously-skip-permissions"
+```
+
+The environment variables `$env:USERPROFILE` (PowerShell) or `%USERPROFILE%` (CMD) automatically point to the user's folder.
 
 ---
 
-## 2. Learning Claude Code Primitives
+## 3. Learning Claude Code Primitives
 
 ```
 אני רוצה לבנות "Agentic App" - אפליקציה שמופעלת על ידי Claude Code.
@@ -31,7 +65,7 @@ The `$env:USERPROFILE` variable automatically points to the user's folder (e.g.,
 
 ---
 
-## 3. Creating CLAUDE.md with Learning Rule
+## 4. Creating CLAUDE.md with Learning Rule
 
 ```
 צור קובץ CLAUDE.md לפרויקט שלנו עם הכללים הבאים:
@@ -62,7 +96,7 @@ The `$env:USERPROFILE` variable automatically points to the user's folder (e.g.,
 
 ---
 
-## 4. Installing html-to-pdf Skill
+## 5. Installing html-to-pdf Skill
 
 ```
 התקן את ה-skill של html-to-pdf מספריית aviz85.
@@ -87,7 +121,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g
 
 ---
 
-## 5. Creating First Quotation
+## 6. Creating First Quotation
 
 ```
 קרא את קובץ ה-CRM ומצא לקוח שמתאים לקורס AI למתחילים.
@@ -105,7 +139,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g
 
 ---
 
-## 6. Creating Custom Quotation Skill
+## 7. Creating Custom Quotation Skill
 
 ```
 צור skill חדש בשם "create-quotation" שייצור הצעות מחיר.
@@ -130,7 +164,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g
 
 ---
 
-## 7. Adding Logo to Quotation Skill
+## 8. Adding Logo to Quotation Skill
 
 ```
 עדכן את ה-skill של create-quotation כך שישתמש בלוגו:
@@ -144,7 +178,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g
 
 ---
 
-## 8. Setting Up Products Project
+## 9. Setting Up Products Project
 
 ```
 זהו פרויקט לניהול קטלוג המוצרים שלנו.
@@ -159,7 +193,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g
 
 ---
 
-## 9. GOLDEN STEP: Generate Recommendations Agent
+## 10. GOLDEN STEP: Generate Recommendations Agent
 
 ```
 צור skill חדש בשם "generate-recommendations" שעושה את הדבר הבא:
@@ -182,7 +216,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g
 
 ---
 
-## 10. Running the Recommendations Skill
+## 11. Running the Recommendations Skill
 
 ```
 /generate-recommendations
@@ -192,7 +226,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g
 
 ---
 
-## 11. Bonus: Preview Personalized Messages
+## 12. Bonus: Preview Personalized Messages
 
 ```
 קרא את קובץ ההמלצות שיצרנו.
