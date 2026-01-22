@@ -21,6 +21,7 @@
 |-------|-------|
 | **WhatsApp Group Link** | https://chat.whatsapp.com/EjJQbYq0kaIDrFKyOLPcpK |
 | **Green API Group ID** | [TBD] |
+| **Payment Link (Morning)** | https://mrng.to/oDrXjUVbrR |
 
 ---
 
