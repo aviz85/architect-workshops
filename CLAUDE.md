@@ -38,7 +38,7 @@ This keeps the codebase consistent and maintainable while allowing Hebrew where 
 
 | Timing | Procedure | Command/Action |
 |--------|-----------|----------------|
-| **1 week before** | Marketing push - poster, publish to groups | `/nano-banana-poster`, `/social-publisher` |
+| **1 week before** | Marketing push - poster, publish to groups | `workshop-marketing-poster`, `/social-publisher` |
 | **3-4 days before** | Reminders in groups, sneak peeks | `workshop-updates` |
 | **2 days before** | Final prep - presentation ready? POC ready? | Check pipeline status |
 | **Day of (morning)** | Pre-live checklist, final prep | `/live-prep` |
@@ -86,7 +86,7 @@ Then compare with today's date and alert the user:
 - Generate `workshop.md` with logistics, agenda, and pipeline tracking
 - Set up WhatsApp group, Zoom link
 
-### 3. Marketing (`nano-banana-poster` skill)
+### 3. Marketing (`workshop-marketing-poster` skill)
 - Generate promotional posters with brand consistency
 - Use avatar and brand assets from `image-references/` or skill references
 - Post to WhatsApp groups, Facebook communities
@@ -119,7 +119,7 @@ architect-workshops/
 └── .claude/skills/           # Automation skills
     ├── workshop-creator/
     ├── workshop-updates/
-    ├── nano-banana-poster/
+    ├── workshop-marketing-poster/
     ├── presentation-architect/
     └── whatsapp-*/
 ```
@@ -141,7 +141,7 @@ When ready to schedule, move concept content to a new workshop folder in `worksh
 | `workshop-ideation` | Brainstorm and add ideas to backlog |
 | `workshop-creator` | Create new workshop with folder structure |
 | `workshop-updates` | Track pipeline progress, attendance, follow-ups |
-| `nano-banana-poster` | Generate promotional posters |
+| `workshop-marketing-poster` | Generate promotional posters |
 | `presentation-architect` | Create presentation blueprints |
 | `whatsapp-group-info` | Get WhatsApp group details |
 | `whatsapp-send-message` | Send messages to participants |
@@ -195,7 +195,7 @@ All workshop presentations must follow these rules:
 /workshop-updates
 
 # Generate a poster
-/nano-banana-poster
+/workshop-marketing-poster
 
 # Create presentation blueprint
 /presentation-architect
@@ -206,7 +206,7 @@ All workshop presentations must follow these rules:
 | Type | When | Examples |
 |------|------|----------|
 | **Command** | Clear trigger point - "I need to do X now" | `/workshop-end`, `/live-prep` |
-| **Skill** | Comes up during flow of other work | `workshop-updates`, `nano-banana-poster` |
+| **Skill** | Comes up during flow of other work | `workshop-updates`, `workshop-marketing-poster` |
 
 ## Brand Assets
 
@@ -214,10 +214,10 @@ All workshop presentations must follow these rules:
 
 | Avatar | File | Use For |
 |--------|------|---------|
-| **Boss Avatar** | `.claude/skills/nano-banana-poster/references/avatar-boss.png` | Workshop posters - professional 3D character in dark suit with green tie. Use for powerful, aspirational imagery (sitting on throne, money flying, etc.) |
-| **Original Avatar** | `.claude/skills/nano-banana-poster/references/avatar.jpg` | General use |
+| **Boss Avatar** | `.claude/skills/workshop-marketing-poster/references/avatar-boss.png` | Workshop posters - professional 3D character in dark suit with green tie. Use for powerful, aspirational imagery (sitting on throne, money flying, etc.) |
+| **Original Avatar** | `.claude/skills/workshop-marketing-poster/references/avatar.jpg` | General use |
 
 ### Other Assets
 
-- **Gallery:** `.claude/skills/nano-banana-poster/assets/gallery/` (reference posters)
+- **Gallery:** `.claude/skills/workshop-marketing-poster/assets/gallery/` (reference posters)
 - **Colors:** Green (#22C55E), gray tones, professional tech aesthetic
