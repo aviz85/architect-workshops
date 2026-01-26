@@ -108,6 +108,9 @@ architect-workshops/
 ├── CLAUDE.md                 # This file - project instructions
 ├── workshop-ideas.md         # Topic backlog
 ├── image-references/         # Global brand assets (avatar, logo)
+├── content/                  # Shared content & inspiration
+│   ├── 30-posts.md           # 30 social media posts for marketing
+│   └── exponential-efficiency.md  # Core concept: exponential efficiency
 ├── future-concepts/          # Detailed concepts not yet scheduled
 │   └── concept-name.md       # In-depth workshop concept
 ├── workshops/
@@ -123,6 +126,17 @@ architect-workshops/
     ├── presentation-architect/
     └── whatsapp-*/
 ```
+
+### Content Folder - Inspiration & Reference
+
+The `content/` folder contains reusable content for marketing and presentations:
+
+- **`30-posts.md`** - 30 ready-made social posts about Claude Code & Spaceship Mode. Use for inspiration when creating marketing materials, posters, or presentation content.
+- **`exponential-efficiency.md`** - Core concept explaining the exponential nature of skill-building.
+
+**Key concepts from content:**
+- **חצי-אוטומאט (Semi-Auto)** - The sweet spot: not manual ping-pong chat, not full autonomy. Send task → do something else → come back. Manager, not executor.
+- **התייעלות אקספוננציאלית** - Each skill becomes foundation for next. Layers compound exponentially.
 
 ### Future Concepts Folder
 
