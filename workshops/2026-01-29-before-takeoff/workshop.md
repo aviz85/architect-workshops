@@ -13,17 +13,18 @@
 | **Day** | יום חמישי (Thursday) |
 | **Time** | 21:00 |
 | **Duration** | ~2 hours |
-| **Price** | ₪90 (משלמי סדנאות קודמות - חינם) |
+| **Price** | ₪50 (משלמי סדנאות קודמות - חינם) |
 | **Platform** | Zoom |
-| **Zoom Link** | [TBD] |
+| **Zoom Link** | https://us06web.zoom.us/j/83651445103?pwd=yjaRR0fp81jqV1Lta89QvtS5NkBGcV.1 |
+| **Zoom Password** | 147489 |
 
 ### WhatsApp Group
 
 | Field | Value |
 |-------|-------|
-| **WhatsApp Group Link** | [TBD] |
+| **WhatsApp Group Link** | https://chat.whatsapp.com/IE12BkBzv8w9iVM4THPawC |
 | **Green API Group ID** | [TBD] |
-| **Payment Link (Morning)** | [TBD] |
+| **Payment Link (Morning)** | https://mrng.to/Br0AnXAjwQ |
 
 ---
 

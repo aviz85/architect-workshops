@@ -19,13 +19,23 @@ const WORKSHOPS: Record<string, {
   date: string
   watchPageUrl: string
   zoomLink: string
+  whatsappGroup: string
 }> = {
+  'רגע לפני השיגור': {
+    dbName: 'claudosh-before-takeoff-2026-01-29',
+    title: 'קלודוש - רגע לפני השיגור',
+    date: 'יום חמישי 29.1.26 בשעה 21:00',
+    watchPageUrl: 'https://chat.whatsapp.com/IE12BkBzv8w9iVM4THPawC',
+    zoomLink: 'https://us06web.zoom.us/j/83651445103?pwd=yjaRR0fp81jqV1Lta89QvtS5NkBGcV.1',
+    whatsappGroup: 'https://chat.whatsapp.com/IE12BkBzv8w9iVM4THPawC',
+  },
   'מצב חללית': {
     dbName: 'claudosh-spaceship-2026-01-29',
     title: 'קלודוש - מצב חללית',
     date: 'יום חמישי 29.1.26 בשעה 21:00',
     watchPageUrl: 'https://chat.whatsapp.com/EjJQbYq0kaIDrFKyOLPcpK',
     zoomLink: 'https://us06web.zoom.us/j/84183944103?pwd=TJGnkLd1lue0JbBVFPgz4va0PXnHZv.1',
+    whatsappGroup: 'https://chat.whatsapp.com/EjJQbYq0kaIDrFKyOLPcpK',
   },
   'מתחילים בקטן': {
     dbName: 'claudosh-beginner-2026-01-13',
@@ -33,6 +43,7 @@ const WORKSHOPS: Record<string, {
     date: 'יום שלישי 13.1.26 בשעה 21:00',
     watchPageUrl: 'https://claudosh.master-x.co.il/watch-x7m3p',
     zoomLink: 'https://us06web.zoom.us/j/81637723179?pwd=Rdhjj55bbTnmN9vtP2wDxNIuJp6820.1',
+    whatsappGroup: '',
   },
   'קלודוש הסוכן המטורף': {
     dbName: 'claudosh-agent-2026-01-06',
@@ -40,6 +51,7 @@ const WORKSHOPS: Record<string, {
     date: 'יום שלישי 6.1.26 בשעה 21:00',
     watchPageUrl: 'https://claudosh.master-x.co.il/watch-q3x7z',
     zoomLink: 'https://us06web.zoom.us/j/85374512520?pwd=SeNeeFB4Uznkjq0zImONKbSGkri7iD.1',
+    whatsappGroup: '',
   },
 }
 
@@ -154,7 +166,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Find workshop by keyword
-    let workshop = WORKSHOPS['מצב חללית'] // Default to current workshop
+    let workshop = WORKSHOPS['רגע לפני השיגור'] // Default to current workshop
     if (workshopKeyword) {
       for (const [key, value] of Object.entries(WORKSHOPS)) {
         if (workshopKeyword.includes(key)) {
