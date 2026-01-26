@@ -334,44 +334,50 @@
         <div class="step">
             <div class="step-header">
                 <div class="step-number">2</div>
-                <div class="step-title">יצירת קיצור דרך ל-Claude Code</div>
-                <span class="step-time">3 דק׳</span>
+                <div class="step-title">הוספת Claude Code לתפריט קליק ימני</div>
+                <span class="step-time">1 דק׳</span>
             </div>
             <div class="step-content">
-                <p>ניצור קיצור דרך שיפתח את Claude Code ישירות בתיקייה שלנו:</p>
+                <p>נוסיף אפשרות לפתוח Claude Code <strong>בכל תיקייה</strong> דרך קליק ימני:</p>
+
                 <ol>
-                    <li>לחצו קליק ימני על שולחן העבודה</li>
-                    <li>בחרו <strong>New → Shortcut</strong></li>
-                    <li>בשדה Location הכניסו:</li>
+                    <li>הורידו את הקובץ:</li>
                 </ol>
 
-                <p><strong>אופציה 1: PowerShell (מומלץ)</strong></p>
-                <div class="code-block">
-                    <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-                    <pre>powershell.exe -NoExit -Command "cd '$env:USERPROFILE\Desktop\my-crm'; claude --dangerously-skip-permissions"</pre>
-                </div>
+                <a href="add_claude_context_menu.bat" download class="download-btn">
+                    📥 הורדת add_claude_context_menu.bat
+                </a>
 
-                <p><strong>אופציה 2: CMD</strong></p>
-                <div class="code-block">
-                    <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-                    <pre>cmd.exe /k "cd /d %USERPROFILE%\Desktop\my-crm && claude --dangerously-skip-permissions"</pre>
-                </div>
+                <ol start="2">
+                    <li>
+                        <strong>הפעלה כמנהל (Administrator):</strong>
+                        <ul style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                            <li><strong>קליק ימני</strong> על הקובץ <code>add_claude_context_menu.bat</code></li>
+                            <li>בתפריט שנפתח, בחרו <strong>Run as administrator</strong> (הפעל כמנהל מערכת)</li>
+                            <li>יופיע חלון שחור של <strong>User Account Control</strong> ששואל:<br>
+                            <em>"Do you want to allow this app to make changes to your device?"</em></li>
+                            <li>לחצו <strong>Yes</strong> (כן)</li>
+                            <li>יפתח חלון שחור שירוץ לרגע ויסגר - זה תקין!</li>
+                        </ul>
+                    </li>
+                    <li>זהו! ✅ עכשיו תוכלו ללחוץ ימני על כל תיקייה ולבחור <strong>"Open With Claude Code"</strong></li>
+                </ol>
 
-                <p><strong>אופציה 3: נתיב ידני</strong> (אם האופציות למעלה לא עובדות)</p>
-                <div class="code-block">
-                    <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-                    <pre>cmd.exe /k "cd /d C:\Users\YOUR_USERNAME\Desktop\my-crm && claude --dangerously-skip-permissions"</pre>
+                <div class="tip" style="background: #1a2a2a; border-right-color: var(--green); margin-top: 1rem;">
+                    <div class="tip-label" style="color: var(--green);">🔍 לא מוצאים "Run as administrator"?</div>
+                    <p>ב-Windows 11, לפעמים צריך ללחוץ על <strong>"Show more options"</strong> (הצג אפשרויות נוספות) בתחתית התפריט כדי לראות את כל האפשרויות.<br>
+                    לחלופין: לחצו <strong>Shift + קליק ימני</strong> על הקובץ כדי לקבל ישירות את התפריט המלא.</p>
                 </div>
 
                 <div class="tip">
-                    <div class="tip-label">💡 טיפ</div>
-                    <p>באופציה 3, החליפו את <code>YOUR_USERNAME</code> בשם המשתמש שלכם (למשל: <code>C:\Users\David\Desktop\my-crm</code>)</p>
+                    <div class="tip-label">🛡️ שתי אפשרויות בתפריט</div>
+                    <p><strong>Open With Claude Code</strong> - רגיל<br>
+                    <strong>Open With Claude Code (Admin)</strong> - עם הרשאות מנהל (מגן UAC)</p>
                 </div>
 
-                <ol start="4">
-                    <li>לחצו Next ותנו שם לקיצור: <code>Claude - My CRM</code></li>
-                    <li>לחצו Finish</li>
-                </ol>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
+                    להסרה: <a href="remove_claude_context_menu.bat" download style="color: var(--green);">remove_claude_context_menu.bat</a>
+                </p>
             </div>
         </div>
 
@@ -379,30 +385,6 @@
         <div class="step">
             <div class="step-header">
                 <div class="step-number">3</div>
-                <div class="step-title">הגדרת הרשאות מנהל</div>
-                <span class="step-time">2 דק׳</span>
-            </div>
-            <div class="step-content">
-                <p>נגדיר שהקיצור יפעל עם הרשאות מנהל:</p>
-                <ol>
-                    <li>לחצו קליק ימני על הקיצור שיצרנו</li>
-                    <li>בחרו <strong>Properties</strong></li>
-                    <li>בלשונית <strong>Shortcut</strong> לחצו על <strong>Advanced...</strong></li>
-                    <li>סמנו ✅ <strong>Run as administrator</strong></li>
-                    <li>לחצו OK → Apply → OK</li>
-                </ol>
-
-                <div class="tip">
-                    <div class="tip-label">💡 למה צריך הרשאות מנהל?</div>
-                    <p>חלק מהפעולות של Claude Code (כמו התקנת packages) דורשות הרשאות גבוהות</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- STEP 4 -->
-        <div class="step">
-            <div class="step-header">
-                <div class="step-number">4</div>
                 <div class="step-title">הורדת נתוני ה-CRM</div>
                 <span class="step-time">2 דק׳</span>
             </div>
@@ -429,10 +411,10 @@
             <span>⚙️ הגדרת Claude Code</span>
         </div>
 
-        <!-- STEP 5 -->
+        <!-- STEP 4 -->
         <div class="step">
             <div class="step-header">
-                <div class="step-number">5</div>
+                <div class="step-number">4</div>
                 <div class="step-title">הפעלת Claude Code ולמידה על Primitives</div>
                 <span class="step-time">8 דק׳</span>
             </div>
@@ -459,10 +441,10 @@ Use the claude-code-guide agent to learn about each one and give me a short summ
             </div>
         </div>
 
-        <!-- STEP 6 -->
+        <!-- STEP 5 -->
         <div class="step">
             <div class="step-header">
-                <div class="step-number">6</div>
+                <div class="step-number">5</div>
                 <div class="step-title">יצירת CLAUDE.md - קובץ הכללים</div>
                 <span class="step-time">7 דק׳</span>
             </div>
@@ -509,10 +491,10 @@ You must use the `claude-code-guide` agent to get accurate and up-to-date inform
             <span>🛠️ התקנת כלים</span>
         </div>
 
-        <!-- STEP 7 -->
+        <!-- STEP 6 -->
         <div class="step">
             <div class="step-header">
-                <div class="step-number">7</div>
+                <div class="step-number">6</div>
                 <div class="step-title">התקנת Skill: HTML to PDF</div>
                 <span class="step-time">10 דק׳</span>
             </div>
@@ -564,10 +546,10 @@ npx skills add trailofbits/skills</pre>
             </div>
         </div>
 
-        <!-- STEP 8 -->
+        <!-- STEP 7 -->
         <div class="step">
             <div class="step-header">
-                <div class="step-number">8</div>
+                <div class="step-number">7</div>
                 <div class="step-title">יצירת הצעת מחיר ראשונה</div>
                 <span class="step-time">8 דק׳</span>
             </div>
@@ -592,10 +574,10 @@ Save the file in the documents/ folder</pre>
             </div>
         </div>
 
-        <!-- STEP 9 -->
+        <!-- STEP 8 -->
         <div class="step">
             <div class="step-header">
-                <div class="step-number">9</div>
+                <div class="step-number">8</div>
                 <div class="step-title">יצירת Skill מותאם אישית להצעות מחיר</div>
                 <span class="step-time">12 דק׳</span>
             </div>
@@ -627,10 +609,10 @@ Design: green colors (#22C55E), clean font, RTL</pre>
             </div>
         </div>
 
-        <!-- STEP 10 -->
+        <!-- STEP 9 -->
         <div class="step">
             <div class="step-header">
-                <div class="step-number">10</div>
+                <div class="step-number">9</div>
                 <div class="step-title">הוספת לוגו לחברה</div>
                 <span class="step-time">5 דק׳</span>
             </div>
@@ -661,10 +643,10 @@ Test that everything works by creating a new quotation.</pre>
             <span>📦 פרויקט המוצרים</span>
         </div>
 
-        <!-- STEP 11 -->
+        <!-- STEP 10 -->
         <div class="step">
             <div class="step-header">
-                <div class="step-number">11</div>
+                <div class="step-number">10</div>
                 <div class="step-title">יצירת פרויקט המוצרים</div>
                 <span class="step-time">5 דק׳</span>
             </div>
@@ -672,7 +654,6 @@ Test that everything works by creating a new quotation.</pre>
                 <p>ניצור פרויקט חדש לניהול המוצרים שלנו:</p>
                 <ol>
                     <li>צרו תיקייה חדשה על שולחן העבודה: <code>my-products</code></li>
-                    <li>צרו קיצור דרך נוסף ל-Claude Code (כמו בשלב 2-3)</li>
                     <li>הורידו את קובץ המוצרים:</li>
                 </ol>
 
@@ -680,14 +661,17 @@ Test that everything works by creating a new quotation.</pre>
                     📥 הורדת products.zip
                 </a>
 
-                <p>חלצו את הקובץ לתוך תיקיית <code>my-products</code></p>
+                <ol start="3">
+                    <li>חלצו את הקובץ לתוך תיקיית <code>my-products</code></li>
+                    <li>קליק ימני על התיקייה → <strong>Open With Claude Code</strong></li>
+                </ol>
             </div>
         </div>
 
-        <!-- STEP 12 -->
+        <!-- STEP 11 -->
         <div class="step">
             <div class="step-header">
-                <div class="step-number">12</div>
+                <div class="step-number">11</div>
                 <div class="step-title">הגדרת פרויקט המוצרים</div>
                 <span class="step-time">5 דק׳</span>
             </div>
@@ -717,7 +701,7 @@ Scan the existing products and give me a summary of what we have.</pre>
         <div class="step golden-step">
             <span class="golden-badge">⭐ THE GOLDEN STEP</span>
             <div class="step-header">
-                <div class="step-number">13</div>
+                <div class="step-number">12</div>
                 <div class="step-title">הסוכן שמחבר הכל - המלצות חכמות</div>
                 <span class="step-time">18 דק׳</span>
             </div>

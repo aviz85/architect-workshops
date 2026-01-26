@@ -4,24 +4,7 @@ All prompts used in the workshop tutorial, ready for copy-paste.
 
 ---
 
-## 1. Windows Right-Click Integration (Registry)
-
-After installing Claude Code, add it to your Windows context menu so you can right-click any folder and open Claude Code directly.
-
-**Download:** [add_claude_context_menu.bat](https://aviz85.github.io/claudosh-spaceship-tutorial/add_claude_context_menu.bat)
-
-**Steps:**
-1. Download the BAT file
-2. Right-click → Run as administrator
-3. Done! Now you can right-click any folder → "Open With Claude Code"
-
-**Remove:** [remove_claude_context_menu.bat](https://aviz85.github.io/claudosh-spaceship-tutorial/remove_claude_context_menu.bat)
-
----
-
-## 2. Windows Shortcut Setup (Manual Fallback)
-
-> **Note:** This step is optional if you completed step 1. Use only if the registry method doesn't work.
+## 1. Windows Shortcut Setup for Claude Code
 
 **Option 1: PowerShell (Recommended)**
 ```
@@ -37,7 +20,7 @@ The environment variables `$env:USERPROFILE` (PowerShell) or `%USERPROFILE%` (CM
 
 ---
 
-## 3. Learning Claude Code Primitives
+## 2. Learning Claude Code Primitives
 
 ```
 אני רוצה לבנות "Agentic App" - אפליקציה שמופעלת על ידי Claude Code.
@@ -53,7 +36,7 @@ The environment variables `$env:USERPROFILE` (PowerShell) or `%USERPROFILE%` (CM
 
 ---
 
-## 4. Creating CLAUDE.md with Learning Rule
+## 3. Creating CLAUDE.md with Learning Rule
 
 ```
 צור קובץ CLAUDE.md לפרויקט שלנו עם הכללים הבאים:
@@ -84,7 +67,7 @@ The environment variables `$env:USERPROFILE` (PowerShell) or `%USERPROFILE%` (CM
 
 ---
 
-## 5. Installing html-to-pdf Skill
+## 4. Installing html-to-pdf Skill
 
 ```
 התקן את ה-skill של html-to-pdf מספריית aviz85.
@@ -109,7 +92,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g
 
 ---
 
-## 6. Creating First Quotation
+## 5. Creating First Quotation
 
 ```
 קרא את קובץ ה-CRM ומצא לקוח שמתאים לקורס AI למתחילים.
@@ -127,7 +110,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g
 
 ---
 
-## 7. Creating Custom Quotation Skill
+## 6. Creating Custom Quotation Skill
 
 ```
 צור skill חדש בשם "create-quotation" שייצור הצעות מחיר.
@@ -152,7 +135,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g
 
 ---
 
-## 8. Adding Logo to Quotation Skill
+## 7. Adding Logo to Quotation Skill
 
 ```
 עדכן את ה-skill של create-quotation כך שישתמש בלוגו:
@@ -166,7 +149,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g
 
 ---
 
-## 9. Setting Up Products Project
+## 8. Setting Up Products Project
 
 ```
 זהו פרויקט לניהול קטלוג המוצרים שלנו.
@@ -181,7 +164,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g
 
 ---
 
-## 10. GOLDEN STEP: Generate Recommendations Agent
+## 9. GOLDEN STEP: Generate Recommendations Agent
 
 ```
 צור skill חדש בשם "generate-recommendations" שעושה את הדבר הבא:
@@ -204,7 +187,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g
 
 ---
 
-## 11. Running the Recommendations Skill
+## 10. Running the Recommendations Skill
 
 ```
 /generate-recommendations
@@ -214,7 +197,7 @@ npx add-skill aviz85/claude-skills-library -s html-to-pdf -g
 
 ---
 
-## 12. Bonus: Preview Personalized Messages
+## 11. Bonus: Preview Personalized Messages
 
 ```
 קרא את קובץ ההמלצות שיצרנו.
