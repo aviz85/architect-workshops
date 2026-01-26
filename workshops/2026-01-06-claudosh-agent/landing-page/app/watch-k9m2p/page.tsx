@@ -91,7 +91,7 @@ export default function WatchPage() {
           </p>
         </div>
 
-        {/* Beginner Workshop Access */}
+        {/* Next Workshop Access */}
         <div style={{
           marginTop: '32px',
           background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%)',
@@ -101,17 +101,19 @@ export default function WatchPage() {
           textAlign: 'center'
         }}>
           <p style={{ color: '#22C55E', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px', letterSpacing: '1px' }}>
-            בונוס למשתתפים!
+            🎁 בונוס למשתתפים!
           </p>
           <h3 style={{ color: '#fff', fontSize: '20px', marginBottom: '12px' }}>
-            קלודוש הסוכן - מתחילים בקטן!
+            קלודוש - רגע לפני השיגור
           </h3>
           <p style={{ color: '#9CA3AF', fontSize: '14px', marginBottom: '16px' }}>
-            כמשתתף בסדנה, יש לך גישה גם לסדנה הבאה!<br/>
-            יום שלישי, 13.1.26 בשעה 21:00
+            כמשתתף בסדנה, יש לך גישה חינם לסדנה הבאה!<br/>
+            יום חמישי, 29.1.26 בשעה 21:00
           </p>
           <a
-            href="https://claudosh.master-x.co.il/watch-x7m3p"
+            href="https://us06web.zoom.us/j/83651445103?pwd=yjaRR0fp81jqV1Lta89QvtS5NkBGcV.1"
+            target="_blank"
+            rel="noopener noreferrer"
             className="payment-btn"
             style={{
               background: 'linear-gradient(135deg, #22C55E 0%, #16A34A 100%)',
@@ -123,8 +125,11 @@ export default function WatchPage() {
               padding: '12px 24px'
             }}
           >
-            לעמוד הסדנה
+            🚀 כניסה לזום
           </a>
+          <p style={{ color: '#6B7280', fontSize: '12px', marginTop: '12px' }}>
+            סיסמה: 147489
+          </p>
         </div>
 
         <p className="small-note" style={{ marginTop: '24px' }}>
