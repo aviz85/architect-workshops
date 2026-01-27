@@ -85,9 +85,7 @@ ${workshop.watchPageUrl}
 
 function getFollowUpMessage(workshop: typeof WORKSHOPS[string]): string {
   return `אגב, אם יש בעיה להיכנס לקישור - הנה קישור ישיר לזום:
-${workshop.zoomLink}
-
-בקישור למעלה תופיע גם ההקלטה לאחר השידור`
+${workshop.zoomLink}`
 }
 
 // Email HTML template (no emojis!)
@@ -116,7 +114,7 @@ function getWelcomeEmailHtml(name: string, workshop: typeof WORKSHOPS[string]): 
       </div>
       <p style="font-size: 14px; color: #666; text-align: center;">קישור ישיר לזום:<br><a href="${workshop.zoomLink}" style="color: #22C55E;">${workshop.zoomLink}</a></p>
       <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-      <p style="font-size: 14px; color: #888; line-height: 1.6;"><strong>טיפ:</strong> כדאי להיכנס כמה דקות לפני תחילת הסדנה.<br>לאחר השידור, ההקלטה תהיה זמינה באותו קישור.</p>
+      <p style="font-size: 14px; color: #888; line-height: 1.6;"><strong>טיפ:</strong> כדאי להיכנס כמה דקות לפני תחילת הסדנה.</p>
     </div>
     <div style="background-color: #f9fafb; padding: 20px; text-align: center; border-top: 1px solid #eee;">
       <p style="margin: 0; color: #666; font-size: 14px;">נתראה בסדנה!</p>

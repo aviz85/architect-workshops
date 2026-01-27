@@ -73,9 +73,7 @@ ${WATCH_PAGE_URL}
 
 function getFollowUpMessage(): string {
   return `אגב, אם יש בעיה להיכנס לקישור - הנה קישור ישיר לזום:
-${ZOOM_LINK}
-
-בקישור למעלה תופיע גם ההקלטה לאחר השידור 🎬`
+${ZOOM_LINK}`
 }
 
 async function addParticipant(name: string, email: string, phone: string, sendMessages: boolean = true) {
