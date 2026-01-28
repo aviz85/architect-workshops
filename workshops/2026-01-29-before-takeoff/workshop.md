@@ -104,6 +104,7 @@
 **Attendance:**
 | Metric | Count |
 |--------|-------|
+| Paid Participants | 59 |
 | WhatsApp Group Size | TBD |
 | Peak | TBD |
 
