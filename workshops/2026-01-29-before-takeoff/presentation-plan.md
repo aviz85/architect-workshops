@@ -627,7 +627,62 @@ Screenshot mockups showing each step of the installation process. Arrows connect
 
 ---
 
-## Slide 12 – The cc Shortcut
+## Slide 12 – Windows Installation Guide
+
+**Purpose:** Step-by-step Windows installation for participants on Windows.
+
+**Direction:** RTL - content flows from right to left
+
+**Content:**
+
+**Headline (Top-right):**
+"🪟 התקנה לווינדוס"
+
+**Link (Top-left, small):**
+"aviz85.github.io/claude-code-windows-guide/he.html"
+
+**Four Steps (Vertical, compact):**
+
+**Step 1:** "התקנת Node.js"
+"nodejs.org → LTS → התקינו → Next בכל שלב"
+
+**Step 2:** "התקנת Claude Code"
+```
+npm install -g @anthropic-ai/claude-code
+```
+
+**Step 3:** "התקנת Git"
+"git-scm.com → 64-bit → Next בכל שלב"
+
+**Step 4:** "הפעלה ראשונה"
+"צרו תיקייה → פתחו PowerShell → `claude`"
+
+**QR Code / Link Box (Bottom-right):**
+"📱 סרקו לקישור מלא עם צילומי מסך!"
+
+**Checkpoint (Bottom-left):**
+"✅ מי על ווינדוס ויצא לו? תרימו יד!"
+
+**Layout:**
+- Headline: Top-right
+- Link: Top-left, small monospace
+- Four steps: Stacked vertically, compact
+- QR/Link: Bottom-right
+- Checkpoint: Bottom-left
+
+**Visual:**
+Windows logo with Node.js, Git, and Claude Code icons arranged as installation steps. Arrows showing the flow. Clean instructional style with green checkmarks.
+
+**Typography:**
+- Headline: Assistant Bold, 38pt, white with Windows emoji
+- Link: Monospace, 18pt, gray
+- Steps: Numbered circles, Assistant Bold 24pt headers, 18pt details
+- Code: Monospace, 18pt, green on dark
+- Checkpoint: Assistant Bold, 22pt, green
+
+---
+
+## Slide 13 – The cc Shortcut
 
 **Purpose:** Teach the most useful trick for running Claude Code.
 
