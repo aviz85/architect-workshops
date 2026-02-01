@@ -1,3 +1,9 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+---
+
 # Architect Workshops
 
 This repository manages workshops by **Aviz - The Architect** - educational tech workshops delivered in Hebrew via Zoom.
@@ -235,3 +241,36 @@ All workshop presentations must follow these rules:
 
 - **Gallery:** `.claude/skills/workshop-marketing-poster/assets/gallery/` (reference posters)
 - **Colors:** Green (#22C55E), gray tones, professional tech aesthetic
+
+---
+
+## Landing Pages (Next.js)
+
+Some workshops have landing pages for registration/recordings in `workshops/YYYY-MM-DD-topic/landing-page/`.
+
+**Tech Stack:** Next.js 14, React 18, TypeScript, Supabase, deployed to Vercel
+
+**Commands (run from landing-page folder):**
+```bash
+npm install        # Install dependencies
+npm run dev        # Local development server (http://localhost:3000)
+npm run build      # Production build
+vercel --prod      # Deploy to Vercel
+```
+
+**Pattern:** Each landing page has `/watch-XXXXX` routes for recorded content with access code protection via Supabase.
+
+---
+
+## Courses
+
+The `courses/` folder contains structured course content (separate from one-time workshops):
+
+- `courses/pricing.md` - Pricing strategy
+- `courses/claudosh-course/` - Claude Code course structure, branding, messaging
+
+---
+
+## Workshop-Specific CLAUDE.md
+
+For complex workshops with live demos or special requirements, create a local `CLAUDE.md` in the workshop folder. See `workshops/2026-01-18-ai-for-golden-age/CLAUDE.md` for an example of live demo instructions.
