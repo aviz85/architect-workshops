@@ -21,6 +21,14 @@ const WORKSHOPS: Record<string, {
   zoomLink: string
   whatsappGroup: string
 }> = {
+  'אפס חיכוך': {
+    dbName: 'zero-friction-2026-02-05',
+    title: 'אפס חיכוך',
+    date: 'יום חמישי 5.2.26 בשעה 21:00',
+    watchPageUrl: 'https://us06web.zoom.us/j/83106471338?pwd=9ZsXQKbR7p5mysGhZc8qQt8XVk7rSC.1',
+    zoomLink: 'https://us06web.zoom.us/j/83106471338?pwd=9ZsXQKbR7p5mysGhZc8qQt8XVk7rSC.1',
+    whatsappGroup: '', // No dedicated group
+  },
   'רגע לפני השיגור': {
     dbName: 'claudosh-before-takeoff-2026-01-29',
     title: 'קלודוש - רגע לפני השיגור',
@@ -164,7 +172,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Find workshop by keyword
-    let workshop = WORKSHOPS['רגע לפני השיגור'] // Default to current workshop
+    let workshop = WORKSHOPS['אפס חיכוך'] // Default to current workshop
     if (workshopKeyword) {
       for (const [key, value] of Object.entries(WORKSHOPS)) {
         if (workshopKeyword.includes(key)) {

@@ -100,9 +100,23 @@ function checkMorningEmails() {
         var parsed = parsePaymentEmail(body);
 
         if (parsed) {
-          // Extract workshop keyword from email
-          var workshopMatch = body.match(/סדנת[״"]([^״"]+)[״"]/);
-          var workshopKeyword = workshopMatch ? workshopMatch[1] : '';
+          // Extract workshop keyword from email - try multiple patterns
+          var workshopKeyword = '';
+
+          // Pattern 1: סדנת"שם" or סדנת״שם״ (with quotes)
+          var quotedMatch = body.match(/סדנת[״"]([^״"]+)[״"]/);
+          if (quotedMatch) {
+            workshopKeyword = quotedMatch[1];
+          } else {
+            // Pattern 2: סדנת שם (without quotes) - capture until newline or dash
+            var unquotedMatch = body.match(/סדנת\s+([^\n\-]+)/);
+            if (unquotedMatch) {
+              workshopKeyword = unquotedMatch[1].trim();
+            }
+          }
+
+          // Normalize: "0 חיכוך" -> "אפס חיכוך"
+          workshopKeyword = workshopKeyword.replace(/^0\s+/, 'אפס ');
 
           // Check if already processed (prevents duplicates!)
           if (wasAlreadyProcessed(parsed.email, workshopKeyword)) {
