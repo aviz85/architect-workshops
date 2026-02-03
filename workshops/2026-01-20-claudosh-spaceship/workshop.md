@@ -15,12 +15,12 @@
 | **Platform** | Zoom |
 | **Zoom Link** | https://us06web.zoom.us/j/84183944103?pwd=TJGnkLd1lue0JbBVFPgz4va0PXnHZv.1 |
 
-### WhatsApp Group
+### WhatsApp Groups
 
-| Field | Value |
-|-------|-------|
-| **WhatsApp Group Link** | https://chat.whatsapp.com/EjJQbYq0kaIDrFKyOLPcpK |
-| **Green API Group ID** | [TBD] |
+| Group | Link | Green API ID |
+|-------|------|--------------|
+| **הודעות** | https://chat.whatsapp.com/EjJQbYq0kaIDrFKyOLPcpK | `120363423727336065@g.us` |
+| **דיונים** | https://chat.whatsapp.com/DdTgzdh2jVgBOOKmPgWyEd | `120363424062875470@g.us` |
 
 ---
 
