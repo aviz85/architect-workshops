@@ -237,13 +237,15 @@ export async function POST(request: NextRequest) {
       message: getWelcomeMessage(name, workshop),
     })
 
-    // Small delay between messages
-    await new Promise(r => setTimeout(r, 1000))
-
-    const followUpResult = await sendWhatsAppMessage({
-      chatId,
-      message: getFollowUpMessage(workshop),
-    })
+    // Send follow-up only if Zoom link differs from watch page (avoid duplicate)
+    let followUpResult = { success: true }
+    if (workshop.zoomLink && workshop.zoomLink !== workshop.watchPageUrl) {
+      await new Promise(r => setTimeout(r, 1000))
+      followUpResult = await sendWhatsAppMessage({
+        chatId,
+        message: getFollowUpMessage(workshop),
+      })
+    }
 
     // Send welcome email
     const emailResult = await sendWelcomeEmail(email, name, workshop)
