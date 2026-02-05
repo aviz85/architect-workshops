@@ -213,7 +213,30 @@
 
 ## Recommendations & Testimonials
 
-> Add participant feedback after the workshop
+### יוסף רטיג (משתתף חוזר)
+
+**תובנות מפתח:**
+- מודל המדרגות ("התעוררות" → "התבגרות" → "מאסטר") היה מוצלח ושווה להחזיר
+- קהל הסדנה לא מכיר גיטהאב ודברים בסיסיים, למרות שקלוד קוד מותקן
+- בלי בסיס, לא מבינים את הפוטנציאל העתידי
+
+**הצעות:**
+1. **אזור אישי** - מעקב התקדמות + "תעודות" לכל שלב + תרגילים
+2. **פירמידת קהל** - זיקוק הקהל לפי רמות (מתחילים / אמצע / טופ)
+3. **מנטורינג** - אנשי טופ יעבירו הדרכות למתחילים (מודל חדר כושר אונליין)
+4. **תוכן מוקלט** - הקלטות למכירה, מדרגות בודדות או חבילות
+
+**מה היה חדש עבורו:**
+- ספריית פלאגינים + התקנת סקיל ממקור חיצוני
+- עבודה במובייל
+
+**נושאים מתקדמים שמבקש:**
+1. בניית אתר/אפליקציה/משחק - מעבר ל-HTML+JS+CSS
+2. דיפלוי ופריסה (Vercel, GitHub Pages)
+3. הפיכת סקילים לממשק ויזואלי (פלטפורמה ולא רק צ'אט)
+4. ההבדל בין סקיל לסוכן
+
+**ציטוט:** "אישית היום רוב המוחלט זה דברים שכבר יישמתי בעקבות הסדנה הקודמת"
 
 ---
 
@@ -267,21 +290,23 @@
 **Marketing Notes:** Use "Core Philosophy" section above for messaging inspiration
 
 ### Workshop Delivery
-- [ ] Workshop delivered
+- [x] Workshop delivered (2026-02-05)
 
 **Attendance:**
 | Metric | Count |
 |--------|-------|
-| WhatsApp Group Size | |
-| First 15 min | |
-| Peak | |
-| Last 15 min | |
+| Registered (paid) | 38 |
+| Peak | ~38 |
 
 ### Post-Workshop
-- [ ] Transcript added
-- [ ] Summary written
+- [x] Transcript added (`assets/transcription.md` - 183KB)
+- [x] Summary written (`assets/workshop-summary.md`)
+- [x] Thank you email sent to all 38 participants (2026-02-06)
+- [x] Thank you poster created (`assets/poster-thanks.jpg`)
+- [x] Thank you message sent to discussion group (2026-02-06)
 - [ ] Testimonials collected
-- [ ] Follow-up sent
+- [x] Follow-up sent
+- [x] Recording shared (Vimeo, access code: 019426)
 
 ---
 
