@@ -764,6 +764,237 @@
             color: var(--energy);
         }
 
+        /* Chrome Extension Section */
+        .chrome-section {
+            padding: 80px 5%;
+            min-height: auto;
+            background: linear-gradient(180deg, var(--void-deep) 0%, var(--void) 100%);
+        }
+
+        .chrome-content {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+        }
+
+        .chrome-intro {
+            margin-bottom: 32px;
+        }
+
+        .chrome-icon-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .chrome-big-icon {
+            font-size: 3rem;
+            flex-shrink: 0;
+        }
+
+        .chrome-icon-row h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--energy);
+            margin-bottom: 8px;
+        }
+
+        .chrome-icon-row p {
+            font-size: 1rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+        }
+
+        .chrome-icon-row p strong {
+            color: var(--text);
+        }
+
+        .chrome-how, .chrome-mcp, .chrome-capabilities {
+            margin-top: 28px;
+            padding-top: 28px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .chrome-how h4, .chrome-mcp h4, .chrome-capabilities h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .chrome-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .chrome-flow-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .chrome-flow-num {
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            border-radius: 50%;
+            background: var(--energy);
+            color: var(--void);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .chrome-flow-item strong {
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .chrome-flow-item p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        .chrome-flow-item code {
+            background: var(--void);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: var(--energy);
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+
+        .chrome-mcp p {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .chrome-mcp p strong {
+            color: var(--energy);
+        }
+
+        .mcp-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px;
+            background: var(--void);
+            border-radius: 12px;
+        }
+
+        .mcp-node {
+            padding: 10px 20px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .mcp-middle {
+            background: var(--energy);
+            color: var(--void);
+            border-color: var(--energy);
+        }
+
+        .mcp-arrow {
+            color: var(--energy);
+            font-size: 1.2rem;
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .capability-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 14px;
+            background: var(--void);
+            border-radius: 10px;
+        }
+
+        .capability-item > span {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .capability-item strong {
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .capability-item p {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        .chrome-example-box {
+            margin-top: 28px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.03) 100%);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+        }
+
+        .chrome-example-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--energy);
+            margin-bottom: 10px;
+        }
+
+        .chrome-example-box p {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .chrome-example-result {
+            color: var(--text) !important;
+        }
+
+        .chrome-example-result strong {
+            color: var(--energy);
+        }
+
+        @media (max-width: 768px) {
+            .chrome-content {
+                padding: 24px 18px;
+            }
+
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chrome-icon-row {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .mcp-diagram {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
         /* Ladder Section */
         .ladder-section {
             padding: 80px 5%;
@@ -1819,6 +2050,117 @@
                     <h4 class="tip-card-title">Private Repos</h4>
                     <p class="tip-card-desc">כל פרוייקט ב-GitHub הוא פרטי כברירת מחדל. רק אתם רואים.</p>
                     <div class="tip-card-code">gh repo create --private</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chrome Extension Section -->
+        <section class="chrome-section" id="chrome">
+            <h2 class="section-title reveal">קלוד <span>בדפדפן</span></h2>
+            <p class="section-subtitle reveal">Claude in Chrome — כשהסוכן רואה מה שאתה רואה</p>
+
+            <div class="chrome-content reveal">
+                <div class="chrome-intro">
+                    <div class="chrome-icon-row">
+                        <span class="chrome-big-icon">🌐</span>
+                        <div>
+                            <h3>מה זה Claude in Chrome?</h3>
+                            <p>תוסף רשמי של Anthropic לכרום שמאפשר לקלוד קוד <strong>לראות, ללחוץ, להקליד ולנווט</strong> בדפדפן שלכם — בדיוק כמו שאתם עושים.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chrome-how">
+                    <h4>איך זה עובד?</h4>
+                    <div class="chrome-flow">
+                        <div class="chrome-flow-item">
+                            <span class="chrome-flow-num">1</span>
+                            <div>
+                                <strong>מתקינים את התוסף</strong>
+                                <p>מתוך Chrome Web Store — חינם, רשמי של Anthropic</p>
+                            </div>
+                        </div>
+                        <div class="chrome-flow-item">
+                            <span class="chrome-flow-num">2</span>
+                            <div>
+                                <strong>מפעילים עם <code>claude --chrome</code></strong>
+                                <p>או מקלידים <code>/chrome</code> מתוך שיחה קיימת</p>
+                            </div>
+                        </div>
+                        <div class="chrome-flow-item">
+                            <span class="chrome-flow-num">3</span>
+                            <div>
+                                <strong>קלוד רואה את הדפדפן</strong>
+                                <p>מתחבר דרך פרוטוקול MCP — ומקבל גישה לכל מה שפתוח</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chrome-mcp">
+                    <h4>מה זה MCP?</h4>
+                    <p><strong>Model Context Protocol</strong> — פרוטוקול שמאפשר לקלוד להתחבר לכלים חיצוניים. התוסף של כרום הוא שרת MCP שחושף יכולות דפדפן לקלוד קוד.</p>
+                    <div class="mcp-diagram">
+                        <span class="mcp-node">Claude Code</span>
+                        <span class="mcp-arrow">⟷</span>
+                        <span class="mcp-node mcp-middle">MCP</span>
+                        <span class="mcp-arrow">⟷</span>
+                        <span class="mcp-node">Chrome</span>
+                    </div>
+                </div>
+
+                <div class="chrome-capabilities">
+                    <h4>מה קלוד יכול לעשות בדפדפן?</h4>
+                    <div class="capabilities-grid">
+                        <div class="capability-item">
+                            <span>👁️</span>
+                            <div>
+                                <strong>לקרוא דפים</strong>
+                                <p>טקסט, טבלאות, טפסים, כפתורים</p>
+                            </div>
+                        </div>
+                        <div class="capability-item">
+                            <span>🖱️</span>
+                            <div>
+                                <strong>ללחוץ ולהקליד</strong>
+                                <p>מילוי טפסים, ניווט, חיפוש</p>
+                            </div>
+                        </div>
+                        <div class="capability-item">
+                            <span>📸</span>
+                            <div>
+                                <strong>צילומי מסך</strong>
+                                <p>לראות בדיוק מה מופיע על המסך</p>
+                            </div>
+                        </div>
+                        <div class="capability-item">
+                            <span>🔗</span>
+                            <div>
+                                <strong>לנווט בין דפים</strong>
+                                <p>לפתוח טאבים, ללכת קדימה ואחורה</p>
+                            </div>
+                        </div>
+                        <div class="capability-item">
+                            <span>🔐</span>
+                            <div>
+                                <strong>גישה לאתרים מחוברים</strong>
+                                <p>Gmail, Google Docs, Notion — כל מה שאתם מחוברים אליו</p>
+                            </div>
+                        </div>
+                        <div class="capability-item">
+                            <span>🎬</span>
+                            <div>
+                                <strong>הקלטת GIF</strong>
+                                <p>תיעוד פעולות הדפדפן כאנימציה</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chrome-example-box">
+                    <div class="chrome-example-title">💡 דוגמה מהחיים</div>
+                    <p>״קלוד, תיכנס ל-Gmail, תמצא את המייל מהלקוח, תשלוף את הפרטים ותעדכן את קובץ הלקוחות״</p>
+                    <p class="chrome-example-result">קלוד פותח את Gmail, מוצא את המייל, קורא אותו, וחוזר לעדכן את הקובץ — <strong>בלי שנגעתם בדפדפן.</strong></p>
                 </div>
             </div>
         </section>
