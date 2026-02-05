@@ -788,6 +788,163 @@
             animation: glow-pulse 3s ease-in-out infinite;
         }
 
+        /* Examples Section */
+        .examples {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .examples-intro {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .example-card {
+            background: linear-gradient(145deg, var(--card) 0%, var(--card-hover) 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: right;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .example-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--energy), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--energy);
+            box-shadow: 0 15px 40px rgba(34, 197, 94, 0.15);
+        }
+
+        .example-card:hover::before {
+            opacity: 1;
+        }
+
+        .example-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .example-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 10px var(--energy-glow));
+        }
+
+        .example-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .example-role {
+            font-size: 0.85rem;
+            color: var(--energy);
+            margin-top: 2px;
+        }
+
+        .example-scenario {
+            background: var(--void);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-right: 3px solid var(--energy);
+        }
+
+        .example-scenario-label {
+            font-size: 0.75rem;
+            color: var(--energy);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .example-scenario-text {
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .example-ecosystem {
+            margin-top: 16px;
+        }
+
+        .example-ecosystem-title {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ecosystem-components {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .ecosystem-tag {
+            padding: 4px 10px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            color: var(--energy);
+        }
+
+        .example-result {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .example-result-label {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+        }
+
+        .example-result-text {
+            font-size: 1rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .example-result-text strong {
+            color: var(--energy);
+        }
+
+        @media (max-width: 768px) {
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -1192,7 +1349,12 @@
                             <div class="how-to-title">📋 הקמה חד-פעמית</div>
                             <ol class="how-to-steps">
                                 <li>פתחו חשבון ב-github.com</li>
-                                <li>התקינו gh CLI: <code>brew install gh</code></li>
+                                <li>התקינו gh CLI:<br>
+                                    <span style="color: var(--text-dim); font-size: 0.8rem;">
+                                        Mac: <code>brew install gh</code><br>
+                                        Windows: <code>winget install GitHub.cli</code>
+                                    </span>
+                                </li>
                                 <li>התחברו: <code>gh auth login</code></li>
                                 <li>בקשו מקלוד: ״צור repo ודחוף את הפרוייקט״</li>
                             </ol>
@@ -1301,6 +1463,199 @@
                     <div class="ladder-content">
                         <h4>מאשר (Approver)</h4>
                         <p>קלוד עושה הכל, אתה רק מאשר</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Examples Section -->
+        <section class="examples" id="examples">
+            <h2 class="section-title reveal">דוגמאות <span>מהחיים</span></h2>
+            <p class="examples-intro reveal">
+                פרוייקט אג'נטי הוא לא קוד. זה אקוסיסטם של ידע, סקילים וכלים שעוטף את הסוכן ומאפשר לו להחליט ולפעול בשבילך.
+                <br>הנה דוגמאות איך אנשים מתחומים שונים בונים פרוייקטים שמשנים להם את החיים.
+            </p>
+
+            <div class="examples-grid">
+                <!-- Example 1: Teacher -->
+                <div class="example-card reveal">
+                    <div class="example-header">
+                        <span class="example-icon">👩‍🏫</span>
+                        <div>
+                            <div class="example-title">המורה שמכירה כל תלמיד</div>
+                            <div class="example-role">מורה לחטיבה / תיכון</div>
+                        </div>
+                    </div>
+                    <div class="example-scenario">
+                        <div class="example-scenario-label">📋 הסיטואציה</div>
+                        <div class="example-scenario-text">
+                            מעלה מבחנים סרוקים לתיקייה. הסוכן מתמלל, בודק תשובות, מזהה דפוסי טעויות של כל תלמיד, ומציע טיפים אישיים להעצמה.
+                        </div>
+                    </div>
+                    <div class="example-ecosystem">
+                        <div class="example-ecosystem-title">🔧 האקוסיסטם שנבנה בהדרגה:</div>
+                        <div class="ecosystem-components">
+                            <span class="ecosystem-tag">CLAUDE.md עם פרופיל כיתה</span>
+                            <span class="ecosystem-tag">סקיל בדיקת מבחנים</span>
+                            <span class="ecosystem-tag">קובץ דפוסים לכל תלמיד</span>
+                            <span class="ecosystem-tag">סקיל המלצות אישיות</span>
+                        </div>
+                    </div>
+                    <div class="example-result">
+                        <div class="example-result-label">התוצאה:</div>
+                        <div class="example-result-text">"ידעתי בדיוק איפה <strong>כל תלמיד נתקע</strong> - בלי לשבת שעות על ניתוח"</div>
+                    </div>
+                </div>
+
+                <!-- Example 2: Wedding Planner -->
+                <div class="example-card reveal">
+                    <div class="example-header">
+                        <span class="example-icon">💒</span>
+                        <div>
+                            <div class="example-title">מתכננת החתונות</div>
+                            <div class="example-role">מארגנת אירועים עצמאית</div>
+                        </div>
+                    </div>
+                    <div class="example-scenario">
+                        <div class="example-scenario-label">📋 הסיטואציה</div>
+                        <div class="example-scenario-text">
+                            מנהלת 8 חתונות במקביל. הסוכן יודע את כל הספקים, התקציבים, הדדליינים, ושולח תזכורות אוטומטיות. "תזכירי לזוג כהן שצריך לאשר תפריט עד מחר".
+                        </div>
+                    </div>
+                    <div class="example-ecosystem">
+                        <div class="example-ecosystem-title">🔧 האקוסיסטם שנבנה בהדרגה:</div>
+                        <div class="ecosystem-components">
+                            <span class="ecosystem-tag">תיקייה לכל אירוע</span>
+                            <span class="ecosystem-tag">רשימת ספקים מועדפים</span>
+                            <span class="ecosystem-tag">סקיל מעקב תקציב</span>
+                            <span class="ecosystem-tag">חיבור WhatsApp</span>
+                            <span class="ecosystem-tag">סקיל תזכורות</span>
+                        </div>
+                    </div>
+                    <div class="example-result">
+                        <div class="example-result-label">התוצאה:</div>
+                        <div class="example-result-text">"הכפלתי את מספר האירועים <strong>בלי להכפיל את השעות</strong>"</div>
+                    </div>
+                </div>
+
+                <!-- Example 3: Parent -->
+                <div class="example-card reveal">
+                    <div class="example-header">
+                        <span class="example-icon">👨‍👩‍👧‍👦</span>
+                        <div>
+                            <div class="example-title">ההורה המאורגן</div>
+                            <div class="example-role">הורה ל-4 ילדים</div>
+                        </div>
+                    </div>
+                    <div class="example-scenario">
+                        <div class="example-scenario-label">📋 הסיטואציה</div>
+                        <div class="example-scenario-text">
+                            מנהל יומן משפחתי: חוגים, מבחנים, ימי הולדת, תורנויות. הסוכן מתאם בין כל הלוחות, מזהה קונפליקטים, ושולח תזכורת בוקר ל-WhatsApp: "היום: נעם - שחייה, מיה - מבחן מתמטיקה".
+                        </div>
+                    </div>
+                    <div class="example-ecosystem">
+                        <div class="example-ecosystem-title">🔧 האקוסיסטם שנבנה בהדרגה:</div>
+                        <div class="ecosystem-components">
+                            <span class="ecosystem-tag">CLAUDE.md עם פרטי המשפחה</span>
+                            <span class="ecosystem-tag">חיבור ל-Google Calendar</span>
+                            <span class="ecosystem-tag">סקיל תזכורת בוקר</span>
+                            <span class="ecosystem-tag">חיבור WhatsApp</span>
+                        </div>
+                    </div>
+                    <div class="example-result">
+                        <div class="example-result-label">התוצאה:</div>
+                        <div class="example-result-text">"סוף סוף <strong>לא שוכחים שום דבר</strong> - והילדים מרגישים שרואים אותם"</div>
+                    </div>
+                </div>
+
+                <!-- Example 4: Writer -->
+                <div class="example-card reveal">
+                    <div class="example-header">
+                        <span class="example-icon">✍️</span>
+                        <div>
+                            <div class="example-title">הסופרת שכותבת ספר</div>
+                            <div class="example-role">כותבת פנטזיה</div>
+                        </div>
+                    </div>
+                    <div class="example-scenario">
+                        <div class="example-scenario-label">📋 הסיטואציה</div>
+                        <div class="example-scenario-text">
+                            כותבת סדרת פנטזיה עם 40 דמויות. הסוכן מכיר את כולן - היסטוריה, מערכות יחסים, סודות. "מה הקשר בין אלינור לדוכס?" - ומקבלת תשובה מיידית עם הפניות לפרקים.
+                        </div>
+                    </div>
+                    <div class="example-ecosystem">
+                        <div class="example-ecosystem-title">🔧 האקוסיסטם שנבנה בהדרגה:</div>
+                        <div class="ecosystem-components">
+                            <span class="ecosystem-tag">קובץ דמויות מפורט</span>
+                            <span class="ecosystem-tag">ציר זמן עלילתי</span>
+                            <span class="ecosystem-tag">מפת עולם</span>
+                            <span class="ecosystem-tag">סקיל בדיקת עקביות</span>
+                            <span class="ecosystem-tag">סקיל רעיונות לפרק</span>
+                        </div>
+                    </div>
+                    <div class="example-result">
+                        <div class="example-result-label">התוצאה:</div>
+                        <div class="example-result-text">"יש לי <strong>עורך אישי שמכיר את העולם שלי</strong> טוב ממני"</div>
+                    </div>
+                </div>
+
+                <!-- Example 5: Therapist -->
+                <div class="example-card reveal">
+                    <div class="example-header">
+                        <span class="example-icon">🧠</span>
+                        <div>
+                            <div class="example-title">הפסיכולוג המלווה</div>
+                            <div class="example-role">מטפל פרטי</div>
+                        </div>
+                    </div>
+                    <div class="example-scenario">
+                        <div class="example-scenario-label">📋 הסיטואציה</div>
+                        <div class="example-scenario-text">
+                            אחרי כל פגישה, מכתיב סיכום קצר. הסוכן מארגן את הסיכומים, עוקב אחרי נושאים חוזרים, ומכין "דף הכנה" לפני כל פגישה: "בפגישה האחרונה דיברתם על... נקודות לשים לב..."
+                        </div>
+                    </div>
+                    <div class="example-ecosystem">
+                        <div class="example-ecosystem-title">🔧 האקוסיסטם שנבנה בהדרגה:</div>
+                        <div class="ecosystem-components">
+                            <span class="ecosystem-tag">תיקייה לכל מטופל</span>
+                            <span class="ecosystem-tag">סקיל תמלול סיכום</span>
+                            <span class="ecosystem-tag">סקיל זיהוי דפוסים</span>
+                            <span class="ecosystem-tag">סקיל הכנה לפגישה</span>
+                        </div>
+                    </div>
+                    <div class="example-result">
+                        <div class="example-result-label">התוצאה:</div>
+                        <div class="example-result-text">"אני נכנס לפגישה <strong>מוכן ומרוכז</strong> - לא צריך לדפדף בהערות"</div>
+                    </div>
+                </div>
+
+                <!-- Example 6: Music Teacher -->
+                <div class="example-card reveal">
+                    <div class="example-header">
+                        <span class="example-icon">🎸</span>
+                        <div>
+                            <div class="example-title">מורה למוזיקה</div>
+                            <div class="example-role">מורה פרטי לגיטרה</div>
+                        </div>
+                    </div>
+                    <div class="example-scenario">
+                        <div class="example-scenario-label">📋 הסיטואציה</div>
+                        <div class="example-scenario-text">
+                            מלמד 25 תלמידים ברמות שונות. הסוכן יודע מה כל תלמיד למד, איפה הוא נתקע, ומה השיר הבא שמתאים לו. "מה ללמד את דני היום?" - ומקבל תוכנית שיעור מותאמת.
+                        </div>
+                    </div>
+                    <div class="example-ecosystem">
+                        <div class="example-ecosystem-title">🔧 האקוסיסטם שנבנה בהדרגה:</div>
+                        <div class="ecosystem-components">
+                            <span class="ecosystem-tag">פרופיל מוזיקלי לכל תלמיד</span>
+                            <span class="ecosystem-tag">ספריית שירים לפי רמה</span>
+                            <span class="ecosystem-tag">סקיל תוכנית שיעור</span>
+                            <span class="ecosystem-tag">מעקב התקדמות</span>
+                        </div>
+                    </div>
+                    <div class="example-result">
+                        <div class="example-result-label">התוצאה:</div>
+                        <div class="example-result-text">"כל תלמיד מרגיש <strong>שהשיעור נבנה בדיוק בשבילו</strong>"</div>
                     </div>
                 </div>
             </div>
