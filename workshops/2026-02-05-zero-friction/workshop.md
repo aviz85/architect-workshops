@@ -192,6 +192,9 @@
 | Description | URL |
 |-------------|-----|
 | **Payment Link** | https://mrng.to/rBVo3iq7bv |
+| **Workshop Guide** | https://aviz85.github.io/zero-friction-guide/ |
+| **Installation Guide** | https://aviz85.github.io/claude-code-windows-guide/he.html |
+| **Skills Library** | https://aviz85.github.io/claude-skills-library |
 
 ---
 
@@ -199,10 +202,12 @@
 
 | File | Description |
 |------|-------------|
-| `presentation-plan.md` | Presentation blueprint (Hebrew, RTL) |
-| `assets/poster.png` | Workshop promotional poster |
-| `assets/avatar.jpg` | Workshop avatar |
-| `assets/slides.pdf` | Final presentation slides |
+| `guide.html` | Interactive workshop guide (deployed to GitHub Pages) |
+| `assets/hero-bg.jpg` | Hero background - astronaut floating in space |
+| `assets/avatar.jpg` | Workshop avatar (4 poses) |
+| `assets/poster_atomic_epic.jpg` | Main poster - astronaut reading Atomic Habits |
+| `assets/poster_final_*.jpg` | Action posters (manga style) |
+| `assets/poster_content_*.jpg` | Content/explanatory posters |
 
 ---
 
@@ -216,10 +221,21 @@
 
 ### POC (Proof of Concept)
 - [x] Idea defined
-- [ ] POC built
-- [ ] Wow effect identified
+- [x] POC built (interactive guide page)
+- [x] Wow effect identified
 
-**POC Notes:** [TBD]
+**POC Notes:** Interactive HTML guide with space theme, hero background, step-by-step flow
+
+### Content Created
+- [x] Interactive guide page (`guide.html`)
+- [x] Hero background image (astronaut in space)
+- [x] "Why build an ecosystem?" section with timeline
+- [x] Dev habits section (Markdown, GitHub, .gitignore)
+- [x] 11-step workshop flow in 4 phases
+- [x] 6 niche examples (teacher, wedding planner, parent, writer, therapist, music teacher)
+- [x] Automation Ladder visualization
+- [x] Cumulative effect visualization
+- [x] `/find-my-project` skill created and added to skills library
 
 ### Sneak Peeks
 | # | Date | Platform | Link | Notes |
@@ -229,9 +245,9 @@
 | 3 | | | | |
 
 ### Presentation
-- [ ] Content outline reviewed
-- [ ] Presentation plan created (`presentation-plan.md`)
-- [ ] Slides created via NotebookLM Studio (manual step)
+- [x] Content outline reviewed (guide.html serves as presentation)
+- [x] Interactive guide created (replaces traditional slides)
+- [ ] ~~Slides created via NotebookLM Studio~~ (using guide.html instead)
 
 ### Poster & Marketing
 - [x] Poster created (multiple versions - action + content)
@@ -245,6 +261,7 @@
 |------|-------|----------|
 | Action/Manga | `poster_final_1-5`, `poster_manga1-3` | Eye-catching, social media |
 | Content/Explanatory | `poster_content_1-8` | Facebook groups, detailed explanation |
+| Atomic Habits | `poster_atomic_epic.jpg` | Main promotional |
 | Final 3 v2 | `poster_final_3_v2.jpg` | "ללא מעצורים. ללא גבולות." |
 
 **Marketing Notes:** Use "Core Philosophy" section above for messaging inspiration
@@ -273,3 +290,13 @@
 - הדימוי "0 חיכוך" - כמו בחלל, אין התנגדות, העבודה זורמת
 - סדנה למתקדמים - ההנחה שכבר יש קלוד קוד
 - דגש על פשטות ועל קבצי טקסט
+- **Guide page flow:**
+  1. Hero with space background
+  2. "Why ecosystem?" - small investment, big returns over time
+  3. Dev habits - .md files, GitHub sync, .gitignore
+  4. 11 steps in 4 phases: Finding project → Building foundation → Adding power → Full system
+  5. Tips section (TSK, WAME, private repos)
+  6. Automation Ladder (Executor → Manager → Strategist → Approver)
+  7. 6 niche examples from real life
+  8. Cumulative effect visualization
+- **New skill:** `/find-my-project` - helps beginners find their first agentic project through pain point identification
