@@ -940,6 +940,76 @@
             color: var(--text);
         }
 
+        .dev-habits {
+            margin-top: 40px;
+            padding: 30px;
+            background: var(--void);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .dev-habits h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .dev-icon {
+            font-size: 1.5rem;
+        }
+
+        .dev-habits > p {
+            color: var(--text-dim);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .habit-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .habit-item {
+            padding: 16px 20px;
+            background: var(--card);
+            border-radius: 10px;
+            border-right: 3px solid var(--energy);
+        }
+
+        .habit-title {
+            font-weight: 600;
+            color: var(--energy);
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        .habit-desc {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .habit-desc strong {
+            color: var(--text);
+        }
+
+        .habit-note {
+            margin-top: 20px;
+            padding: 14px 18px;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        .habit-note strong {
+            color: var(--energy);
+        }
+
         @media (max-width: 768px) {
             .ecosystem-content {
                 padding: 30px 20px;
@@ -948,6 +1018,10 @@
             .ecosystem-cta {
                 flex-direction: column;
                 text-align: center;
+            }
+
+            .dev-habits {
+                padding: 20px;
             }
         }
 
@@ -1248,6 +1322,30 @@
                         ואז מגלים: <strong>נבנה פה משהו עוצמתי.</strong>
                         לא כלי חד-פעמי — אלא שותף שמכיר את העולם שלך.
                     </p>
+                </div>
+
+                <div class="dev-habits">
+                    <h3><span class="dev-icon">👨‍💻</span> הרגלים מעולם התוכנה</h3>
+                    <p>אנחנו מאמצים כמה הרגלים שהגיעו מעולם הפיתוח — לא צריך להיות מתכנתים כדי ליהנות מהם:</p>
+
+                    <div class="habit-grid">
+                        <div class="habit-item">
+                            <div class="habit-title">📝 קבצי Markdown (.md)</div>
+                            <div class="habit-desc">קבצי טקסט פשוטים עם עיצוב בסיסי. הסוכן קורא אותם בקלות, וגם אתם. לא צריך Word או Google Docs.</div>
+                        </div>
+
+                        <div class="habit-item">
+                            <div class="habit-title">🔄 סנכרון עם GitHub</div>
+                            <div class="habit-desc">גיבוי אוטומטי + היסטוריית גרסאות + אפשרות לעבוד מכמה מחשבים. הפרוייקט שלכם תמיד בטוח בענן.</div>
+                        </div>
+
+                        <div class="habit-item">
+                            <div class="habit-title">🚫 .gitignore</div>
+                            <div class="habit-desc">קובץ שאומר ל-GitHub מה <strong>לא</strong> לסנכרן: קבצים כבדים (תמונות, PDF), קבצים רגישים (סיסמאות, API keys). אלה צריכים גיבוי במקום אחר (Google Drive, Dropbox).</div>
+                        </div>
+                    </div>
+
+                    <p class="habit-note">💡 <strong>הרעיון:</strong> הכלים האלה הם הסיבה שמפתחים יכולים לעבוד על פרוייקטים מורכבים בלי לאבד שום דבר. עכשיו זה זמין גם לכם.</p>
                 </div>
 
                 <div class="ecosystem-cta">
