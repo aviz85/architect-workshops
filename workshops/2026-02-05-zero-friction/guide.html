@@ -492,6 +492,70 @@
             color: var(--text-dim);
         }
 
+        /* Install Steps */
+        .install-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 14px;
+        }
+
+        .install-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .install-num {
+            width: 26px;
+            height: 26px;
+            min-width: 26px;
+            border-radius: 50%;
+            background: var(--energy);
+            color: var(--void);
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .install-content {
+            flex: 1;
+        }
+
+        .install-content strong {
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .install-code {
+            margin-top: 6px;
+            padding: 10px 14px;
+            background: var(--void);
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--energy);
+            border: 1px solid var(--border);
+            word-break: break-all;
+        }
+
+        .install-details {
+            margin-top: 6px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        .install-details code {
+            background: var(--void);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--energy);
+            font-size: 0.8rem;
+        }
+
         /* Tip Box */
         .tip-box {
             background: var(--tip-bg);
@@ -1396,14 +1460,33 @@
                         <div class="skill-box">
                             <div class="skill-box-title">
                                 <span>🔮</span>
-                                סקיל עזר למציאת הפרוייקט
+                                סקיל עזר למציאת הפרוייקט: <code>/find-my-project</code>
                             </div>
-                            <div class="skill-command">/find-my-project</div>
-                            <div class="skill-features">
-                                <span class="skill-feature">שואל על הכאבים</span>
-                                <span class="skill-feature">מזהה הזדמנויות</span>
-                                <span class="skill-feature">מציע פרוייקט</span>
-                                <span class="skill-feature">מציע קבצים</span>
+
+                            <div class="install-steps">
+                                <div class="install-step">
+                                    <span class="install-num">1</span>
+                                    <div class="install-content">
+                                        <strong>הוסיפו את ספריית הסקילים</strong>
+                                        <div class="install-code">/plugin marketplace add aviz85/claude-skills-library</div>
+                                    </div>
+                                </div>
+                                <div class="install-step">
+                                    <span class="install-num">2</span>
+                                    <div class="install-content">
+                                        <strong>בחרו את הסקיל</strong>
+                                        <div class="install-details">
+                                            הקלידו <code>/plugin</code> → לחצו ימינה ל-marketplace → בחרו <code>aviz-skills-library</code> → browse plugins → בחרו <code>find-my-project</code>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="install-step">
+                                    <span class="install-num">3</span>
+                                    <div class="install-content">
+                                        <strong>הפעילו מחדש</strong>
+                                        <div class="install-details">סגרו Claude Code → פתחו מחדש → הקלידו <code>/skills</code> לוודא שמופיע</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
