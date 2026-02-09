@@ -18,6 +18,8 @@ A collection of potential workshop topics for "Aviz - The Architect".
 | Web Scraping עם AI              | איסוף מידע מאתרים בעזרת AI              | Intermediate | 2 hours  | Available |
 | Claude for Chrome               | שליטה בדפדפן עם AI                      | Intermediate | 2 hours  | Planned   |
 | **Agentic Apps לעסקים**         | בניית אפליקציות שלמות עם Claude Code primitives - ללא קוד מסורתי | Advanced     | 3 hours  | Concept   |
+| AI Tools for Architects         | Using AI for floor plans, rendering, client presentations | Intermediate | 3 hours  | Draft     |
+| **סידרת קלודוש - 3 מפגשים**   | Series: Launch→Spaceship→Astronauts. ₪297. New cycle every 9 days. | All Levels   | 3×90 min | **Active** |
 
 ## How to Use
 
