@@ -20,6 +20,24 @@
 | 2/3 | מצב חללית | Spaceship Mode | למתקדמים | 🛸 |
 | 3/3 | אפס כבידה | Zero Gravity | לאסטרונאוטים | 🌌 |
 
+### Session Core Concepts (What We Actually Learn)
+
+| Session | Core Concept | The Shift | Visual Metaphor |
+|---------|-------------|-----------|-----------------|
+| **השיגור** | Breaking the window - exit the tab/window flow. One agent runs a full task sequence for you. | From copy-pasting between tabs → one agent handling the chain | Shattering a browser window, stepping through to the other side |
+| **מצב חללית** | Multiple windows, multiple projects. Agent works across screens/projects simultaneously. | From single-task → multi-project parallel work on computer | Sitting at a multi-screen workstation, holographic windows surrounding you |
+| **אפס כבידה** | Swarm control from WhatsApp. Leave the computer. Manage agent swarm from phone. | From sitting at computer → floating free, phone-only control | Floating in zero gravity, phone in hand, agent swarm orbiting like satellites |
+
+### The Progression
+
+```
+Session 1: You → [one agent] → task chain
+Session 2: You at computer → [agent across projects] → parallel work
+Session 3: You on phone → [agent swarm] → autonomous execution
+```
+
+**The risk escalation:** Each session requires more trust in the agents. Session 3 = letting go of the keyboard entirely.
+
 ---
 
 ## Visual Language

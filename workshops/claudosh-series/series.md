@@ -54,6 +54,12 @@ New cycle starts every ~9 days. Continuous enrollment.
 **Prerequisite:** None
 **What they leave with:** Installed agent + first working skill + mind blown
 
+### Core Concept: Breaking the Window
+
+You're stuck in an endless flow of browser tabs, chat windows, emails, notifications. Copy-paste between apps. Context switching. The agent breaks you OUT of that loop. One agent, one conversation, a sequence of tasks - it handles the whole chain while you watch. The "launch" = breaking through the glass ceiling of manual tab-hopping into agent-powered flow.
+
+**Visual metaphor:** Shattering the browser window. Stepping out from behind the screen.
+
 ### Philosophy: Fish + Fishing Rod
 
 Give immediate value (fish) AND long-term tools (fishing rod). Nobody leaves empty-handed.
@@ -97,6 +103,12 @@ Give immediate value (fish) AND long-term tools (fishing rod). Nobody leaves emp
 **Prerequisite:** Session 1 (Launch)
 **What they leave with:** 2 working projects + cross-project magic + multi-agent experience
 
+### Core Concept: Multiple Windows, Multiple Projects
+
+Session 1 gave you one agent doing a chain of tasks. Now you multiply: multiple projects open, multiple screens, the agent working across all of them. Like a spaceship command bridge - you're surrounded by screens/windows, each showing a different project, and the agent navigates between them. Cross-project work, parallel tasks, managing complexity through the agent instead of through your own multitasking.
+
+**Visual metaphor:** Working at a multi-screen workstation, holographic windows surrounding you.
+
 ### Philosophy: Build, Don't Learn
 
 No slides. No theory. Pure building. Participants create real projects that solve real problems in their lives.
@@ -139,6 +151,12 @@ No slides. No theory. Pure building. Participants create real projects that solv
 **Tagline:** הסוכנים עובדים, אתה מנהל
 **Prerequisite:** Session 2 (Spaceship Mode)
 **What they leave with:** Agent team experience + WhatsApp command center + personal OS vision
+
+### Core Concept: Swarm Control from WhatsApp
+
+Session 2 had you at the computer, commanding multiple windows. Now you leave the computer entirely. You control a SWARM of agents from your phone - via WhatsApp. Voice message in, results back. You're floating in zero gravity - no desk, no keyboard, no screen. Just your phone and a network of agents executing. This is the riskiest leap: trusting agents to run without you watching every step.
+
+**Visual metaphor:** Floating above it all, phone in hand, agent swarm orbiting like satellites.
 
 ### Philosophy: From Operator to Strategist
 
