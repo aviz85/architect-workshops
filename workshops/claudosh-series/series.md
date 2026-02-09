@@ -133,7 +133,7 @@ No slides. No theory. Pure building. Participants create real projects that solv
 
 ---
 
-## Session 3: Astronauts 🌌
+## Session 3: Zero Gravity 🌌
 
 **Hebrew:** קלודוש - אפס כבידה
 **Tagline:** הסוכנים עובדים, אתה מנהל
