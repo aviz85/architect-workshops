@@ -135,7 +135,7 @@ No slides. No theory. Pure building. Participants create real projects that solv
 
 ## Session 3: Astronauts 🌌
 
-**Hebrew:** קלודוש - אסטרונאוטים
+**Hebrew:** קלודוש - אפס כבידה
 **Tagline:** הסוכנים עובדים, אתה מנהל
 **Prerequisite:** Session 2 (Spaceship Mode)
 **What they leave with:** Agent team experience + WhatsApp command center + personal OS vision
