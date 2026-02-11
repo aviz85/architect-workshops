@@ -13,16 +13,18 @@
       color: #1a1a2e;
       line-height: 1.7;
       font-size: 12px;
+      background: #f7f8fa;
     }
 
     .page {
-      width: 210mm;
-      height: 297mm;
-      padding: 10mm 12mm 13mm;
+      width: 100%;
+      height: 381mm;
+      padding: 12mm 16mm 14mm;
       page-break-after: always;
       position: relative;
-      background: #fff;
+      background: #f7f8fa;
       overflow: hidden;
+      box-sizing: border-box;
     }
     .page:last-child { page-break-after: auto; }
 
@@ -32,7 +34,7 @@
       position: absolute;
       top: 0; right: 0; left: 0;
       height: 4px;
-      background: linear-gradient(90deg, #16A34A, #22C55E, #4ADE80);
+      background: linear-gradient(90deg, #15803d, #16A34A, #22c55e);
     }
 
     h1 {
@@ -47,7 +49,7 @@
       color: #0f172a;
       margin: 14px 0 8px;
       padding-bottom: 4px;
-      border-bottom: 2px solid #22C55E;
+      border-bottom: 2px solid #16A34A;
       display: inline-block;
     }
     h3 {
@@ -67,7 +69,7 @@
 
     .subtitle {
       font-size: 18px;
-      color: #22C55E;
+      color: #16A34A;
       font-weight: 700;
       margin-bottom: 4px;
     }
@@ -80,7 +82,7 @@
     }
 
     .hero-box {
-      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      background: linear-gradient(135deg, #dcfce7 0%, #dcfce7 100%);
       border: 1px solid #bbf7d0;
       border-radius: 12px;
       padding: 14px 18px;
@@ -114,7 +116,7 @@
       margin: 8px 0;
     }
     .audience-item {
-      background: #f0fdf4;
+      background: #dcfce7;
       border: 1px solid #bbf7d0;
       border-radius: 8px;
       padding: 10px 12px;
@@ -136,7 +138,7 @@
     .session-num {
       font-size: 38px;
       font-weight: 900;
-      color: #22C55E;
+      color: #16A34A;
       line-height: 1;
     }
     .session-info .session-title {
@@ -157,12 +159,12 @@
       font-size: 11.5px;
     }
     .agenda-table th {
-      background: #f0fdf4;
+      background: #dcfce7;
       color: #166534;
       font-weight: 700;
       padding: 5px 10px;
       text-align: right;
-      border-bottom: 2px solid #22C55E;
+      border-bottom: 2px solid #16A34A;
     }
     .agenda-table td {
       padding: 5px 10px;
@@ -170,11 +172,11 @@
       vertical-align: top;
     }
     .agenda-table tr:last-child td { border-bottom: none; }
-    .time-cell { color: #22C55E; font-weight: 700; white-space: nowrap; width: 55px; }
+    .time-cell { color: #16A34A; font-weight: 700; white-space: nowrap; width: 55px; }
 
     .outcome-box {
-      background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
-      border-right: 4px solid #22C55E;
+      background: linear-gradient(135deg, #dcfce7, #ecfdf5);
+      border-right: 4px solid #16A34A;
       border-radius: 0 8px 8px 0;
       padding: 10px 14px;
       margin: 8px 0;
@@ -200,7 +202,7 @@
       content: '✓';
       position: absolute;
       right: 0;
-      color: #22C55E;
+      color: #16A34A;
       font-weight: 700;
     }
 
@@ -231,7 +233,7 @@
     }
     .schedule-table th {
       background: #0f172a;
-      color: #22C55E;
+      color: #16A34A;
       font-weight: 700;
       padding: 8px 12px;
       text-align: center;
@@ -253,14 +255,14 @@
     }
     .acc-step {
       flex: 1;
-      background: #f0fdf4;
+      background: #dcfce7;
       border: 1px solid #bbf7d0;
       border-radius: 8px;
       padding: 10px;
       text-align: center;
       position: relative;
     }
-    .acc-step .num { font-size: 22px; font-weight: 900; color: #22C55E; }
+    .acc-step .num { font-size: 22px; font-weight: 900; color: #16A34A; }
     .acc-step .label { font-size: 11px; color: #166534; font-weight: 600; margin-top: 2px; }
     .acc-step .desc { font-size: 10.5px; color: #4b5563; margin-top: 2px; line-height: 1.4; }
 
@@ -283,9 +285,9 @@
 
     .footer-bar {
       position: absolute;
-      bottom: 8mm;
-      right: 12mm;
-      left: 12mm;
+      bottom: 10mm;
+      right: 16mm;
+      left: 16mm;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -294,7 +296,7 @@
       border-top: 1px solid #e5e7eb;
       padding-top: 6px;
     }
-    .footer-bar .brand { color: #22C55E; font-weight: 700; }
+    .footer-bar .brand { color: #16A34A; font-weight: 700; }
 
     .checklist {
       list-style: none; padding: 0; margin: 4px 0;
@@ -310,7 +312,7 @@
       content: '✓';
       position: absolute;
       right: 0;
-      color: #22C55E;
+      color: #16A34A;
       font-weight: 700;
     }
 
@@ -321,7 +323,7 @@
       padding: 8px 12px;
       margin: 5px 0;
     }
-    .concept-box .term { font-weight: 700; color: #22C55E; font-size: 13px; }
+    .concept-box .term { font-weight: 700; color: #16A34A; font-size: 13px; }
     .concept-box .def { font-size: 11.5px; color: #475569; margin-top: 2px; line-height: 1.5; }
 
     .price-box {
@@ -332,7 +334,7 @@
       margin: 12px 0;
       color: #fff;
     }
-    .price-box .amount { font-size: 36px; font-weight: 900; color: #22C55E; }
+    .price-box .amount { font-size: 36px; font-weight: 900; color: #16A34A; }
     .price-box .detail { font-size: 13px; color: #94a3b8; margin-top: 2px; }
     .price-box .includes { font-size: 11px; color: #cbd5e1; margin-top: 8px; text-align: right; }
   </style>
@@ -341,7 +343,7 @@
 
 <!-- ==================== PAGE 1: Cover + Intro ==================== -->
 <div class="page">
-  <p style="font-size: 12px; color: #22C55E; font-weight: 700; letter-spacing: 2px; margin-bottom: 4px;">AVIZ — THE ARCHITECT</p>
+  <p style="font-size: 12px; color: #16A34A; font-weight: 700; letter-spacing: 2px; margin-bottom: 4px;">AVIZ — THE ARCHITECT</p>
   <h1>החללית של קלודוש</h1>
   <p class="subtitle">סיליבוס מלא — 3 מפגשים למערכת הפעלה אישית</p>
   <p class="tagline">סדרת סדנאות מעשיות לבניית מערכת סוכני AI שעובדת בשבילך, בלי לכתוב שורת קוד אחת.</p>
