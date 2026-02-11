@@ -67,26 +67,34 @@ const WORKSHOPS: Record<string, {
 const MORNING_PRODUCTS: Record<string, {
   dbName: string
   title: string
+  descriptionKeywords: string[]
   welcomeMessage: (name: string) => string
   welcomeEmailHtml: (name: string) => string
 }> = {
-  // TODO: Replace with real productId from Morning when series product is created
+  // Product ID will be confirmed from webhook logs. Description-based matching active as fallback.
   '047645ec-022e-4cfe-84b0-b49970da4450': {
-    dbName: 'claudosh-series-2026-02',
-    title: 'סדרת מצב חללית',
+    dbName: 'claudosh-spaceship-series-2026-02',
+    title: 'החללית של קלודוש',
+    descriptionKeywords: ['חללית', 'קלודוש'],
     welcomeMessage: (name: string) => `היי ${name.split(' ')[0]}! 🚀
 
-*ברוך הבא לסדרת מצב חללית!* 🎉
+*ברוך הבא לחללית של קלודוש!* 🎉
 
-נרשמת בהצלחה ל-3 מפגשים שיהפכו אותך לאסטרונאוט עסקי:
+3 מפגשים תמציתיים, כל שבוע שיעור אחד עם *שני מועדים* לבחירה:
 
-🚀 מפגש 1: *השיגור* - מ-0 לסוכן עובד
-🛸 מפגש 2: *מצב חללית* - בונים פרויקטים אמיתיים
-🌌 מפגש 3: *אפס כבידה* - הסוכנים עובדים, אתה מנהל
+🚀 *שבוע 1 - השיגור*
+שני 16.2 ב-21:00 | חמישי 19.2 ב-9:30
 
-📅 נעדכן אותך על התאריכים בקרוב!
+🛸 *שבוע 2 - מצב חללית*
+שני 23.2 ב-21:00 | חמישי 26.2 ב-9:30
 
-💪 אביץ`,
+🌌 *שבוע 3 - אפס כבידה*
+שני 2.3 ב-21:00 | חמישי 5.3 ב-9:30
+
+⏱️ כל מפגש שעתיים. בזום.
+פיספסת יום שני? יש חמישי בבוקר 💪
+
+אביץ`,
     welcomeEmailHtml: (name: string) => `
 <!DOCTYPE html>
 <html dir="rtl" lang="he">
@@ -94,18 +102,18 @@ const MORNING_PRODUCTS: Record<string, {
 <body style="font-family: Arial, sans-serif; direction: rtl; text-align: right; background-color: #f5f5f5; margin: 0; padding: 20px;">
   <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
     <div style="background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%); padding: 30px; text-align: center;">
-      <h1 style="color: #ffffff; margin: 0; font-size: 24px;">ברוך הבא לסדרת מצב חללית!</h1>
+      <h1 style="color: #ffffff; margin: 0; font-size: 24px;">ברוך הבא לחללית של קלודוש!</h1>
     </div>
     <div style="padding: 30px;">
       <p style="font-size: 18px; color: #333; margin-bottom: 20px;">שלום <strong>${name.split(' ')[0]}</strong>,</p>
-      <p style="font-size: 16px; color: #555; line-height: 1.6;">נרשמת בהצלחה לסדרה!</p>
+      <p style="font-size: 16px; color: #555; line-height: 1.6;">נרשמת בהצלחה לחללית של קלודוש!</p>
       <div style="background-color: #f0fdf4; border-right: 4px solid #22C55E; padding: 20px; margin: 25px 0; border-radius: 8px;">
-        <h3 style="margin: 0 0 15px 0; color: #166534;">3 המפגשים</h3>
-        <p style="margin: 5px 0; color: #333;">1. <strong>השיגור</strong> - מ-0 לסוכן עובד</p>
-        <p style="margin: 5px 0; color: #333;">2. <strong>מצב חללית</strong> - בונים פרויקטים אמיתיים</p>
-        <p style="margin: 5px 0; color: #333;">3. <strong>אפס כבידה</strong> - הסוכנים עובדים, אתה מנהל</p>
+        <h3 style="margin: 0 0 15px 0; color: #166534;">3 שבועות, 2 מועדים כל שבוע</h3>
+        <p style="margin: 5px 0; color: #333;"><strong>שבוע 1 - השיגור:</strong> שני 16.2 ב-21:00 | חמישי 19.2 ב-9:30</p>
+        <p style="margin: 5px 0; color: #333;"><strong>שבוע 2 - מצב חללית:</strong> שני 23.2 ב-21:00 | חמישי 26.2 ב-9:30</p>
+        <p style="margin: 5px 0; color: #333;"><strong>שבוע 3 - אפס כבידה:</strong> שני 2.3 ב-21:00 | חמישי 5.3 ב-9:30</p>
       </div>
-      <p style="font-size: 14px; color: #666; line-height: 1.6;">נעדכן אותך בהמשך על תאריכים וקישורי זום.</p>
+      <p style="font-size: 14px; color: #666; line-height: 1.6;">כל מפגש שעתיים, בזום. פיספסת יום שני? יש חמישי בבוקר!</p>
       <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
       <p style="font-size: 14px; color: #888; line-height: 1.6;"><strong>טיפ:</strong> תוודא שיש לך מנוי Claude פעיל לפני המפגש הראשון.</p>
     </div>
@@ -261,7 +269,7 @@ export async function POST(request: NextRequest) {
 
     // ===== MORNING WEBHOOK (payment/received) =====
     // DEBUG MODE: log only, no actions (WhatsApp/email/DB). Remove this block to go live.
-    const MORNING_DEBUG_MODE = true
+    const MORNING_DEBUG_MODE = false
 
     if (isMorningWebhook && MORNING_DEBUG_MODE) {
       console.log('=== MORNING WEBHOOK - DEBUG MODE (no actions taken) ===')
@@ -287,8 +295,11 @@ export async function POST(request: NextRequest) {
       const phone = payer.phone
       const normalizedPhone = normalizePhone(phone)
 
-      // Look up product config, fall back to description-based matching
+      // Look up product config by ID, then by description keywords
       const product = MORNING_PRODUCTS[productId]
+        ?? Object.values(MORNING_PRODUCTS).find(p =>
+          p.descriptionKeywords.some(kw => description?.includes(kw))
+        )
       let dbName: string
       let title: string
 
