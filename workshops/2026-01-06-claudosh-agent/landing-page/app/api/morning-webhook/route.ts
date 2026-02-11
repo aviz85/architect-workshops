@@ -12,7 +12,7 @@ const WEBHOOK_API_KEY = process.env.MORNING_WEBHOOK_KEY || 'mw_aviz_2026_secret'
 const GMAIL_API_URL = 'https://script.google.com/macros/s/AKfycbwLfaOnXYwxfBjZ4ygGPVl8grJ0YpLbYO1kDqE82cNugVaCCDTht4JMbKPP0xCuNZzk/exec'
 const GMAIL_TOKEN = '0baed439f142488e45957b21a65c5626'
 
-// Workshop configurations
+// Workshop configurations (legacy - keyword-based matching)
 const WORKSHOPS: Record<string, {
   dbName: string
   title: string
@@ -27,7 +27,7 @@ const WORKSHOPS: Record<string, {
     date: 'יום חמישי 5.2.26 בשעה 21:00',
     watchPageUrl: 'https://us06web.zoom.us/j/83106471338?pwd=9ZsXQKbR7p5mysGhZc8qQt8XVk7rSC.1',
     zoomLink: 'https://us06web.zoom.us/j/83106471338?pwd=9ZsXQKbR7p5mysGhZc8qQt8XVk7rSC.1',
-    whatsappGroup: '', // No dedicated group
+    whatsappGroup: '',
   },
   'רגע לפני השיגור': {
     dbName: 'claudosh-before-takeoff-2026-01-29',
@@ -60,6 +60,62 @@ const WORKSHOPS: Record<string, {
     watchPageUrl: 'https://claudosh.master-x.co.il/watch-q3x7z',
     zoomLink: 'https://us06web.zoom.us/j/85374512520?pwd=SeNeeFB4Uznkjq0zImONKbSGkri7iD.1',
     whatsappGroup: '',
+  },
+}
+
+// Morning product ID → workshop mapping (for direct Morning webhook integration)
+const MORNING_PRODUCTS: Record<string, {
+  dbName: string
+  title: string
+  welcomeMessage: (name: string) => string
+  welcomeEmailHtml: (name: string) => string
+}> = {
+  // TODO: Replace with real productId from Morning when series product is created
+  '047645ec-022e-4cfe-84b0-b49970da4450': {
+    dbName: 'claudosh-series-2026-02',
+    title: 'סדרת מצב חללית',
+    welcomeMessage: (name: string) => `היי ${name.split(' ')[0]}! 🚀
+
+*ברוך הבא לסדרת מצב חללית!* 🎉
+
+נרשמת בהצלחה ל-3 מפגשים שיהפכו אותך לאסטרונאוט עסקי:
+
+🚀 מפגש 1: *השיגור* - מ-0 לסוכן עובד
+🛸 מפגש 2: *מצב חללית* - בונים פרויקטים אמיתיים
+🌌 מפגש 3: *אפס כבידה* - הסוכנים עובדים, אתה מנהל
+
+📅 נעדכן אותך על התאריכים בקרוב!
+
+💪 אביץ`,
+    welcomeEmailHtml: (name: string) => `
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="font-family: Arial, sans-serif; direction: rtl; text-align: right; background-color: #f5f5f5; margin: 0; padding: 20px;">
+  <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+    <div style="background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%); padding: 30px; text-align: center;">
+      <h1 style="color: #ffffff; margin: 0; font-size: 24px;">ברוך הבא לסדרת מצב חללית!</h1>
+    </div>
+    <div style="padding: 30px;">
+      <p style="font-size: 18px; color: #333; margin-bottom: 20px;">שלום <strong>${name.split(' ')[0]}</strong>,</p>
+      <p style="font-size: 16px; color: #555; line-height: 1.6;">נרשמת בהצלחה לסדרה!</p>
+      <div style="background-color: #f0fdf4; border-right: 4px solid #22C55E; padding: 20px; margin: 25px 0; border-radius: 8px;">
+        <h3 style="margin: 0 0 15px 0; color: #166534;">3 המפגשים</h3>
+        <p style="margin: 5px 0; color: #333;">1. <strong>השיגור</strong> - מ-0 לסוכן עובד</p>
+        <p style="margin: 5px 0; color: #333;">2. <strong>מצב חללית</strong> - בונים פרויקטים אמיתיים</p>
+        <p style="margin: 5px 0; color: #333;">3. <strong>אפס כבידה</strong> - הסוכנים עובדים, אתה מנהל</p>
+      </div>
+      <p style="font-size: 14px; color: #666; line-height: 1.6;">נעדכן אותך בהמשך על תאריכים וקישורי זום.</p>
+      <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+      <p style="font-size: 14px; color: #888; line-height: 1.6;"><strong>טיפ:</strong> תוודא שיש לך מנוי Claude פעיל לפני המפגש הראשון.</p>
+    </div>
+    <div style="background-color: #f9fafb; padding: 20px; text-align: center; border-top: 1px solid #eee;">
+      <p style="margin: 0; color: #666; font-size: 14px;">נתראה בסדרה!</p>
+      <p style="margin: 10px 0 0 0; color: #22C55E; font-weight: bold;">אביץ - הארכיטקט</p>
+    </div>
+  </div>
+</body>
+</html>`,
   },
 }
 
@@ -154,16 +210,215 @@ async function sendWelcomeEmail(email: string, name: string, workshop: typeof WO
 
 export async function POST(request: NextRequest) {
   try {
-    // Verify API key
+    // === FULL REQUEST LOGGING (for Morning integration debug) ===
+    const rawBody = await request.text()
+    const headers: Record<string, string> = {}
+    request.headers.forEach((value, key) => {
+      headers[key] = value
+    })
+
+    const logEntry = {
+      timestamp: new Date().toISOString(),
+      method: request.method,
+      url: request.url,
+      headers,
+      body: rawBody,
+      bodyParsed: null as unknown,
+    }
+
+    try {
+      logEntry.bodyParsed = JSON.parse(rawBody)
+    } catch {
+      logEntry.bodyParsed = { _raw: rawBody, _parseError: 'Not valid JSON' }
+    }
+
+    console.log('=== MORNING WEBHOOK FULL LOG ===')
+    console.log(JSON.stringify(logEntry, null, 2))
+    console.log('=== END LOG ===')
+
+    // Save log to Supabase for easy viewing
+    const logSupabase = createClient(supabaseUrl, supabaseServiceKey)
+    await logSupabase
+      .from('webhook_logs')
+      .insert({
+        source: 'morning-webhook',
+        headers: JSON.stringify(headers),
+        body: rawBody,
+        body_parsed: logEntry.bodyParsed,
+        created_at: new Date().toISOString(),
+      })
+      .then(({ error }) => {
+        if (error) console.log('Log save error (table may not exist):', error.message)
+      })
+
+    // === END LOGGING ===
+
+    // Detect source: Morning webhook or legacy API key call
+    const isMorningWebhook = request.headers.get('x-webhook-topic') === 'payment/received'
     const apiKey = request.headers.get('x-api-key')
+
+    const body = JSON.parse(rawBody)
+
+    // ===== MORNING WEBHOOK (payment/received) =====
+    // DEBUG MODE: log only, no actions (WhatsApp/email/DB). Remove this block to go live.
+    const MORNING_DEBUG_MODE = true
+
+    if (isMorningWebhook && MORNING_DEBUG_MODE) {
+      console.log('=== MORNING WEBHOOK - DEBUG MODE (no actions taken) ===')
+      return NextResponse.json({
+        success: true,
+        debug: true,
+        message: 'Debug mode: logged only, no actions taken.',
+        received: logEntry.bodyParsed,
+      })
+    }
+
+    if (isMorningWebhook) {
+      console.log('=== PROCESSING MORNING WEBHOOK ===')
+
+      const { payer, productId, description, total, id: paymentId } = body
+      if (!payer?.name || !payer?.email || !payer?.phone) {
+        console.error('Morning webhook: missing payer info', { payer })
+        return NextResponse.json({ success: false, error: 'Missing payer info' }, { status: 400 })
+      }
+
+      const name = payer.name
+      const email = payer.email
+      const phone = payer.phone
+      const normalizedPhone = normalizePhone(phone)
+
+      // Look up product config, fall back to description-based matching
+      const product = MORNING_PRODUCTS[productId]
+      let dbName: string
+      let title: string
+
+      if (product) {
+        dbName = product.dbName
+        title = product.title
+      } else {
+        // Fallback: try matching description to WORKSHOPS
+        let matchedWorkshop = WORKSHOPS['אפס חיכוך'] // default
+        for (const [key, value] of Object.entries(WORKSHOPS)) {
+          if (description?.includes(key)) {
+            matchedWorkshop = value
+            break
+          }
+        }
+        dbName = matchedWorkshop.dbName
+        title = matchedWorkshop.title
+      }
+
+      const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
+      // Check if already exists
+      const { data: existing } = await supabase
+        .from('workshop_registrations')
+        .select('id, payment_status')
+        .eq('normalized_phone', normalizedPhone)
+        .eq('workshop_name', dbName)
+        .single()
+
+      let dbAction = 'none'
+      if (existing) {
+        if (existing.payment_status !== 'paid') {
+          await supabase
+            .from('workshop_registrations')
+            .update({
+              payment_status: 'paid',
+              notes: `Morning webhook ${paymentId} | ${total} ILS`,
+            })
+            .eq('id', existing.id)
+          dbAction = 'updated'
+        } else {
+          dbAction = 'already_paid'
+        }
+      } else {
+        const { error } = await supabase
+          .from('workshop_registrations')
+          .insert({
+            name,
+            email: email.toLowerCase(),
+            phone,
+            normalized_phone: normalizedPhone,
+            workshop_name: dbName,
+            payment_status: 'paid',
+            marketing_consent: false,
+            is_waitlist: false,
+            notes: `Morning webhook ${paymentId} | ${total} ILS | ${description}`,
+          })
+        if (error) {
+          console.error('Supabase insert error:', error)
+          return NextResponse.json({ error: error.message }, { status: 500 })
+        }
+        dbAction = 'inserted'
+      }
+
+      // Send WhatsApp welcome
+      const chatId = formatPhoneForWhatsApp(phone)
+      let whatsappResult = { success: false }
+
+      if (product) {
+        // Series: custom welcome message
+        whatsappResult = await sendWhatsAppMessage({
+          chatId,
+          message: product.welcomeMessage(name),
+        })
+      } else {
+        // Legacy workshop: standard message
+        const workshop = Object.values(WORKSHOPS).find(w => w.dbName === dbName)
+        if (workshop) {
+          whatsappResult = await sendWhatsAppMessage({
+            chatId,
+            message: getWelcomeMessage(name, workshop),
+          })
+        }
+      }
+
+      // Send welcome email
+      let emailResult = false
+      if (product) {
+        try {
+          const params = new URLSearchParams({
+            token: GMAIL_TOKEN,
+            action: 'send',
+            to: email,
+            subject: `אישור הרשמה - ${product.title}`,
+            html: product.welcomeEmailHtml(name),
+            name: 'AVIZ - הארכיטקט',
+          })
+          const resp = await fetch(`${GMAIL_API_URL}?${params.toString()}`, { redirect: 'follow' })
+          const data = await resp.json()
+          emailResult = data.success === true
+        } catch (e) {
+          console.error('Email error:', e)
+        }
+      } else {
+        const workshop = Object.values(WORKSHOPS).find(w => w.dbName === dbName)
+        if (workshop) {
+          emailResult = await sendWelcomeEmail(email, name, workshop)
+        }
+      }
+
+      console.log('=== MORNING WEBHOOK RESULT ===', { dbAction, whatsapp: whatsappResult.success, email: emailResult })
+
+      return NextResponse.json({
+        success: true,
+        source: 'morning',
+        participant: { name, email, phone: normalizedPhone },
+        product: title,
+        dbAction,
+        whatsapp: whatsappResult.success,
+        email: emailResult,
+      })
+    }
+
+    // ===== LEGACY API KEY CALLS (from Apps Script etc.) =====
     if (apiKey !== WEBHOOK_API_KEY) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const body = await request.json()
     const { name, email, phone, workshopKeyword } = body
 
-    // Validate required fields
     if (!name || !email || !phone) {
       return NextResponse.json(
         { error: 'Missing required fields: name, email, phone' },
@@ -172,7 +427,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Find workshop by keyword
-    let workshop = WORKSHOPS['אפס חיכוך'] // Default to current workshop
+    let workshop = WORKSHOPS['אפס חיכוך']
     if (workshopKeyword) {
       for (const [key, value] of Object.entries(WORKSHOPS)) {
         if (workshopKeyword.includes(key)) {
@@ -185,7 +440,6 @@ export async function POST(request: NextRequest) {
     const normalizedPhone = normalizePhone(phone)
     const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
-    // Check if already exists
     const { data: existing } = await supabase
       .from('workshop_registrations')
       .select('id, payment_status')
@@ -194,20 +448,17 @@ export async function POST(request: NextRequest) {
       .single()
 
     let dbAction = 'none'
-
     if (existing) {
-      // Update to paid if not already
       if (existing.payment_status !== 'paid') {
         await supabase
           .from('workshop_registrations')
-          .update({ payment_status: 'paid', notes: 'Updated via Morning webhook' })
+          .update({ payment_status: 'paid', notes: 'Updated via legacy webhook' })
           .eq('id', existing.id)
         dbAction = 'updated'
       } else {
         dbAction = 'already_paid'
       }
     } else {
-      // Insert new
       const { error } = await supabase
         .from('workshop_registrations')
         .insert({
@@ -219,9 +470,8 @@ export async function POST(request: NextRequest) {
           payment_status: 'paid',
           marketing_consent: false,
           is_waitlist: false,
-          notes: 'Added via Morning webhook',
+          notes: 'Added via legacy webhook',
         })
-
       if (error) {
         console.error('Supabase error:', error)
         return NextResponse.json({ error: error.message }, { status: 500 })
@@ -229,15 +479,12 @@ export async function POST(request: NextRequest) {
       dbAction = 'inserted'
     }
 
-    // Send WhatsApp messages
     const chatId = formatPhoneForWhatsApp(phone)
-
     const welcomeResult = await sendWhatsAppMessage({
       chatId,
       message: getWelcomeMessage(name, workshop),
     })
 
-    // Send follow-up only if Zoom link differs from watch page (avoid duplicate)
     let followUpResult = { success: true }
     if (workshop.zoomLink && workshop.zoomLink !== workshop.watchPageUrl) {
       await new Promise(r => setTimeout(r, 1000))
@@ -247,11 +494,11 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Send welcome email
     const emailResult = await sendWelcomeEmail(email, name, workshop)
 
     return NextResponse.json({
       success: true,
+      source: 'legacy',
       participant: { name, email, phone: normalizedPhone },
       workshop: workshop.title,
       dbAction,
