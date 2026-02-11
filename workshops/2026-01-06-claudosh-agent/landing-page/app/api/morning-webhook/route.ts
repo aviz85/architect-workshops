@@ -83,16 +83,18 @@ const MORNING_PRODUCTS: Record<string, {
 3 מפגשים תמציתיים, כל שבוע שיעור אחד עם *שני מועדים* לבחירה:
 
 🚀 *שבוע 1 - השיגור*
-שני 16.2 ב-21:00 | חמישי 19.2 ב-9:30
+שני 16.2 ב-21:00: https://us06web.zoom.us/j/87590911189?pwd=4ZuLPHewXO2CXGhhabJTKmdb35BXGs.1
+חמישי 19.2 ב-9:30: https://us06web.zoom.us/j/87674059282?pwd=CVfRGnDrsutkaVRvS9KiHY2xX3iHnw.1
 
 🛸 *שבוע 2 - מצב חללית*
-שני 23.2 ב-21:00 | חמישי 26.2 ב-9:30
+שני 23.2 ב-21:00: https://us06web.zoom.us/j/85432742799?pwd=gzgc6cERRuTj8xtl9E7Jp55w6DZ1VY.1
+חמישי 26.2 ב-9:30: https://us06web.zoom.us/j/86431304027?pwd=ftmsVdE6iyXB2YWDLTpbb6MjQfqAeS.1
 
 🌌 *שבוע 3 - אפס כבידה*
-שני 2.3 ב-21:00 | חמישי 5.3 ב-9:30
+שני 2.3 ב-21:00: https://us06web.zoom.us/j/82185831088?pwd=vVIAIvaElPKmRe3r2Aus3pZS7BmHXO.1
+חמישי 5.3 ב-9:30: https://us06web.zoom.us/j/82313338479?pwd=6vfLmexsQagR0LkJ2jNWVrrMCbvOiB.1
 
-⏱️ כל מפגש שעתיים. בזום.
-פיספסת יום שני? יש חמישי בבוקר 💪
+⏱️ כל מפגש שעתיים. פיספסת יום שני? יש חמישי בבוקר 💪
 
 אביץ`,
     welcomeEmailHtml: (name: string) => `
@@ -109,11 +111,25 @@ const MORNING_PRODUCTS: Record<string, {
       <p style="font-size: 16px; color: #555; line-height: 1.6;">נרשמת בהצלחה לחללית של קלודוש!</p>
       <div style="background-color: #f0fdf4; border-right: 4px solid #22C55E; padding: 20px; margin: 25px 0; border-radius: 8px;">
         <h3 style="margin: 0 0 15px 0; color: #166534;">3 שבועות, 2 מועדים כל שבוע</h3>
-        <p style="margin: 5px 0; color: #333;"><strong>שבוע 1 - השיגור:</strong> שני 16.2 ב-21:00 | חמישי 19.2 ב-9:30</p>
-        <p style="margin: 5px 0; color: #333;"><strong>שבוע 2 - מצב חללית:</strong> שני 23.2 ב-21:00 | חמישי 26.2 ב-9:30</p>
-        <p style="margin: 5px 0; color: #333;"><strong>שבוע 3 - אפס כבידה:</strong> שני 2.3 ב-21:00 | חמישי 5.3 ב-9:30</p>
+        <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+          <tr style="border-bottom: 1px solid #e5e7eb;">
+            <td style="padding: 8px 4px; color: #333; font-weight: bold;">שבוע 1 - השיגור</td>
+            <td style="padding: 8px 4px; color: #555;"><a href="https://us06web.zoom.us/j/87590911189?pwd=4ZuLPHewXO2CXGhhabJTKmdb35BXGs.1" style="color: #22C55E;">שני 16.2 ב-21:00</a></td>
+            <td style="padding: 8px 4px; color: #555;"><a href="https://us06web.zoom.us/j/87674059282?pwd=CVfRGnDrsutkaVRvS9KiHY2xX3iHnw.1" style="color: #22C55E;">חמישי 19.2 ב-9:30</a></td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e5e7eb;">
+            <td style="padding: 8px 4px; color: #333; font-weight: bold;">שבוע 2 - מצב חללית</td>
+            <td style="padding: 8px 4px; color: #555;"><a href="https://us06web.zoom.us/j/85432742799?pwd=gzgc6cERRuTj8xtl9E7Jp55w6DZ1VY.1" style="color: #22C55E;">שני 23.2 ב-21:00</a></td>
+            <td style="padding: 8px 4px; color: #555;"><a href="https://us06web.zoom.us/j/86431304027?pwd=ftmsVdE6iyXB2YWDLTpbb6MjQfqAeS.1" style="color: #22C55E;">חמישי 26.2 ב-9:30</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 4px; color: #333; font-weight: bold;">שבוע 3 - אפס כבידה</td>
+            <td style="padding: 8px 4px; color: #555;"><a href="https://us06web.zoom.us/j/82185831088?pwd=vVIAIvaElPKmRe3r2Aus3pZS7BmHXO.1" style="color: #22C55E;">שני 2.3 ב-21:00</a></td>
+            <td style="padding: 8px 4px; color: #555;"><a href="https://us06web.zoom.us/j/82313338479?pwd=6vfLmexsQagR0LkJ2jNWVrrMCbvOiB.1" style="color: #22C55E;">חמישי 5.3 ב-9:30</a></td>
+          </tr>
+        </table>
       </div>
-      <p style="font-size: 14px; color: #666; line-height: 1.6;">כל מפגש שעתיים, בזום. פיספסת יום שני? יש חמישי בבוקר!</p>
+      <p style="font-size: 14px; color: #666; line-height: 1.6;">כל מפגש שעתיים. פיספסת יום שני? יש חמישי בבוקר! לחץ על המועד שנוח לך.</p>
       <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
       <p style="font-size: 14px; color: #888; line-height: 1.6;"><strong>טיפ:</strong> תוודא שיש לך מנוי Claude פעיל לפני המפגש הראשון.</p>
     </div>
