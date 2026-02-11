@@ -5,10 +5,61 @@ const RECORDING_LINK = 'https://us06web.zoom.us/rec/share/q46dutNhYJLDYeQW0R6Twz
 const RECORDING_PASSCODE = 'L952Hs+*'
 const YOUTUBE_LINK = 'https://www.youtube.com/watch?v=cUzOW5YdUuk'
 
+// NEW: Before Takeoff recording
+const BEFORE_TAKEOFF_LINK = 'https://vimeo.com/1159854949?share=copy'
+const BEFORE_TAKEOFF_PASSCODE = 'fs$%6ert35wqe'
+
 export default function WatchPage() {
   return (
     <div className="container">
       <div className="thank-you-container">
+
+        {/* NEW RECORDING - TOP PRIORITY */}
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(234, 88, 12, 0.15) 100%)',
+          border: '3px solid #F97316',
+          borderRadius: '16px',
+          padding: '24px',
+          marginBottom: '32px',
+          textAlign: 'center'
+        }}>
+          <p style={{ color: '#F97316', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px', letterSpacing: '1px' }}>
+            🔥 חדש!
+          </p>
+          <h2 style={{ color: '#fff', fontSize: '22px', fontWeight: 'bold', marginBottom: '16px' }}>
+            הקלטה מסדנת ״קלודוש רגע לפני השיגור 29.1.26״
+          </h2>
+          <a
+            href={BEFORE_TAKEOFF_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="payment-btn"
+            style={{
+              background: 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              fontSize: '18px',
+              padding: '14px 28px',
+              marginBottom: '12px'
+            }}
+          >
+            🎬 צפייה בהקלטה
+          </a>
+          <div style={{
+            background: 'rgba(249, 115, 22, 0.15)',
+            borderRadius: '8px',
+            padding: '10px',
+            marginTop: '8px'
+          }}>
+            <p style={{ color: '#9CA3AF', fontSize: '14px', marginBottom: '4px' }}>סיסמה:</p>
+            <p style={{ color: '#F97316', fontSize: '20px', fontWeight: 'bold', fontFamily: 'monospace' }}>
+              {BEFORE_TAKEOFF_PASSCODE}
+            </p>
+          </div>
+        </div>
+
         <h1 className="thank-you-title">קלודוש הסוכן המטורף</h1>
         <p className="thank-you-text">
           סדנה עם אביץ - הארכיטקט

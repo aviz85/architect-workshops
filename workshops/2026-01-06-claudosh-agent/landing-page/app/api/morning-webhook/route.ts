@@ -96,6 +96,9 @@ const MORNING_PRODUCTS: Record<string, {
 
 ⏱️ כל מפגש שעתיים. פיספסת יום שני? יש חמישי בבוקר 💪
 
+📢 *קבוצת עדכונים:*
+https://chat.whatsapp.com/GoXp5Le2DKJIp9sCnTUhmG
+
 אביץ`,
     welcomeEmailHtml: (name: string) => `
 <!DOCTYPE html>
@@ -130,6 +133,9 @@ const MORNING_PRODUCTS: Record<string, {
         </table>
       </div>
       <p style="font-size: 14px; color: #666; line-height: 1.6;">כל מפגש שעתיים. פיספסת יום שני? יש חמישי בבוקר! לחץ על המועד שנוח לך.</p>
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="https://chat.whatsapp.com/GoXp5Le2DKJIp9sCnTUhmG" style="display: inline-block; background: #25D366; color: #fff; text-decoration: none; padding: 12px 32px; border-radius: 8px; font-weight: bold; font-size: 16px;">הצטרף לקבוצת העדכונים</a>
+      </div>
       <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
       <p style="font-size: 14px; color: #888; line-height: 1.6;"><strong>טיפ:</strong> תוודא שיש לך מנוי Claude פעיל לפני המפגש הראשון.</p>
     </div>
