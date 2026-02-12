@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { sendRegistrationConfirmation, formatPhoneForWhatsApp } from '../../../lib/greenapi'
+import { sendRegistrationConfirmation, sendWhatsAppMessage, formatPhoneForWhatsApp } from '../../../lib/greenapi'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://lrhdriqwteyeelvxipet.supabase.co'
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || ''
@@ -21,7 +21,7 @@ function normalizePhone(phone: string): string {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, phone, email, marketingConsent, workshopName } = body
+    const { name, phone, email, marketingConsent, workshopName, question } = body
 
     // Validate required fields
     if (!name || !phone || !email || !workshopName) {
@@ -49,6 +49,7 @@ export async function POST(request: NextRequest) {
         normalized_phone: normalizedPhone,
         payment_status: 'pending',
         is_waitlist: false,
+        notes: question || null,
       })
       .select()
       .single()
@@ -82,6 +83,14 @@ export async function POST(request: NextRequest) {
       .catch(err => {
         console.error('WhatsApp send error:', err)
       })
+
+    // If user has a question, forward it to Aviz via WhatsApp
+    if (question && question.trim()) {
+      const avizChatId = '972503973736@c.us'
+      const questionMsg = `📩 שאלה חדשה מהרשמה לסדנה (${workshopName})\n\n👤 ${name}\n📱 ${phone}\n📧 ${email}\n\n❓ שאלה:\n${question}`
+      sendWhatsAppMessage({ chatId: avizChatId, message: questionMsg })
+        .catch(err => console.error('Question forward error:', err))
+    }
 
     return NextResponse.json({
       success: true,

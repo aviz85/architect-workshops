@@ -1,7 +1,61 @@
 'use client'
 
+import { useState, useRef } from 'react'
+
 export default function SeriesPage() {
   const paymentLink = 'https://mrng.to/T8sXLy6nZi'
+  const formRef = useRef<HTMLDivElement>(null)
+
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', question: '' })
+  const [marketingConsent, setMarketingConsent] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setStatus('loading')
+    setErrorMessage('')
+
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          question: formData.question,
+          marketingConsent,
+          workshopName: 'spaceship-series-1',
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        if (data.error === 'duplicate entry') {
+          // Already registered — just redirect to payment
+          window.open(paymentLink, '_blank')
+          setStatus('idle')
+          return
+        }
+        setErrorMessage('שגיאה בהרשמה, נסו שוב')
+        setStatus('error')
+        return
+      }
+
+      setStatus('success')
+      // Redirect to Morning payment page
+      window.open(paymentLink, '_blank')
+    } catch {
+      setErrorMessage('שגיאה בהרשמה, נסו שוב')
+      setStatus('error')
+    }
+  }
 
   const sessions = [
     {
@@ -104,10 +158,8 @@ export default function SeriesPage() {
               marginBottom: 32,
             }}
           />
-          <a
-            href={paymentLink}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={scrollToForm}
             style={{
               display: 'inline-block',
               padding: '18px 48px',
@@ -116,13 +168,14 @@ export default function SeriesPage() {
               color: '#0a0a0a',
               background: 'linear-gradient(135deg, #22C55E 0%, #16A34A 100%)',
               borderRadius: 12,
-              textDecoration: 'none',
+              border: 'none',
+              cursor: 'pointer',
               transition: 'transform 0.2s, box-shadow 0.2s',
               boxShadow: '0 4px 20px rgba(34, 197, 94, 0.4)',
             }}
           >
             הרשמה לסדרה — ₪297
-          </a>
+          </button>
           <p style={{ color: '#6B7280', fontSize: 14, marginTop: 12 }}>
             3 מפגשים × שעתיים | מתחילים 16.2
           </p>
@@ -394,26 +447,181 @@ export default function SeriesPage() {
               ))}
             </ul>
           </div>
-          <a
-            href={paymentLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-block',
-              padding: '20px 56px',
-              fontSize: 24,
-              fontWeight: 700,
-              color: '#0a0a0a',
-              background: 'linear-gradient(135deg, #22C55E 0%, #16A34A 100%)',
-              borderRadius: 14,
-              textDecoration: 'none',
-              boxShadow: '0 6px 30px rgba(34, 197, 94, 0.4)',
-            }}
-          >
-            הרשמה עכשיו
-          </a>
+          {/* Registration Form */}
+          <div ref={formRef} style={{
+            background: '#1F2937',
+            borderRadius: 16,
+            padding: '32px 24px',
+            border: '1px solid #374151',
+            textAlign: 'right',
+          }}>
+            <h3 style={{ color: '#fff', fontSize: 20, fontWeight: 700, marginBottom: 4, textAlign: 'center' }}>
+              השאירו פרטים והמשיכו לתשלום
+            </h3>
+            <p style={{ color: '#9CA3AF', fontSize: 14, marginBottom: 24, textAlign: 'center' }}>
+              לאחר מילוי הפרטים תועברו לדף תשלום מאובטח
+            </p>
+
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <input
+                type="text"
+                placeholder="שם מלא"
+                required
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                style={{
+                  width: '100%',
+                  padding: '14px 16px',
+                  fontSize: 16,
+                  borderRadius: 10,
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  background: 'rgba(255,255,255,0.05)',
+                  color: 'white',
+                  direction: 'rtl',
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                }}
+              />
+              <input
+                type="tel"
+                placeholder="טלפון"
+                required
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                style={{
+                  width: '100%',
+                  padding: '14px 16px',
+                  fontSize: 16,
+                  borderRadius: 10,
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  background: 'rgba(255,255,255,0.05)',
+                  color: 'white',
+                  direction: 'ltr',
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                }}
+              />
+              <input
+                type="email"
+                placeholder="אימייל"
+                required
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                style={{
+                  width: '100%',
+                  padding: '14px 16px',
+                  fontSize: 16,
+                  borderRadius: 10,
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  background: 'rgba(255,255,255,0.05)',
+                  color: 'white',
+                  direction: 'ltr',
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                }}
+              />
+              <textarea
+                placeholder="יש לך שאלה? כתוב כאן ונחזור אליך בווצאפ"
+                value={formData.question}
+                onChange={(e) => setFormData({ ...formData, question: e.target.value })}
+                rows={3}
+                style={{
+                  width: '100%',
+                  padding: '14px 16px',
+                  fontSize: 15,
+                  borderRadius: 10,
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  background: 'rgba(255,255,255,0.05)',
+                  color: 'white',
+                  direction: 'rtl',
+                  outline: 'none',
+                  resize: 'vertical',
+                  fontFamily: 'inherit',
+                  boxSizing: 'border-box',
+                }}
+              />
+
+              {/* Marketing consent checkbox */}
+              <label style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 10,
+                cursor: 'pointer',
+                direction: 'rtl',
+              }}>
+                <input
+                  type="checkbox"
+                  checked={marketingConsent}
+                  onChange={(e) => setMarketingConsent(e.target.checked)}
+                  style={{
+                    marginTop: 3,
+                    width: 18,
+                    height: 18,
+                    accentColor: '#22C55E',
+                    flexShrink: 0,
+                  }}
+                />
+                <span style={{ color: '#9CA3AF', fontSize: 13, lineHeight: 1.5 }}>
+                  אני מסכים/ה לקבל עדכונים על סדנאות והצעות נוספות מאביץ — הארכיטקט
+                </span>
+              </label>
+
+              {errorMessage && (
+                <p style={{ color: '#EF4444', textAlign: 'center', fontSize: 14 }}>
+                  {errorMessage}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                style={{
+                  width: '100%',
+                  padding: '18px',
+                  fontSize: 20,
+                  fontWeight: 700,
+                  color: '#0a0a0a',
+                  background: status === 'loading'
+                    ? '#6B7280'
+                    : 'linear-gradient(135deg, #22C55E 0%, #16A34A 100%)',
+                  borderRadius: 12,
+                  border: 'none',
+                  cursor: status === 'loading' ? 'not-allowed' : 'pointer',
+                  boxShadow: '0 6px 30px rgba(34, 197, 94, 0.4)',
+                }}
+              >
+                {status === 'loading' ? 'שולח...' : 'הרשמה עכשיו'}
+              </button>
+            </form>
+
+            {status === 'success' && (
+              <div style={{
+                marginTop: 16,
+                padding: '12px 16px',
+                background: 'rgba(34, 197, 94, 0.1)',
+                borderRadius: 10,
+                border: '1px solid rgba(34, 197, 94, 0.3)',
+                textAlign: 'center',
+              }}>
+                <p style={{ color: '#22C55E', fontSize: 15, fontWeight: 600 }}>
+                  נרשמת בהצלחה! מועבר לדף התשלום...
+                </p>
+              </div>
+            )}
+          </div>
+
           <p style={{ color: '#6B7280', fontSize: 13, marginTop: 16 }}>
             תשלום מאובטח דרך מורנינג • חשבונית מס אוטומטית
+          </p>
+          <p style={{ color: '#6B7280', fontSize: 12, marginTop: 8 }}>
+            <a
+              href="https://architect.master-x.co.il/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#6B7280', textDecoration: 'underline' }}
+            >
+              מדיניות פרטיות
+            </a>
           </p>
         </div>
       </section>
