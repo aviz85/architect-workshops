@@ -73,32 +73,39 @@ const MORNING_PRODUCTS: Record<string, {
 }> = {
   // Product ID will be confirmed from webhook logs. Description-based matching active as fallback.
   '047645ec-022e-4cfe-84b0-b49970da4450': {
-    dbName: 'claudosh-spaceship-series-2026-02',
-    title: 'החללית של קלודוש',
-    descriptionKeywords: ['חללית', 'קלודוש'],
+    dbName: 'claudosh-series-2026-02',
+    title: 'סידרת קלודוש',
+    descriptionKeywords: ['חללית', 'קלודוש', 'סידרה', 'סידרת'],
     welcomeMessage: (name: string) => `היי ${name.split(' ')[0]}! 🚀
 
-*ברוך הבא לחללית של קלודוש!* 🎉
+*ברוך הבא לסידרת קלודוש — מאפס לצבא סוכנים!* 🎉
 
-3 מפגשים תמציתיים, כל שבוע שיעור אחד עם *שני מועדים* לבחירה:
+4 מפגשים מעשיים, כל יום שני בשעה 21:00:
 
-🚀 *שבוע 1 - השיגור*
-שני 16.2 ב-21:00: https://us06web.zoom.us/j/87590911189?pwd=4ZuLPHewXO2CXGhhabJTKmdb35BXGs.1
-חמישי 19.2 ב-9:30: https://us06web.zoom.us/j/87674059282?pwd=CVfRGnDrsutkaVRvS9KiHY2xX3iHnw.1
+🚀 *מפגש 1 — הסוכן הכללי כבר כאן*
+שני 16.2 ב-21:00
+https://us06web.zoom.us/j/87590911189?pwd=4ZuLPHewXO2CXGhhabJTKmdb35BXGs.1
 
-🛸 *שבוע 2 - מצב חללית*
-שני 23.2 ב-21:00: https://us06web.zoom.us/j/85432742799?pwd=gzgc6cERRuTj8xtl9E7Jp55w6DZ1VY.1
-חמישי 26.2 ב-9:30: https://us06web.zoom.us/j/86431304027?pwd=ftmsVdE6iyXB2YWDLTpbb6MjQfqAeS.1
+🛸 *מפגש 2 — ערימות של סקילים*
+שני 23.2 ב-21:00
+https://us06web.zoom.us/j/85432742799?pwd=gzgc6cERRuTj8xtl9E7Jp55w6DZ1VY.1
 
-🌌 *שבוע 3 - אפס כבידה*
-שני 2.3 ב-21:00: https://us06web.zoom.us/j/82185831088?pwd=vVIAIvaElPKmRe3r2Aus3pZS7BmHXO.1
-חמישי 5.3 ב-9:30: https://us06web.zoom.us/j/82313338479?pwd=6vfLmexsQagR0LkJ2jNWVrrMCbvOiB.1
+🛰️ *מפגש 3 — אפליקציות סוכניות*
+שני 2.3 ב-21:00
+https://us06web.zoom.us/j/82185831088?pwd=vVIAIvaElPKmRe3r2Aus3pZS7BmHXO.1
 
-⏱️ כל מפגש שעתיים. פיספסת יום שני? יש חמישי בבוקר 💪
+🌌 *מפגש 4 — נחילי סוכנים*
+שני 9.3 ב-21:00
+https://us06web.zoom.us/j/85857289804?pwd=rbhoiCWBHB4UbxyealtA9KAUe1HVsb.1
 
-📢 *קבוצת עדכונים:*
+⏱️ כל מפגש כשעתיים. כל המפגשים מוקלטים.
+
+📢 *הצטרפו לקבוצת הווצאפ:*
 https://chat.whatsapp.com/GoXp5Le2DKJIp9sCnTUhmG
 
+💡 *חשוב:* תוודאו שיש לכם מנוי Claude פעיל (claude.ai — $20 לחודש). את ההתקנה של Claude Code נעשה ביחד במפגש הראשון.
+
+נתראה! 💪
 אביץ`,
     welcomeEmailHtml: (name: string) => `
 <!DOCTYPE html>
@@ -107,37 +114,39 @@ https://chat.whatsapp.com/GoXp5Le2DKJIp9sCnTUhmG
 <body style="font-family: Arial, sans-serif; direction: rtl; text-align: right; background-color: #f5f5f5; margin: 0; padding: 20px;">
   <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
     <div style="background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%); padding: 30px; text-align: center;">
-      <h1 style="color: #ffffff; margin: 0; font-size: 24px;">ברוך הבא לחללית של קלודוש!</h1>
+      <h1 style="color: #ffffff; margin: 0; font-size: 24px;">ברוך הבא לסידרת קלודוש!</h1>
+      <p style="color: rgba(255,255,255,0.85); margin: 8px 0 0; font-size: 16px;">מאפס לצבא סוכנים</p>
     </div>
     <div style="padding: 30px;">
       <p style="font-size: 18px; color: #333; margin-bottom: 20px;">שלום <strong>${name.split(' ')[0]}</strong>,</p>
-      <p style="font-size: 16px; color: #555; line-height: 1.6;">נרשמת בהצלחה לחללית של קלודוש!</p>
+      <p style="font-size: 16px; color: #555; line-height: 1.6;">נרשמת בהצלחה לסידרת קלודוש! 4 מפגשים מעשיים שבהם תבנה מערכת סוכני AI שעובדת בשבילך.</p>
       <div style="background-color: #f0fdf4; border-right: 4px solid #22C55E; padding: 20px; margin: 25px 0; border-radius: 8px;">
-        <h3 style="margin: 0 0 15px 0; color: #166534;">3 שבועות, 2 מועדים כל שבוע</h3>
+        <h3 style="margin: 0 0 15px 0; color: #166534;">4 מפגשים — כל שני ב-21:00</h3>
         <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
           <tr style="border-bottom: 1px solid #e5e7eb;">
-            <td style="padding: 8px 4px; color: #333; font-weight: bold;">שבוע 1 - השיגור</td>
-            <td style="padding: 8px 4px; color: #555;"><a href="https://us06web.zoom.us/j/87590911189?pwd=4ZuLPHewXO2CXGhhabJTKmdb35BXGs.1" style="color: #22C55E;">שני 16.2 ב-21:00</a></td>
-            <td style="padding: 8px 4px; color: #555;"><a href="https://us06web.zoom.us/j/87674059282?pwd=CVfRGnDrsutkaVRvS9KiHY2xX3iHnw.1" style="color: #22C55E;">חמישי 19.2 ב-9:30</a></td>
+            <td style="padding: 10px 4px; color: #333; font-weight: bold;">מפגש 1 — הסוכן הכללי כבר כאן</td>
+            <td style="padding: 10px 4px; color: #555; text-align: left;"><a href="https://us06web.zoom.us/j/87590911189?pwd=4ZuLPHewXO2CXGhhabJTKmdb35BXGs.1" style="color: #22C55E; font-weight: bold;">שני 16.2 ב-21:00</a></td>
           </tr>
           <tr style="border-bottom: 1px solid #e5e7eb;">
-            <td style="padding: 8px 4px; color: #333; font-weight: bold;">שבוע 2 - מצב חללית</td>
-            <td style="padding: 8px 4px; color: #555;"><a href="https://us06web.zoom.us/j/85432742799?pwd=gzgc6cERRuTj8xtl9E7Jp55w6DZ1VY.1" style="color: #22C55E;">שני 23.2 ב-21:00</a></td>
-            <td style="padding: 8px 4px; color: #555;"><a href="https://us06web.zoom.us/j/86431304027?pwd=ftmsVdE6iyXB2YWDLTpbb6MjQfqAeS.1" style="color: #22C55E;">חמישי 26.2 ב-9:30</a></td>
+            <td style="padding: 10px 4px; color: #333; font-weight: bold;">מפגש 2 — ערימות של סקילים</td>
+            <td style="padding: 10px 4px; color: #555; text-align: left;"><a href="https://us06web.zoom.us/j/85432742799?pwd=gzgc6cERRuTj8xtl9E7Jp55w6DZ1VY.1" style="color: #22C55E; font-weight: bold;">שני 23.2 ב-21:00</a></td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e5e7eb;">
+            <td style="padding: 10px 4px; color: #333; font-weight: bold;">מפגש 3 — אפליקציות סוכניות</td>
+            <td style="padding: 10px 4px; color: #555; text-align: left;"><a href="https://us06web.zoom.us/j/82185831088?pwd=vVIAIvaElPKmRe3r2Aus3pZS7BmHXO.1" style="color: #22C55E; font-weight: bold;">שני 2.3 ב-21:00</a></td>
           </tr>
           <tr>
-            <td style="padding: 8px 4px; color: #333; font-weight: bold;">שבוע 3 - אפס כבידה</td>
-            <td style="padding: 8px 4px; color: #555;"><a href="https://us06web.zoom.us/j/82185831088?pwd=vVIAIvaElPKmRe3r2Aus3pZS7BmHXO.1" style="color: #22C55E;">שני 2.3 ב-21:00</a></td>
-            <td style="padding: 8px 4px; color: #555;"><a href="https://us06web.zoom.us/j/82313338479?pwd=6vfLmexsQagR0LkJ2jNWVrrMCbvOiB.1" style="color: #22C55E;">חמישי 5.3 ב-9:30</a></td>
+            <td style="padding: 10px 4px; color: #333; font-weight: bold;">מפגש 4 — נחילי סוכנים</td>
+            <td style="padding: 10px 4px; color: #555; text-align: left;"><a href="https://us06web.zoom.us/j/85857289804?pwd=rbhoiCWBHB4UbxyealtA9KAUe1HVsb.1" style="color: #22C55E; font-weight: bold;">שני 9.3 ב-21:00</a></td>
           </tr>
         </table>
       </div>
-      <p style="font-size: 14px; color: #666; line-height: 1.6;">כל מפגש שעתיים. פיספסת יום שני? יש חמישי בבוקר! לחץ על המועד שנוח לך.</p>
+      <p style="font-size: 14px; color: #666; line-height: 1.6;">כל מפגש כשעתיים. כל המפגשים מוקלטים וזמינים לצפייה חוזרת.</p>
       <div style="text-align: center; margin: 20px 0;">
-        <a href="https://chat.whatsapp.com/GoXp5Le2DKJIp9sCnTUhmG" style="display: inline-block; background: #25D366; color: #fff; text-decoration: none; padding: 12px 32px; border-radius: 8px; font-weight: bold; font-size: 16px;">הצטרף לקבוצת העדכונים</a>
+        <a href="https://chat.whatsapp.com/GoXp5Le2DKJIp9sCnTUhmG" style="display: inline-block; background: #25D366; color: #fff; text-decoration: none; padding: 12px 32px; border-radius: 8px; font-weight: bold; font-size: 16px;">הצטרפו לקבוצת הווצאפ</a>
       </div>
       <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-      <p style="font-size: 14px; color: #888; line-height: 1.6;"><strong>טיפ:</strong> תוודא שיש לך מנוי Claude פעיל לפני המפגש הראשון.</p>
+      <p style="font-size: 14px; color: #888; line-height: 1.6;"><strong>חשוב:</strong> תוודאו שיש לכם מנוי Claude פעיל (claude.ai - $20 לחודש). את ההתקנה של Claude Code נעשה ביחד במפגש הראשון.</p>
     </div>
     <div style="background-color: #f9fafb; padding: 20px; text-align: center; border-top: 1px solid #eee;">
       <p style="margin: 0; color: #666; font-size: 14px;">נתראה בסדרה!</p>
