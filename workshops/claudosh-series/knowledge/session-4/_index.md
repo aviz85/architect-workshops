@@ -22,8 +22,9 @@
 1. Agent swarms - multiple agents collaborating on one task
 2. WhatsApp/voice as command center (Peleg Orchestra concept)
 3. Hooks and safety boundaries
-4. Personal OS architecture
-5. Compound effect / 1% = 37x
+4. **Visual interface** - agent builds its own UI from natural language description
+5. Personal OS architecture
+6. Compound effect / 1% = 37x
 
 ## Narrative Arc
 "You started with a short leash and a single command. Now you have a swarm of agents, controlled from your phone, working while you sleep. This is your Personal Operating System."

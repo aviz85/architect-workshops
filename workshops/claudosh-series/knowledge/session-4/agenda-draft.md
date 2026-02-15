@@ -1,6 +1,6 @@
 # Session 4 - Agenda Draft (Updated)
 
-> Source: Deep Interview, 2026-02-15 (updated with expanded security)
+> Source: Deep Interview, 2026-02-15 (updated with expanded security + visual interface)
 
 ## Time Allocation (120 min)
 
@@ -8,13 +8,14 @@
 |------|-------|------|----------|
 | 0:00 | **Month Review: The Journey** | Show+Tell | 10 min |
 | 0:10 | **Agent Swarms Demo** | Demo | 20 min |
-| 0:30 | **Prompt Injection & Defense** | Theory+Demo | 25 min |
-| 0:55 | **WhatsApp Command Center** | Demo | 20 min |
-| 1:15 | **Design Your Personal OS** | Exercise | 20 min |
+| 0:30 | **Prompt Injection & Defense** | Theory+Demo | 20 min |
+| 0:50 | **WhatsApp Command Center** | Demo | 15 min |
+| 1:05 | **Build a Visual Interface** | Demo+Exercise | 15 min |
+| 1:20 | **Design Your Personal OS** | Exercise | 15 min |
 | 1:35 | **Participant Showcase** | Show+Tell | 15 min |
 | 1:50 | **Vision: Where This Goes** | Talk | 10 min |
 
-**Ratio:** ~25 min theory, ~20 min exercise, ~40 min demos, ~35 min showcase/vision
+**Ratio:** ~20 min theory, ~30 min exercise, ~50 min demos, ~35 min showcase/vision
 
 ## Block Details
 
@@ -32,7 +33,7 @@
 - All work simultaneously, results merge into one briefing document
 - Explain: how swarms work, when to use them, the orchestration pattern
 
-### Prompt Injection & Defense (25 min) ← EXPANDED SECURITY BLOCK
+### Prompt Injection & Defense (20 min) ← SECURITY BLOCK
 
 #### What is Prompt Injection? (10 min)
 - **The concept:** Malicious text hidden in files/web that hijacks your agent
@@ -87,16 +88,47 @@ The Security Pyramid - layers of defense:
 **Key message:**
 > "ככל שהסוכן חזק יותר, האחריות שלכם גדלה. זה לא מפחיד - זה בדיוק כמו לנהל עובד. אתם קובעים את הגבולות."
 
-### WhatsApp Command Center (20 min)
+### WhatsApp Command Center (15 min)
 - Aviz's full Peleg Orchestra demo
 - LIVE: Send voice message from phone → agent processes → results back
 - Show: "Prepare a quote for David Levi" → CRM → PDF → WhatsApp
 - Show: voice message workflow (speak → transcribe → execute → respond)
 - Show: always-on agent concept (OpenClaw, morning briefings)
-- Participants take notes: "what would MY command center look like?"
 - **Note: show safety layers around the command center too**
 
-### Design Your Personal OS (20 min)
+### Build a Visual Interface (15 min) ← NEW BLOCK
+
+**The "wow" moment:** The agent builds its own face. No code from the participant.
+
+#### LIVE DEMO (10 min)
+Aviz asks Claude Code in natural language:
+> "בנה לי דשבורד HTML שמציג את המערכת האישית שלי — סקילים פעילים, פרויקטים, היסטוריית משימות, וסטטוס סוכנים"
+
+Claude Code generates a complete HTML page:
+- Beautiful dashboard with cards, charts, status indicators
+- RTL Hebrew layout, professional design
+- Interactive elements (filters, toggles)
+- All from a single natural language prompt
+
+**Show the progression:**
+```
+Terminal only (Session 1) → Skills (Session 2) → Agentic apps (Session 3) → Visual interface (Session 4)
+```
+
+**Key message:**
+> "הסוכן לא רק עובד בשבילכם — הוא גם בונה לעצמו פנים. אתם לא צריכים לדעת HTML, CSS, או JavaScript. אתם צריכים לדעת לתאר מה אתם רוצים."
+
+#### Mini Exercise (5 min)
+Each participant describes in 1-2 sentences what dashboard THEY would want:
+- "דשבורד לקוחות עם סטטוס פרויקטים"
+- "לוח משימות יומי עם התראות"
+- "ממשק ניהול הזמנות לחנות שלי"
+
+Aviz picks 1-2 and shows how fast Claude generates them (30 seconds each).
+
+**Takeaway:** Your Personal OS doesn't have to live in the terminal. It can have a visual interface that YOU designed by describing it.
+
+### Design Your Personal OS (15 min)
 - Interactive exercise: each participant maps their system
 - Template to fill:
   - What projects do you need?
