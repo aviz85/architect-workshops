@@ -92,7 +92,7 @@ https://us06web.zoom.us/j/85432742799?pwd=gzgc6cERRuTj8xtl9E7Jp55w6DZ1VY.1
 
 🛰️ *מפגש 3 — אפליקציות סוכניות*
 חמישי 5.3 ב-21:00
-https://us06web.zoom.us/j/82185831088?pwd=vVIAIvaElPKmRe3r2Aus3pZS7BmHXO.1
+https://us06web.zoom.us/j/89833552273?pwd=WvRBiUJu5XTDxUMBZ2dOhmclabtDpl.1
 
 🌌 *מפגש 4 — נחילי סוכנים*
 שני 9.3 ב-21:00
@@ -133,7 +133,7 @@ https://chat.whatsapp.com/GoXp5Le2DKJIp9sCnTUhmG
           </tr>
           <tr style="border-bottom: 1px solid #e5e7eb;">
             <td style="padding: 10px 4px; color: #333; font-weight: bold;">מפגש 3 — אפליקציות סוכניות</td>
-            <td style="padding: 10px 4px; color: #555; text-align: left;"><a href="https://us06web.zoom.us/j/82185831088?pwd=vVIAIvaElPKmRe3r2Aus3pZS7BmHXO.1" style="color: #22C55E; font-weight: bold;">חמישי 5.3 ב-21:00</a></td>
+            <td style="padding: 10px 4px; color: #555; text-align: left;"><a href="https://us06web.zoom.us/j/89833552273?pwd=WvRBiUJu5XTDxUMBZ2dOhmclabtDpl.1" style="color: #22C55E; font-weight: bold;">חמישי 5.3 ב-21:00</a></td>
           </tr>
           <tr>
             <td style="padding: 10px 4px; color: #333; font-weight: bold;">מפגש 4 — נחילי סוכנים</td>
