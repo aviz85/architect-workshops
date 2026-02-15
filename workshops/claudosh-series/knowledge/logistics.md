@@ -13,10 +13,10 @@
 |---|------|-----|-------|
 | 1 | 16.02.2026 | Monday | הסוכן הכללי כבר כאן |
 | 2 | 23.02.2026 | Monday | ערימות של סקילים |
-| 3 | 09.03.2026 | Monday | אפליקציות סוכניות |
-| 4 | 16.03.2026 | Monday | נחילי סוכנים |
+| 3 | 05.03.2026 | Thursday | אפליקציות סוכניות |
+| 4 | 09.03.2026 | Monday | נחילי סוכנים |
 
-> Note: Sessions 3-4 delayed by 1 week (skip 02.03) due to Purim.
+> Note: Session 3 moved to Thursday (from Monday 02.03) due to Purim.
 
 ## Enrollment Model
 - **Fixed cohort** - everyone starts session 1 together, progresses as a group

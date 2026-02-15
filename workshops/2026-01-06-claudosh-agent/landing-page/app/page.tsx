@@ -179,7 +179,7 @@ export default function LandingPage() {
             <div className="session-card fade-in">
               <div className="session-number">03</div>
               <div className="session-emoji">🛰️</div>
-              <div className="session-date">יום שני 09.03 | 21:00</div>
+              <div className="session-date">יום חמישי 05.03 | 21:00</div>
               <h3 className="session-name">אפליקציות סוכניות</h3>
               <p className="session-desc">בונים אפליקציות שרצות על סוכנים — עם hooks, אבטחה, תזמון משימות. הסוכן מתחיל לעבוד גם כשאתה לא שם.</p>
               <ul className="session-topics">
@@ -192,7 +192,7 @@ export default function LandingPage() {
             <div className="session-card fade-in">
               <div className="session-number">04</div>
               <div className="session-emoji">🌌</div>
-              <div className="session-date">יום שני 16.03 | 21:00</div>
+              <div className="session-date">יום שני 09.03 | 21:00</div>
               <h3 className="session-name">נחילי סוכנים</h3>
               <p className="session-desc">הנחיל מתעורר. צוותי סוכנים, הגנה מפני prompt injection, מרכז פיקוד בווצאפ — ומערכת הפעלה אישית מלאה.</p>
               <ul className="session-topics">
