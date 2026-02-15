@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מערכת הפעלה אישית — Personal OS Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0A0A0A;--card:#141414;--border:#1e1e1e;
+    --green:#22C55E;--green-dim:#22c55e33;--green-glow:0 0 20px #22c55e44;
+    --text:#e4e4e7;--text-dim:#71717a;--text-muted:#52525b;
+    --red:#ef4444;--amber:#f59e0b;--blue:#3b82f6;--purple:#a855f7;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Heebo',sans-serif;background:var(--bg);color:var(--text);
+    line-height:1.6;min-height:100vh;overflow-x:hidden;
+  }
+  .container{max-width:1280px;margin:0 auto;padding:0 20px}
+
+  /* ===== HEADER ===== */
+  .header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(10,10,10,0.85);backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);padding:16px 0;
+  }
+  .header-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  .header-right{display:flex;align-items:center;gap:16px}
+  .logo{font-size:1.3rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:10px}
+  .logo span{color:var(--green)}
+  .status-badge{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--green-dim);color:var(--green);
+    padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:500;
+  }
+  .status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+  .header-left{display:flex;align-items:center;gap:20px;font-size:0.85rem;color:var(--text-dim)}
+  .header-left .user-name{color:var(--text);font-weight:500}
+  #live-clock{font-variant-numeric:tabular-nums;direction:ltr}
+
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+  /* ===== SECTION TITLES ===== */
+  .section-title{
+    font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:16px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .section-title .icon{font-size:1.2rem}
+
+  /* ===== STATS ROW ===== */
+  .stats-row{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+    padding:28px 0;
+  }
+  .stat-card{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;
+    padding:24px;text-align:center;transition:all 0.3s ease;cursor:default;
+  }
+  .stat-card:hover{border-color:var(--green);box-shadow:var(--green-glow);transform:translateY(-2px)}
+  .stat-number{font-size:2.4rem;font-weight:900;color:var(--green);line-height:1.1}
+  .stat-label{font-size:0.85rem;color:var(--text-dim);margin-top:6px}
+
+  /* ===== TWO COLUMN LAYOUT ===== */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding-bottom:28px}
+
+  /* ===== AGENT CARDS ===== */
+  .agent-card{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;
+    padding:16px;display:flex;align-items:center;gap:14px;
+    transition:all 0.3s ease;cursor:default;
+  }
+  .agent-card:hover{border-color:var(--green);box-shadow:var(--green-glow);transform:translateY(-1px)}
+  .agent-card+.agent-card{margin-top:10px}
+  .agent-icon{
+    width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+    font-size:1.2rem;flex-shrink:0;
+  }
+  .agent-info{flex:1;min-width:0}
+  .agent-name{font-weight:600;font-size:0.92rem}
+  .agent-task{font-size:0.78rem;color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .agent-status{
+    font-size:0.72rem;padding:3px 10px;border-radius:20px;font-weight:500;flex-shrink:0;
+  }
+  .agent-status.active{background:#22c55e22;color:var(--green)}
+  .agent-status.idle{background:#f59e0b22;color:var(--amber)}
+  .agent-status.scheduled{background:#3b82f622;color:var(--blue)}
+
+  .pulse-ring{position:relative}
+  .pulse-ring::before{
+    content:'';position:absolute;top:-3px;right:-3px;width:10px;height:10px;
+    border-radius:50%;background:var(--green);animation:pulse-ring 2s infinite;
+  }
+  @keyframes pulse-ring{0%{transform:scale(1);opacity:0.8}70%{transform:scale(2.2);opacity:0}100%{transform:scale(1);opacity:0}}
+
+  /* ===== ACTIVITY FEED ===== */
+  .activity-list{display:flex;flex-direction:column;gap:2px}
+  .activity-item{
+    display:flex;align-items:center;gap:12px;padding:10px 14px;
+    border-radius:10px;transition:background 0.2s;
+  }
+  .activity-item:hover{background:var(--card)}
+  .activity-icon{
+    width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+    font-size:0.9rem;flex-shrink:0;background:var(--border);
+  }
+  .activity-text{flex:1;font-size:0.82rem;min-width:0}
+  .activity-text strong{color:var(--green);font-weight:600}
+  .activity-time{font-size:0.72rem;color:var(--text-muted);white-space:nowrap;direction:ltr}
+
+  /* ===== SKILLS LIBRARY ===== */
+  .skills-section{padding-bottom:28px}
+  .skill-filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+  .skill-filter{
+    padding:6px 16px;border-radius:20px;font-size:0.8rem;font-weight:500;
+    border:1px solid var(--border);background:transparent;color:var(--text-dim);
+    cursor:pointer;transition:all 0.2s;font-family:inherit;
+  }
+  .skill-filter.active,.skill-filter:hover{
+    border-color:var(--green);color:var(--green);background:var(--green-dim);
+  }
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+  .skill-badge{
+    background:var(--card);border:1px solid var(--border);border-radius:10px;
+    padding:12px 14px;transition:all 0.3s ease;cursor:default;position:relative;
+  }
+  .skill-badge:hover{border-color:var(--green);box-shadow:var(--green-glow);transform:translateY(-1px)}
+  .skill-badge .skill-name{font-size:0.82rem;font-weight:600;margin-bottom:4px}
+  .skill-badge .skill-desc{font-size:0.7rem;color:var(--text-dim);display:none}
+  .skill-badge:hover .skill-desc{display:block}
+  .skill-badge .skill-dots{display:flex;gap:3px;margin-top:6px}
+  .skill-badge .skill-dots span{
+    width:6px;height:6px;border-radius:50%;background:var(--border);
+  }
+  .skill-badge .skill-dots span.used{background:var(--green)}
+  .skill-category-tag{
+    font-size:0.62rem;color:var(--text-muted);position:absolute;top:8px;left:10px;
+  }
+
+  /* ===== BOTTOM ROW ===== */
+  .bottom-row{display:grid;grid-template-columns:1fr 1.5fr;gap:24px;padding-bottom:40px}
+
+  /* ===== SECURITY MONITOR ===== */
+  .security-card{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;
+  }
+  .security-status{
+    display:flex;align-items:center;gap:10px;margin-bottom:18px;
+    font-weight:700;color:var(--green);font-size:1rem;
+  }
+  .security-status .dot{width:12px;height:12px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+  .security-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  .sec-stat{text-align:center}
+  .sec-stat .num{font-size:1.5rem;font-weight:700;color:var(--text)}
+  .sec-stat .lbl{font-size:0.72rem;color:var(--text-dim)}
+
+  /* ===== LEASH PROGRESSION ===== */
+  .leash-card{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;
+  }
+  .leash-track{
+    display:flex;align-items:center;justify-content:space-between;position:relative;
+    margin-top:20px;padding:0 10px;
+  }
+  .leash-track::before{
+    content:'';position:absolute;top:50%;right:30px;left:30px;height:3px;
+    background:var(--border);transform:translateY(-50%);z-index:0;
+  }
+  .leash-track::after{
+    content:'';position:absolute;top:50%;right:30px;height:3px;
+    width:75%;background:linear-gradient(to left,var(--green),var(--green-dim));
+    transform:translateY(-50%);z-index:1;border-radius:3px;
+  }
+  .leash-step{
+    display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;
+    position:relative;
+  }
+  .leash-dot{
+    width:20px;height:20px;border-radius:50%;border:2px solid var(--border);
+    background:var(--bg);transition:all 0.3s;
+  }
+  .leash-step.done .leash-dot{background:var(--green);border-color:var(--green)}
+  .leash-step.current .leash-dot{
+    background:var(--green);border-color:var(--green);
+    box-shadow:0 0 12px var(--green),0 0 24px var(--green-dim);
+    animation:pulse 2s infinite;
+  }
+  .leash-step.current .leash-dot::after{
+    content:'';position:absolute;inset:-6px;border-radius:50%;
+    border:2px solid var(--green);opacity:0.3;animation:pulse-ring 2s infinite;
+  }
+  .leash-label{font-size:0.72rem;color:var(--text-dim);text-align:center;max-width:80px}
+  .leash-step.done .leash-label,.leash-step.current .leash-label{color:var(--green)}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:900px){
+    .stats-row{grid-template-columns:repeat(2,1fr)}
+    .two-col,.bottom-row{grid-template-columns:1fr}
+    .skills-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  }
+  @media(max-width:500px){
+    .stats-row{grid-template-columns:1fr 1fr}
+    .stat-number{font-size:1.8rem}
+    .header-inner{flex-direction:column;text-align:center}
+    .header-left{justify-content:center}
+    .leash-label{font-size:0.62rem;max-width:60px}
+  }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar{width:6px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--text-muted)}
+
+  /* ===== FADE IN ===== */
+  .fade-in{opacity:0;transform:translateY(12px);animation:fadeIn 0.5s ease forwards}
+  @keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
+  .delay-1{animation-delay:0.1s}.delay-2{animation-delay:0.2s}
+  .delay-3{animation-delay:0.3s}.delay-4{animation-delay:0.4s}
+  .delay-5{animation-delay:0.5s}.delay-6{animation-delay:0.6s}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="container header-inner">
+    <div class="header-right">
+      <div class="logo">
+        <span>⌘</span> מערכת הפעלה אישית
+      </div>
+      <div class="status-badge"><span class="status-dot"></span> פעיל</div>
+    </div>
+    <div class="header-left">
+      <span id="live-clock"></span>
+      <span class="user-name">אביץ — The Architect</span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ===== STATS ROW ===== -->
+  <section class="stats-row fade-in delay-1">
+    <div class="stat-card">
+      <div class="stat-number">18</div>
+      <div class="stat-label">סקילים פעילים</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">7</div>
+      <div class="stat-label">פרויקטים</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">4</div>
+      <div class="stat-label">סוכנים רצים</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">23.5</div>
+      <div class="stat-label">שעות נחסכו החודש</div>
+    </div>
+  </section>
+
+  <!-- ===== AGENTS + ACTIVITY ===== -->
+  <section class="two-col fade-in delay-2">
+    <!-- Running Agents -->
+    <div>
+      <div class="section-title"><span class="icon">🤖</span> סוכנים פעילים</div>
+      <div class="agent-card">
+        <div class="agent-icon pulse-ring" style="background:#22c55e22">🎯</div>
+        <div class="agent-info">
+          <div class="agent-name">task-receiver</div>
+          <div class="agent-task">מעבד 3 משימות מהתיבה הנכנסת</div>
+        </div>
+        <span class="agent-status active">פעיל</span>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon pulse-ring" style="background:#22c55e22">☀️</div>
+        <div class="agent-info">
+          <div class="agent-name">morning-briefing</div>
+          <div class="agent-task">מחכה לטריגר הבוקר — 07:00</div>
+        </div>
+        <span class="agent-status scheduled">מתוזמן</span>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon" style="background:#3b82f622">📡</div>
+        <div class="agent-info">
+          <div class="agent-name">workshop-monitor</div>
+          <div class="agent-task">מעקב אחרי הרשמות — 47 נרשמים</div>
+        </div>
+        <span class="agent-status active">פעיל</span>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon" style="background:#f59e0b22">💬</div>
+        <div class="agent-info">
+          <div class="agent-name">whatsapp-bot</div>
+          <div class="agent-task">ממתין להודעות נכנסות</div>
+        </div>
+        <span class="agent-status idle">ממתין</span>
+      </div>
+    </div>
+
+    <!-- Activity Feed -->
+    <div>
+      <div class="section-title"><span class="icon">📋</span> פעילות אחרונה</div>
+      <div class="activity-list">
+        <div class="activity-item">
+          <div class="activity-icon" style="background:#22c55e22">🐝</div>
+          <div class="activity-text"><strong>Swarm</strong> השלים: עיצוב פוסטר + כתיבת קופי + פרסום ב-3 פלטפורמות</div>
+          <span class="activity-time">12:34</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:#3b82f622">📧</div>
+          <div class="activity-text"><strong>email-processor</strong> עיבד 23 מיילים, 4 דורשים תגובה</div>
+          <span class="activity-time">11:50</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:#a855f722">🎨</div>
+          <div class="activity-text"><strong>workshop-poster</strong> יצר פוסטר שיווקי עם אווטאר הבוס</div>
+          <span class="activity-time">11:22</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:#f59e0b22">🔒</div>
+          <div class="activity-text"><strong>Hook</strong> חסם push עם secrets — .env נחשף</div>
+          <span class="activity-time">10:45</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:#22c55e22">🗓️</div>
+          <div class="activity-text"><strong>calendar</strong> תיאום פגישה עם לקוח — נשלחו 3 אופציות</div>
+          <span class="activity-time">10:30</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:#3b82f622">📊</div>
+          <div class="activity-text"><strong>expense-analyzer</strong> זיהה מנוי כפול — Notion + Obsidian</div>
+          <span class="activity-time">09:15</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:#a855f722">🎤</div>
+          <div class="activity-text"><strong>transcribe</strong> תמלול הרצאה — 47 דקות → SRT + טקסט</div>
+          <span class="activity-time">09:00</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:#22c55e22">💬</div>
+          <div class="activity-text"><strong>whatsapp</strong> שלח תזכורת סדנה ל-3 קבוצות</div>
+          <span class="activity-time">08:30</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:#f59e0b22">🧠</div>
+          <div class="activity-text"><strong>morning-briefing</strong> סיכום יומי — 5 משימות, 2 פגישות, 1 דדליין</div>
+          <span class="activity-time">07:00</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:#3b82f622">🔄</div>
+          <div class="activity-text"><strong>git-hook</strong> auto-commit + push — 3 קבצים עודכנו</div>
+          <span class="activity-time">06:45</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:#22c55e22">📱</div>
+          <div class="activity-text"><strong>telegram</strong> קיבל הודעה מ-OpenClaw — heartbeat תקין</div>
+          <span class="activity-time">04:00</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SKILLS LIBRARY ===== -->
+  <section class="skills-section fade-in delay-3">
+    <div class="section-title"><span class="icon">⚡</span> ספריית סקילים</div>
+    <div class="skill-filters">
+      <button class="skill-filter active" data-cat="all">הכל</button>
+      <button class="skill-filter" data-cat="business">עסקי</button>
+      <button class="skill-filter" data-cat="comm">תקשורת</button>
+      <button class="skill-filter" data-cat="content">תוכן</button>
+      <button class="skill-filter" data-cat="auto">אוטומציה</button>
+    </div>
+    <div class="skills-grid" id="skills-grid">
+      <!-- Skills injected by JS -->
+    </div>
+  </section>
+
+  <!-- ===== BOTTOM ROW: SECURITY + LEASH ===== -->
+  <section class="bottom-row fade-in delay-4">
+    <!-- Security Monitor -->
+    <div class="security-card">
+      <div class="section-title"><span class="icon">🛡️</span> אבטחה</div>
+      <div class="security-status">
+        <span class="dot"></span> הכל תקין
+      </div>
+      <div class="security-stats">
+        <div class="sec-stat">
+          <div class="num">6</div>
+          <div class="lbl">Hooks פעילים</div>
+        </div>
+        <div class="sec-stat">
+          <div class="num">3</div>
+          <div class="lbl">חסימות אחרונות</div>
+        </div>
+        <div class="sec-stat">
+          <div class="num">12</div>
+          <div class="lbl">בקשות הרשאה</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leash Progression -->
+    <div class="leash-card">
+      <div class="section-title"><span class="icon">🔗</span> התקדמות הרצועה — Leash Progression</div>
+      <div class="leash-track">
+        <div class="leash-step done">
+          <div class="leash-dot"></div>
+          <div class="leash-label">רצועה קצרה</div>
+        </div>
+        <div class="leash-step done">
+          <div class="leash-dot"></div>
+          <div class="leash-label">רצועה ארוכה</div>
+        </div>
+        <div class="leash-step done">
+          <div class="leash-dot"></div>
+          <div class="leash-label">בלי רצועה</div>
+        </div>
+        <div class="leash-step current">
+          <div class="leash-dot"></div>
+          <div class="leash-label">חופש מלא</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// ===== LIVE CLOCK =====
+function updateClock(){
+  const now=new Date();
+  const d=now.toLocaleDateString('he-IL',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const t=now.toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  document.getElementById('live-clock').textContent=d+' • '+t;
+}
+updateClock();
+setInterval(updateClock,1000);
+
+// ===== SKILLS DATA =====
+const skills=[
+  {name:'invoice-creator',cat:'business',desc:'יצירת חשבוניות מס',usage:5},
+  {name:'expense-analyzer',cat:'business',desc:'ניתוח הוצאות כרטיס אשראי',usage:4},
+  {name:'calendar',cat:'business',desc:'ניהול יומן Google',usage:5},
+  {name:'schedule-meeting',cat:'business',desc:'תיאום פגישות אוטומטי',usage:3},
+  {name:'get-contact',cat:'business',desc:'חיפוש אנשי קשר ב-CRM',usage:4},
+  {name:'whatsapp',cat:'comm',desc:'שליחת הודעות WhatsApp',usage:5},
+  {name:'telegram',cat:'comm',desc:'אוטומציית Telegram',usage:3},
+  {name:'gmail',cat:'comm',desc:'קריאה ושליחת מיילים',usage:4},
+  {name:'email-processor',cat:'comm',desc:'עיבוד תיבת דואר יומי',usage:5},
+  {name:'workshop-poster',cat:'content',desc:'יצירת פוסטרים שיווקיים',usage:4},
+  {name:'presentation',cat:'content',desc:'בניית מצגות מובנות',usage:3},
+  {name:'transcribe',cat:'content',desc:'תמלול אודיו/וידאו',usage:4},
+  {name:'image-gen',cat:'content',desc:'יצירת תמונות עם Gemini',usage:3},
+  {name:'social-publisher',cat:'content',desc:'פרסום במספר פלטפורמות',usage:5},
+  {name:'morning-briefing',cat:'auto',desc:'סיכום בוקר אוטומטי',usage:5},
+  {name:'task-receiver',cat:'auto',desc:'קבלת משימות מתיבה נכנסת',usage:5},
+  {name:'git-hooks',cat:'auto',desc:'הוקים אוטומטיים ל-Git',usage:4},
+  {name:'workshop-monitor',cat:'auto',desc:'מעקב הרשמות וסטטוס',usage:3},
+];
+
+function renderSkills(filter){
+  const grid=document.getElementById('skills-grid');
+  const filtered=filter==='all'?skills:skills.filter(s=>s.cat===filter);
+  grid.innerHTML=filtered.map(s=>{
+    const dots=Array.from({length:5},(_,i)=>
+      `<span class="${i<s.usage?'used':''}"></span>`
+    ).join('');
+    const catLabel={business:'עסקי',comm:'תקשורת',content:'תוכן',auto:'אוטומציה'}[s.cat];
+    return `<div class="skill-badge" data-cat="${s.cat}">
+      <span class="skill-category-tag">${catLabel}</span>
+      <div class="skill-name">${s.name}</div>
+      <div class="skill-desc">${s.desc}</div>
+      <div class="skill-dots">${dots}</div>
+    </div>`;
+  }).join('');
+}
+renderSkills('all');
+
+// ===== SKILL FILTERS =====
+document.querySelectorAll('.skill-filter').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.skill-filter').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderSkills(btn.dataset.cat);
+  });
+});
+</script>
+</body>
+</html>
