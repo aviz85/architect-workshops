@@ -77,7 +77,8 @@
     .agenda-table th { background: #dcfce7; color: #166534; font-weight: 700; padding: 4px 8px; text-align: right; border-bottom: 2px solid #16A34A; }
     .agenda-table td { padding: 4px 8px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
     .agenda-table tr:last-child td { border-bottom: none; }
-    .time-cell { color: #16A34A; font-weight: 700; white-space: nowrap; width: 45px; }
+
+    .beta-badge { display: inline-block; background: #fef3c7; border: 1px solid #fde68a; border-radius: 4px; padding: 2px 8px; font-size: 9px; color: #92400e; font-weight: 600; margin-right: 6px; }
 
     .outcome-box {
       background: linear-gradient(135deg, #dcfce7, #ecfdf5);
@@ -160,8 +161,9 @@
 <div class="page">
   <p style="font-size: 12px; color: #16A34A; font-weight: 700; letter-spacing: 2px; margin-bottom: 4px;">AVIZ — THE ARCHITECT</p>
   <h1>מאפס לצבא סוכנים</h1>
-  <p class="subtitle">סיליבוס מלא — 4 מפגשים למערכת הפעלה אישית</p>
-  <p class="tagline">סדרת סדנאות מעשיות לבניית מערכת סוכני AI שעובדת בשבילך, בלי לכתוב שורת קוד אחת.</p>
+  <p class="subtitle">סיליבוס מלא — 4 מפגשים למערכת הפעלה אישית <span class="beta-badge">גרסת BETA</span></p>
+  <p class="tagline">סדרת סדנאות מעשיות לבניית מערכת סוכני AI שעובדת בשבילך, בלי לכתוב שורת קוד אחת.
+    <br>ייתכנו שינויים קלים בסיליבוס — העקרונות נשמרים.</p>
 
   <div class="hero-box">
     <p style="font-size: 14px; font-weight: 700; margin-bottom: 8px;">
@@ -401,46 +403,38 @@
   <h3>תוכנית מפורטת</h3>
   <table class="agenda-table">
     <thead>
-      <tr><th style="width:55px">זמן</th><th style="width:130px">בלוק</th><th>מה קורה</th></tr>
+      <tr><th style="width:130px">בלוק</th><th>מה קורה</th></tr>
     </thead>
     <tbody>
       <tr>
-        <td class="time-cell">0:00</td>
         <td><strong>סקירה + ריבית דריבית</strong></td>
         <td>מי השלים את הפרויקט? איך הסוכן הפך חכם יותר תוך שבוע? עקרון הצבירה בפעולה. דיון על תוכנית התשלום ($100–$200).</td>
       </tr>
       <tr>
-        <td class="time-cell">0:10</td>
         <td><strong>שחרור רצועה</strong></td>
         <td>מכירים את מצב skip-permissions ואת קיצור הדרך cld. מה זה אומר? מתי להשתמש ומתי <strong>לא</strong>. הפשרה: מהירות מול בטיחות.</td>
       </tr>
       <tr>
-        <td class="time-cell">0:20</td>
         <td><strong>בונים CRM מנתונים</strong></td>
         <td>מייבאים אנשי קשר (גוגל/אקסל). כותבים CLAUDE.md עם כללים עסקיים. בונים סקיל להצעות מחיר. דמו: "תכין הצעה ליוסי כהן" &rarr; PDF ממותג.</td>
       </tr>
       <tr>
-        <td class="time-cell">0:40</td>
         <td><strong>חיבור וואטסאפ</strong></td>
         <td>כולם מגדירים חיבור Green API. הסבר: חיבור לא-רשמי, שימוש מדוד ובטוח. התקנת סקיל וואטסאפ. בדיקה: שולחים הודעה לעצמכם.</td>
       </tr>
       <tr>
-        <td class="time-cell">1:00</td>
         <td><strong>ראיון עומק: מכירים את העסק</strong></td>
         <td>מתקינים סקיל "ראיון עומק" מהספרייה. הסוכן שואל שאלות על העסק, המוצרים, השירותים. הידע מאורגן אוטומטית בתיקיות.</td>
       </tr>
       <tr>
-        <td class="time-cell">1:20</td>
         <td><strong>מצב חללית</strong></td>
         <td>פותחים 2 חלונות טרמינל, 2 פרויקטים. שולחים משימות לשניהם, עוברים ביניהם. חווים חצי-אוטומאט: שולח &rarr; עושה משהו אחר &rarr; חוזר.</td>
       </tr>
       <tr>
-        <td class="time-cell">1:35</td>
         <td><strong>WOW: הודעות אישיות ללקוחות</strong></td>
         <td>מחברים CRM + וואטסאפ + ידע עסקי. "שלח מבצע אישי ללקוחות שקנו X" &rarr; הסוכן כותב הודעה ייחודית לכל לקוח.</td>
       </tr>
       <tr>
-        <td class="time-cell">1:50</td>
         <td><strong>סיכום + שיעורי בית</strong></td>
         <td>העשירו CRM, שלחו 3 הודעות אמיתיות בוואטסאפ, הרחיבו ידע עסקי. הצצה: "בפעם הבאה — הסוכן הופך לאפליקציה."</td>
       </tr>
@@ -493,31 +487,26 @@
   <h3>תוכנית מפורטת</h3>
   <table class="agenda-table">
     <thead>
-      <tr><th style="width:55px">זמן</th><th style="width:130px">בלוק</th><th>מה קורה</th></tr>
+      <tr><th style="width:130px">בלוק</th><th>מה קורה</th></tr>
     </thead>
     <tbody>
       <tr>
-        <td class="time-cell">0:00</td>
         <td><strong>סקירה + Show & Tell</strong></td>
         <td>מה נבנה ב-2 שבועות? מישהו רוצה להציג? הרצועה הולכת ומתארכת.</td>
       </tr>
       <tr>
-        <td class="time-cell">0:10</td>
         <td><strong>הפרדיגמה של אפליקציה סוכנית</strong></td>
         <td>טבלת השוואה: אפליקציה רגילה מול אפליקציה סוכנית. Runtime = קלוד קוד. לוגיקה = סקילים. מסד נתונים = קבצי Markdown. <strong>לא צריך להיות מפתח כדי לבנות אפליקציה.</strong></td>
       </tr>
       <tr>
-        <td class="time-cell">0:25</td>
         <td><strong>5 אבני הבניין</strong></td>
         <td>CLAUDE.md = חוקה. סקילים = יכולות. פקודות = נקודות כניסה. סוכנים = תהליכי רקע. קבצי נתונים = מסד נתונים בטקסט.</td>
       </tr>
       <tr>
-        <td class="time-cell">0:35</td>
         <td><strong>בונים: בוט וואטסאפ לעסק</strong></td>
         <td>פרויקט חדש מאפס. CLAUDE.md שמגדיר אישיות ובוט. ידע עסקי (מהראיון העומק). סקילים: מענה לשאלות, בדיקת זמינות, הצעת מחיר. <strong>הבוט עונה ללקוחות על העסק שלכם!</strong></td>
       </tr>
       <tr>
-        <td class="time-cell" style="color: #dc2626;">1:05</td>
         <td><strong style="color: #dc2626;">🔒 הוקים ושליטה בסוכן</strong></td>
         <td>
           <strong>מה זה הוקים?</strong> סקריפטים שרצים לפני/אחרי כל פעולה — כמו מצלמות אבטחה ושומרים.<br>
@@ -526,12 +515,10 @@
         </td>
       </tr>
       <tr>
-        <td class="time-cell">1:30</td>
         <td><strong>Agent SDK + תזמון</strong></td>
         <td>הפעלת סוכן מסקריפט (לא מטרמינל). הגדרת משימה מתוזמנת — הסוכן עובד בזמן שאתה ישן.</td>
       </tr>
       <tr>
-        <td class="time-cell">1:45</td>
         <td><strong>סיכום + שיעורי בית</strong></td>
         <td>השאירו את הבוט רץ שבוע. עקבו אחרי ההוקים — הם תפסו משהו? הצצה: "בפעם הבאה — Prompt Injection, נחילים, ושליטה מהנייד."</td>
       </tr>
@@ -591,21 +578,18 @@
   <h3>תוכנית מפורטת</h3>
   <table class="agenda-table">
     <thead>
-      <tr><th style="width:55px">זמן</th><th style="width:130px">בלוק</th><th>מה קורה</th></tr>
+      <tr><th style="width:130px">בלוק</th><th>מה קורה</th></tr>
     </thead>
     <tbody>
       <tr>
-        <td class="time-cell">0:00</td>
         <td><strong>סקירת החודש</strong></td>
         <td>מהיכן יצאנו ולאן הגענו. אפקט הצבירה במספרים אמיתיים. "תסתכלו כמה רחוק הגעתם מאותה פקודה ראשונה."</td>
       </tr>
       <tr>
-        <td class="time-cell">0:10</td>
         <td><strong>דמו: נחילי סוכנים</strong></td>
         <td>אביץ מפעיל 3 סוכנים על משימה אחת: "תכין הכל לפגישה עם יוסי כהן" — סוכן 1 שולף CRM, סוכן 2 חוקר חברה, סוכן 3 מכין אג׳נדה. <strong>הכל רץ במקביל, מתמזג למסמך אחד.</strong></td>
       </tr>
       <tr>
-        <td class="time-cell" style="color: #dc2626;">0:30</td>
         <td><strong style="color: #dc2626;">🛡️ Prompt Injection והגנה</strong></td>
         <td>
           <strong>מה זה?</strong> טקסט זדוני מוסתר בקבצים שמנסה לחטוף את הסוכן.<br>
@@ -615,22 +599,18 @@
         </td>
       </tr>
       <tr>
-        <td class="time-cell">0:55</td>
         <td><strong>תזמורת וואטסאפ</strong></td>
         <td>דמו מהנייד: אביץ שולח הודעה קולית "תכין הצעה לדוד לוי" &rarr; תמלול &rarr; CRM &rarr; PDF &rarr; חזרה בוואטסאפ. שיחה קולית = עבודה נעשית. משתתפים מתכננים: "איך ייראה מרכז הפיקוד שלי?"</td>
       </tr>
       <tr>
-        <td class="time-cell">1:15</td>
         <td><strong>מתכננים: ה-OS האישי</strong></td>
         <td>תרגיל אינטראקטיבי: כל משתתף מתכנן את המערכת שלו. אילו פרויקטים? אילו סקילים? איך מתחברים? מה אוטומטי? מה דורש אישור? <strong>כולל גבולות אבטחה.</strong> אביץ סוקר 2-3 דוגמאות.</td>
       </tr>
       <tr>
-        <td class="time-cell">1:35</td>
         <td><strong>תצוגת משתתפים</strong></td>
         <td>2-3 משתתפים מציגים מה בנו ב-4 שבועות. חוגגים הצלחות, מכירים באתגרים. רגע קהילתי.</td>
       </tr>
       <tr>
-        <td class="time-cell">1:50</td>
         <td><strong>חזון: לאן ממשיכים</strong></td>
         <td>אפקט הצבירה: 1% ביום = פי 37 בשנה. סולם ההתייעלות: מבצע &rarr; מנהל &rarr; אסטרטג &rarr; מאשר. קהילת בוגרים, מנטורינג. <strong>"התחלתם כמפעילים. אתם יוצאים כאדריכלים."</strong></td>
       </tr>

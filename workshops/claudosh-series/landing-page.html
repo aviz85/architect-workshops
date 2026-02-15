@@ -1086,6 +1086,19 @@
   </div>
 </section>
 
+<!-- ==================== SYLLABUS DOWNLOAD ==================== -->
+<section style="background: var(--dark); padding: 48px 0; text-align: center;">
+  <div class="container fade-in">
+    <div style="background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(34,197,94,0.02)); border: 1px solid rgba(34,197,94,0.2); border-radius: 16px; padding: 32px; max-width: 600px; margin: 0 auto;">
+      <p style="font-size: 1.3rem; font-weight: 800; color: var(--white); margin-bottom: 8px;">📄 רוצים לראות את הסיליבוס המלא?</p>
+      <p style="font-size: 0.95rem; color: var(--gray-400); margin-bottom: 20px;">6 עמודים עם פירוט מלא של כל מפגש, מושגי יסוד, ומה מקבלים.</p>
+      <a href="syllabus-v2.pdf" download style="display: inline-flex; align-items: center; gap: 8px; background: transparent; border: 2px solid var(--green); color: var(--green); font-family: 'Heebo', sans-serif; font-size: 1rem; font-weight: 700; padding: 12px 32px; border-radius: 10px; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='var(--green)'; this.style.color='var(--black)';" onmouseout="this.style.background='transparent'; this.style.color='var(--green)';">
+        הורדת הסיליבוס (PDF)
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== THE JOURNEY ==================== -->
 <section class="journey-section">
   <div class="container">
@@ -1186,24 +1199,33 @@
       <div class="audience-card">
         <div class="audience-icon">💼</div>
         <div class="audience-title">בעלי עסקים</div>
-        <p class="audience-desc">שרוצים לייעל תהליכים, להוציא הצעות מחיר, לנהל לקוחות ולשווק — עם פחות מאמץ ויותר עקביות.</p>
+        <p class="audience-desc">שרוצים לייעל תהליכים, להוציא הצעות מחיר, לנהל לקוחות ולשווק — עם פחות מאמץ ויותר עקביות. הסוכן הופך ל"עובד" שמכיר את העסק שלך.</p>
       </div>
       <div class="audience-card">
         <div class="audience-icon">👔</div>
         <div class="audience-title">מנהלים ואנשי מקצוע</div>
-        <p class="audience-desc">שעושים את אותן משימות שוב ושוב ויודעים שאפשר אחרת — אם רק מישהו יראה להם איך.</p>
+        <p class="audience-desc">שעושים את אותן משימות שוב ושוב — מיילים, דוחות, הצעות, תיאום. הסוכן לוקח על עצמו את המשימות החוזרות ומשחרר אותך לדברים חשובים.</p>
       </div>
       <div class="audience-card">
         <div class="audience-icon">🎯</div>
         <div class="audience-title">סקרנים טכנולוגיים</div>
-        <p class="audience-desc">ששמעו על סוכני AI ורוצים להבין מה זה באמת — ולבנות משהו עובד, לא רק לקרוא על זה.</p>
+        <p class="audience-desc">ששמעו על סוכני AI ורוצים להבין מה זה באמת — ולבנות משהו עובד, לא רק לקרוא על זה. Early Adopters שמוכנים להוביל.</p>
       </div>
     </div>
-    <div class="audience-note fade-in">
+    <div class="audience-note fade-in" style="margin-bottom: 20px;">
       <div class="audience-note-icon">🚫</div>
       <div class="audience-note-text">
         <strong>לא צריך ניסיון בתכנות. בכלל.</strong><br>
-        אם אתה יודע לכתוב הודעה בווצאפ — אתה יודע מספיק. הסדרה בנויה ל-Early Adopters שרוצים להוביל, לא למתכנתים.
+        אם אתה יודע לכתוב הודעה בווצאפ — אתה יודע מספיק. הסדרה לא מלמדת קוד.
+        <strong>Claude Code הוא כלי שעובד בשיחה</strong> — אתה מתאר מה אתה צריך בעברית פשוטה, והסוכן מבצע.
+        אתה הופך ממבצע למנהל: שולח משימה, הולך לעשות משהו אחר, וחוזר לתוצאה מוכנה.
+      </div>
+    </div>
+    <div class="audience-note fade-in">
+      <div class="audience-note-icon">⚠️</div>
+      <div class="audience-note-text">
+        <strong>הסדרה לא מתאימה למי שמחפש הרצאת השראה.</strong><br>
+        זו סדנה מעשית. אתה מתקין, בונה, ויוצא עם מערכת עובדת. צריך להגיע עם מחשב, עם נכונות לנסות, ועם סבלנות ללמוד כלי חדש. מי שמוכן — יוצא עם משהו שמשנה את היומיום.
       </div>
     </div>
   </div>
@@ -1259,11 +1281,29 @@
     <div class="faq-list fade-in">
       <div class="faq-item">
         <button class="faq-question">
+          <span>למי הסדרה מיועדת?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>לבעלי עסקים, מנהלים, עצמאים ואנשי מקצוע שרוצים להפסיק לעשות הכל ידנית ולבנות מערכת AI שעובדת בשבילם. לא צריך רקע טכני — הסדרה בנויה למי שיודע להשתמש במחשב ומוכן ללמוד כלי חדש. המשותף למשתתפים: סקרנות, נכונות לנסות, ורצון אמיתי לשנות את הדרך שבה הם עובדים.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>מה זה Claude Code? מה ההבדל מ-ChatGPT?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Claude Code הוא סוכן AI שרץ על המחשב שלך ויכול לבצע פעולות אמיתיות — לא רק לענות על שאלות. ההבדל מ-ChatGPT: ChatGPT הוא צ'אטבוט שעונה בתוך חלון. Claude Code הוא סוכן שניגש לקבצים, שולח הודעות, מייצר מסמכים — ועובד גם כשאתה לא שם. אתה מדבר אליו בעברית פשוטה, והוא מבצע.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
           <span>צריך לדעת לתכנת?</span>
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          <p>ממש לא. הסדרה בנויה למי שלא כתב שורת קוד בחיים. אם אתה יודע לכתוב הודעה בווצאפ — יש לך את כל מה שצריך.</p>
+          <p>ממש לא. הסדרה בנויה למי שלא כתב שורת קוד בחיים. Claude Code עובד בשיחה — אתה מתאר מה אתה צריך, והסוכן עושה. אם אתה יודע לכתוב הודעה בווצאפ — יש לך את כל מה שצריך.</p>
         </div>
       </div>
       <div class="faq-item">
@@ -1281,7 +1321,7 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          <p>מחשב (Mac, Windows או Linux), חיבור אינטרנט יציב, ומנוי Claude פעיל (claude.ai — $20 לחודש). מדריך התקנה מפורט נשלח לפני המפגש.</p>
+          <p>מחשב (Mac, Windows או Linux), חיבור אינטרנט יציב, ומנוי Claude פעיל (claude.ai — $20 לחודש). את ההתקנה של Claude Code נעשה ביחד במפגש הראשון.</p>
         </div>
       </div>
       <div class="faq-item">
@@ -1318,6 +1358,15 @@
         </button>
         <div class="faq-answer">
           <p>פה לא לומדים תיאוריה — בונים. בכל מפגש יוצאים עם משהו שעובד. בנוסף, זו הסדרה היחידה בעברית שמתמקדת בבניית מערכת סוכנים מלאה, לא רק בשימוש בכלי יחיד.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>איפה אפשר לראות את הסיליבוס המלא?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>הסיליבוס המלא זמין להורדה כ-PDF — <a href="syllabus-v2.pdf" download style="color: var(--green); font-weight: 700; text-decoration: underline;">להורדת הסיליבוס המלא לחצו כאן</a>. הוא כולל פירוט מלא של כל 4 המפגשים, מושגי יסוד, מה מקבלים ומחירים.</p>
         </div>
       </div>
     </div>
