@@ -3,10 +3,20 @@
 > Source: Deep Interview, 2026-02-15
 
 ## Schedule
-- **Cadence:** Once a week (1 session per week)
+- **Cadence:** Once a week (Mondays at 21:00)
 - **Duration:** 4 weeks total
 - **Session length:** 2 hours each
 - **Total hours:** 8 hours of content
+
+### Session Dates
+| # | Date | Day | Topic |
+|---|------|-----|-------|
+| 1 | 16.02.2026 | Monday | הסוכן הכללי כבר כאן |
+| 2 | 23.02.2026 | Monday | ערימות של סקילים |
+| 3 | 09.03.2026 | Monday | אפליקציות סוכניות |
+| 4 | 16.03.2026 | Monday | נחילי סוכנים |
+
+> Note: Sessions 3-4 delayed by 1 week (skip 02.03) due to Purim.
 
 ## Enrollment Model
 - **Fixed cohort** - everyone starts session 1 together, progresses as a group
@@ -20,7 +30,5 @@
 - More content, more depth, higher per-session value
 
 ## Open Questions
-- Day of week? (Thursday evenings like usual?)
-- Time? (20:00 or 21:00?)
 - Max participants per cohort?
-- Pilot beta: 2026-02-16
+- Pilot beta started: 2026-02-16 (Mondays at 21:00)
