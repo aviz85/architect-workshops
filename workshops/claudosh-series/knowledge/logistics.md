@@ -14,13 +14,13 @@
 - Homework between sessions builds on previous week
 
 ## Pricing
-- **Target:** ₪497+ (premium positioning)
+- **Per session:** ₪150
+- **Full series (4 sessions):** ₪500 (save ₪100)
 - Old 3-session series was ₪297
-- More content, more depth, higher value justifies premium
+- More content, more depth, higher per-session value
 
 ## Open Questions
-- Exact price point (497? 597? 697?)
 - Day of week? (Thursday evenings like usual?)
 - Time? (20:00 or 21:00?)
 - Max participants per cohort?
-- When does the first cohort start?
+- Pilot beta: 2026-02-16

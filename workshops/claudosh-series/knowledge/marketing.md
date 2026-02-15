@@ -31,8 +31,9 @@
 6. **The full package** - recordings, guides, skill library, templates
 
 ## Pricing
-- **₪497+** (premium positioning, 4 sessions × 2 hours)
+- **₪150 per session** | **₪500 for full series** (save ₪100)
 - Justification: 8 hours of content + materials + community + ongoing support
+- Low barrier per session, incentive to commit to full series
 
 ## Differentiators
 1. Hebrew - only serious Claude Code training in Hebrew
