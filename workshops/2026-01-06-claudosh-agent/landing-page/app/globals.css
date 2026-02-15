@@ -315,6 +315,14 @@ section {
 
 .session-emoji { font-size: 2.4rem; margin-bottom: 12px; display: block; }
 
+.session-date {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 6px;
+  letter-spacing: 0.03em;
+}
+
 .session-name {
   font-size: 1.4rem;
   font-weight: 800;
