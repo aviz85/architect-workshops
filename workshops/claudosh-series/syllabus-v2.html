@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      margin: 0; padding: 0;
+      font-family: 'Heebo', sans-serif;
+      direction: rtl; text-align: right;
+      color: #1a1a2e;
+      line-height: 1.6;
+      font-size: 11px;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 8mm 10mm 12mm;
+      page-break-after: always;
+      position: relative;
+      background: #f7f8fa;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .page:last-child { page-break-after: auto; }
+
+    .page::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #15803d, #16A34A, #22c55e);
+    }
+
+    h1 { font-size: 26px; font-weight: 900; color: #0f172a; margin-bottom: 4px; }
+    h2 { font-size: 17px; font-weight: 800; color: #0f172a; margin: 10px 0 6px; padding-bottom: 3px; border-bottom: 2px solid #16A34A; display: inline-block; }
+    h3 { font-size: 14px; font-weight: 700; color: #166534; margin: 8px 0 4px; }
+    h4 { font-size: 12px; font-weight: 700; color: #0f172a; margin: 6px 0 3px; }
+    p { margin-bottom: 6px; }
+
+    .subtitle { font-size: 15px; color: #16A34A; font-weight: 700; margin-bottom: 3px; }
+    .tagline { font-size: 12px; color: #64748b; font-weight: 400; margin-bottom: 14px; }
+
+    .hero-box {
+      background: linear-gradient(135deg, #dcfce7 0%, #dcfce7 100%);
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin: 8px 0;
+    }
+    .hero-box p { font-size: 11px; color: #166534; line-height: 1.6; }
+
+    .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 6px 0; }
+    .pain-item { background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 8px 10px; }
+    .pain-item .icon { font-size: 14px; margin-bottom: 2px; }
+    .pain-item .text { font-size: 10px; color: #991b1b; line-height: 1.4; }
+
+    .audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 6px 0; }
+    .audience-item { background: #dcfce7; border: 1px solid #bbf7d0; border-radius: 6px; padding: 8px 10px; }
+    .audience-item .icon { font-size: 14px; margin-bottom: 2px; }
+    .audience-item .title { font-weight: 700; font-size: 10px; color: #166534; }
+    .audience-item .desc { font-size: 10px; color: #4b5563; line-height: 1.4; margin-top: 2px; }
+
+    .session-header {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #fff; border-radius: 8px; padding: 10px 14px; margin: 8px 0;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .session-num { font-size: 30px; font-weight: 900; color: #16A34A; line-height: 1; }
+    .session-info .session-title { font-size: 16px; font-weight: 800; color: #fff; }
+    .session-info .session-tagline { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+
+    .agenda-table { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 10px; }
+    .agenda-table th { background: #dcfce7; color: #166534; font-weight: 700; padding: 4px 8px; text-align: right; border-bottom: 2px solid #16A34A; }
+    .agenda-table td { padding: 4px 8px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+    .agenda-table tr:last-child td { border-bottom: none; }
+    .time-cell { color: #16A34A; font-weight: 700; white-space: nowrap; width: 45px; }
+
+    .outcome-box {
+      background: linear-gradient(135deg, #dcfce7, #ecfdf5);
+      border-right: 3px solid #16A34A; border-radius: 0 6px 6px 0;
+      padding: 8px 12px; margin: 6px 0;
+    }
+    .outcome-box .label { font-size: 10px; font-weight: 700; color: #166534; margin-bottom: 3px; }
+    .outcome-box ul { list-style: none; padding: 0; }
+    .outcome-box li { font-size: 10px; color: #374151; padding: 1px 0; padding-right: 14px; position: relative; }
+    .outcome-box li::before { content: '\2713'; position: absolute; right: 0; color: #16A34A; font-weight: 700; }
+
+    .explain-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 8px 12px; margin: 6px 0; }
+    .explain-box .label { font-size: 10px; font-weight: 700; color: #92400e; margin-bottom: 2px; }
+    .explain-box p { font-size: 10px; color: #78350f; line-height: 1.5; }
+
+    .concept-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 10px; margin: 4px 0; }
+    .concept-box .term { font-weight: 700; color: #16A34A; font-size: 11px; }
+    .concept-box .def { font-size: 10px; color: #475569; margin-top: 1px; line-height: 1.45; }
+
+    .schedule-table { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 10px; }
+    .schedule-table th { background: #0f172a; color: #16A34A; font-weight: 700; padding: 6px 10px; text-align: center; }
+    .schedule-table th:first-child { text-align: right; border-radius: 0 8px 0 0; }
+    .schedule-table th:last-child { border-radius: 8px 0 0 0; }
+    .schedule-table td { padding: 6px 10px; border-bottom: 1px solid #e5e7eb; text-align: center; }
+    .schedule-table td:first-child { text-align: right; font-weight: 600; }
+
+    .accumulation { display: flex; gap: 5px; margin: 6px 0; align-items: stretch; }
+    .acc-step { flex: 1; background: #dcfce7; border: 1px solid #bbf7d0; border-radius: 6px; padding: 6px; text-align: center; }
+    .acc-step .num { font-size: 18px; font-weight: 900; color: #16A34A; }
+    .acc-step .label { font-size: 9px; color: #166534; font-weight: 600; margin-top: 2px; }
+    .acc-step .desc { font-size: 8.5px; color: #4b5563; margin-top: 2px; line-height: 1.3; }
+
+    .req-list { list-style: none; padding: 0; margin: 4px 0; }
+    .req-list li { display: flex; align-items: center; gap: 6px; padding: 3px 0; border-bottom: 1px solid #f3f4f6; font-size: 10px; }
+    .req-list .icon { font-size: 15px; }
+    .req-list .req-title { font-weight: 600; }
+    .req-list .req-desc { color: #6b7280; font-size: 9.5px; }
+
+    .footer-bar {
+      position: absolute; bottom: 6mm; right: 10mm; left: 10mm;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 9px; color: #9ca3af; border-top: 1px solid #e5e7eb; padding-top: 6px;
+    }
+    .footer-bar .brand { color: #16A34A; font-weight: 700; }
+
+    .checklist { list-style: none; padding: 0; margin: 3px 0; }
+    .checklist li { padding: 1px 0; padding-right: 14px; position: relative; font-size: 10px; color: #374151; }
+    .checklist li::before { content: '\2713'; position: absolute; right: 0; color: #16A34A; font-weight: 700; }
+    .price-box .checklist li { color: #ffffff; }
+    .price-box .checklist li::before { color: #4ade80; }
+
+    .price-box {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      border-radius: 8px; padding: 12px 16px; text-align: center; margin: 8px 0; color: #fff;
+    }
+    .price-box .amount { font-size: 28px; font-weight: 900; color: #16A34A; }
+    .price-box .detail { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+    .price-box .includes { font-size: 10px; color: #cbd5e1; margin-top: 6px; text-align: right; }
+
+    .security-box {
+      background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px;
+      padding: 8px 12px; margin: 6px 0;
+    }
+    .security-box .label { font-size: 10px; font-weight: 700; color: #991b1b; margin-bottom: 2px; }
+    .security-box p { font-size: 10px; color: #7f1d1d; line-height: 1.5; }
+
+    .leash-track {
+      display: flex; gap: 4px; margin: 6px 0; align-items: center;
+    }
+    .leash-step {
+      flex: 1; text-align: center; padding: 6px 4px;
+      border-radius: 6px; font-size: 9px;
+    }
+    .leash-arrow { color: #16A34A; font-size: 16px; font-weight: 900; }
+  </style>
+</head>
+<body>
+
+<!-- ==================== PAGE 1: Cover + Intro ==================== -->
+<div class="page">
+  <p style="font-size: 12px; color: #16A34A; font-weight: 700; letter-spacing: 2px; margin-bottom: 4px;">AVIZ — THE ARCHITECT</p>
+  <h1>מאפס לצבא סוכנים</h1>
+  <p class="subtitle">סיליבוס מלא — 4 מפגשים למערכת הפעלה אישית</p>
+  <p class="tagline">סדרת סדנאות מעשיות לבניית מערכת סוכני AI שעובדת בשבילך, בלי לכתוב שורת קוד אחת.</p>
+
+  <div class="hero-box">
+    <p style="font-size: 14px; font-weight: 700; margin-bottom: 8px;">
+      מה אם היה לך עובד שמכיר את העסק שלך לעומק, עובד 24/7, לא מתעייף, לא שוכח, ומשתפר כל יום?
+    </p>
+    <p>
+      זו לא פנטזיה. זו המציאות של מי שבנה לעצמו <strong>מערכת הפעלה אישית מבוססת AI</strong>.
+      ב-4 מפגשים של שעתיים, אתה בונה — בידיים שלך — צבא סוכנים שמכיר אותך, עובד בסגנון שלך, ומטפל במשימות שגוזלות לך שעות ביום.
+    </p>
+  </div>
+
+  <h2>המסע: מרצועה קצרה לחופש מלא</h2>
+  <div class="leash-track">
+    <div class="leash-step" style="background: #dcfce7; border: 1px solid #bbf7d0;">
+      <div style="font-size: 14px;">🚀</div>
+      <div style="font-weight: 700; color: #166534;">רצועה קצרה</div>
+      <div style="color: #4b5563;">צ׳אט + פעולה בודדת</div>
+    </div>
+    <div class="leash-arrow">&larr;</div>
+    <div class="leash-step" style="background: #d1fae5; border: 1px solid #a7f3d0;">
+      <div style="font-size: 14px;">🛸</div>
+      <div style="font-weight: 700; color: #166534;">רצועה ארוכה</div>
+      <div style="color: #4b5563;">חצי-אוטומאט</div>
+    </div>
+    <div class="leash-arrow">&larr;</div>
+    <div class="leash-step" style="background: #bbf7d0; border: 1px solid #86efac;">
+      <div style="font-size: 14px;">🛰️</div>
+      <div style="font-weight: 700; color: #166534;">ללא רצועה</div>
+      <div style="color: #4b5563;">אפליקציות + אבטחה</div>
+    </div>
+    <div class="leash-arrow">&larr;</div>
+    <div class="leash-step" style="background: #86efac; border: 1px solid #4ade80;">
+      <div style="font-size: 14px;">🌌</div>
+      <div style="font-weight: 700; color: #166534;">חופש מלא</div>
+      <div style="color: #4b5563;">נחילים + שליטה מהנייד</div>
+    </div>
+  </div>
+
+  <h2>על איזה כאב הסדרה עונה?</h2>
+  <div class="pain-grid">
+    <div class="pain-item">
+      <div class="icon">😵‍💫</div>
+      <div class="text"><strong>העומס היומיומי:</strong> קופץ בין 20 טאבים, מעתיק-מדביק בין אפליקציות, מנהל הכל ידנית. כל יום אותו דבר.</div>
+    </div>
+    <div class="pain-item">
+      <div class="icon">🤖</div>
+      <div class="text"><strong>AI שלא עובד באמת:</strong> ניסית ChatGPT, אבל זה מרגיש כמו גוגל משופר. שואלים, מקבלים, שוכחים, מתחילים מחדש.</div>
+    </div>
+    <div class="pain-item">
+      <div class="icon">🧱</div>
+      <div class="text"><strong>חסם הטכנולוגיה:</strong> כל המדריכים מדברים על "קוד". אתה מרגיש שזה לא בשבילך, למרות שיש פה ערך עצום.</div>
+    </div>
+    <div class="pain-item">
+      <div class="icon">⏰</div>
+      <div class="text"><strong>חוסר שליטה:</strong> שמעת על סוכני AI אוטונומיים ואתה לא יודע איך לשלוט בהם, מה בטוח ומה לא.</div>
+    </div>
+  </div>
+
+  <h2>למי הסדרה מיועדת?</h2>
+  <div class="audience-grid">
+    <div class="audience-item">
+      <div class="icon">💼</div>
+      <div class="title">בעלי עסקים</div>
+      <div class="desc">שרוצים לייעל תהליכים, לנהל לקוחות, לשווק ולמכור — עם פחות מאמץ ויותר עקביות.</div>
+    </div>
+    <div class="audience-item">
+      <div class="icon">🎯</div>
+      <div class="title">Early Adopters</div>
+      <div class="desc">שמוכנים לצאת מאזור הנוחות, ללמוד כלי עבודה מהפכני ולהשקיע בלבנות משהו חדש.</div>
+    </div>
+    <div class="audience-item">
+      <div class="icon">👔</div>
+      <div class="title">מנהלים ואנשי מקצוע</div>
+      <div class="desc">שעושים את אותן משימות שוב ושוב ויודעים שאפשר אחרת, אם רק מישהו יראה להם איך.</div>
+    </div>
+    <div class="audience-item">
+      <div class="icon">🚫</div>
+      <div class="title">לא מתכנתים</div>
+      <div class="desc">אין צורך בידע מוקדם בקוד. אם אתה יודע לכתוב הודעה בווצאפ — אתה יודע מספיק.</div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>סיליבוס — מאפס לצבא סוכנים</span>
+    <span class="brand">AVIZ — THE ARCHITECT</span>
+    <span>עמוד 1</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 2: Approach + Session 1 ==================== -->
+<div class="page">
+  <h2>הגישה: משולש הערך</h2>
+  <p style="font-size: 11px; color: #475569; margin-bottom: 8px;">
+    כל מפגש עוקב אחרי אותו מודל: <strong>ידע &rarr; תהליך &rarr; סקיל</strong>. לומדים משהו חדש, מיישמים אותו בתהליך אמיתי, והופכים אותו לסקיל שעובד לבד. שוב ושוב, שכבה על שכבה.
+  </p>
+
+  <div class="accumulation">
+    <div class="acc-step">
+      <div class="num">1</div>
+      <div class="label">מתקינים ומבינים</div>
+      <div class="desc">סוכן ראשון + הבנה מה זה קונטקסט</div>
+    </div>
+    <div class="acc-step" style="background: #d1fae5;">
+      <div class="num">2</div>
+      <div class="label">בונים כוח</div>
+      <div class="desc">ערימות סקילים + CRM + וואטסאפ</div>
+    </div>
+    <div class="acc-step" style="background: #bbf7d0;">
+      <div class="num">3</div>
+      <div class="label">אפליקציה סוכנית</div>
+      <div class="desc">הסוכן הופך לאפליקציה + הוקים ואבטחה</div>
+    </div>
+    <div class="acc-step" style="background: #86efac;">
+      <div class="num">4</div>
+      <div class="label">צבא סוכנים</div>
+      <div class="desc">נחילים + שליטה מהנייד + Personal OS</div>
+    </div>
+  </div>
+
+  <div class="explain-box">
+    <div class="label">🔑 עקרון הצבירה</div>
+    <p>
+      שום דבר לא נעלם בין המפגשים. מה שבנית במפגש 1 ממשיך לעבוד ולצבור ערך. כל שכבה מחזקת את מה שמתחתיה.
+      זה כמו ריבית דריבית: 1% שיפור ביום = <strong>פי 37 בשנה</strong>.
+    </p>
+  </div>
+
+  <!-- SESSION 1 -->
+  <div class="session-header">
+    <div class="session-num">01</div>
+    <div class="session-info">
+      <div class="session-title">🚀 הסוכן הכללי כבר כאן</div>
+      <div class="session-tagline">ההזדמנות של 2026 — מ-0 לסוכן עובד בשעתיים</div>
+    </div>
+  </div>
+
+  <p style="font-size: 10px; color: #475569; margin: 6px 0 8px;">
+    מדוע קלוד קוד הוא לא עוד צ׳אטבוט, אלא קפיצת מדרגה ביכולת של AI לשרת אותנו? במפגש הזה נבין את ההבדל, נתקין יחד, ונבנה את הפרויקט הראשון.
+  </p>
+
+  <h3>תוכנית מפורטת</h3>
+  <table class="agenda-table">
+    <thead>
+      <tr><th style="width:130px">בלוק</th><th>מה קורה</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>הסוכן הכללי</strong></td>
+        <td>מה הופך סוכן ל"כללי"? שלושה צירים: משך פעולה, מרחב פעולה, התאמה אישית. למה ChatGPT זה לא מספיק. המלך החדש: <strong>קונטקסט</strong>.</td>
+      </tr>
+      <tr>
+        <td><strong>התקנה יחד</strong></td>
+        <td>מתקינים Claude Code צעד אחר צעד — כולם ביחד. פותחים טרמינל, מגדירים, ומוודאים שהכל עובד. פתרון בעיות בזמן אמת.</td>
+      </tr>
+      <tr>
+        <td><strong>דמו: חלון הקונטקסט</strong></td>
+        <td>הפקודה /context — רואים בדיוק מה הסוכן "יודע". חלון ההקשר המוגבל והאסטרטגיה להזנה נכונה שלו.</td>
+      </tr>
+      <tr>
+        <td><strong>אסטרטגיית הרצועה הקצרה</strong></td>
+        <td>טעות נפוצה: בונים סוכן מורכב לפני שיש מטרה. השיטה: מתחילים בשיחה, עוברים לפעולה, ורק אז משחררים רצועה. <strong>אל תתקינו סקילים מוכנים — למדו לבנות לבד.</strong></td>
+      </tr>
+      <tr>
+        <td><strong>תיקייה = מרחב עבודה</strong></td>
+        <td>קלוד קוד "חי" בתיקייה. דמו: מסדר את תיקיית ההורדות. דמו: קורא מסמך הנחיות ופועל לפיו. הסוכן משתמש בתיקייה כמקור ידע.</td>
+      </tr>
+      <tr>
+        <td><strong>מה זה סקיל?</strong></td>
+        <td>פרומפט כתוב מראש שנטען רק כשצריך. שדרוג של Custom GPTs: ארגז כלים של סקילים קטנים ומדויקים. דמו: ספריית הסקילים של אביץ.</td>
+      </tr>
+      <tr>
+        <td><strong>דמו WOW</strong></td>
+        <td>אביץ מראה את המערכת האמיתית: שולח וואטסאפ, מייצר PDF, יוצר פוסטר — הכל משיחה אחת. מראה את היעד, לא רק את הצעד הראשון.</td>
+      </tr>
+      <tr>
+        <td><strong>תרגיל: הפרויקט הראשון</strong></td>
+        <td>בוחרים פרויקט רלוונטי. יוצרים תיקייה + ידע בטקסט (למה דווקא .md?). תהליך עם הסוכן. הופכים לסקיל. מגדירים CLAUDE.md.</td>
+      </tr>
+      <tr>
+        <td><strong>סיכום + שיעורי בית</strong></td>
+        <td>משולש הערך: ידע &rarr; תהליך &rarr; סקיל. השבוע: 3 משימות אמיתיות עם הסוכן, העשרת הידע בפרויקט.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="outcome-box">
+    <div class="label">🎒 מה יוצאים עם?</div>
+    <ul>
+      <li>Claude Code מותקן ועובד + קיצור דרך מוגדר</li>
+      <li>הבנת ההבדל בין צ׳אטבוט לסוכן כללי</li>
+      <li>פרויקט ראשון עם ידע + סקיל עובד</li>
+      <li>CLAUDE.md שמלמד את הסוכן את העסק שלך</li>
+    </ul>
+  </div>
+
+  <div class="footer-bar">
+    <span>סיליבוס — מאפס לצבא סוכנים</span>
+    <span class="brand">AVIZ — THE ARCHITECT</span>
+    <span>עמוד 2</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 3: Session 2 ==================== -->
+<div class="page">
+  <h3>מושגי יסוד מהמפגש הקודם</h3>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 8px;">
+    <div class="concept-box">
+      <div class="term">תיקייה = מרחב עבודה</div>
+      <div class="def">הסוכן "חי" בתיקייה על המחשב. כל מה שבתיקייה — הוא מכיר.</div>
+    </div>
+    <div class="concept-box">
+      <div class="term">קונטקסט הוא המלך</div>
+      <div class="def">ידע מוקדם עליך ועל שיטות העבודה שלך — זה מה שעושה את כל ההבדל.</div>
+    </div>
+    <div class="concept-box">
+      <div class="term">סקיל = יכולת ארוזה</div>
+      <div class="def">פרומפט מדויק שנטען רק כשצריך. ארגז כלים של סקילים קטנים.</div>
+    </div>
+    <div class="concept-box">
+      <div class="term">משולש הערך</div>
+      <div class="def">ידע &rarr; תהליך &rarr; סקיל, וחוזר חלילה. כל סיבוב מעמיק את היכולת.</div>
+    </div>
+  </div>
+
+  <div class="session-header">
+    <div class="session-num">02</div>
+    <div class="session-info">
+      <div class="session-title">🛸 ערימות של סקילים</div>
+      <div class="session-tagline">ריבוי פרויקטים, CRM, וואטסאפ — הכוח מצטבר</div>
+    </div>
+  </div>
+
+  <p style="font-size: 10px; color: #475569; margin: 6px 0 8px;">
+    במפגש 1 בנית סקיל אחד. במפגש 2 תגלה שסקילים <strong>נערמים</strong>. וכשפרויקטים מדברים אחד עם השני — קורה קסם. מפגש עם דגש על תרגול ופחות תיאוריה.
+  </p>
+
+  <h3>תוכנית מפורטת</h3>
+  <table class="agenda-table">
+    <thead>
+      <tr><th style="width:55px">זמן</th><th style="width:130px">בלוק</th><th>מה קורה</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="time-cell">0:00</td>
+        <td><strong>סקירה + ריבית דריבית</strong></td>
+        <td>מי השלים את הפרויקט? איך הסוכן הפך חכם יותר תוך שבוע? עקרון הצבירה בפעולה. דיון על תוכנית התשלום ($100–$200).</td>
+      </tr>
+      <tr>
+        <td class="time-cell">0:10</td>
+        <td><strong>שחרור רצועה</strong></td>
+        <td>מכירים את מצב skip-permissions ואת קיצור הדרך cld. מה זה אומר? מתי להשתמש ומתי <strong>לא</strong>. הפשרה: מהירות מול בטיחות.</td>
+      </tr>
+      <tr>
+        <td class="time-cell">0:20</td>
+        <td><strong>בונים CRM מנתונים</strong></td>
+        <td>מייבאים אנשי קשר (גוגל/אקסל). כותבים CLAUDE.md עם כללים עסקיים. בונים סקיל להצעות מחיר. דמו: "תכין הצעה ליוסי כהן" &rarr; PDF ממותג.</td>
+      </tr>
+      <tr>
+        <td class="time-cell">0:40</td>
+        <td><strong>חיבור וואטסאפ</strong></td>
+        <td>כולם מגדירים חיבור Green API. הסבר: חיבור לא-רשמי, שימוש מדוד ובטוח. התקנת סקיל וואטסאפ. בדיקה: שולחים הודעה לעצמכם.</td>
+      </tr>
+      <tr>
+        <td class="time-cell">1:00</td>
+        <td><strong>ראיון עומק: מכירים את העסק</strong></td>
+        <td>מתקינים סקיל "ראיון עומק" מהספרייה. הסוכן שואל שאלות על העסק, המוצרים, השירותים. הידע מאורגן אוטומטית בתיקיות.</td>
+      </tr>
+      <tr>
+        <td class="time-cell">1:20</td>
+        <td><strong>מצב חללית</strong></td>
+        <td>פותחים 2 חלונות טרמינל, 2 פרויקטים. שולחים משימות לשניהם, עוברים ביניהם. חווים חצי-אוטומאט: שולח &rarr; עושה משהו אחר &rarr; חוזר.</td>
+      </tr>
+      <tr>
+        <td class="time-cell">1:35</td>
+        <td><strong>WOW: הודעות אישיות ללקוחות</strong></td>
+        <td>מחברים CRM + וואטסאפ + ידע עסקי. "שלח מבצע אישי ללקוחות שקנו X" &rarr; הסוכן כותב הודעה ייחודית לכל לקוח.</td>
+      </tr>
+      <tr>
+        <td class="time-cell">1:50</td>
+        <td><strong>סיכום + שיעורי בית</strong></td>
+        <td>העשירו CRM, שלחו 3 הודעות אמיתיות בוואטסאפ, הרחיבו ידע עסקי. הצצה: "בפעם הבאה — הסוכן הופך לאפליקציה."</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="outcome-box">
+    <div class="label">🎒 מה יוצאים עם?</div>
+    <ul>
+      <li>מערכת CRM עובדת עם הצעות מחיר אוטומטיות</li>
+      <li>חיבור וואטסאפ פעיל — שולחים הודעות מהסוכן</li>
+      <li>בסיס ידע עסקי מאורגן (מתוך ראיון עומק)</li>
+      <li>חוויית עבודה מקבילית על 2 פרויקטים</li>
+    </ul>
+  </div>
+
+  <div class="footer-bar">
+    <span>סיליבוס — מאפס לצבא סוכנים</span>
+    <span class="brand">AVIZ — THE ARCHITECT</span>
+    <span>עמוד 3</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 4: Session 3 ==================== -->
+<div class="page">
+  <h3>מושגי יסוד מהמפגש הקודם</h3>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 8px;">
+    <div class="concept-box">
+      <div class="term">חצי-אוטומאט</div>
+      <div class="def">שולח משימה, הולך לעשות משהו אחר, חוזר לתוצאות. מנהל, לא מבצע.</div>
+    </div>
+    <div class="concept-box">
+      <div class="term">ריבית דריבית</div>
+      <div class="def">כל סקיל שבונים הופך לבסיס לבא. הידע מצטבר, הכוח מכפיל את עצמו.</div>
+    </div>
+  </div>
+
+  <div class="session-header">
+    <div class="session-num">03</div>
+    <div class="session-info">
+      <div class="session-title">🛰️ אפליקציות סוכניות</div>
+      <div class="session-tagline">הסוכן הופך לאפליקציה — הוקים, אבטחה ושליטה</div>
+    </div>
+  </div>
+
+  <p style="font-size: 10px; color: #475569; margin: 6px 0 8px;">
+    גילוי מפתיע: מה שבנית ב-2 המפגשים הקודמים — זו כבר אפליקציה. פרדיגמה חדשה שבה הסוכן הוא המנוע, מסמכים מחליפים אלגוריתמים, ולא צריך להיות מפתח. <strong>במפגש הזה גם נלמד לשלוט — הוקים, הרשאות ואבטחה.</strong>
+  </p>
+
+  <h3>תוכנית מפורטת</h3>
+  <table class="agenda-table">
+    <thead>
+      <tr><th style="width:55px">זמן</th><th style="width:130px">בלוק</th><th>מה קורה</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="time-cell">0:00</td>
+        <td><strong>סקירה + Show & Tell</strong></td>
+        <td>מה נבנה ב-2 שבועות? מישהו רוצה להציג? הרצועה הולכת ומתארכת.</td>
+      </tr>
+      <tr>
+        <td class="time-cell">0:10</td>
+        <td><strong>הפרדיגמה של אפליקציה סוכנית</strong></td>
+        <td>טבלת השוואה: אפליקציה רגילה מול אפליקציה סוכנית. Runtime = קלוד קוד. לוגיקה = סקילים. מסד נתונים = קבצי Markdown. <strong>לא צריך להיות מפתח כדי לבנות אפליקציה.</strong></td>
+      </tr>
+      <tr>
+        <td class="time-cell">0:25</td>
+        <td><strong>5 אבני הבניין</strong></td>
+        <td>CLAUDE.md = חוקה. סקילים = יכולות. פקודות = נקודות כניסה. סוכנים = תהליכי רקע. קבצי נתונים = מסד נתונים בטקסט.</td>
+      </tr>
+      <tr>
+        <td class="time-cell">0:35</td>
+        <td><strong>בונים: בוט וואטסאפ לעסק</strong></td>
+        <td>פרויקט חדש מאפס. CLAUDE.md שמגדיר אישיות ובוט. ידע עסקי (מהראיון העומק). סקילים: מענה לשאלות, בדיקת זמינות, הצעת מחיר. <strong>הבוט עונה ללקוחות על העסק שלכם!</strong></td>
+      </tr>
+      <tr>
+        <td class="time-cell" style="color: #dc2626;">1:05</td>
+        <td><strong style="color: #dc2626;">🔒 הוקים ושליטה בסוכן</strong></td>
+        <td>
+          <strong>מה זה הוקים?</strong> סקריפטים שרצים לפני/אחרי כל פעולה — כמו מצלמות אבטחה ושומרים.<br>
+          <strong>תרגול:</strong> כותבים הוק שחוסם פקודות מסוכנות. כותבים הוק שמתעד כל פעולה ללוג.<br>
+          <strong>הרשאות:</strong> Deny &rarr; Ask &rarr; Allow. מגדירים: מה הסוכן <em>לעולם</em> לא יעשה, מה דורש אישור, מה מותר.
+        </td>
+      </tr>
+      <tr>
+        <td class="time-cell">1:30</td>
+        <td><strong>Agent SDK + תזמון</strong></td>
+        <td>הפעלת סוכן מסקריפט (לא מטרמינל). הגדרת משימה מתוזמנת — הסוכן עובד בזמן שאתה ישן.</td>
+      </tr>
+      <tr>
+        <td class="time-cell">1:45</td>
+        <td><strong>סיכום + שיעורי בית</strong></td>
+        <td>השאירו את הבוט רץ שבוע. עקבו אחרי ההוקים — הם תפסו משהו? הצצה: "בפעם הבאה — Prompt Injection, נחילים, ושליטה מהנייד."</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="outcome-box">
+    <div class="label">🎒 מה יוצאים עם?</div>
+    <ul>
+      <li>אפליקציה סוכנית שעונה ללקוחות בוואטסאפ</li>
+      <li>הוקים פעילים שמגנים ומתעדים כל פעולה</li>
+      <li>הגדרות הרשאות: מה מותר, מה דורש אישור, מה חסום</li>
+      <li>משימה מתוזמנת — הסוכן עובד 24/7</li>
+    </ul>
+  </div>
+
+  <div class="security-box">
+    <div class="label">🛡️ למה אבטחה חשובה?</div>
+    <p>
+      ככל שמשחררים יותר רצועה לסוכן, <strong>השליטה חשובה יותר</strong>. הוקים הם הדרך שלכם לקבוע את הגבולות — בדיוק כמו מנהל שקובע את החוקים לעובד שלו. זה לא מפחיד, זה אחריות.
+    </p>
+  </div>
+
+  <div class="footer-bar">
+    <span>סיליבוס — מאפס לצבא סוכנים</span>
+    <span class="brand">AVIZ — THE ARCHITECT</span>
+    <span>עמוד 4</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 5: Session 4 ==================== -->
+<div class="page">
+  <h3>מושגי יסוד מהמפגש הקודם</h3>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 8px;">
+    <div class="concept-box">
+      <div class="term">אפליקציה סוכנית</div>
+      <div class="def">אפליקציה שבה הסוכן הוא המנוע, מסמכים הם הלוגיקה, וקבצי טקסט הם מסד הנתונים.</div>
+    </div>
+    <div class="concept-box">
+      <div class="term">הוקים = שומרים</div>
+      <div class="def">סקריפטים שבודקים כל פעולה לפני/אחרי ביצוע. Deny/Ask/Allow — אתם קובעים את הכללים.</div>
+    </div>
+  </div>
+
+  <div class="session-header">
+    <div class="session-num">04</div>
+    <div class="session-info">
+      <div class="session-title">🌌 נחילי סוכנים</div>
+      <div class="session-tagline">שליטה מהנייד, אבטחה מתקדמת, ומערכת הפעלה אישית</div>
+    </div>
+  </div>
+
+  <p style="font-size: 10px; color: #475569; margin: 6px 0 8px;">
+    המפגש האחרון. מחזור מלא — מרצועה קצרה לחופש מלא. נראה נחילי סוכנים, נלמד על Prompt Injection ואיך להתגונן, ונתכנן את מערכת ההפעלה האישית שלכם.
+  </p>
+
+  <h3>תוכנית מפורטת</h3>
+  <table class="agenda-table">
+    <thead>
+      <tr><th style="width:55px">זמן</th><th style="width:130px">בלוק</th><th>מה קורה</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="time-cell">0:00</td>
+        <td><strong>סקירת החודש</strong></td>
+        <td>מהיכן יצאנו ולאן הגענו. אפקט הצבירה במספרים אמיתיים. "תסתכלו כמה רחוק הגעתם מאותה פקודה ראשונה."</td>
+      </tr>
+      <tr>
+        <td class="time-cell">0:10</td>
+        <td><strong>דמו: נחילי סוכנים</strong></td>
+        <td>אביץ מפעיל 3 סוכנים על משימה אחת: "תכין הכל לפגישה עם יוסי כהן" — סוכן 1 שולף CRM, סוכן 2 חוקר חברה, סוכן 3 מכין אג׳נדה. <strong>הכל רץ במקביל, מתמזג למסמך אחד.</strong></td>
+      </tr>
+      <tr>
+        <td class="time-cell" style="color: #dc2626;">0:30</td>
+        <td><strong style="color: #dc2626;">🛡️ Prompt Injection והגנה</strong></td>
+        <td>
+          <strong>מה זה?</strong> טקסט זדוני מוסתר בקבצים שמנסה לחטוף את הסוכן.<br>
+          <strong>4 וקטורי תקיפה:</strong> CLAUDE.md זדוני ברפו, הוראות מוסתרות בקבצים, תוכן אינטרנט, פלט MCP.<br>
+          <strong>פירמידת ההגנה:</strong> הגנות מובנות &rarr; הרשאות &rarr; הוקים &rarr; Sandbox &rarr; בידוד מלא.<br>
+          <strong>כללי זהב:</strong> קראו הרשאות, אל תיכנסו לתיקיות לא מוכרות, הגבילו כלים, בדקו מה הסוכן עשה.
+        </td>
+      </tr>
+      <tr>
+        <td class="time-cell">0:55</td>
+        <td><strong>תזמורת וואטסאפ</strong></td>
+        <td>דמו מהנייד: אביץ שולח הודעה קולית "תכין הצעה לדוד לוי" &rarr; תמלול &rarr; CRM &rarr; PDF &rarr; חזרה בוואטסאפ. שיחה קולית = עבודה נעשית. משתתפים מתכננים: "איך ייראה מרכז הפיקוד שלי?"</td>
+      </tr>
+      <tr>
+        <td class="time-cell">1:15</td>
+        <td><strong>מתכננים: ה-OS האישי</strong></td>
+        <td>תרגיל אינטראקטיבי: כל משתתף מתכנן את המערכת שלו. אילו פרויקטים? אילו סקילים? איך מתחברים? מה אוטומטי? מה דורש אישור? <strong>כולל גבולות אבטחה.</strong> אביץ סוקר 2-3 דוגמאות.</td>
+      </tr>
+      <tr>
+        <td class="time-cell">1:35</td>
+        <td><strong>תצוגת משתתפים</strong></td>
+        <td>2-3 משתתפים מציגים מה בנו ב-4 שבועות. חוגגים הצלחות, מכירים באתגרים. רגע קהילתי.</td>
+      </tr>
+      <tr>
+        <td class="time-cell">1:50</td>
+        <td><strong>חזון: לאן ממשיכים</strong></td>
+        <td>אפקט הצבירה: 1% ביום = פי 37 בשנה. סולם ההתייעלות: מבצע &rarr; מנהל &rarr; אסטרטג &rarr; מאשר. קהילת בוגרים, מנטורינג. <strong>"התחלתם כמפעילים. אתם יוצאים כאדריכלים."</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="outcome-box">
+    <div class="label">🎒 מה יוצאים עם?</div>
+    <ul>
+      <li>הבנה של נחילי סוכנים — כמה סוכנים עובדים על משימה אחת</li>
+      <li>ידע בהגנה מפני Prompt Injection ופירמידת האבטחה</li>
+      <li>חזון של שליטה מהנייד — תזמורת וואטסאפ</li>
+      <li>מפת ארכיטקטורה של מערכת ההפעלה האישית שלכם</li>
+      <li>חברות בקהילת בוגרים + תוכנית המשך</li>
+    </ul>
+  </div>
+
+  <div class="footer-bar">
+    <span>סיליבוס — מאפס לצבא סוכנים</span>
+    <span class="brand">AVIZ — THE ARCHITECT</span>
+    <span>עמוד 5</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 6: Schedule + Logistics + Pricing ==================== -->
+<div class="page">
+
+  <h2>לוח זמנים — מחזור פיילוט</h2>
+  <p style="font-size: 11px; color: #64748b; margin-bottom: 8px;">
+    מפגש אחד בשבוע, 4 שבועות. כל מפגש שעתיים. <strong>שיעורי בית בין המפגשים</strong> — מומלץ מאוד לביצוע.
+  </p>
+
+  <table class="schedule-table">
+    <thead>
+      <tr>
+        <th>מפגש</th>
+        <th>נושא</th>
+        <th>שבוע</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>🚀 מפגש 1</td>
+        <td>הסוכן הכללי כבר כאן</td>
+        <td>שבוע 1</td>
+      </tr>
+      <tr>
+        <td>🛸 מפגש 2</td>
+        <td>ערימות של סקילים</td>
+        <td>שבוע 2</td>
+      </tr>
+      <tr>
+        <td>🛰️ מפגש 3</td>
+        <td>אפליקציות סוכניות</td>
+        <td>שבוע 3</td>
+      </tr>
+      <tr>
+        <td>🌌 מפגש 4</td>
+        <td>נחילי סוכנים</td>
+        <td>שבוע 4</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size: 10px; color: #78350f; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 6px 10px; margin: 6px 0;">
+    💡 <strong>פיספסת מפגש?</strong> כל המפגשים מוקלטים ותוכלו לצפות בהם מאוחר יותר.
+  </p>
+
+  <h2>מה צריך להביא?</h2>
+  <ul class="req-list">
+    <li>
+      <span class="icon">💻</span>
+      <div><span class="req-title">מחשב</span><br><span class="req-desc">Mac, Windows או Linux — כל מערכת הפעלה מתאימה.</span></div>
+    </li>
+    <li>
+      <span class="icon">🌐</span>
+      <div><span class="req-title">חיבור אינטרנט יציב</span><br><span class="req-desc">נדרש חיבור טוב לזום ולעבודה עם Claude Code.</span></div>
+    </li>
+    <li>
+      <span class="icon">🤖</span>
+      <div><span class="req-title">מנוי Claude פעיל</span><br><span class="req-desc">נרשמים ב-claude.ai. מנוי Pro עולה $20 לחודש. <strong>חובה לפני המפגש הראשון.</strong></span></div>
+    </li>
+    <li>
+      <span class="icon">💡</span>
+      <div><span class="req-title">רצון לבנות משהו</span><br><span class="req-desc">לא צריך ידע בתכנות. בכלל. אם אתה יודע לכתוב הודעה בווצאפ — אתה יודע מספיק.</span></div>
+    </li>
+  </ul>
+
+  <h2>מה כלול?</h2>
+  <ul class="checklist">
+    <li>4 מפגשי לייב בזום עם בנייה בזמן אמת</li>
+    <li>גישה להקלטות כל המפגשים</li>
+    <li>מדריכים כתובים לכל מפגש</li>
+    <li>גישה לספריית הסקילים של אביץ</li>
+    <li>תבניות ופרויקטים מוכנים להתחלה</li>
+    <li>קבוצת WhatsApp לתמיכה ושאלות</li>
+    <li>קהילת בוגרים + מפגש חודשי</li>
+    <li>תמיכה אישית מאביץ</li>
+  </ul>
+
+  <div style="display: flex; gap: 10px; margin-top: 10px;">
+    <div class="price-box" style="flex: 1;">
+      <div style="font-size: 11px; color: #94a3b8; margin-bottom: 4px;">מפגש בודד</div>
+      <div class="amount">₪150</div>
+      <div class="detail">שעתיים של בנייה אמיתית</div>
+    </div>
+    <div class="price-box" style="flex: 1.5; border: 2px solid #16A34A;">
+      <div style="font-size: 11px; color: #4ade80; margin-bottom: 4px; font-weight: 700;">🔥 סידרה מלאה — חיסכון של ₪100</div>
+      <div class="amount">₪500</div>
+      <div class="detail">4 מפגשים × שעתיים | 8 שעות של בנייה</div>
+      <div style="margin-top: 6px;">
+        <span style="background: #16A34A; color: #fff; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;">המחיר המשתלם ביותר</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 14px; padding: 10px; background: linear-gradient(135deg, #dcfce7, #ecfdf5); border-radius: 8px; border: 1px solid #bbf7d0;">
+    <p style="font-size: 14px; font-weight: 800; color: #166534; margin-bottom: 2px;">
+      מאפס לצבא סוכנים — ב-4 שבועות
+    </p>
+    <p style="font-size: 11px; color: #4b5563; margin: 0;">
+      🚀 מתקינים &rarr; 🛸 בונים כוח &rarr; 🛰️ הופכים לאפליקציה &rarr; 🌌 שולטים מהנייד
+    </p>
+  </div>
+
+  <div class="footer-bar">
+    <span>סיליבוס — מאפס לצבא סוכנים</span>
+    <span class="brand">AVIZ — THE ARCHITECT</span>
+    <span>עמוד 6</span>
+  </div>
+</div>
+
+</body>
+</html>
