@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>סידרת קלודוש — מאפס לצבא סוכנים</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #22C55E;
+      --green-dark: #16A34A;
+      --green-deeper: #166534;
+      --green-glow: rgba(34, 197, 94, 0.3);
+      --green-subtle: rgba(34, 197, 94, 0.08);
+      --black: #0A0A0A;
+      --dark: #111111;
+      --dark-card: #141414;
+      --dark-border: #1e1e1e;
+      --gray-900: #171717;
+      --gray-800: #1f1f1f;
+      --gray-700: #2a2a2a;
+      --gray-600: #3a3a3a;
+      --gray-400: #888;
+      --gray-300: #aaa;
+      --white: #ffffff;
+      --off-white: #e5e5e5;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--black);
+      color: var(--off-white);
+      direction: rtl;
+      text-align: right;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ========== UTILITIES ========== */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--gray-400);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .green-accent {
+      color: var(--green);
+    }
+
+    /* Scroll-based fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 60px 24px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(34, 197, 94, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.03) 0%, transparent 70%);
+      z-index: 0;
+    }
+
+    /* Stars background */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 40% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.35) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 85% 45%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 15% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 45% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 60% 40%, rgba(255,255,255,0.45) 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 55%, rgba(255,255,255,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 65%, rgba(255,255,255,0.3) 0%, transparent 100%);
+      z-index: 0;
+      animation: twinkle 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.7; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: var(--green);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 20px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 4.5rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--green), #4ade80);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      color: var(--gray-300);
+      font-weight: 400;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--gray-400);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: var(--black);
+      font-family: 'Heebo', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      padding: 16px 40px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px var(--green-glow);
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px var(--green-glow), 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 56px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-value {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--green);
+    }
+
+    .hero-stat-label {
+      font-size: 0.85rem;
+      color: var(--gray-400);
+      margin-top: 4px;
+    }
+
+    /* ========== PAIN POINTS ========== */
+    .pain-section {
+      background: var(--dark);
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .pain-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all 0.3s ease;
+    }
+
+    .pain-card:hover {
+      border-color: rgba(239, 68, 68, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .pain-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .pain-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f87171;
+      margin-bottom: 8px;
+    }
+
+    .pain-text {
+      font-size: 0.95rem;
+      color: var(--gray-400);
+      line-height: 1.7;
+    }
+
+    /* ========== SESSIONS ========== */
+    .sessions-section {
+      background: var(--black);
+    }
+
+    .session-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .session-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .session-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green), #4ade80);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .session-card:hover {
+      border-color: rgba(34, 197, 94, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 40px rgba(34, 197, 94, 0.08);
+    }
+
+    .session-card:hover::before {
+      opacity: 1;
+    }
+
+    .session-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--green);
+      margin-bottom: 16px;
+    }
+
+    .session-emoji {
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .session-name {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .session-desc {
+      font-size: 0.95rem;
+      color: var(--gray-400);
+      line-height: 1.7;
+    }
+
+    .session-topics {
+      list-style: none;
+      margin-top: 16px;
+      padding: 0;
+    }
+
+    .session-topics li {
+      padding: 4px 18px 4px 0;
+      position: relative;
+      font-size: 0.9rem;
+      color: var(--gray-300);
+    }
+
+    .session-topics li::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 12px;
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    /* ========== JOURNEY / LEASH ========== */
+    .journey-section {
+      background: var(--dark);
+      overflow: hidden;
+    }
+
+    .journey-track {
+      position: relative;
+      padding: 20px 0;
+    }
+
+    .journey-line {
+      position: absolute;
+      top: 50%;
+      right: 40px;
+      left: 40px;
+      height: 3px;
+      background: linear-gradient(to left, var(--green-deeper), var(--green), #4ade80);
+      transform: translateY(-50%);
+      border-radius: 2px;
+      z-index: 0;
+    }
+
+    .journey-steps {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .journey-step {
+      text-align: center;
+      flex: 1;
+      padding: 0 8px;
+    }
+
+    .journey-dot {
+      width: 56px;
+      height: 56px;
+      background: var(--dark);
+      border: 3px solid var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px var(--green-glow);
+    }
+
+    .journey-step:hover .journey-dot {
+      background: rgba(34, 197, 94, 0.15);
+      transform: scale(1.1);
+    }
+
+    .journey-label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .journey-sublabel {
+      font-size: 0.8rem;
+      color: var(--gray-400);
+    }
+
+    .leash-indicator {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 32px;
+      padding: 0 20px;
+    }
+
+    .leash-end {
+      font-size: 0.85rem;
+      color: var(--gray-400);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .leash-end .arrow {
+      color: var(--green);
+      font-size: 1.2rem;
+    }
+
+    /* ========== WHAT YOU GET ========== */
+    .benefits-section {
+      background: var(--black);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .benefit-item:hover {
+      border-color: rgba(34, 197, 94, 0.2);
+    }
+
+    .benefit-check {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: rgba(34, 197, 94, 0.12);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .benefit-text {
+      font-size: 0.95rem;
+      color: var(--off-white);
+      line-height: 1.6;
+    }
+
+    /* ========== AUDIENCE ========== */
+    .audience-section {
+      background: var(--dark);
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .audience-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .audience-card:hover {
+      border-color: rgba(34, 197, 94, 0.25);
+      transform: translateY(-3px);
+    }
+
+    .audience-icon {
+      font-size: 2.5rem;
+      margin-bottom: 14px;
+    }
+
+    .audience-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .audience-desc {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    .audience-note {
+      margin-top: 36px;
+      background: rgba(34, 197, 94, 0.06);
+      border: 1px solid rgba(34, 197, 94, 0.15);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .audience-note-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .audience-note-text {
+      font-size: 0.95rem;
+      color: var(--gray-300);
+      line-height: 1.7;
+    }
+
+    .audience-note-text strong {
+      color: var(--green);
+    }
+
+    /* ========== PRICING ========== */
+    .pricing-section {
+      background: var(--black);
+      text-align: center;
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 20px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--green);
+      box-shadow: 0 0 40px var(--green-glow);
+    }
+
+    .pricing-card.featured::before {
+      content: 'חסכון של 100 שקלים';
+      position: absolute;
+      top: -14px;
+      right: 50%;
+      transform: translateX(50%);
+      background: var(--green);
+      color: var(--black);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 18px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .pricing-label {
+      font-size: 0.95rem;
+      color: var(--gray-400);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .pricing-amount {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .pricing-card.featured .pricing-amount {
+      color: var(--green);
+    }
+
+    .pricing-period {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+      margin-bottom: 24px;
+    }
+
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      text-align: right;
+      margin-bottom: 28px;
+    }
+
+    .pricing-features li {
+      padding: 6px 20px 6px 0;
+      position: relative;
+      font-size: 0.9rem;
+      color: var(--gray-300);
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      position: absolute;
+      right: 0;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .pricing-btn {
+      display: inline-block;
+      width: 100%;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .pricing-btn-outline {
+      background: transparent;
+      border: 2px solid var(--gray-600);
+      color: var(--white);
+    }
+
+    .pricing-btn-outline:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .pricing-btn-filled {
+      background: var(--green);
+      color: var(--black);
+      box-shadow: 0 0 20px var(--green-glow);
+    }
+
+    .pricing-btn-filled:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px var(--green-glow);
+    }
+
+    /* ========== FAQ ========== */
+    .faq-section {
+      background: var(--dark);
+    }
+
+    .faq-list {
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--dark-border);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 22px 0;
+      font-family: 'Heebo', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      text-align: right;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.3s ease;
+    }
+
+    .faq-question:hover {
+      color: var(--green);
+    }
+
+    .faq-arrow {
+      font-size: 1.4rem;
+      color: var(--gray-600);
+      transition: transform 0.3s ease, color 0.3s ease;
+      flex-shrink: 0;
+      margin-right: 16px;
+    }
+
+    .faq-item.open .faq-arrow {
+      transform: rotate(180deg);
+      color: var(--green);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding-bottom: 22px;
+    }
+
+    .faq-answer p {
+      font-size: 0.95rem;
+      color: var(--gray-400);
+      line-height: 1.8;
+    }
+
+    /* ========== ABOUT ========== */
+    .about-section {
+      background: var(--black);
+    }
+
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .about-avatar {
+      flex-shrink: 0;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(34,197,94,0.2), rgba(34,197,94,0.05));
+      border: 3px solid rgba(34, 197, 94, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .about-text h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .about-text .about-role {
+      font-size: 0.95rem;
+      color: var(--green);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .about-text p {
+      font-size: 0.95rem;
+      color: var(--gray-400);
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+
+    /* ========== FINAL CTA ========== */
+    .final-cta {
+      background: var(--dark);
+      text-align: center;
+      padding: 100px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(34, 197, 94, 0.06) 0%, transparent 60%);
+    }
+
+    .final-cta .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .final-cta p {
+      font-size: 1.1rem;
+      color: var(--gray-400);
+      margin-bottom: 36px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--dark-border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--gray-600);
+    }
+
+    /* ========== GREEN SEPARATOR ========== */
+    .green-sep {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green), #4ade80);
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    .green-sep.center {
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      section {
+        padding: 56px 0;
+      }
+
+      .pain-grid,
+      .session-cards,
+      .benefits-grid,
+      .pricing-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .audience-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        gap: 28px;
+      }
+
+      .journey-steps {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .journey-line {
+        display: none;
+      }
+
+      .about-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .audience-note {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .leash-indicator {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .pricing-card.featured::before {
+        font-size: 0.7rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      .hero-cta {
+        font-size: 1rem;
+        padding: 14px 32px;
+      }
+
+      .pricing-amount {
+        font-size: 2.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">AVIZ — THE ARCHITECT</div>
+    <h1>סידרת <span>קלודוש</span></h1>
+    <p class="hero-tagline">מאפס לצבא סוכנים</p>
+    <p class="hero-desc">
+      4 מפגשים מעשיים שבהם אתה בונה — בידיים שלך — מערכת סוכני AI שעובדת בשבילך 24/7.
+      בלי לכתוב שורת קוד אחת.
+    </p>
+    <a href="#pricing" class="hero-cta">שריינו לי מקום</a>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-value">4</div>
+        <div class="hero-stat-label">מפגשים</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">0</div>
+        <div class="hero-stat-label">שורות קוד</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">100%</div>
+        <div class="hero-stat-label">מעשי</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PAIN POINTS ==================== -->
+<section class="pain-section">
+  <div class="container">
+    <div class="fade-in">
+      <div class="green-sep"></div>
+      <h2 class="section-title">על איזה כאב הסדרה עונה?</h2>
+      <p class="section-subtitle">אם אתה מזהה את עצמך באחד מהמצבים האלה — הסדרה הזו נבנתה בשבילך.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card fade-in">
+        <div class="pain-icon">😵‍💫</div>
+        <div class="pain-title">העומס היומיומי</div>
+        <p class="pain-text">אתה קופץ בין 20 טאבים, מעתיק-מדביק בין אפליקציות, מנהל הכל ידנית. כל יום אותו דבר — ואין לך רגע לנשום.</p>
+      </div>
+      <div class="pain-card fade-in">
+        <div class="pain-icon">🤖</div>
+        <div class="pain-title">AI שלא עובד באמת</div>
+        <p class="pain-text">ניסית ChatGPT או Claude, אבל זה מרגיש כמו גוגל משופר. שואלים, מקבלים תשובה, שוכחים — ומתחילים מחדש.</p>
+      </div>
+      <div class="pain-card fade-in">
+        <div class="pain-icon">🧱</div>
+        <div class="pain-title">חסם הטכנולוגיה</div>
+        <p class="pain-text">כל המדריכים מדברים על "קוד" ו"תכנות". אתה מרגיש שזה לא בשבילך, למרות שאתה יודע שיש פה ערך עצום.</p>
+      </div>
+      <div class="pain-card fade-in">
+        <div class="pain-icon">⏰</div>
+        <div class="pain-title">אין זמן לקורס ארוך</div>
+        <p class="pain-text">אין לך שבועות להשקיע בלמידה תיאורטית. אתה צריך משהו שנותן ערך מיידי ומצטבר — מהמפגש הראשון.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== THE 4 SESSIONS ==================== -->
+<section class="sessions-section">
+  <div class="container">
+    <div class="fade-in" style="text-align: center; margin-bottom: 48px;">
+      <div class="green-sep center"></div>
+      <h2 class="section-title" style="margin-bottom: 12px;">4 מפגשים. מערכת שלמה.</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">כל מפגש נבנה על הקודם. מה שבנית — ממשיך לעבוד ולצבור ערך.</p>
+    </div>
+    <div class="session-cards">
+      <!-- Session 1 -->
+      <div class="session-card fade-in">
+        <div class="session-number">01</div>
+        <div class="session-emoji">🚀</div>
+        <h3 class="session-name">הסוכן הכללי כבר כאן</h3>
+        <p class="session-desc">מתקינים את הסוכן, מלמדים אותו מי אתה, ורואים אותו מבצע את המשימה הראשונה. הרגע שבו מבינים שזה משהו אחר לגמרי.</p>
+        <ul class="session-topics">
+          <li>התקנת Claude Code צעד אחר צעד</li>
+          <li>כתיבת הזיכרון הראשון — הסוכן "מכיר" אותך</li>
+          <li>סקיל ראשון מהספרייה</li>
+          <li>הבנת קונטקסט — למה זה הכל</li>
+        </ul>
+      </div>
+      <!-- Session 2 -->
+      <div class="session-card fade-in">
+        <div class="session-number">02</div>
+        <div class="session-emoji">🛸</div>
+        <h3 class="session-name">ערימות של סקילים</h3>
+        <p class="session-desc">בונים פרויקטים אמיתיים — CRM, מנוע תוכן, חיבור ביניהם. ריבוי חלונות, ריבוי פרויקטים — מצב חללית.</p>
+        <ul class="session-topics">
+          <li>CRM אישי עם הצעות מחיר אוטומטיות</li>
+          <li>חיבור ל-WhatsApp ומיילים</li>
+          <li>ראיון עומק — הסוכן לומד את העסק שלך</li>
+          <li>עבודה חוצה-פרויקטים</li>
+        </ul>
+      </div>
+      <!-- Session 3 -->
+      <div class="session-card fade-in">
+        <div class="session-number">03</div>
+        <div class="session-emoji">🛰️</div>
+        <h3 class="session-name">אפליקציות סוכניות</h3>
+        <p class="session-desc">בונים אפליקציות שרצות על סוכנים — עם hooks, אבטחה, תזמון משימות. הסוכן מתחיל לעבוד גם כשאתה לא שם.</p>
+        <ul class="session-topics">
+          <li>בניית אפליקציה סוכנית מאפס</li>
+          <li>Hooks ואבטחה — שליטה מדויקת</li>
+          <li>תזמון משימות אוטומטי</li>
+          <li>הסוכן עובד 24/7</li>
+        </ul>
+      </div>
+      <!-- Session 4 -->
+      <div class="session-card fade-in">
+        <div class="session-number">04</div>
+        <div class="session-emoji">🌌</div>
+        <h3 class="session-name">נחילי סוכנים</h3>
+        <p class="session-desc">הנחיל מתעורר. צוותי סוכנים, הגנה מפני prompt injection, מרכז פיקוד בווצאפ — ומערכת הפעלה אישית מלאה.</p>
+        <ul class="session-topics">
+          <li>נחיל סוכנים — כמה סוכנים על משימה אחת</li>
+          <li>הגנה מפני prompt injection</li>
+          <li>מרכז פיקוד WhatsApp</li>
+          <li>מערכת הפעלה אישית — Personal OS</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== THE JOURNEY ==================== -->
+<section class="journey-section">
+  <div class="container">
+    <div class="fade-in" style="text-align: center; margin-bottom: 48px;">
+      <div class="green-sep center"></div>
+      <h2 class="section-title">המסע: מרצועה קצרה לחירות מלאה</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">בכל מפגש אתה נותן לסוכן עוד חופש פעולה — עד שהוא עובד בשבילך לגמרי.</p>
+    </div>
+    <div class="journey-track fade-in">
+      <div class="journey-line"></div>
+      <div class="journey-steps">
+        <div class="journey-step">
+          <div class="journey-dot">🚀</div>
+          <div class="journey-label">מפגש 1</div>
+          <div class="journey-sublabel">רצועה קצרה</div>
+          <p style="font-size: 0.78rem; color: var(--gray-400); margin-top: 6px;">אתה ליד המחשב, צופה בכל צעד</p>
+        </div>
+        <div class="journey-step">
+          <div class="journey-dot">🛸</div>
+          <div class="journey-label">מפגש 2</div>
+          <div class="journey-sublabel">רצועה ארוכה</div>
+          <p style="font-size: 0.78rem; color: var(--gray-400); margin-top: 6px;">שולח משימה, הולך לעשות קפה</p>
+        </div>
+        <div class="journey-step">
+          <div class="journey-dot">🛰️</div>
+          <div class="journey-label">מפגש 3</div>
+          <div class="journey-sublabel">חצי-חופשי</div>
+          <p style="font-size: 0.78rem; color: var(--gray-400); margin-top: 6px;">הסוכן עובד גם כשאתה לא שם</p>
+        </div>
+        <div class="journey-step">
+          <div class="journey-dot">🌌</div>
+          <div class="journey-label">מפגש 4</div>
+          <div class="journey-sublabel">חירות מלאה</div>
+          <p style="font-size: 0.78rem; color: var(--gray-400); margin-top: 6px;">הנחיל עובד, אתה מנהל מהנייד</p>
+        </div>
+      </div>
+      <div class="leash-indicator">
+        <div class="leash-end"><span class="arrow">←</span> שליטה צמודה</div>
+        <div class="leash-end">אוטונומיה מלאה <span class="arrow">→</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHAT YOU GET ==================== -->
+<section class="benefits-section">
+  <div class="container">
+    <div class="fade-in">
+      <div class="green-sep"></div>
+      <h2 class="section-title">מה מקבלים?</h2>
+      <p class="section-subtitle">כל מה שצריך כדי לבנות מערכת סוכני AI מלאה — ולהמשיך לצמוח אחרי הסדרה.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-item fade-in">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">4 מפגשי לייב בזום עם בנייה בזמן אמת</div>
+      </div>
+      <div class="benefit-item fade-in">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">הקלטות מלאות של כל המפגשים — לצפייה חוזרת</div>
+      </div>
+      <div class="benefit-item fade-in">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">מדריכים כתובים צעד-אחר-צעד לכל מפגש</div>
+      </div>
+      <div class="benefit-item fade-in">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">ספריית סקילים מוכנה להתקנה מיידית</div>
+      </div>
+      <div class="benefit-item fade-in">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">קבוצת WhatsApp לתמיכה שוטפת</div>
+      </div>
+      <div class="benefit-item fade-in">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">תמיכה אישית מאביץ</div>
+      </div>
+      <div class="benefit-item fade-in">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">ערכת כלים ואינטגרציות (WhatsApp, מייל, תמונות)</div>
+      </div>
+      <div class="benefit-item fade-in">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">גישה לקהילת בוגרים להמשך למידה</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TARGET AUDIENCE ==================== -->
+<section class="audience-section">
+  <div class="container">
+    <div class="fade-in" style="text-align: center; margin-bottom: 48px;">
+      <div class="green-sep center"></div>
+      <h2 class="section-title">למי הסדרה מיועדת?</h2>
+    </div>
+    <div class="audience-grid fade-in">
+      <div class="audience-card">
+        <div class="audience-icon">💼</div>
+        <div class="audience-title">בעלי עסקים</div>
+        <p class="audience-desc">שרוצים לייעל תהליכים, להוציא הצעות מחיר, לנהל לקוחות ולשווק — עם פחות מאמץ ויותר עקביות.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon">👔</div>
+        <div class="audience-title">מנהלים ואנשי מקצוע</div>
+        <p class="audience-desc">שעושים את אותן משימות שוב ושוב ויודעים שאפשר אחרת — אם רק מישהו יראה להם איך.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon">🎯</div>
+        <div class="audience-title">סקרנים טכנולוגיים</div>
+        <p class="audience-desc">ששמעו על סוכני AI ורוצים להבין מה זה באמת — ולבנות משהו עובד, לא רק לקרוא על זה.</p>
+      </div>
+    </div>
+    <div class="audience-note fade-in">
+      <div class="audience-note-icon">🚫</div>
+      <div class="audience-note-text">
+        <strong>לא צריך ניסיון בתכנות. בכלל.</strong><br>
+        אם אתה יודע לכתוב הודעה בווצאפ — אתה יודע מספיק. הסדרה בנויה ל-Early Adopters שרוצים להוביל, לא למתכנתים.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PRICING ==================== -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="fade-in" style="margin-bottom: 48px;">
+      <div class="green-sep center"></div>
+      <h2 class="section-title">מחירים</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">בחרו את המסלול שמתאים לכם.</p>
+    </div>
+    <div class="pricing-cards fade-in">
+      <!-- Single session -->
+      <div class="pricing-card">
+        <div class="pricing-label">מפגש בודד</div>
+        <div class="pricing-amount">₪150</div>
+        <div class="pricing-period">למפגש</div>
+        <ul class="pricing-features">
+          <li>מפגש לייב בזום</li>
+          <li>הקלטה מלאה</li>
+          <li>מדריך כתוב</li>
+          <li>גישה לקבוצת WhatsApp</li>
+        </ul>
+        <a href="#" class="pricing-btn pricing-btn-outline">הרשמה למפגש בודד</a>
+      </div>
+      <!-- Full series -->
+      <div class="pricing-card featured">
+        <div class="pricing-label">הסדרה המלאה</div>
+        <div class="pricing-amount">₪500</div>
+        <div class="pricing-period">4 מפגשים</div>
+        <ul class="pricing-features">
+          <li>4 מפגשי לייב בזום</li>
+          <li>הקלטות מלאות של כל המפגשים</li>
+          <li>מדריכים כתובים + ספריית סקילים</li>
+          <li>קבוצת WhatsApp + תמיכה אישית</li>
+          <li>גישה לקהילת בוגרים</li>
+        </ul>
+        <a href="#" class="pricing-btn pricing-btn-filled">הרשמה לסדרה המלאה</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="faq-section">
+  <div class="container">
+    <div class="fade-in" style="text-align: center; margin-bottom: 48px;">
+      <div class="green-sep center"></div>
+      <h2 class="section-title">שאלות נפוצות</h2>
+    </div>
+    <div class="faq-list fade-in">
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>צריך לדעת לתכנת?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>ממש לא. הסדרה בנויה למי שלא כתב שורת קוד בחיים. אם אתה יודע לכתוב הודעה בווצאפ — יש לך את כל מה שצריך.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>מה אם אני מפספס מפגש?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>כל המפגשים מוקלטים וזמינים לצפייה חוזרת. בנוסף, יש קבוצת WhatsApp שבה אפשר לשאול שאלות ולקבל עזרה.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>מה צריך להכין לפני המפגש הראשון?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>מחשב (Mac, Windows או Linux), חיבור אינטרנט יציב, ומנוי Claude פעיל (claude.ai — $20 לחודש). מדריך התקנה מפורט נשלח לפני המפגש.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>כמה זמן כל מפגש?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>כל מפגש נמשך כשעתיים. זה מפגש מעשי שבו אתה בונה דברים אמיתיים — לא הרצאה תיאורטית.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>אפשר להצטרף רק למפגש אחד?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>כן, אפשר לרכוש מפגש בודד ב-₪150. אבל הסדרה המלאה נבנתה כמסע מצטבר — כל מפגש בונה על הקודם, ובחבילה המלאה אתה חוסך ₪100.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>באיזו שפה המפגשים?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>הכל בעברית. ההוראה, המדריכים, התמיכה — הכל בשפה שלך.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>מה ההבדל בין הסדרה הזו לקורסים אחרים?</span>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>פה לא לומדים תיאוריה — בונים. בכל מפגש יוצאים עם משהו שעובד. בנוסף, זו הסדרה היחידה בעברית שמתמקדת בבניית מערכת סוכנים מלאה, לא רק בשימוש בכלי יחיד.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section class="about-section">
+  <div class="container">
+    <div class="fade-in">
+      <div class="green-sep center"></div>
+      <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">מי מלמד?</h2>
+    </div>
+    <div class="about-content fade-in">
+      <div class="about-avatar">👨‍💻</div>
+      <div class="about-text">
+        <h3>אביץ — הארכיטקט</h3>
+        <div class="about-role">בונה מערכות סוכני AI | מרצה ומנחה סדנאות</div>
+        <p>
+          אביץ חי ונושם סוכני AI. הוא בנה לעצמו מערכת הפעלה אישית מלאה שמנהלת לקוחות, מייצרת תוכן, שולחת הודעות, מכינה הצעות מחיר — הכל דרך שיחה פשוטה עם הסוכנים שלו.
+        </p>
+        <p>
+          בסדרת קלודוש הוא מלמד את כל מי שרוצה לבנות את אותה מערכת — צעד אחר צעד, בלי קוד, בעברית.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FINAL CTA ==================== -->
+<section class="final-cta">
+  <div class="container">
+    <div class="fade-in">
+      <h2>מוכנים <span class="green-accent">להמריא</span>?</h2>
+      <p>הצטרפו לסידרת קלודוש ובנו את מערכת הסוכנים שתעבוד בשבילכם.</p>
+      <a href="#pricing" class="hero-cta">שריינו לי מקום</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-brand">AVIZ — THE ARCHITECT</div>
+  <div class="footer-copy">סידרת קלודוש — מאפס לצבא סוכנים</div>
+</footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+  // Scroll-based fade-in animation
+  (function() {
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll('.fade-in').forEach(function(el) {
+      observer.observe(el);
+    });
+  })();
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = this.parentElement;
+      var isOpen = item.classList.contains('open');
+
+      // Close all items
+      document.querySelectorAll('.faq-item').forEach(function(i) {
+        i.classList.remove('open');
+      });
+
+      // Toggle clicked item
+      if (!isOpen) {
+        item.classList.add('open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
