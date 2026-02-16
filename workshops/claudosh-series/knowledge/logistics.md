@@ -42,7 +42,7 @@
 | # | Name | Email | Phone | Notes |
 |---|------|-------|-------|-------|
 | 1 | דניאל רוזין | Daniarozin@gmail.com | 0503733010 | |
-| 2 | מיכל בן לביא | office@benlaviclinic.com | 0555612082 | Bought for employee: שרה קובליק (055-5612082, sarah1k.office@gmail.com) |
+| 2 | שרה קובליק | sarah1k.office@gmail.com | 0555612082 | Paid by מיכל בן לביא (office@benlaviclinic.com) |
 | 3 | Doron zeltser | bardawill@gmail.com | +972548090695 | |
 | 4 | מנדי קסטיאל | kastielmm@gmail.com | 0544977051 | |
 | 5 | רועי רזון | razon2266@gmail.com | 0549452266 | "לא ראיתי שיש כבר תאריכים נבחרים לשיעורים הבאים" |
