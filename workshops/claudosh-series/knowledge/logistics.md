@@ -29,6 +29,49 @@
 - Old 3-session series was ₪297
 - More content, more depth, higher per-session value
 
+## Registration & Attendance
+
+| Metric | Count |
+|--------|-------|
+| **Paid registrations** | 30 |
+| **Revenue** | ₪15,000 (30 × ₪500) |
+| **Payment source** | Morning payment link |
+
+### Participants List (from payment CSV, 2026-02-16)
+
+| # | Name | Email | Phone | Notes |
+|---|------|-------|-------|-------|
+| 1 | דניאל רוזין | Daniarozin@gmail.com | 0503733010 | |
+| 2 | מיכל בן לביא | office@benlaviclinic.com | 0555612082 | Bought for employee: שרה קובליק (055-5612082, sarah1k.office@gmail.com) |
+| 3 | Doron zeltser | bardawill@gmail.com | +972548090695 | |
+| 4 | מנדי קסטיאל | kastielmm@gmail.com | 0544977051 | |
+| 5 | רועי רזון | razon2266@gmail.com | 0549452266 | "לא ראיתי שיש כבר תאריכים נבחרים לשיעורים הבאים" |
+| 6 | שי יצחקי | shyy.110@gmail.com | 0526654409 | |
+| 7 | יונתן ברס | yonib182@gmail.com | 0525715364 | "אביץ אתה אלוף תענוג לקרוא ולעקוב אחרי המסע של בעולם הai" |
+| 8 | קרן סדרינס | keren@kerensadrinas.com | 0547641364 | |
+| 9 | המרכז לרפואה וטרינרית | vet_batyam@yahoo.com | 0543123419 | "חלק מהמפגשים אצטרך לראות בהקלטה" |
+| 10 | דיגיטק השכלה פרקטית (מתן) | Matan@digi-tech.co.il | 0525856784 | |
+| 11 | מיכל בן לביא | hemibenlavi@gmail.com | 0544608119 | |
+| 12 | איציק וולף | itzikwolf1@gmail.com | 0545445112 | |
+| 13 | שלום לרר | shloleml@gmail.com | 0584062319 | |
+| 14 | אהרן כרמל | aharoni.carmel@gmail.com | 0526566762 | |
+| 15 | אסף צבאח | assaf.sab@gmail.com | 0547353003 | |
+| 16 | אבירם אביטבול | aviramabi@gmail.com | 0509649576 | |
+| 17 | רן לוי | shinobiproduct@gmail.com | 0509450501 | "בוא נעוף" |
+| 18 | ניו גלובס בע"מ | newglobes@gmail.com | | |
+| 19 | רפי - סטודיו ניק | rafi@nowyouknow.io | 054-5772436 | |
+| 20 | איתי נגלר | itaynagler@gmail.com | 0526102993 | |
+| 21 | ליאור איזנברג | lior.aizenberg@gmail.com | 0542030607 | |
+| 22 | רזניק מערכות תשתית | Rreznik7@gmail.com | 0546500101 | |
+| 23 | אוהד דקל | dekelohad@gmail.com | 0542164600 | |
+| 24 | ליאור סבג | lsabag@gmail.com | 0523675123 | |
+| 25 | ישי יפעתי | djevents613@gmail.com | 0525788343 | |
+| 26 | נדב בן גל | nadavbg@gmail.com | 0523003114 | "אשמח לדעת תאריכי הסדנה" |
+| 27 | צור הדרכות | zurelad@gmail.com | 0509000235 | "אשמח לדבר לפני המפגש" |
+| 28 | ארז פרץ | erez.peretz@gmail.com | 0559398308 | |
+| 29 | הילה שפירא | Hilafaith@gmail.com | 0553180322 | |
+| 30 | Uria berman | uriaberman@gmail.com | 0548825232 | |
+
 ## Open Questions
 - Max participants per cohort?
 - Pilot beta started: 2026-02-16 (Mondays at 21:00)
