@@ -121,7 +121,7 @@ https://chat.whatsapp.com/GoXp5Le2DKJIp9sCnTUhmG
       <p style="font-size: 18px; color: #333; margin-bottom: 20px;">שלום <strong>${name.split(' ')[0]}</strong>,</p>
       <p style="font-size: 16px; color: #555; line-height: 1.6;">נרשמת בהצלחה לסידרת קלודוש! 4 מפגשים מעשיים שבהם תבנה מערכת סוכני AI שעובדת בשבילך.</p>
       <div style="background-color: #f0fdf4; border-right: 4px solid #22C55E; padding: 20px; margin: 25px 0; border-radius: 8px;">
-        <h3 style="margin: 0 0 15px 0; color: #166534;">4 מפגשים — כל שני ב-21:00</h3>
+        <h3 style="margin: 0 0 15px 0; color: #166534;">4 מפגשים — ב-21:00</h3>
         <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
           <tr style="border-bottom: 1px solid #e5e7eb;">
             <td style="padding: 10px 4px; color: #333; font-weight: bold;">מפגש 1 — הסוכן הכללי כבר כאן</td>
