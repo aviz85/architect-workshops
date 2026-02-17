@@ -11,6 +11,8 @@
 | **Audience** | קהילת מרצי בינה מלאכותית (exclusive) |
 | **Type** | Special live session (not a paid workshop) |
 | **Status** | Preparing |
+| **Calendar Invite** | https://calendar.app.google/dYHmVnxCEAA41FLJ7 |
+| **Zoom Link** | https://us06web.zoom.us/j/84013461262?pwd=63bsp5iBWW6MDkEmaajmLz4MREPade.1 |
 
 ## Topic
 
@@ -153,11 +155,22 @@ Full Autonomy (OpenClaw)  ←——→  Full Manual (Chat)  ←——→  Sweet 
 - [x] Avatar assets ready
 - [x] Poster created (6 versions!)
 - [x] Talking points and concept prepared
-- [ ] Zoom link created
+- [x] Zoom link added
+- [x] Calendar invite link added
+- [x] Presentation plan (19 slides) created
 - [ ] Post to AI lecturers community
-- [ ] Presentation/talking points prepared
+- [ ] 5 concept posters for presentation slides
 - [ ] Live session delivered
 - [ ] Follow-up and recording shared
+
+## Marketing CTA
+
+Every post/publication should include:
+- The poster image
+- Text with the message
+- CTA: "שמרו את התאריך!" + calendar link: https://calendar.app.google/dYHmVnxCEAA41FLJ7
+- Zoom link (in text, not on poster): https://us06web.zoom.us/j/84013461262?pwd=63bsp5iBWW6MDkEmaajmLz4MREPade.1
+- Reminder: "יום רביעי 18.02 | שעה 21:00 | בזום"
 
 ## Assets
 
