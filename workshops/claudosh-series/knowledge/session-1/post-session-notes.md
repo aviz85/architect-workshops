@@ -1,5 +1,13 @@
 # Session 1 - Post-Session Notes (16.02.2026)
 
+## Recording
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Vimeo |
+| **URL** | https://vimeo.com/1165601065?share=copy&fl=sv&fe=ci |
+| **Password** | claudosh |
+
 ## Partnership: Guy Ronen (גיא רונן)
 
 Session 1 was co-delivered with Guy Ronen as partner.

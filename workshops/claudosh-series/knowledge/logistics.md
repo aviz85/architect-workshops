@@ -72,6 +72,13 @@
 | 29 | הילה שפירא | Hilafaith@gmail.com | 0553180322 | |
 | 30 | Uria berman | uriaberman@gmail.com | 0548825232 | |
 
+## WhatsApp Groups
+
+| Group | Green API ID | Link |
+|-------|-------------|------|
+| **Series Group** | 120363424966386496@g.us | |
+| **Discussion Group** | 120363404944129028@g.us | https://chat.whatsapp.com/I60sLw6ZExnH5Io0d35pIX |
+
 ## Open Questions
 - Max participants per cohort?
 - Pilot beta started: 2026-02-16 (Mondays at 21:00)
