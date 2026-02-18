@@ -16,6 +16,30 @@
 - Why this is a phase transition, not an incremental step
 - Why everyone is silent about it
 
+### The Fuel: Chinese Open Models Are Exploding
+- **Kimi** (Moonshot AI), **Qwen** (Alibaba), **MiniMax**, **DeepSeek** - open, cheap, powerful
+- These are the FUEL of autonomous agents. You can't run an agent on $15/M tokens (Claude Opus). But at $0.28/M tokens (DeepSeek V3.2)? Suddenly agents are economically viable 24/7
+- **OpenRouter Top 20:** Chinese models hold ~35% of spots:
+  - #2: Kimi K2.5 | #3: MiniMax M2.5 | #7: DeepSeek V3.2 | #8: Qwen 3.5
+- **Qwen:** 700M+ downloads on HuggingFace - most downloaded AI model family IN THE WORLD. Overtook Meta's Llama
+- **DeepSeek R1:** Was #1 free app in US App Store. Triggered ~$1T sell-off in US tech stocks
+- **Price comparison:**
+  - Claude Opus 4.6: ~$15/$75 per M tokens
+  - DeepSeek V3.2: $0.28/$0.42 per M tokens = **1/50th the cost**
+  - Kimi K2.5: $0.23/$3.00 - benchmarks close to Opus at 1/7th price
+- **Show live in browser:**
+  - OpenRouter rankings: https://openrouter.ai/rankings (MiniMax 1.44T, Kimi 1.3T leading the chart)
+  - Star history: https://star-history.com/#anthropics/claude-code&openclaw/openclaw&Date
+    - Claude Code: steady growth to ~65K stars
+    - OpenClaw: VERTICAL explosion from 0 to 205K+ in weeks. This IS the phase shift visual
+- **OpenClaw GitHub: 205K+ stars** - the most dramatic star growth in GitHub history
+
+### Phase Shift Visual
+- Late 2024: Chinese open models = 1.2% global usage
+- Nov 2025: ~15%
+- Early 2026: ~30%
+- THIS is what a phase shift looks like from the data side
+
 ### The Descent of Breakthroughs (Slide 2.5 content)
 - Breakthroughs used to require inventive research → scaling laws → product innovation → independent developer → users → technology itself
 - We've descended to the point where technology improves ITSELF
