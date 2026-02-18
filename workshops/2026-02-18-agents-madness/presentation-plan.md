@@ -73,6 +73,64 @@ OpenClaw icon (crab in TARDIS) on the left side, large. Below it: the OpenClaw l
 
 ---
 
+## Slide 2.5 – מי צריך לפרוץ דרך? (הירידה לפרט)
+
+**Purpose:** Show the historical evolution of WHO can create technological breakthroughs - from labs to companies to individuals to the technology itself. This frames OpenClaw and the sweet spot discussion in a much bigger context.
+
+**Direction:** RTL - content flows from right to left
+
+**Content:**
+
+**Headline (Top-center):**
+"מי צריך לפרוץ דרך?"
+
+**Descending staircase / waterfall visualization (Center):**
+Six levels, each lower and closer to the individual, showing how the "barrier to breakthrough" keeps dropping:
+
+**Level 1 (Top, academic/institutional, gray):**
+"🔬 מחקר המצאתי"
+"אלגוריתם חדש, איכות טכנולוגית חדשה. דרש מהנדסים, מחקר, שנים."
+
+**Level 2 (Below, slightly green, scaling):**
+"📈 Scaling Laws"
+"בלי טכנולוגיה חדשה - רק הגדלה של הקיים חושפת יכולות חדשות. מדהים. אבל רק מעבדות AI עם משאבי מיחשוב עצומים יכלו."
+
+**Level 3 (Below, more green, product):**
+"📦 מוצר / צורת שימוש"
+"הטכנולוגיה כל כך מפותחת שפריצת דרך מגיעה דרך מוצר: Claude Code, ChatGPT Agent. עדיין תלויים בחברות תוכנה."
+
+**Level 4 (Below, bright green, individual):**
+"👤 מפתח עצמאי אחד"
+"מפתח בודד בנה את OpenClaw. טכנית - כמעט לא חידש. אבל האפקט = מעבר פאזה. ישות AI חיה, פעילה, שמתקשרת עם הסביבה. גל חדש."
+
+**Level 5 (Below, brilliant green, users):**
+"👥 המשתמשים עצמם"
+"החידושים מגיעים מאנשים רגילים שמגלים צורות שימוש חדשות. אין דרך אחת נכונה. העולם עוד לא מבין. הכוח אצל כל אחד."
+
+**Level 6 (Bottom, golden/white glow, singularity):**
+"🔄 הטכנולוגיה משתמשת בעצמה"
+"לא צריך אפילו משתמשים. הטכנולוגיה פורצת דרכים חדשות לבד. זו הסינגולריות. ואנחנו שם."
+
+**Bottom punchline (Center, large):**
+"כשיצא ChatGPT, חוקרי AI ידעו שהמחשב ידבר איתנו טבעית - לא דמיינו שזה יגיע כל כך מהר."
+"אותו דבר עם הסינגולריות. ידענו שתגיע. לא ידענו שזה עכשיו."
+
+**Visual:**
+Descending waterfall/staircase flowing from top-right to bottom-left. Each step is wider and brighter as it goes down. The top steps are gray/institutional, middle steps green, bottom step radiates golden light. A small figure grows larger at each step, representing how the individual gains more power. At the final step, the figure dissolves into light - the technology transcends the individual.
+
+**Background:** Pure black with the waterfall as the hero visual element. Subtle particles flowing downward.
+
+**Typography:**
+- Headline: Heebo Bold, 54pt, white
+- Level titles: Heebo Bold, 24pt, respective step color
+- Level descriptions: Heebo Regular, 18pt, white/light gray
+- Punchline: Heebo Bold, 28pt, #22C55E
+- Final line: Heebo Black, 32pt, white with glow
+
+**Transition:** From macro (history of breakthroughs) to micro (my personal experiment) - "I lived through levels 4, 5, and 6. Let me show you."
+
+---
+
 ## Slide 3 – הניסוי שלי: סוכן שרץ לבד
 
 **Purpose:** Personal story - I deployed an autonomous agent. Here's what happened.
