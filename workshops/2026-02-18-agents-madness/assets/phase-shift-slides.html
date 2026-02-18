@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="he" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080">
+<title>Phase Shift Slides</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; direction: ltr; }
+
+.slide {
+  width: 1920px;
+  height: 1080px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(var(--scale, 1));
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 120px;
+  direction: rtl;
+  text-align: center;
+}
+.slide.active { display: flex; }
+
+/* Slide counter */
+.slide-counter {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #555;
+  font-family: 'Heebo', sans-serif;
+  font-size: 18px;
+  z-index: 1000;
+}
+
+/* ====== SLIDE 1: The Question ====== */
+#slide1 {
+  background: radial-gradient(ellipse at center, #0a0a0a 0%, #000 100%);
+}
+#slide1 .headline {
+  font-size: 120px;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+  line-height: 1.2;
+  text-shadow: 0 0 80px rgba(34, 197, 94, 0.3);
+}
+#slide1 .subtitle {
+  font-size: 42px;
+  font-weight: 300;
+  color: #22C55E;
+  text-align: center;
+  margin-top: 40px;
+  opacity: 0.9;
+}
+
+/* ====== SLIDE 2: Phase 1 - Research ====== */
+#slide2 {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+}
+#slide2 .phase-num {
+  font-size: 200px;
+  font-weight: 900;
+  color: rgba(100, 100, 120, 0.15);
+  position: absolute;
+  top: -30px;
+  left: 80px;
+  line-height: 1;
+}
+#slide2 .icon { font-size: 80px; margin-bottom: 20px; }
+#slide2 .headline {
+  font-size: 72px;
+  font-weight: 900;
+  color: #9ca3af;
+  text-align: center;
+}
+#slide2 .desc {
+  font-size: 36px;
+  font-weight: 300;
+  color: #6b7280;
+  text-align: center;
+  max-width: 1200px;
+  margin-top: 30px;
+  line-height: 1.6;
+}
+#slide2 .who {
+  margin-top: 50px;
+  font-size: 28px;
+  color: #4b5563;
+  border: 1px solid #374151;
+  padding: 15px 40px;
+  border-radius: 50px;
+}
+#slide2 .breakthrough {
+  margin-top: 30px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #9ca3af;
+}
+
+/* ====== SLIDE 3: Phase 2 - Scaling Laws ====== */
+#slide3 {
+  background: linear-gradient(135deg, #0a0a0a 0%, #0a1628 100%);
+}
+#slide3 .phase-num {
+  font-size: 200px;
+  font-weight: 900;
+  color: rgba(59, 130, 246, 0.08);
+  position: absolute;
+  top: -30px;
+  left: 80px;
+  line-height: 1;
+}
+#slide3 .icon { font-size: 80px; margin-bottom: 20px; }
+#slide3 .headline {
+  font-size: 72px;
+  font-weight: 900;
+  color: #60a5fa;
+  text-align: center;
+}
+#slide3 .equation {
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 60px;
+  border: 2px solid rgba(96, 165, 250, 0.3);
+  border-radius: 16px;
+  background: rgba(96, 165, 250, 0.05);
+}
+#slide3 .desc {
+  font-size: 32px;
+  font-weight: 300;
+  color: #93c5fd;
+  text-align: center;
+  max-width: 1200px;
+  margin-top: 30px;
+  line-height: 1.6;
+}
+#slide3 .but {
+  margin-top: 40px;
+  font-size: 36px;
+  font-weight: 700;
+  color: #f87171;
+  text-align: center;
+}
+
+/* ====== SLIDE 4: Phase 3 - Product ====== */
+#slide4 {
+  background: linear-gradient(135deg, #0a0a0a 0%, #0a2818 100%);
+}
+#slide4 .phase-num {
+  font-size: 200px;
+  font-weight: 900;
+  color: rgba(34, 197, 94, 0.08);
+  position: absolute;
+  top: -30px;
+  left: 80px;
+  line-height: 1;
+}
+#slide4 .products {
+  display: flex;
+  gap: 60px;
+  margin-top: 40px;
+  direction: ltr;
+}
+#slide4 .product-box {
+  padding: 30px 50px;
+  border-radius: 20px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  text-align: center;
+}
+#slide4 .product-box .name {
+  font-size: 32px;
+  font-weight: 700;
+  color: #22C55E;
+}
+#slide4 .product-box .type {
+  font-size: 22px;
+  color: #6b7280;
+  margin-top: 8px;
+}
+#slide4 .headline {
+  font-size: 68px;
+  font-weight: 900;
+  color: #22C55E;
+  text-align: center;
+}
+#slide4 .desc {
+  font-size: 34px;
+  font-weight: 300;
+  color: #86efac;
+  text-align: center;
+  max-width: 1200px;
+  margin-top: 30px;
+  line-height: 1.6;
+}
+#slide4 .still {
+  margin-top: 40px;
+  font-size: 30px;
+  color: #f87171;
+}
+
+/* ====== SLIDE 5: Phase 4 - Independent Developer ====== */
+#slide5 {
+  background: radial-gradient(ellipse at center, #1a0a0a 0%, #000 100%);
+}
+#slide5::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.08) 0%, transparent 60%);
+}
+#slide5 .icon { font-size: 72px; margin-bottom: 10px; position: relative; z-index: 1; }
+#slide5 .headline {
+  font-size: 54px;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  line-height: 1.3;
+}
+#slide5 .highlight {
+  color: #ef4444;
+}
+#slide5 .desc {
+  font-size: 28px;
+  font-weight: 300;
+  color: #fca5a5;
+  text-align: center;
+  max-width: 1200px;
+  margin-top: 15px;
+  line-height: 1.5;
+  position: relative;
+  z-index: 1;
+}
+#slide5 .punchline {
+  margin-top: 25px;
+  font-size: 34px;
+  font-weight: 900;
+  color: #ef4444;
+  text-align: center;
+  text-shadow: 0 0 40px rgba(239, 68, 68, 0.5);
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+}
+
+/* ====== SLIDE 6: Phase 5+6 - Users → Singularity ====== */
+#slide6 {
+  background: radial-gradient(ellipse at center bottom, #1a1a00 0%, #000 100%);
+}
+#slide6 .two-phases {
+  display: flex;
+  gap: 80px;
+  align-items: flex-start;
+  direction: rtl;
+}
+#slide6 .phase {
+  flex: 1;
+  text-align: center;
+  padding: 50px;
+}
+#slide6 .phase-icon { font-size: 80px; margin-bottom: 20px; }
+#slide6 .phase-title {
+  font-size: 48px;
+  font-weight: 900;
+}
+#slide6 .phase:first-child .phase-title { color: #fbbf24; }
+#slide6 .phase:last-child .phase-title { color: #fff; text-shadow: 0 0 30px rgba(255,255,255,0.5); }
+#slide6 .phase-desc {
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1.7;
+  margin-top: 20px;
+}
+#slide6 .phase:first-child .phase-desc { color: #fde68a; }
+#slide6 .phase:last-child .phase-desc { color: #e5e7eb; }
+#slide6 .divider {
+  width: 2px;
+  height: 300px;
+  background: linear-gradient(to bottom, transparent, #fbbf24, #fff, transparent);
+  align-self: center;
+}
+#slide6 .bottom-line {
+  margin-top: 50px;
+  font-size: 40px;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 0 60px rgba(255,255,255,0.3);
+}
+
+/* ====== SLIDE 7: The Fuel - Chinese Models ====== */
+#slide7 {
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a0a0a 100%);
+}
+#slide7 .headline {
+  font-size: 64px;
+  font-weight: 900;
+  color: #ef4444;
+  text-align: center;
+  margin-bottom: 50px;
+}
+#slide7 .models-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  width: 100%;
+  max-width: 1600px;
+  direction: ltr;
+}
+#slide7 .model-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+}
+#slide7 .model-card .model-name {
+  font-size: 36px;
+  font-weight: 900;
+  color: #fff;
+}
+#slide7 .model-card .model-price {
+  font-size: 48px;
+  font-weight: 900;
+  color: #22C55E;
+  margin-top: 15px;
+}
+#slide7 .model-card .model-unit {
+  font-size: 18px;
+  color: #6b7280;
+}
+#slide7 .model-card .model-note {
+  font-size: 20px;
+  color: #9ca3af;
+  margin-top: 10px;
+}
+#slide7 .vs-box {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  direction: ltr;
+}
+#slide7 .vs-item {
+  font-size: 28px;
+  padding: 15px 40px;
+  border-radius: 12px;
+}
+#slide7 .vs-expensive {
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  text-decoration: line-through;
+}
+#slide7 .vs-cheap {
+  color: #22C55E;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  font-weight: 700;
+}
+#slide7 .vs-label { color: #6b7280; font-size: 28px; }
+#slide7 .bottom-stat {
+  margin-top: 30px;
+  font-size: 28px;
+  color: #fbbf24;
+}
+
+/* ====== SLIDE 8: The Dream Metaphor ====== */
+#slide8 {
+  background: radial-gradient(ellipse at center, #0a0a1a 0%, #000 100%);
+}
+#slide8 .headline {
+  font-size: 72px;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 60px;
+}
+#slide8 .metaphor-row {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  direction: rtl;
+  max-width: 1500px;
+}
+#slide8 .metaphor-box {
+  flex: 1;
+  text-align: center;
+  padding: 40px;
+  border-radius: 24px;
+}
+#slide8 .box-brain {
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+#slide8 .box-ai {
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+#slide8 .metaphor-icon { font-size: 64px; margin-bottom: 15px; }
+#slide8 .metaphor-title {
+  font-size: 36px;
+  font-weight: 900;
+}
+#slide8 .box-brain .metaphor-title { color: #a78bfa; }
+#slide8 .box-ai .metaphor-title { color: #22C55E; }
+#slide8 .metaphor-text {
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1.7;
+  margin-top: 15px;
+}
+#slide8 .box-brain .metaphor-text { color: #c4b5fd; }
+#slide8 .box-ai .metaphor-text { color: #86efac; }
+#slide8 .equals {
+  font-size: 64px;
+  color: #fff;
+  font-weight: 900;
+}
+#slide8 .conclusion {
+  margin-top: 50px;
+  font-size: 40px;
+  font-weight: 700;
+  color: #22C55E;
+  text-align: center;
+  text-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+}
+
+/* ====== SLIDE 9: AI Lives in Environment ====== */
+#slide9 {
+  background: radial-gradient(ellipse at center, #001a0a 0%, #000 100%);
+}
+#slide9::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 60%, rgba(34, 197, 94, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 70% 40%, rgba(34, 197, 94, 0.04) 0%, transparent 40%);
+}
+#slide9 .headline {
+  font-size: 68px;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 60px rgba(34, 197, 94, 0.4);
+  max-width: 1400px;
+}
+#slide9 .headline em {
+  font-style: normal;
+  color: #22C55E;
+}
+#slide9 .sub {
+  font-size: 40px;
+  font-weight: 300;
+  color: #86efac;
+  text-align: center;
+  margin-top: 30px;
+  position: relative;
+  z-index: 1;
+}
+#slide9 .environment-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+  direction: ltr;
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+}
+#slide9 .env-item {
+  padding: 20px 35px;
+  border-radius: 16px;
+  background: rgba(34, 197, 94, 0.06);
+  border: 1px solid rgba(34, 197, 94, 0.15);
+  color: #22C55E;
+  font-size: 24px;
+  font-weight: 700;
+}
+#slide9 .punchline {
+  margin-top: 40px;
+  font-size: 36px;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  max-width: 1300px;
+  line-height: 1.5;
+}
+#slide9 .final {
+  margin-top: 25px;
+  font-size: 40px;
+  color: #22C55E;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+}
+
+/* ====== SLIDE 10: Agent vs Model ====== */
+#slide10 {
+  background: #000;
+}
+#slide10 .headline {
+  font-size: 56px;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 60px;
+}
+#slide10 .comparison {
+  display: flex;
+  gap: 80px;
+  direction: rtl;
+  align-items: stretch;
+  max-width: 1500px;
+}
+#slide10 .comp-box {
+  flex: 1;
+  padding: 50px;
+  border-radius: 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#slide10 .comp-model {
+  background: rgba(107, 114, 128, 0.08);
+  border: 1px solid rgba(107, 114, 128, 0.2);
+}
+#slide10 .comp-agent {
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  box-shadow: 0 0 60px rgba(34, 197, 94, 0.1);
+}
+#slide10 .comp-icon { font-size: 72px; margin-bottom: 20px; }
+#slide10 .comp-title { font-size: 42px; font-weight: 900; }
+#slide10 .comp-model .comp-title { color: #9ca3af; }
+#slide10 .comp-agent .comp-title { color: #22C55E; }
+#slide10 .comp-line {
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+#slide10 .comp-model .comp-line { color: #6b7280; }
+#slide10 .comp-agent .comp-line { color: #86efac; }
+#slide10 .comp-punchline {
+  margin-top: auto;
+  padding-top: 30px;
+  font-size: 32px;
+  font-weight: 900;
+}
+#slide10 .comp-model .comp-punchline { color: #9ca3af; }
+#slide10 .comp-agent .comp-punchline { color: #22C55E; text-shadow: 0 0 20px rgba(34, 197, 94, 0.4); }
+#slide10 .bottom {
+  margin-top: 50px;
+  font-size: 40px;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+}
+#slide10 .bottom em { font-style: normal; color: #22C55E; }
+
+/* Navigation hint */
+.nav-hint {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #333;
+  font-size: 16px;
+  z-index: 999;
+}
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: The Question -->
+<div class="slide active" id="slide1">
+  <div class="headline">מי צריך לפרוץ דרך?</div>
+  <div class="subtitle">ההיסטוריה של מי שיכול לשנות את העולם — ולמה זה כבר לא מה שחשבתם</div>
+</div>
+
+<!-- SLIDE 2: Phase 1 - Research -->
+<div class="slide" id="slide2">
+  <div class="phase-num">01</div>
+  <div class="icon">🔬</div>
+  <div class="headline">מחקר המצאתי</div>
+  <div class="desc">פריצת דרך דרשה אלגוריתם חדש, איכות טכנולוגית חדשה לגמרי.<br>שנים של מחקר. מהנדסים. מעבדות. תקציבים עצומים.</div>
+  <div class="who">מי? → מעבדות מחקר ואוניברסיטאות</div>
+  <div class="breakthrough">הפריצה הייתה ב<strong>מדע</strong></div>
+</div>
+
+<!-- SLIDE 3: Phase 2 - Scaling Laws -->
+<div class="slide" id="slide3">
+  <div class="phase-num">02</div>
+  <div class="icon">📈</div>
+  <div class="headline">Scaling Laws</div>
+  <div class="equation">בלי טכנולוגיה חדשה → רק הגדלה של הקיים → יכולות חדשות</div>
+  <div class="desc">אין מחקר מדעי. יש פשוט האצה של הקיים.<br>מדהים. אבל —</div>
+  <div class="but">רק מעבדות AI עם משאבי מיחשוב עצומים יכלו להפעיל את הסקייל</div>
+</div>
+
+<!-- SLIDE 4: Phase 3 - Product -->
+<div class="slide" id="slide4">
+  <div class="phase-num" style="font-size:200px;font-weight:900;color:rgba(34,197,94,0.08);position:absolute;top:-30px;left:80px;line-height:1;">03</div>
+  <div class="headline">פריצת דרך דרך מוצר</div>
+  <div class="desc">הטכנולוגיה כל כך מפותחת — שפריצת דרך מגיעה דרך צורת שימוש</div>
+  <div class="products">
+    <div class="product-box">
+      <div class="name">Claude Code</div>
+      <div class="type">סוכן קוד</div>
+    </div>
+    <div class="product-box">
+      <div class="name">ChatGPT Agent</div>
+      <div class="type">סוכן משימות</div>
+    </div>
+    <div class="product-box">
+      <div class="name">Cursor / Windsurf</div>
+      <div class="type">IDE חכם</div>
+    </div>
+  </div>
+  <div class="still">עדיין תלויים בחברות תוכנה</div>
+</div>
+
+<!-- SLIDE 5: Phase 4 - Independent Developer -->
+<div class="slide" id="slide5">
+  <div class="icon">🦞</div>
+  <div class="headline">מפתח <span class="highlight">עצמאי אחד</span> בנה ארכיטקטורה חדשה</div>
+  <div class="desc">
+    clawdbot → OpenClaw<br>
+    טכנית — כמעט לא חידש שום דבר. אותם מודלים. אותן APIs.<br>
+    אבל האפקט? <strong>מעבר פאזה.</strong>
+  </div>
+  <div class="punchline">ישות AI חיה, פעילה, שמתקשרת עם הסביבה ומשפרת את עצמה</div>
+</div>
+
+<!-- SLIDE 6: Phase 5+6 - Users → Singularity -->
+<div class="slide" id="slide6">
+  <div class="two-phases">
+    <div class="phase">
+      <div class="phase-icon">👥</div>
+      <div class="phase-title">המשתמשים עצמם</div>
+      <div class="phase-desc">
+        החידושים כבר לא מגיעים מהמפתח.<br>
+        אנשים רגילים מגלים צורות שימוש חדשות.<br>
+        אין דרך אחת נכונה.<br>
+        העולם עוד לא מבין.
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="phase">
+      <div class="phase-icon">🔄</div>
+      <div class="phase-title">הטכנולוגיה משתמשת בעצמה</div>
+      <div class="phase-desc">
+        לא צריך אפילו משתמשים.<br>
+        הטכנולוגיה פורצת דרכים חדשות לבד.<br>
+        סוכנים שמשפרים את עצמם.<br>
+        זו הסינגולריות.
+      </div>
+    </div>
+  </div>
+  <div class="bottom-line">ואנחנו שם.</div>
+</div>
+
+<!-- SLIDE 7: The Fuel - Chinese Models -->
+<div class="slide" id="slide7">
+  <div class="headline">הדלק של הסוכנים</div>
+  <div class="models-grid">
+    <div class="model-card">
+      <div class="model-name">Kimi K2.5</div>
+      <div class="model-price">$0.23</div>
+      <div class="model-unit">/ 1M tokens (input)</div>
+      <div class="model-note">#2 on OpenRouter</div>
+    </div>
+    <div class="model-card">
+      <div class="model-name">MiniMax M2.5</div>
+      <div class="model-price">$0.30</div>
+      <div class="model-unit">/ 1M tokens (input)</div>
+      <div class="model-note">#3 on OpenRouter</div>
+    </div>
+    <div class="model-card">
+      <div class="model-name">DeepSeek V3.2</div>
+      <div class="model-price">$0.28</div>
+      <div class="model-unit">/ 1M tokens (input)</div>
+      <div class="model-note">757B tokens/week</div>
+    </div>
+    <div class="model-card">
+      <div class="model-name">Qwen 3 Coder</div>
+      <div class="model-price">$0.07</div>
+      <div class="model-unit">/ 1M tokens (input)</div>
+      <div class="model-note">700M+ HF downloads</div>
+    </div>
+  </div>
+  <div class="vs-box">
+    <span class="vs-item vs-expensive">Claude Opus: $15/M</span>
+    <span class="vs-label">→</span>
+    <span class="vs-item vs-cheap">DeepSeek: $0.28/M = 1/50 מהמחיר</span>
+  </div>
+  <div class="bottom-stat">מודלים פתוחים סיניים: מ-1.2% ל-30% מהשימוש הגלובלי תוך 14 חודשים</div>
+</div>
+
+<!-- SLIDE 8: The Dream Metaphor -->
+<div class="slide" id="slide8">
+  <div class="headline">"המודלים עוד לא שם, הם עדיין טועים"</div>
+  <div class="metaphor-row">
+    <div class="metaphor-box box-brain">
+      <div class="metaphor-icon">🧠</div>
+      <div class="metaphor-title">המוח שלנו</div>
+      <div class="metaphor-text">
+        גם המוח הוזה.<br>
+        מתי? כשהוא <strong>לא מקורקע</strong>.<br>
+        בחלום. בחושך מוחלט.<br>
+        אבל מוח בתוך גוף,<br>בתוך סביבה — <strong>לא הוזה.</strong>
+      </div>
+    </div>
+    <div class="equals">=</div>
+    <div class="metaphor-box box-ai">
+      <div class="metaphor-icon">🤖</div>
+      <div class="metaphor-title">מודל AI</div>
+      <div class="metaphor-text">
+        גם הוא הוזה.<br>
+        מתי? כשהוא <strong>לא מקורקע</strong>.<br>
+        בצ'אט גנרי. בלי הקשר.<br>
+        אבל AI בתוך סביבה אמיתית —<br><strong>אפקטיבי בטירוף.</strong>
+      </div>
+    </div>
+  </div>
+  <div class="conclusion">כל המשחק — לתת להם הקשר. לקרקע אותם.</div>
+</div>
+
+<!-- SLIDE 9: AI Lives in Environment -->
+<div class="slide" id="slide9">
+  <div class="headline">לראשונה — AI <em>חי</em> בתוך סביבה</div>
+  <div class="sub">לא בחלון צ'אט. לא בסנדבוקס. בעולם אמיתי.</div>
+  <div class="environment-strip">
+    <div class="env-item">📁 קבצים</div>
+    <div class="env-item">🔌 APIs</div>
+    <div class="env-item">👥 משתמשים</div>
+    <div class="env-item">📋 משימות</div>
+    <div class="env-item">💬 WhatsApp</div>
+    <div class="env-item">📅 יומן</div>
+    <div class="env-item">💰 חשבוניות</div>
+    <div class="env-item">🌐 רשתות</div>
+  </div>
+  <div class="punchline">הסביבה היא הקירקוע.<br>ברגע שה-AI חי בסביבה — הוא מפסיק להיות כלי<br>ומתחיל להיות ישות.</div>
+  <div class="final">וזה משנה הכל. הכל הכל הכל.</div>
+</div>
+
+<!-- SLIDE 10: Agent vs Model -->
+<div class="slide" id="slide10">
+  <div class="headline">ההבדל הקריטי</div>
+  <div class="comparison">
+    <div class="comp-box comp-model">
+      <div class="comp-icon">💬</div>
+      <div class="comp-title">מודל שפה</div>
+      <div class="comp-line">
+        עובד → מדבר איתנו<br>
+        לא משתפר<br>
+        לא לומד<br>
+        לא מתקדם<br>
+        סטטי אחרי שפורס
+      </div>
+      <div class="comp-punchline">כלי.</div>
+    </div>
+    <div class="comp-box comp-agent">
+      <div class="comp-icon">🦞</div>
+      <div class="comp-title">סוכן</div>
+      <div class="comp-line">
+        עובד → משתפר<br>
+        לומד מהסביבה<br>
+        מתקדם הלאה<br>
+        צובר ידע<br>
+        לולאה עצמית-מתחזקת
+      </div>
+      <div class="comp-punchline">ישות.</div>
+    </div>
+  </div>
+  <div class="bottom">ברגע שסוכן <em>עובד</em> — הוא רק מתחיל.</div>
+</div>
+
+<div class="slide-counter"></div>
+<div class="nav-hint">← → לניווט</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const counter = document.querySelector('.slide-counter');
+let current = 0;
+
+function showSlide(n) {
+  slides[current].classList.remove('active');
+  current = ((n % slides.length) + slides.length) % slides.length;
+  slides[current].classList.add('active');
+  counter.textContent = `${current + 1} / ${slides.length}`;
+}
+
+function resize() {
+  const scaleX = window.innerWidth / 1920;
+  const scaleY = window.innerHeight / 1080;
+  const scale = Math.min(scaleX, scaleY);
+  document.documentElement.style.setProperty('--scale', scale);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') showSlide(current + 1);
+  else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') showSlide(current - 1);
+  else if (e.key === 'Home') showSlide(0);
+  else if (e.key === 'End') showSlide(slides.length - 1);
+});
+
+// Click navigation
+document.addEventListener('click', e => {
+  if (e.clientX > window.innerWidth / 2) showSlide(current + 1);
+  else showSlide(current - 1);
+});
+
+window.addEventListener('resize', resize);
+resize();
+showSlide(0);
+</script>
+</body>
+</html>
