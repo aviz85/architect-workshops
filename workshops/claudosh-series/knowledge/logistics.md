@@ -82,3 +82,47 @@
 ## Open Questions
 - Max participants per cohort?
 - Pilot beta started: 2026-02-16 (Mondays at 21:00)
+
+---
+
+## Cohort B (Morning) — Starts 12.03.2026
+
+### Schedule
+
+| # | Date | Day | Time | Topic |
+|---|------|-----|------|-------|
+| **Prep** | 05-11.03 | Week | Async | Installation kit + troubleshooting |
+| **1** | 12.03 | Thursday | 10:00-12:00 | הסוכן הכללי כבר כאן |
+| **2** | 19.03 | Thursday | 10:00-12:00 | ערימות של סקילים |
+| **3** | 26.03 | Thursday | 10:00-12:00 | אפליקציות סוכניות |
+| **4** | 09.04 | Thursday | 10:00-12:00 | נחילי סוכנים |
+
+> Session 4 moved from April 2 to April 9 due to Passover.
+
+### Pricing
+- **Full series:** ₪700
+- **Payment:** Morning payment link (TBD)
+
+### Key Changes from Cohort A
+- **Prep week** replaces in-session installation (session 1 feedback: ~1.5h wasted)
+- **VS Code from start** (terminal was a recurring pain point)
+- **Pre-session questionnaire** (Mac/Windows, subscription, experience level)
+- **Morning slot** for professionals
+
+### Installation Kit
+- Written guide: `workshops/claudosh-series/installation-guide/index.html`
+- Video guides: TBD (Mac + Windows screen recordings)
+- Pre-session questionnaire: TBD (Google Form)
+
+### WhatsApp Groups
+
+| Group | Green API ID | Link |
+|-------|-------------|------|
+| **Cohort B Group** | TBD | TBD |
+
+### Registration & Attendance
+
+| Metric | Count |
+|--------|-------|
+| **Paid registrations** | 0 |
+| **Revenue** | ₪0 |

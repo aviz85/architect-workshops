@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מדריך התקנה — סידרת קלודוש</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #22C55E;
+      --green-dark: #16A34A;
+      --green-glow: rgba(34, 197, 94, 0.3);
+      --black: #0A0A0A;
+      --dark: #111111;
+      --dark-card: #141414;
+      --dark-border: #1e1e1e;
+      --gray-700: #2a2a2a;
+      --gray-600: #3a3a3a;
+      --gray-400: #888;
+      --gray-300: #aaa;
+      --white: #ffffff;
+      --off-white: #e5e5e5;
+      --red: #ef4444;
+      --yellow: #eab308;
+      --blue: #3b82f6;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--black);
+      color: var(--off-white);
+      direction: rtl;
+      text-align: right;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    .header {
+      padding: 48px 0 32px;
+      text-align: center;
+      border-bottom: 1px solid var(--dark-border);
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: var(--green);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 16px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+
+    .header h1 {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .header h1 span { color: var(--green); }
+
+    .header p {
+      font-size: 1.05rem;
+      color: var(--gray-400);
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    /* Progress bar */
+    .progress-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark);
+      border-bottom: 1px solid var(--dark-border);
+      padding: 12px 0;
+    }
+
+    .progress-steps {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: var(--gray-700);
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .progress-step:hover, .progress-step.active {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--green);
+    }
+
+    .progress-step .num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gray-600);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .progress-step:hover .num, .progress-step.active .num {
+      background: var(--green);
+      color: var(--black);
+    }
+
+    /* OS Tabs */
+    .os-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    .os-btn {
+      padding: 12px 32px;
+      border-radius: 12px;
+      border: 2px solid var(--gray-600);
+      background: transparent;
+      color: var(--gray-300);
+      font-family: 'Heebo', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .os-btn.active {
+      border-color: var(--green);
+      background: rgba(34, 197, 94, 0.1);
+      color: var(--green);
+    }
+
+    .os-btn:hover { border-color: var(--green); color: var(--green); }
+
+    .os-icon { font-size: 1.3rem; }
+
+    .mac-only, .win-only { display: none; }
+    body.os-mac .mac-only { display: block; }
+    body.os-win .win-only { display: block; }
+    body.os-mac .both-os, body.os-win .both-os { display: block; }
+
+    /* Step sections */
+    .step-section {
+      padding: 48px 0;
+      border-bottom: 1px solid var(--dark-border);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .step-num {
+      width: 48px;
+      height: 48px;
+      background: rgba(34, 197, 94, 0.12);
+      border: 2px solid rgba(34, 197, 94, 0.3);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .step-desc {
+      font-size: 1rem;
+      color: var(--gray-400);
+      margin-bottom: 24px;
+    }
+
+    /* Instruction cards */
+    .instruction {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .instruction h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .instruction p {
+      color: var(--gray-300);
+      margin-bottom: 12px;
+    }
+
+    .instruction a {
+      color: var(--green);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .instruction a:hover { text-decoration: underline; }
+
+    /* Code blocks */
+    .code-block {
+      background: #0d1117;
+      border: 1px solid #21262d;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      direction: ltr;
+      text-align: left;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 0.9rem;
+      color: #c9d1d9;
+      position: relative;
+      overflow-x: auto;
+    }
+
+    .code-block .comment { color: #8b949e; }
+    .code-block .cmd { color: #79c0ff; }
+    .code-block .success { color: #3fb950; }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--gray-700);
+      border: 1px solid var(--gray-600);
+      color: var(--gray-300);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: 'Heebo', sans-serif;
+      transition: all 0.2s ease;
+    }
+
+    .copy-btn:hover { background: var(--green); color: var(--black); border-color: var(--green); }
+
+    /* Alert boxes */
+    .alert {
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .alert-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+
+    .alert-success {
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+    .alert-success .alert-icon { color: var(--green); }
+    .alert-success p { color: var(--green); }
+
+    .alert-warning {
+      background: rgba(234, 179, 8, 0.08);
+      border: 1px solid rgba(234, 179, 8, 0.2);
+    }
+    .alert-warning .alert-icon { color: var(--yellow); }
+    .alert-warning p { color: #fbbf24; }
+
+    .alert-error {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+    .alert-error .alert-icon { color: var(--red); }
+    .alert-error p { color: #f87171; }
+
+    .alert-info {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+    .alert-info .alert-icon { color: var(--blue); }
+    .alert-info p { color: #60a5fa; }
+
+    /* Checklist */
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+
+    .checklist li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--gray-300);
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .check-box {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--gray-600);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .check-box.checked {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .check-box.checked::after {
+      content: '✓';
+      color: var(--black);
+      font-size: 0.8rem;
+      font-weight: 900;
+    }
+
+    /* Troubleshooting */
+    .trouble-item {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .trouble-q {
+      padding: 16px 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      color: var(--white);
+      transition: color 0.3s ease;
+    }
+
+    .trouble-q:hover { color: var(--green); }
+
+    .trouble-arrow {
+      color: var(--gray-600);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      margin-right: 12px;
+    }
+
+    .trouble-item.open .trouble-arrow { transform: rotate(180deg); color: var(--green); }
+
+    .trouble-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .trouble-item.open .trouble-a {
+      max-height: 500px;
+    }
+
+    .trouble-a-inner {
+      padding: 0 20px 16px;
+      color: var(--gray-300);
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
+    .guide-footer {
+      padding: 48px 0 32px;
+      text-align: center;
+    }
+
+    .guide-footer p {
+      color: var(--gray-400);
+      font-size: 0.9rem;
+    }
+
+    .guide-footer a { color: var(--green); text-decoration: none; font-weight: 600; }
+
+    .help-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: var(--black);
+      font-family: 'Heebo', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 12px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .help-cta:hover { transform: translateY(-2px); box-shadow: 0 0 30px var(--green-glow); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .progress-steps { gap: 4px; }
+      .progress-step { padding: 4px 8px; font-size: 0.7rem; }
+      .progress-step .num { width: 16px; height: 16px; font-size: 0.6rem; }
+      .step-title { font-size: 1.2rem; }
+      .os-btn { padding: 10px 20px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body class="os-mac">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="container">
+    <div class="header-badge">CLAUDOSH SERIES — PREP WEEK</div>
+    <h1>מדריך <span>התקנה</span></h1>
+    <p>עקבו אחרי השלבים — ותגיעו למפגש הראשון מוכנים לחלוטין.</p>
+  </div>
+</div>
+
+<!-- PROGRESS BAR -->
+<nav class="progress-bar">
+  <div class="container">
+    <div class="progress-steps">
+      <a href="#step-1" class="progress-step"><span class="num">1</span> Node.js</a>
+      <a href="#step-2" class="progress-step"><span class="num">2</span> Git</a>
+      <a href="#step-3" class="progress-step"><span class="num">3</span> Claude Code</a>
+      <a href="#step-4" class="progress-step"><span class="num">4</span> VS Code</a>
+      <a href="#step-5" class="progress-step"><span class="num">5</span> קיצור cc</a>
+      <a href="#step-6" class="progress-step"><span class="num">6</span> בדיקה</a>
+    </div>
+  </div>
+</nav>
+
+<!-- OS TOGGLE -->
+<div class="container">
+  <div class="os-toggle">
+    <button class="os-btn active" onclick="setOS('mac')">
+      <span class="os-icon">&#63743;</span> Mac
+    </button>
+    <button class="os-btn" onclick="setOS('win')">
+      <span class="os-icon">&#9881;</span> Windows
+    </button>
+  </div>
+</div>
+
+<!-- STEP 1: NODE.JS -->
+<section class="step-section" id="step-1">
+  <div class="container">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <h2 class="step-title">התקנת Node.js</h2>
+    </div>
+    <p class="step-desc">Node.js הוא הבסיס ש-Claude Code רץ עליו. צריך גרסה 18 ומעלה.</p>
+
+    <!-- MAC -->
+    <div class="mac-only">
+      <div class="instruction">
+        <h4>אפשרות א׳ — הורדה ישירה (מומלץ למתחילים)</h4>
+        <p>נכנסים לאתר הרשמי ומורידים את הגרסה ל-Mac:</p>
+        <p><a href="https://nodejs.org/en" target="_blank">nodejs.org</a> — לחצו על הכפתור הירוק "LTS" והתקינו.</p>
+      </div>
+      <div class="instruction">
+        <h4>אפשרות ב׳ — דרך Homebrew (למי שמכיר)</h4>
+        <p>אם יש לכם Homebrew מותקן:</p>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+          <span class="cmd">brew install node</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WINDOWS -->
+    <div class="win-only">
+      <div class="instruction">
+        <h4>הורדה והתקנה</h4>
+        <p>נכנסים לאתר הרשמי ומורידים:</p>
+        <p><a href="https://nodejs.org/en" target="_blank">nodejs.org</a> — לחצו על "LTS", הורידו את קובץ ה-.msi והריצו אותו.</p>
+        <div class="alert alert-warning">
+          <span class="alert-icon">&#9888;</span>
+          <div>
+            <p><strong>חשוב:</strong> במהלך ההתקנה, ודאו שהאפשרות "Add to PATH" מסומנת. בלי זה, הטרמינל לא יזהה את הפקודות.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTH -->
+    <div class="instruction both-os">
+      <h4>בדיקה שההתקנה הצליחה</h4>
+      <p>פתחו טרמינל (Mac: Terminal, Windows: PowerShell) והריצו:</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+        <span class="cmd">node --version</span>
+        <br><span class="comment"># צריך להופיע משהו כמו:</span>
+        <br><span class="success">v22.x.x</span>
+      </div>
+      <div class="alert alert-success">
+        <span class="alert-icon">&#10003;</span>
+        <p>אם מופיע מספר גרסה (18 ומעלה) — עברתם את השלב הזה.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 2: GIT -->
+<section class="step-section" id="step-2">
+  <div class="container">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <h2 class="step-title">התקנת Git</h2>
+    </div>
+    <p class="step-desc">Git מנהל גרסאות של קבצים. Claude Code צריך אותו כדי לעבוד עם פרויקטים.</p>
+
+    <!-- MAC -->
+    <div class="mac-only">
+      <div class="instruction">
+        <h4>ב-Mac — בדרך כלל כבר מותקן</h4>
+        <p>ב-Mac רוב הסיכויים ש-Git כבר קיים. בדקו:</p>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+          <span class="cmd">git --version</span>
+        </div>
+        <p>אם מופיעה הודעה על התקנת "Command Line Tools" — אשרו את ההתקנה וחכו שתסתיים.</p>
+      </div>
+    </div>
+
+    <!-- WINDOWS -->
+    <div class="win-only">
+      <div class="instruction">
+        <h4>הורדה והתקנה</h4>
+        <p>הורידו מהאתר הרשמי:</p>
+        <p><a href="https://git-scm.com/download/win" target="_blank">git-scm.com</a> — הריצו את ההתקנה עם הגדרות ברירת מחדל.</p>
+        <div class="alert alert-warning">
+          <span class="alert-icon">&#9888;</span>
+          <div>
+            <p><strong>חשוב:</strong> במסך "Adjusting your PATH" — בחרו באפשרות "Git from the command line and also from 3rd-party software".</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="instruction both-os">
+      <h4>בדיקה</h4>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+        <span class="cmd">git --version</span>
+        <br><span class="comment"># צריך להופיע משהו כמו:</span>
+        <br><span class="success">git version 2.x.x</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 3: CLAUDE CODE -->
+<section class="step-section" id="step-3">
+  <div class="container">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <h2 class="step-title">התקנת Claude Code</h2>
+    </div>
+    <p class="step-desc">זה הסוכן עצמו. ההתקנה לוקחת דקה.</p>
+
+    <div class="instruction both-os">
+      <h4>דרישה מקדימה: מנוי Claude</h4>
+      <p>צריך מנוי פעיל ב-<a href="https://claude.ai" target="_blank">claude.ai</a> (תוכנית Pro — $20 לחודש, או Max — $100).</p>
+      <div class="alert alert-info">
+        <span class="alert-icon">&#8505;</span>
+        <p>אם עדיין אין לכם מנוי — <a href="https://claude.ai" target="_blank" style="color: #60a5fa;">הירשמו כאן</a>. בחרו בתוכנית Pro ($20/חודש).</p>
+      </div>
+    </div>
+
+    <div class="instruction both-os">
+      <h4>התקנה</h4>
+      <p>פתחו טרמינל והריצו:</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+        <span class="cmd">npm install -g @anthropic-ai/claude-code</span>
+      </div>
+
+      <div class="win-only">
+        <div class="alert alert-warning">
+          <span class="alert-icon">&#9888;</span>
+          <div>
+            <p><strong>ב-Windows:</strong> אם מופיעה שגיאת הרשאות — פתחו את PowerShell כמנהל (Run as Administrator) ונסו שוב.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="instruction both-os">
+      <h4>הפעלה ראשונה</h4>
+      <p>אחרי ההתקנה, צרו תיקייה והריצו:</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+        <span class="cmd">mkdir ~/my-first-project</span>
+        <br><span class="cmd">cd ~/my-first-project</span>
+        <br><span class="cmd">claude</span>
+      </div>
+      <p>בפעם הראשונה — ייפתח דפדפן לאימות עם חשבון Claude שלכם. אשרו את החיבור.</p>
+      <div class="alert alert-success">
+        <span class="alert-icon">&#10003;</span>
+        <p>אם נפתח ממשק שיחה בטרמינל עם הודעת ברוכים הבאים — Claude Code מותקן ועובד!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 4: VS CODE -->
+<section class="step-section" id="step-4">
+  <div class="container">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <h2 class="step-title">התקנת VS Code</h2>
+    </div>
+    <p class="step-desc">VS Code הוא עורך הקוד שנעבוד בו. יש לו טרמינל מובנה — הרבה יותר נוח מהטרמינל הרגיל.</p>
+
+    <div class="instruction both-os">
+      <h4>הורדה והתקנה</h4>
+      <p>הורידו מהאתר הרשמי:</p>
+      <p><a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a> — לחצו Download והתקינו.</p>
+    </div>
+
+    <div class="instruction both-os">
+      <h4>פתיחת טרמינל ב-VS Code</h4>
+      <p>אחרי ההתקנה:</p>
+      <ol style="color: var(--gray-300); padding-right: 20px; margin-top: 8px;">
+        <li>פתחו את VS Code</li>
+        <li>מהתפריט העליון: <strong>Terminal</strong> &rarr; <strong>New Terminal</strong></li>
+        <li style="direction: ltr; text-align: left;">או בקיצור מקלדת: <strong>Ctrl+`</strong> (Windows) / <strong>Cmd+`</strong> (Mac)</li>
+        <li>בטרמינל שנפתח למטה — הריצו <code style="background: #1a1a2e; padding: 2px 8px; border-radius: 4px; color: var(--green);">claude</code></li>
+      </ol>
+    </div>
+
+    <div class="win-only">
+      <div class="instruction">
+        <h4>הגדרת PowerShell כברירת מחדל</h4>
+        <p>ב-VS Code, ודאו שהטרמינל משתמש ב-PowerShell:</p>
+        <ol style="color: var(--gray-300); padding-right: 20px; margin-top: 8px;">
+          <li>ליד שם הטרמינל למטה — לחצו על החץ הקטן</li>
+          <li>בחרו <strong>PowerShell</strong></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 5: CC SHORTCUT -->
+<section class="step-section" id="step-5">
+  <div class="container">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <h2 class="step-title">קיצור cc</h2>
+    </div>
+    <p class="step-desc">במקום לכתוב <code style="background: #1a1a2e; padding: 2px 8px; border-radius: 4px; color: var(--green);">claude</code> כל פעם — נגדיר קיצור <code style="background: #1a1a2e; padding: 2px 8px; border-radius: 4px; color: var(--green);">cc</code>.</p>
+
+    <!-- MAC -->
+    <div class="mac-only">
+      <div class="instruction">
+        <h4>הגדרת הקיצור</h4>
+        <p>הריצו בטרמינל:</p>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+          <span class="cmd">echo 'alias cc="claude"' >> ~/.zshrc</span>
+          <br><span class="cmd">source ~/.zshrc</span>
+        </div>
+        <p>עכשיו אפשר לכתוב <code style="background: #1a1a2e; padding: 2px 8px; border-radius: 4px; color: var(--green);">cc</code> במקום <code style="background: #1a1a2e; padding: 2px 8px; border-radius: 4px;">claude</code>.</p>
+      </div>
+    </div>
+
+    <!-- WINDOWS -->
+    <div class="win-only">
+      <div class="instruction">
+        <h4>הגדרת הקיצור ב-PowerShell</h4>
+        <p>הריצו בטרמינל:</p>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+          <span class="comment"># פתיחת קובץ הפרופיל</span>
+          <br><span class="cmd">if (!(Test-Path $PROFILE)) { New-Item -Path $PROFILE -Force }</span>
+          <br><span class="cmd">Add-Content $PROFILE 'Set-Alias cc claude'</span>
+          <br><span class="cmd">. $PROFILE</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="instruction both-os">
+      <h4>בדיקה</h4>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+        <span class="cmd">cc --version</span>
+        <br><span class="comment"># צריך להופיע מספר גרסה</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 6: VERIFICATION -->
+<section class="step-section" id="step-6">
+  <div class="container">
+    <div class="step-header">
+      <div class="step-num">6</div>
+      <h2 class="step-title">בדיקה סופית</h2>
+    </div>
+    <p class="step-desc">ודאו שהכל עובד לפני המפגש הראשון.</p>
+
+    <div class="instruction both-os">
+      <h4>צ׳קליסט — סמנו כל שלב שהשלמתם</h4>
+      <ul class="checklist">
+        <li>
+          <span class="check-box" onclick="toggleCheck(this)"></span>
+          <span>Node.js מותקן (גרסה 18+)</span>
+        </li>
+        <li>
+          <span class="check-box" onclick="toggleCheck(this)"></span>
+          <span>Git מותקן</span>
+        </li>
+        <li>
+          <span class="check-box" onclick="toggleCheck(this)"></span>
+          <span>יש מנוי Claude פעיל (Pro / Max)</span>
+        </li>
+        <li>
+          <span class="check-box" onclick="toggleCheck(this)"></span>
+          <span>Claude Code מותקן (<code style="background: #1a1a2e; padding: 1px 6px; border-radius: 4px;">claude</code> עובד)</span>
+        </li>
+        <li>
+          <span class="check-box" onclick="toggleCheck(this)"></span>
+          <span>VS Code מותקן</span>
+        </li>
+        <li>
+          <span class="check-box" onclick="toggleCheck(this)"></span>
+          <span>קיצור <code style="background: #1a1a2e; padding: 1px 6px; border-radius: 4px;">cc</code> עובד</span>
+        </li>
+        <li>
+          <span class="check-box" onclick="toggleCheck(this)"></span>
+          <span>הרצתי <code style="background: #1a1a2e; padding: 1px 6px; border-radius: 4px;">cc</code> ב-VS Code ונפתחה שיחה</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="alert alert-success">
+      <span class="alert-icon">&#127881;</span>
+      <p><strong>כל הסימונים מלאים? מעולה!</strong> אתם מוכנים למפגש הראשון. נתראה!</p>
+    </div>
+  </div>
+</section>
+
+<!-- TROUBLESHOOTING -->
+<section class="step-section" id="troubleshooting" style="border-bottom: none;">
+  <div class="container">
+    <div class="step-header">
+      <div class="step-num" style="background: rgba(239, 68, 68, 0.12); border-color: rgba(239, 68, 68, 0.3); color: var(--red);">?</div>
+      <h2 class="step-title">תקלות נפוצות</h2>
+    </div>
+    <p class="step-desc">נתקלתם בבעיה? כנראה שמישהו כבר עבר את זה. הנה הפתרונות:</p>
+
+    <div class="trouble-item">
+      <div class="trouble-q" onclick="toggleTrouble(this)">
+        <span>"node" / "npm" is not recognized</span>
+        <span class="trouble-arrow">&#9660;</span>
+      </div>
+      <div class="trouble-a">
+        <div class="trouble-a-inner">
+          <p><strong>הסיבה:</strong> Node.js לא נוסף ל-PATH של המערכת.</p>
+          <p><strong>פתרון ל-Windows:</strong></p>
+          <ol style="padding-right: 20px; margin-top: 8px;">
+            <li>סגרו את הטרמינל / VS Code לגמרי</li>
+            <li>הריצו מחדש את ההתקנה של Node.js</li>
+            <li>ודאו שהאפשרות "Add to PATH" מסומנת</li>
+            <li>הפעילו מחדש את VS Code</li>
+          </ol>
+          <p style="margin-top: 8px;"><strong>פתרון ל-Mac:</strong> הפעילו מחדש את הטרמינל. אם לא עוזר — הריצו מחדש את ההתקנה מ-nodejs.org.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="trouble-item">
+      <div class="trouble-q" onclick="toggleTrouble(this)">
+        <span>שגיאת הרשאות (EACCES / Permission denied)</span>
+        <span class="trouble-arrow">&#9660;</span>
+      </div>
+      <div class="trouble-a">
+        <div class="trouble-a-inner">
+          <p><strong>ב-Windows:</strong> פתחו PowerShell כ-Administrator (קליק ימני &rarr; "Run as Administrator").</p>
+          <p><strong>ב-Mac:</strong> הוסיפו <code style="background: #1a1a2e; padding: 1px 6px; border-radius: 4px;">sudo</code> לפני הפקודה:</p>
+          <div class="code-block">
+            <span class="cmd">sudo npm install -g @anthropic-ai/claude-code</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trouble-item">
+      <div class="trouble-q" onclick="toggleTrouble(this)">
+        <span>"claude" is not recognized (אחרי התקנה)</span>
+        <span class="trouble-arrow">&#9660;</span>
+      </div>
+      <div class="trouble-a">
+        <div class="trouble-a-inner">
+          <p><strong>פתרון 1:</strong> סגרו את כל חלונות הטרמינל / VS Code ופתחו מחדש.</p>
+          <p><strong>פתרון 2 (Windows):</strong> ודאו ש-npm global נמצא ב-PATH:</p>
+          <div class="code-block">
+            <span class="cmd">npm config get prefix</span>
+            <br><span class="comment"># העתיקו את הנתיב שמופיע והוסיפו אותו ל-PATH של המערכת</span>
+          </div>
+          <p><strong>פתרון 3:</strong> התקינו מחדש:</p>
+          <div class="code-block">
+            <span class="cmd">npm uninstall -g @anthropic-ai/claude-code</span>
+            <br><span class="cmd">npm install -g @anthropic-ai/claude-code</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trouble-item">
+      <div class="trouble-q" onclick="toggleTrouble(this)">
+        <span>PowerShell חוסם הרצת סקריפטים (Execution Policy)</span>
+        <span class="trouble-arrow">&#9660;</span>
+      </div>
+      <div class="trouble-a">
+        <div class="trouble-a-inner">
+          <p><strong>הבעיה:</strong> Windows חוסם הרצת סקריפטים מטעמי אבטחה.</p>
+          <p><strong>פתרון:</strong> פתחו PowerShell כ-Administrator והריצו:</p>
+          <div class="code-block">
+            <span class="cmd">Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</span>
+          </div>
+          <p>אשרו עם Y ונסו שוב.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="trouble-item">
+      <div class="trouble-q" onclick="toggleTrouble(this)">
+        <span>הדפדפן לא נפתח לאימות</span>
+        <span class="trouble-arrow">&#9660;</span>
+      </div>
+      <div class="trouble-a">
+        <div class="trouble-a-inner">
+          <p>כש-Claude Code רץ בפעם הראשונה, הוא צריך לפתוח דפדפן לאימות.</p>
+          <p><strong>פתרון:</strong> אם הדפדפן לא נפתח אוטומטית — חפשו בטרמינל קישור (URL) והעתיקו אותו ידנית לדפדפן.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="trouble-item">
+      <div class="trouble-q" onclick="toggleTrouble(this)">
+        <span>Mac: "Permission denied" בהגדרת cc alias</span>
+        <span class="trouble-arrow">&#9660;</span>
+      </div>
+      <div class="trouble-a">
+        <div class="trouble-a-inner">
+          <p>אם אתם משתמשים ב-bash ולא ב-zsh:</p>
+          <div class="code-block">
+            <span class="cmd">echo 'alias cc="claude"' >> ~/.bashrc</span>
+            <br><span class="cmd">source ~/.bashrc</span>
+          </div>
+          <p>לא בטוחים? בדקו:</p>
+          <div class="code-block">
+            <span class="cmd">echo $SHELL</span>
+            <br><span class="comment"># /bin/zsh = השתמשו ב-.zshrc</span>
+            <br><span class="comment"># /bin/bash = השתמשו ב-.bashrc</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STILL STUCK -->
+    <div class="guide-footer">
+      <p>עדיין תקועים? שלחו הודעה בקבוצת הווצאפ ונעזור.</p>
+      <a href="#" class="help-cta">לקבוצת הווצאפ</a>
+    </div>
+  </div>
+</section>
+
+<!-- SCRIPTS -->
+<script>
+  function setOS(os) {
+    document.body.classList.remove('os-mac', 'os-win');
+    document.body.classList.add('os-' + os);
+    document.querySelectorAll('.os-btn').forEach(function(btn) {
+      btn.classList.remove('active');
+    });
+    event.target.closest('.os-btn').classList.add('active');
+    localStorage.setItem('preferred-os', os);
+  }
+
+  function copyCode(btn) {
+    var block = btn.parentElement;
+    var code = block.textContent.replace('העתק', '').trim();
+    // Clean up comments
+    code = code.split('\n').filter(function(line) {
+      return !line.trim().startsWith('#');
+    }).join('\n').trim();
+    navigator.clipboard.writeText(code);
+    btn.textContent = 'הועתק!';
+    setTimeout(function() { btn.textContent = 'העתק'; }, 1500);
+  }
+
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+    // Check if all are checked
+    var all = document.querySelectorAll('.check-box');
+    var checked = document.querySelectorAll('.check-box.checked');
+    if (all.length === checked.length) {
+      document.querySelector('.alert-success:last-of-type').style.display = 'flex';
+    }
+  }
+
+  function toggleTrouble(el) {
+    var item = el.parentElement;
+    var wasOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.trouble-item').forEach(function(i) {
+      i.classList.remove('open');
+    });
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  // Restore OS preference
+  var saved = localStorage.getItem('preferred-os');
+  if (saved) setOS(saved);
+
+  // Highlight active progress step on scroll
+  var sections = document.querySelectorAll('.step-section');
+  var progressSteps = document.querySelectorAll('.progress-step');
+
+  window.addEventListener('scroll', function() {
+    var scrollPos = window.scrollY + 120;
+    sections.forEach(function(section, i) {
+      if (section.offsetTop <= scrollPos && (section.offsetTop + section.offsetHeight) > scrollPos) {
+        progressSteps.forEach(function(s) { s.classList.remove('active'); });
+        if (progressSteps[i]) progressSteps[i].classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

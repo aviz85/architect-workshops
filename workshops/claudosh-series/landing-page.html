@@ -618,18 +618,7 @@
     }
 
     .pricing-card.featured::before {
-      content: 'חסכון של 100 שקלים';
-      position: absolute;
-      top: -14px;
-      right: 50%;
-      transform: translateX(50%);
-      background: var(--green);
-      color: var(--black);
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 4px 18px;
-      border-radius: 100px;
-      white-space: nowrap;
+      display: none;
     }
 
     .pricing-label {
@@ -1044,12 +1033,17 @@
         <div class="session-emoji">🚀</div>
         <div class="session-date">יום שני 16.02 | 21:00</div>
         <h3 class="session-name">הסוכן הכללי כבר כאן</h3>
-        <p class="session-desc">מתקינים את הסוכן, מלמדים אותו מי אתה, ורואים אותו מבצע את המשימה הראשונה. הרגע שבו מבינים שזה משהו אחר לגמרי.</p>
+        <p class="session-desc">מתקינים את הסוכן, מלמדים אותו מי אתה, ורואים אותו מבצע משימות אמיתיות — כולל דיון על בטיחות ושליטה.</p>
         <ul class="session-topics">
-          <li>התקנת Claude Code צעד אחר צעד</li>
-          <li>כתיבת הזיכרון הראשון — הסוכן "מכיר" אותך</li>
-          <li>סקיל ראשון מהספרייה</li>
-          <li>הבנת קונטקסט — למה זה הכל</li>
+          <li>התקנת Claude Code והפעלת הטרמינל</li>
+          <li>תרגיל: סדר בתיקיית ההורדות</li>
+          <li>תרגיל: מה אפשר למחוק? + דיון בטיחות</li>
+          <li>קובץ CLAUDE.md — הזיכרון של הסוכן</li>
+          <li>מה זה סקיל? בניית סקיל ראשון</li>
+          <li>ספריית הסקילים + התקנת פלאגין</li>
+          <li>מה זה פרויקט? תיקייה + ידע + סקילים</li>
+          <li>פרויקט לדוגמא: ניהול לקוחות</li>
+          <li>שיעורי בית: לבנות ספרייה</li>
         </ul>
       </div>
       <!-- Session 2 -->
@@ -1248,23 +1242,39 @@
   <div class="container">
     <div class="fade-in" style="margin-bottom: 48px;">
       <div class="green-sep center"></div>
-      <h2 class="section-title">מחירים</h2>
-      <p class="section-subtitle" style="margin: 0 auto;">בחרו את המסלול שמתאים לכם.</p>
+      <h2 class="section-title">מחזורים ומחירים</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">בחרו את המחזור שמתאים לכם.</p>
     </div>
-    <div class="fade-in" style="max-width: 600px; margin: 0 auto;">
-      <div class="pricing-card featured" style="border-radius: 20px;">
-        <div class="pricing-label" style="font-size: 1.1rem; margin-bottom: 16px;">הסדרה המלאה — 4 מפגשים</div>
-        <div class="pricing-amount">₪500</div>
-        <div class="pricing-period">4 מפגשים × שעתיים | 8 שעות של בנייה</div>
-        <ul class="pricing-features" style="margin: 20px auto; max-width: 320px;">
-          <li>4 מפגשי לייב בזום עם בנייה בזמן אמת</li>
-          <li>הקלטות מלאות + מדריכים כתובים</li>
-          <li>ספריית סקילים + תבניות מוכנות</li>
-          <li>קבוצת WhatsApp + תמיכה אישית מאביץ</li>
-          <li>גישה לקהילת בוגרים</li>
+    <div class="pricing-cards fade-in">
+      <!-- Cohort A - Evening -->
+      <div class="pricing-card" style="border-radius: 20px;">
+        <div class="pricing-label" style="font-size: 1rem; margin-bottom: 12px;">מחזור A — ערב</div>
+        <div class="pricing-amount" style="font-size: 2.8rem;">₪500</div>
+        <div class="pricing-period">ימי שני 21:00 | התחיל 16.02</div>
+        <ul class="pricing-features" style="margin: 16px auto; max-width: 280px;">
+          <li>4 מפגשי לייב בזום</li>
+          <li>הקלטות + מדריכים כתובים</li>
+          <li>ספריית סקילים + תבניות</li>
+          <li>קבוצת WhatsApp + תמיכה</li>
         </ul>
-        <a href="https://mrng.to/T8sXLy6nZi" target="_blank" rel="noopener noreferrer" class="pricing-btn pricing-btn-filled" style="max-width: 320px; margin: 0 auto; font-size: 1.15rem; padding: 16px 32px;">לדף התשלום</a>
-        <p style="font-size: 0.85rem; color: var(--gray-400); margin-top: 16px;">אפשר גם מפגש בודד ב-₪150</p>
+        <a href="https://mrng.to/T8sXLy6nZi" target="_blank" rel="noopener noreferrer" class="pricing-btn pricing-btn-outline" style="max-width: 280px; margin: 0 auto;">לדף התשלום</a>
+      </div>
+      <!-- Cohort B - Morning (Featured) -->
+      <div class="pricing-card featured" style="border-radius: 20px;">
+        <div style="position: absolute; top: -14px; right: 50%; transform: translateX(50%); background: var(--green); color: var(--black); font-size: 0.8rem; font-weight: 700; padding: 4px 18px; border-radius: 100px; white-space: nowrap;">מחזור חדש!</div>
+        <div class="pricing-label" style="font-size: 1rem; margin-bottom: 12px;">מחזור B — בוקר</div>
+        <div class="pricing-amount" style="font-size: 2.8rem;">₪700</div>
+        <div class="pricing-period">ימי חמישי 10:00 | מתחיל 12.03</div>
+        <ul class="pricing-features" style="margin: 16px auto; max-width: 280px;">
+          <li>שבוע הכנה + 4 מפגשי לייב</li>
+          <li>ערכת התקנה (סרטונים + מדריך)</li>
+          <li>הקלטות + מדריכים כתובים</li>
+          <li>ספריית סקילים + תבניות</li>
+          <li>קבוצת WhatsApp + תמיכה</li>
+          <li>מגיעים מוכנים מהמפגש הראשון</li>
+        </ul>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="pricing-btn pricing-btn-filled" style="max-width: 280px; margin: 0 auto; font-size: 1.1rem; padding: 14px 28px;">הרשמה למחזור B</a>
+        <p style="font-size: 0.8rem; color: var(--gray-400); margin-top: 12px;">שבוע הכנה 5-11.03 | מפגשים: 12, 19, 26.03 + 9.04</p>
       </div>
     </div>
   </div>
@@ -1320,7 +1330,7 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          <p>מחשב (Mac, Windows או Linux), חיבור אינטרנט יציב, ומנוי Claude פעיל (claude.ai — $20 לחודש). את ההתקנה של Claude Code נעשה ביחד במפגש הראשון.</p>
+          <p>מחשב (Mac, Windows או Linux), חיבור אינטרנט יציב, ומנוי Claude פעיל (claude.ai — $20 לחודש). במחזור B — שבוע הכנה עם סרטונים ומדריך התקנה, כך שמגיעים למפגש הראשון מוכנים.</p>
         </div>
       </div>
       <div class="faq-item">
@@ -1400,8 +1410,8 @@
   <div class="container">
     <div class="fade-in">
       <h2>מוכנים <span class="green-accent">להמריא</span>?</h2>
-      <p>הצטרפו לסידרת קלודוש ובנו את מערכת הסוכנים שתעבוד בשבילכם.</p>
-      <a href="https://mrng.to/T8sXLy6nZi" target="_blank" rel="noopener noreferrer" class="hero-cta">לדף התשלום</a>
+      <p>מחזור B מתחיל ב-12.03 — שבוע הכנה + 4 מפגשים. מגיעים מוכנים מהרגע הראשון.</p>
+      <a href="#pricing" class="hero-cta">בחרו מחזור והירשמו</a>
     </div>
   </div>
 </section>

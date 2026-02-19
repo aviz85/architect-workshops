@@ -269,15 +269,39 @@ Session 3: Agent Teams + Orchestra + Always-On
 
 ---
 
+## Cohorts
+
+### Cohort A (Evening) — Started 16.02.2026
+
+| Field | Value |
+|-------|-------|
+| **Schedule** | Mondays 21:00-23:00 (Session 3: Thu 05.03) |
+| **Price** | ₪500 (full series) / ₪150 (single) |
+| **Participants** | 30 paid |
+| **Co-Presenter** | Guy Ronen |
+
+### Cohort B (Morning) — Starts 12.03.2026
+
+| Field | Value |
+|-------|-------|
+| **Schedule** | Thursdays 10:00-12:00 |
+| **Price** | ₪700 (full series) |
+| **Prep Week** | March 5-11 (installation kit + troubleshooting) |
+| **Sessions** | Mar 12, 19, 26 + Apr 9 (skips Passover) |
+| **Co-Presenter** | TBD |
+| **Key Innovation** | Pre-session installation (videos + guide + WhatsApp support) |
+
+See `workshops/2026-03-12-claudosh-series-b/workshop.md` for full details.
+
+---
+
 ## Revenue Model
 
 | Item | Amount |
 |------|--------|
-| **Series price** | ₪297 |
-| **Per cycle capacity** | ~50 participants |
-| **Cycles per month** | ~3 (every 9 days) |
-| **Monthly potential** | ₪297 × 50 × 3 = **₪44,550** |
-| **Annual potential** | ~**₪534,600** |
+| **Cohort A price** | ₪500 (30 participants = ₪15,000) |
+| **Cohort B price** | ₪700 |
+| **Per cohort capacity** | ~30-50 participants |
 
 ### Upsell Opportunities
 
