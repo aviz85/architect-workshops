@@ -1,74 +1,108 @@
-# Session 2 - Agenda Draft
+# Session 2 - Agenda Draft (Updated 22.02)
 
-> Source: Deep Interview, 2026-02-15
+> Rewritten to focus on skills: anatomy, creation, stacking, compounding
 
 ## Time Allocation (120 min)
 
 | Time | Block | Type | Duration |
 |------|-------|------|----------|
-| 0:00 | **Week Review + Compounding** | Theory+Show | 10 min |
-| 0:10 | **Release the Leash** | Practice | 10 min |
-| 0:20 | **Build CRM from Data** | Practice | 20 min |
-| 0:40 | **WhatsApp Setup** | Practice | 20 min |
-| 1:00 | **Deep Interview: Know Your Business** | Practice | 20 min |
-| 1:20 | **Spaceship Mode: Multi-Project** | Practice | 15 min |
-| 1:35 | **WOW: Personalized Client Messages** | Demo+Practice | 15 min |
-| 1:50 | **Wrap-up + Homework** | Theory | 10 min |
+| 0:00 | **Week Review + Compounding Intro** | Show+Tell | 10 min |
+| 0:10 | **What is a Skill? Anatomy** | Theory+Demo | 15 min |
+| 0:25 | **Where Skills Live — Files & Folders** | Demo | 10 min |
+| 0:35 | **Hands-On: Create a Skill While Working** | Practice | 30 min |
+| 1:05 | **Stacks = Compounding Power** | Theory+Demo | 15 min |
+| 1:20 | **Aviz Demo: Working with Skill Stacks** | Live Demo | 20 min |
+| 1:40 | **Wrap-up + Homework** | Theory | 10 min |
+| 1:50 | **Buffer / Q&A** | Open | 10 min |
 
-**Ratio:** ~20 min theory, ~90 min practice, ~10 min admin
+**Ratio:** ~25 min theory, ~70 min practice/demo, ~25 min admin
 
 ## Block Details
 
-### Week Review + Compounding (10 min)
-- Check: who completed their project? Show examples
-- The agent got smarter over the week - show evidence (more context, better skills)
-- Compounding principle: each week builds on previous
-- Subscription talk: 100$ vs 200$ plan, how to know if you need more
+### Week Review + Compounding Intro (10 min)
+- Check: who completed their project from session 1?
+- Quick show-and-tell: anyone have a cool result?
+- The agent got smarter over the week — show evidence
+- Compounding principle intro: each layer builds on previous
+- Quick mention: VS Code as alternative to raw terminal
 
-### Release the Leash (10 min)
-- Introduce `claude --dangerously-skip-permissions` and `cld` shortcut
-- What this means: agent can act without asking permission each time
-- When to use it, when NOT to use it
-- The leash metaphor: you now trust the dog a bit more
+### What is a Skill? Anatomy (15 min)
+- Definition: a pre-written prompt that loads on demand
+- Difference from Custom GPTs: skill = small, focused, composable
+- The 100-token rule: only description loads, full content on demand
+- Anatomy of a skill file: name, description, when to use, instructions
+- LIVE DEMO: open a real skill file, walk through each part
+- The "whisperer" from session 1: claude-code-guide is itself a skill
 
-### Build CRM from Data (20 min)
-- Import contacts (Google Contacts export / Excel)
-- Create CLAUDE.md with business rules for the CRM project
-- Build skill for generating personalized documents
-- DEMO: "Create a quote for Yossi Cohen" → agent pulls data, generates PDF
+### Where Skills Live — Files & Folders (10 min)
+- Two locations:
+  - `~/.claude/skills/` — global (available everywhere)
+  - `.claude/skills/` — project-level (specific to one project)
+- When to use which: global = cross-project, project = context-specific
+- LIVE DEMO: show both folders on Aviz's machine
+- Show how Claude auto-discovers skills (no manual loading)
+- Skill = just a folder with a markdown file — that's it
 
-### WhatsApp Setup (20 min)
-- Everyone sets up Green API connection
-- Explain: unofficial connection risks, safe usage patterns
-- Install WhatsApp skill from library
-- Test: send a message to yourself
-- Troubleshoot live
+### Hands-On: Create a Skill While Working (30 min)
+- **The approach:** Don't create a skill in isolation. Work on a real task, then capture the process as a skill.
+- Step 1: Everyone opens their project from session 1
+- Step 2: Do a real task with the agent (e.g., organize files, write a document, generate content)
+- Step 3: Notice the pattern — "I'll want to do this again"
+- Step 4: Ask Claude: "Turn what we just did into a skill"
+- Step 5: Claude creates the skill file in `.claude/skills/`
+- Step 6: Test it — invoke the new skill on a different input
+- **Key insight:** Skills emerge from work, not from planning
+- Provide ready-made prompts for participants who get stuck
 
-### Deep Interview: Know Your Business (20 min)
-- Install deep-interview skill from Aviz's library
-- Run it: agent asks about YOUR business, products, services
-- Knowledge gets organized into folders automatically
-- Result: rich business knowledge base the agent can use
+### Stacks = Compounding Power (15 min)
+- One skill = one capability
+- Stack = skills working together
+- The factory analogy: each worker does one thing, manager coordinates
+- Example: "Send a proposal to Haim"
+  - get-client-info → create-proposal → generate-pdf → send-email
+  - 4 separate skills, 1 command
+- Orchestrator skill: a skill that calls other skills in sequence
+- SHOW: real orchestrator skill from Aviz's system
+- The exponential effect: each new skill multiplies all existing ones
 
-### Spaceship Mode: Multi-Project (15 min)
-- Open 2 terminal windows
-- Project 1: CRM (from earlier)
-- Project 2: Their session-1 project (or new one)
-- Send tasks to both, switch between them
-- Experience semi-auto: send → do other thing → come back to result
-
-### WOW: Personalized Client Messages (15 min)
-- Connect CRM + WhatsApp + business knowledge
-- DEMO: "Send personalized promotion to clients who bought X"
-- Agent reads CRM, writes personal message for EACH client
-- Participants try with their own data
+### Aviz Demo: Working with Skill Stacks (20 min)
+- **Real workflow, not toy example**
+- Show Aviz's actual skill list (50+ skills)
+- Pick 2-3 real use cases and execute live:
+  - Example 1: "Create a marketing poster for tomorrow's workshop" → research + design + generate
+  - Example 2: "Send follow-up to all workshop participants" → CRM + personalize + WhatsApp
+  - Example 3: "Prepare invoice for client X" → get-contact + create-invoice + send-email
+- Show the speed difference: with stacks vs without
+- The "aha moment": this is what compounding looks like in practice
 
 ### Wrap-up + Homework (10 min)
-- Homework: enrich CRM, add more business knowledge, use WhatsApp skill
-- Preview session 3: "You built apps manually. Next time - the AGENT builds the app."
-- Challenge: send at least 3 real WhatsApp messages via agent this week
+- Recap: skill = capability, stack = power, compounding = exponential
+- **Homework:**
+  - Continue your project — create at least 2 more skills
+  - Think about which tasks repeat → those are skill candidates
+  - Try connecting 2 skills into a mini-stack
+  - Enrich your CLAUDE.md with what you learned
+- Preview session 3: "You've been building skills and projects. Next time — discover that what you built IS an application."
+
+## Participant Prompts (Ready to Copy-Paste)
+
+```
+תהפוך את מה שעשינו עכשיו לסקיל
+```
+
+```
+צור לי סקיל שעושה [תיאור המשימה]
+```
+
+```
+תראה לי את כל הסקילים שיש לי
+```
+
+```
+תחבר את הסקיל של [X] עם הסקיל של [Y] לתהליך אחד
+```
 
 ## Open Questions
-- Do we provide sample CRM data for people who don't have their own?
-- What specific Green API plan do participants need?
-- Should we have a backup plan if WhatsApp setup fails for some?
+- Do we provide a "starter skill" template for participants who get stuck?
+- Should we do a live VS Code demo or just mention it?
+- How much time to allocate for troubleshooting participants who didn't complete homework?
