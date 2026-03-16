@@ -866,9 +866,25 @@
         <ul class="timeline-bullets">
           <li><strong>הוסטינג:</strong> VPS (Contabo, Hostinger), GitHub Pages, Vercel — הסוכן מפרסם ומתחזק</li>
           <li><strong>Agent SDK:</strong> הפעלה פרוגרמטית — בנו UI, בנו בוט, בנו אוטומציה</li>
+          <li><strong>Cron Jobs:</strong> תזמון משימות — הסוכן רץ כל בוקר, כל שעה, כל שבוע. בלי שתהיו שם</li>
           <li><strong>Hooks:</strong> פעולות אוטומטיות שמופעלות בתגובה לאירועים</li>
           <li><strong>Background agents:</strong> סוכנים שרצים ברקע בזמן שאתם עושים משהו אחר</li>
         </ul>
+
+        <div style="background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.2); border-radius: 10px; padding: 14px 16px; margin-top: 12px;">
+          <div style="font-size: 0.88rem; font-weight: 700; color: var(--red); margin-bottom: 6px;">🔒 אבטחה — נושא קריטי באוטונומיה</div>
+          <p style="font-size: 0.85rem; color: var(--gray-300); line-height: 1.7;">ככל שהסוכן יותר אוטונומי — האבטחה יותר חשובה. כמה עקרונות:</p>
+          <ul class="timeline-bullets" style="margin-top: 6px;">
+            <li><strong>MCP במקום CLI:</strong> במקום לתת לסוכן גישה לכל ה-CLI, תנו לו כלי ספציפי דרך MCP — מצמצם סיכונים, מגדיר בדיוק מה מותר</li>
+            <li><strong>VPS ייעודי:</strong> לעולם לא על המחשב האישי — שרת נפרד עם Tailscale VPN</li>
+            <li><strong>הרשאות מינימליות:</strong> כל סוכן מקבל רק את הכלים שהוא צריך, לא יותר</li>
+          </ul>
+        </div>
+
+        <div style="background: rgba(6,182,212,0.06); border: 1px solid rgba(6,182,212,0.2); border-radius: 10px; padding: 14px 16px; margin-top: 12px;">
+          <div style="font-size: 0.88rem; font-weight: 700; color: var(--cyan); margin-bottom: 6px;">🔌 MCP — כלי ספציפי במקום CLI</div>
+          <p style="font-size: 0.85rem; color: var(--gray-300); line-height: 1.7;"><strong>MCP = Model Context Protocol.</strong> במקום לתת לסוכן גישה חופשית לשורת פקודה, מחברים אותו לכלי ספציפי שעושה דבר אחד ויחיד. דוגמה: כלי MCP לדפדפן שיודע רק לנווט ולקרוא — בלי לגעת בקבצים.</p>
+        </div>
 
         <div style="background: rgba(168,85,247,0.06); border: 1px solid rgba(168,85,247,0.2); border-radius: 10px; padding: 14px 16px; margin-top: 12px;">
           <div style="font-size: 0.88rem; font-weight: 700; color: var(--purple); margin-bottom: 6px;">🔗 peleg-orchestra — דוגמה חיה</div>

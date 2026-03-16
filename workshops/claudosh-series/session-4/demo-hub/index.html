@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aviz — כל הפרויקטים באוויר</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #22C55E;
+      --black: #0A0A0A;
+      --dark-card: #141414;
+      --dark-border: #1e1e1e;
+      --gray-400: #888;
+      --gray-300: #aaa;
+      --white: #ffffff;
+      --off-white: #e5e5e5;
+      --amber: #F59E0B;
+      --blue: #3B82F6;
+      --purple: #A855F7;
+      --cyan: #06B6D4;
+      --red: #EF4444;
+      --pink: #EC4899;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--black);
+      color: var(--off-white);
+      direction: rtl;
+      text-align: right;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,0.2) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 40% 10%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.15) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.25) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 85% 45%, rgba(255,255,255,0.3) 0%, transparent 100%);
+      z-index: 0;
+      pointer-events: none;
+      animation: twinkle 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      padding: 50px 0 20px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      color: var(--green);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 16px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--green), #4ade80);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 0.92rem;
+      color: var(--gray-400);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 24px 0 10px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--green);
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--gray-400);
+    }
+
+    .category-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--white);
+      margin: 36px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .category-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 100px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+    }
+
+    .card:hover {
+      border-color: rgba(34, 197, 94, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    .card-icon { font-size: 1.6rem; margin-bottom: 6px; }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--gray-400);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .card-url {
+      font-size: 0.72rem;
+      color: var(--green);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      direction: ltr;
+      text-align: left;
+      opacity: 0.7;
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 1px 8px;
+      border-radius: 100px;
+      margin-left: 4px;
+    }
+
+    .tag-gh { background: rgba(34,197,94,0.1); color: var(--green); border: 1px solid rgba(34,197,94,0.2); }
+    .tag-vercel { background: rgba(59,130,246,0.1); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
+
+    .gen-note {
+      text-align: center;
+      margin: 40px 0 20px;
+      padding: 16px;
+      background: rgba(34,197,94,0.04);
+      border: 1px solid rgba(34,197,94,0.12);
+      border-radius: 12px;
+    }
+
+    .gen-note p {
+      font-size: 0.82rem;
+      color: var(--gray-400);
+    }
+
+    .gen-note strong { color: var(--green); }
+
+    footer {
+      border-top: 1px solid var(--dark-border);
+      padding: 24px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-brand { font-size: 0.85rem; font-weight: 700; color: var(--green); letter-spacing: 2px; }
+
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+      .stats { gap: 18px; }
+      .stat-num { font-size: 1.5rem; }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">BUILT WITH CLAUDE CODE</div>
+    <h1>כל הפרויקטים <span>באוויר</span></h1>
+    <p class="hero-sub">כל מה שנבנה עם Claude Code ועלה לאוויר — GitHub Pages, Vercel, ועוד. דף זה נוצר אוטומטית מחיפוש בהיסטוריית השיחות.</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">20</div>
+        <div class="stat-label">פרויקטים באוויר</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">8</div>
+        <div class="stat-label">GitHub Pages</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">12</div>
+        <div class="stat-label">Vercel</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- ===== TOOLS & INFRASTRUCTURE ===== -->
+  <div class="category-title fade-in">🔧 כלים ותשתיות <span class="category-badge tag-gh">TOOLS</span></div>
+  <div class="grid">
+
+    <a href="https://aviz85.github.io/claude-skills-library/" target="_blank" class="card fade-in">
+      <div class="card-icon">📚</div>
+      <div class="card-title">Claude Skills Library</div>
+      <div class="card-desc">ספריית סקילים לקלוד קוד — 20+ כלים מוכנים להתקנה: WhatsApp, speech, image gen, calendar, transcribe ועוד.</div>
+      <span class="card-tag tag-gh">GitHub Pages</span>
+      <div class="card-url">aviz85.github.io/claude-skills-library</div>
+    </a>
+
+    <a href="https://aviz85.github.io/claude-code-os/" target="_blank" class="card fade-in">
+      <div class="card-icon">💻</div>
+      <div class="card-title">Claude Code OS</div>
+      <div class="card-desc">דף נחיתה למושג meOS — Claude Code כמערכת הפעלה אישית לחיים ולעסק. Context tree, modularity בין פרויקטים.</div>
+      <span class="card-tag tag-gh">GitHub Pages</span>
+      <div class="card-url">aviz85.github.io/claude-code-os</div>
+    </a>
+
+    <a href="https://aviz85.github.io/hebrew-rtl-plugin/" target="_blank" class="card fade-in">
+      <div class="card-icon">🔤</div>
+      <div class="card-title">Hebrew RTL Plugin</div>
+      <div class="card-desc">פלאגין שמוסיף אוטומטית סימני RTL לפסקאות עבריות. Hook על Write/Edit — מזהה עברית ומתקן כיוון.</div>
+      <span class="card-tag tag-gh">GitHub Pages</span>
+      <div class="card-url">aviz85.github.io/hebrew-rtl-plugin</div>
+    </a>
+
+    <a href="https://aviz85.github.io/openclaw-guide/" target="_blank" class="card fade-in">
+      <div class="card-icon">🛡️</div>
+      <div class="card-title">OpenClaw Guide</div>
+      <div class="card-desc">מדריך אבטחה בעברית להתקנת OpenClaw על VPS. Tailscale VPN, נעילת SSH, firewall, בוט טלגרם, הגנה מ-prompt injection.</div>
+      <span class="card-tag tag-gh">GitHub Pages</span>
+      <div class="card-url">aviz85.github.io/openclaw-guide</div>
+    </a>
+
+    <a href="https://md-html-template.vercel.app" target="_blank" class="card fade-in">
+      <div class="card-icon">⚙️</div>
+      <div class="card-title">MD-HTML Template</div>
+      <div class="card-desc">Backend/middleware רב-שימושי — Markdown→HTML, Gemini gateway, Jotform, WhatsApp webhook, transcribe, media processing.</div>
+      <span class="card-tag tag-vercel">Vercel</span>
+      <div class="card-url">md-html-template.vercel.app</div>
+    </a>
+
+  </div>
+
+  <!-- ===== WORKSHOPS & EDUCATION ===== -->
+  <div class="category-title fade-in">🎓 סדנאות וחינוך <span class="category-badge tag-gh">WORKSHOPS</span></div>
+  <div class="grid">
+
+    <a href="https://aviz85.github.io/claudosh-series/" target="_blank" class="card fade-in">
+      <div class="card-icon">🚀</div>
+      <div class="card-title">סידרת קלודוש</div>
+      <div class="card-desc">קורס Claude Code בן 4 מפגשים — יסודות, stacking skills, אפליקציות סוכניות, ונחילי סוכנים.</div>
+      <span class="card-tag tag-gh">GitHub Pages</span>
+      <div class="card-url">aviz85.github.io/claudosh-series</div>
+    </a>
+
+    <a href="https://agent-intake-2026.vercel.app" target="_blank" class="card fade-in">
+      <div class="card-icon">📝</div>
+      <div class="card-title">Agent Intake 2026</div>
+      <div class="card-desc">טופס קליטת לקוחות לשירות סוכנים. שאלון ראשוני בסגנון "מצב חללית" להתאמת סוכן AI אישי.</div>
+      <span class="card-tag tag-vercel">Vercel</span>
+      <div class="card-url">agent-intake-2026.vercel.app</div>
+    </a>
+
+  </div>
+
+  <!-- ===== PERSONAL & EXPERIMENTS ===== -->
+  <div class="category-title fade-in">🧪 אישי וניסויים <span class="category-badge" style="background: rgba(168,85,247,0.1); color: var(--purple); border: 1px solid rgba(168,85,247,0.2);">EXPERIMENTS</span></div>
+  <div class="grid">
+
+    <a href="https://aviz85.github.io/aviz-museum/" target="_blank" class="card fade-in">
+      <div class="card-icon">🏛️</div>
+      <div class="card-title">מוזיאון אביץ</div>
+      <div class="card-desc">מוזיאון וירטואלי — 6 חדרים, 6 עידנים, 17 שנות יומנים. מוזיקת אווירה, תמונות AI ותמונות אמיתיות מפייסבוק.</div>
+      <span class="card-tag tag-gh">GitHub Pages</span>
+      <div class="card-url">aviz85.github.io/aviz-museum</div>
+    </a>
+
+    <a href="https://aviz85.github.io/creative-seeds-experiment/" target="_blank" class="card fade-in">
+      <div class="card-icon">🌱</div>
+      <div class="card-title">Creative Seeds Experiment</div>
+      <div class="card-desc">ניסוי — האם הזרקת אבסורד יצירתי לפני brainstorming משפרת את איכות הפלט של מודלים? תוצאות מפתיעות.</div>
+      <span class="card-tag tag-gh">GitHub Pages</span>
+      <div class="card-url">aviz85.github.io/creative-seeds-experiment</div>
+    </a>
+
+    <a href="https://aviz85.github.io/socher-hayam-skill/" target="_blank" class="card fade-in">
+      <div class="card-icon">🚢</div>
+      <div class="card-title">סוחר הים</div>
+      <div class="card-desc">משחק DOS עברי קלאסי מ-1989 בדפדפן. הסוכן משחק דרך אמולטור DOSBox ומקליט GIF.</div>
+      <span class="card-tag tag-gh">GitHub Pages</span>
+      <div class="card-url">aviz85.github.io/socher-hayam-skill</div>
+    </a>
+
+    <a href="https://dalit-cards.vercel.app" target="_blank" class="card fade-in">
+      <div class="card-icon">🃏</div>
+      <div class="card-title">Dalit Cards</div>
+      <div class="card-desc">אפליקציית מיון כרטיסים — סריקה ומיון חכם. נבנתה לדלית.</div>
+      <span class="card-tag tag-vercel">Vercel</span>
+      <div class="card-url">dalit-cards.vercel.app</div>
+    </a>
+
+  </div>
+
+  <!-- ===== CLIENT PROJECTS ===== -->
+  <div class="category-title fade-in">🏢 פרויקטים ללקוחות <span class="category-badge" style="background: rgba(59,130,246,0.1); color: var(--blue); border: 1px solid rgba(59,130,246,0.2);">CLIENTS</span></div>
+  <div class="grid">
+
+    <a href="https://zuz-whatsapp-bot.vercel.app" target="_blank" class="card fade-in">
+      <div class="card-icon">💬</div>
+      <div class="card-title">ZUZ WhatsApp Bot</div>
+      <div class="card-desc">בוט WhatsApp תיירותי ליהודה ושומרון. משחקי טריוויה, צבירת "זוזים", מימוש בעסקים מקומיים. Dashboard ניהול.</div>
+      <span class="card-tag tag-vercel">Vercel</span>
+      <div class="card-url">zuz-whatsapp-bot.vercel.app</div>
+    </a>
+
+    <a href="https://elita-living.vercel.app" target="_blank" class="card fade-in">
+      <div class="card-icon">🛋️</div>
+      <div class="card-title">Elita Living</div>
+      <div class="card-desc">מערכת ניהול קטלוג ריהוט — דגמים, גרסאות, מחירים, קיבוץ לפי קבוצות מוצרים. Next.js + Supabase.</div>
+      <span class="card-tag tag-vercel">Vercel</span>
+      <div class="card-url">elita-living.vercel.app</div>
+    </a>
+
+    <a href="https://beds-fast.vercel.app" target="_blank" class="card fade-in">
+      <div class="card-icon">🏠</div>
+      <div class="card-title">Beds Fast</div>
+      <div class="card-desc">בוט AI לתיווך דירות לעובדים זרים. WhatsApp + טלגרם + דשבורד ניהול. חברות שוכרות דירות לעובדים.</div>
+      <span class="card-tag tag-vercel">Vercel</span>
+      <div class="card-url">beds-fast.vercel.app</div>
+    </a>
+
+    <a href="https://vocalvault-crm-dashboard.vercel.app" target="_blank" class="card fade-in">
+      <div class="card-icon">📊</div>
+      <div class="card-title">VocalVault CRM</div>
+      <div class="card-desc">דשבורד CRM — עיצוב WhatsApp-inspired בעברית RTL. אימות, OAuth 2.0, PWA-enabled.</div>
+      <span class="card-tag tag-vercel">Vercel</span>
+      <div class="card-url">vocalvault-crm-dashboard.vercel.app</div>
+    </a>
+
+    <a href="https://coupla.vercel.app" target="_blank" class="card fade-in">
+      <div class="card-icon">💕</div>
+      <div class="card-title">Coupla (252events)</div>
+      <div class="card-desc">פלטפורמת אירועי היכרויות לקהילה הדתית-לאומית. חברות מועדון, תשלום Cardcom, Supabase.</div>
+      <span class="card-tag tag-vercel">Vercel</span>
+      <div class="card-url">coupla.vercel.app</div>
+    </a>
+
+    <a href="https://claude-agent-speech.vercel.app" target="_blank" class="card fade-in">
+      <div class="card-icon">🎙️</div>
+      <div class="card-title">Dreemz Voice Mentor</div>
+      <div class="card-desc">מנטור קולי בזמן אמת — שיחה speech-to-speech דרך OpenAI Realtime API + WebRTC. עברית + אנגלית, 6 מצבי עבודה.</div>
+      <span class="card-tag tag-vercel">Vercel</span>
+      <div class="card-url">claude-agent-speech.vercel.app</div>
+    </a>
+
+    <a href="https://dreemz-dreamer-avatar.vercel.app" target="_blank" class="card fade-in">
+      <div class="card-icon">🎨</div>
+      <div class="card-title">Dreemizer</div>
+      <div class="card-desc">הופך תמונת פורטרט לחזון חלום AI — מעלים תמונה, מתארים חלום, מקבלים תמונה ערוכה דרך fal.ai.</div>
+      <span class="card-tag tag-vercel">Vercel</span>
+      <div class="card-url">dreemz-dreamer-avatar.vercel.app</div>
+    </a>
+
+    <a href="https://dreemz-bot-onboarding-correct.vercel.app" target="_blank" class="card fade-in">
+      <div class="card-icon">🚪</div>
+      <div class="card-title">Dreemz Onboarding</div>
+      <div class="card-desc">תהליך onboarding שיחתי בן 4 שלבים — Define, Motivation, Capabilities, Blockers. Claude Sonnet + OpenRouter.</div>
+      <span class="card-tag tag-vercel">Vercel</span>
+      <div class="card-url">dreemz-bot-onboarding-correct.vercel.app</div>
+    </a>
+
+    <a href="https://dreemz-docs-wiki.vercel.app" target="_blank" class="card fade-in">
+      <div class="card-icon">📖</div>
+      <div class="card-title">Dreemz Docs Wiki</div>
+      <div class="card-desc">ויקי תיעוד טכני — ארכיטקטורה, מסד נתונים, API routes, modules, תוכנית migration.</div>
+      <span class="card-tag tag-vercel">Vercel</span>
+      <div class="card-url">dreemz-docs-wiki.vercel.app</div>
+    </a>
+
+  </div>
+
+  <div class="gen-note fade-in">
+    <p>🤖 דף זה <strong>נוצר אוטומטית</strong> ע"י Claude Code — חיפוש בהיסטוריית כל השיחות, זיהוי כל הפרויקטים שעלו לאוויר, קריאת ההקשר של כל אחד, ובניית הדף הזה. <strong>זרוע ההקשר בפעולה.</strong></p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-brand">AVIZ — THE ARCHITECT</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
+</script>
+
+</body>
+</html>
