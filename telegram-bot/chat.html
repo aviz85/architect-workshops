@@ -176,6 +176,139 @@
   .workshop-card.future { border-right: 3px solid #22C55E; }
   .workshop-card.past { opacity: 0.75; }
 
+  /* --- New Workshop Button --- */
+  .new-workshop-btn {
+    margin: 8px;
+    padding: 10px;
+    background: #22C55E;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+
+  .new-workshop-btn:hover { background: #16a34a; }
+
+  /* --- Modal --- */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px;
+    width: 480px;
+    max-width: 92vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+
+  .modal h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 5px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #1a1a1a;
+    background: #fafafa;
+    outline: none;
+    direction: rtl;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: #22C55E;
+    background: #fff;
+  }
+
+  .form-group textarea { resize: vertical; min-height: 70px; }
+
+  .form-row {
+    display: flex;
+    gap: 12px;
+  }
+
+  .form-row .form-group { flex: 1; }
+
+  .form-group input[type="date"],
+  .form-group input[type="time"] {
+    direction: ltr;
+    text-align: right;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    margin-top: 24px;
+  }
+
+  .modal-actions .btn-primary {
+    background: #22C55E;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .modal-actions .btn-primary:hover { background: #16a34a; }
+
+  .modal-actions .btn-cancel {
+    background: #fff;
+    color: #666;
+    border: 1px solid #d0d0d0;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .modal-actions .btn-cancel:hover { background: #f5f5f5; }
+
   /* --- Chat Area --- */
   .chat-area {
     flex: 1;
@@ -379,8 +512,60 @@
       <h2>סדנאות</h2>
       <button class="panel-close" onclick="toggleWorkshops()">&times;</button>
     </div>
+    <button class="new-workshop-btn" onclick="openNewWorkshopForm()">+ סדנה חדשה</button>
     <div class="workshops-list" id="workshops-list">
       <div style="padding: 20px; text-align: center; color: #999;">טוען...</div>
+    </div>
+  </div>
+
+  <!-- New Workshop Modal -->
+  <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <h2>יצירת סדנה חדשה</h2>
+      <div class="form-group">
+        <label>שם הסדנה (עברית)</label>
+        <input type="text" id="ws-title" placeholder="למשל: קלודוש - מבוא לסוכנים">
+      </div>
+      <div class="form-group">
+        <label>Slug (אנגלית, לשם התיקייה)</label>
+        <input type="text" id="ws-slug" placeholder="למשל: claudosh-intro" dir="ltr" style="text-align:left">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>תאריך</label>
+          <input type="date" id="ws-date">
+        </div>
+        <div class="form-group">
+          <label>שעה</label>
+          <input type="time" id="ws-time" value="20:00">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>קהל יעד</label>
+        <select id="ws-audience">
+          <option value="מתחילים - ללא ידע קודם">מתחילים - ללא ידע קודם</option>
+          <option value="משתמשים שכבר מכירים Claude Code">משתמשים שכבר מכירים Claude Code</option>
+          <option value="מפתחים ואנשי טכנולוגיה">מפתחים ואנשי טכנולוגיה</option>
+          <option value="בעלי עסקים ויזמים">בעלי עסקים ויזמים</option>
+          <option value="קהל כללי">קהל כללי</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>תיאור קצר - על מה הסדנה?</label>
+        <textarea id="ws-description" placeholder="2-3 משפטים שמתארים את הנושא, מה המשתתפים ילמדו, ומה המסר המרכזי"></textarea>
+      </div>
+      <div class="form-group">
+        <label>נושאים מרכזיים (אחד בכל שורה)</label>
+        <textarea id="ws-topics" placeholder="למשל:&#10;התקנה והגדרת סביבה&#10;בניית CLAUDE.md&#10;יצירת סקיל ראשון&#10;דמו חי"></textarea>
+      </div>
+      <div class="form-group">
+        <label>הערות נוספות (אופציונלי)</label>
+        <textarea id="ws-notes" placeholder="POC מיוחד, דרישות טכניות, שיתופי פעולה, רעיונות לדמו..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-primary" onclick="submitNewWorkshop()">צור סדנה</button>
+        <button class="btn-cancel" onclick="closeModal()">ביטול</button>
+      </div>
     </div>
   </div>
 
@@ -482,6 +667,94 @@
       workshopsPanel.classList.remove('open');
       workshopsBtn.classList.remove('active');
     }
+  }
+
+  // --- New Workshop ---
+
+  function openNewWorkshopForm() {
+    // Default date to next Thursday
+    const now = new Date();
+    const daysUntilThursday = (4 - now.getDay() + 7) % 7 || 7;
+    const nextThursday = new Date(now);
+    nextThursday.setDate(now.getDate() + daysUntilThursday);
+    document.getElementById('ws-date').value = nextThursday.toISOString().slice(0, 10);
+
+    document.getElementById('modal-overlay').classList.add('open');
+
+    // Auto-generate slug from title
+    document.getElementById('ws-title').oninput = () => {
+      const title = document.getElementById('ws-title').value.trim();
+      // Simple transliteration for common Hebrew workshop names
+      if (!document.getElementById('ws-slug').dataset.manual) {
+        const slug = title
+          .replace(/[^a-zA-Z0-9\s\-]/g, '')
+          .trim()
+          .replace(/\s+/g, '-')
+          .toLowerCase();
+        if (slug) document.getElementById('ws-slug').value = slug;
+      }
+    };
+    document.getElementById('ws-slug').oninput = () => {
+      document.getElementById('ws-slug').dataset.manual = '1';
+    };
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    // Reset form
+    ['ws-title','ws-slug','ws-description','ws-topics','ws-notes'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    delete document.getElementById('ws-slug').dataset.manual;
+  }
+
+  function submitNewWorkshop() {
+    const title = document.getElementById('ws-title').value.trim();
+    const slug = document.getElementById('ws-slug').value.trim();
+    const date = document.getElementById('ws-date').value;
+    const time = document.getElementById('ws-time').value;
+    const audience = document.getElementById('ws-audience').value;
+    const description = document.getElementById('ws-description').value.trim();
+    const topics = document.getElementById('ws-topics').value.trim();
+    const notes = document.getElementById('ws-notes').value.trim();
+
+    if (!title || !date) {
+      alert('חובה למלא שם וסתאריך');
+      return;
+    }
+
+    const prompt = `הפעל את הסקיל workshop-creator ליצירת סדנה חדשה עם הפרטים הבאים:
+
+**שם הסדנה:** ${title}
+**Slug:** ${slug || title.replace(/\s+/g, '-').toLowerCase()}
+**תאריך:** ${date}
+**שעה:** ${time || '20:00'}
+**קהל יעד:** ${audience}
+
+**תיאור:**
+${description || 'ליצור תיאור מתאים על בסיס שם הסדנה והנושאים'}
+
+**נושאים מרכזיים:**
+${topics || 'ליצור אג׳נדה מתאימה על בסיס שם הסדנה'}
+
+${notes ? `**הערות נוספות:**\n${notes}` : ''}
+
+צור את כל מבנה התיקיות, workshop.md מלא עם אג'נדה מפורטת, pipeline tracking, ותוכן ראשוני. וודא שהכל בעברית (חוץ מקוד וטכני). אחרי שסיימת, תן סיכום קצר של מה שנוצר.`;
+
+    closeModal();
+
+    // Close workshops panel on mobile
+    if (window.innerWidth <= 768) {
+      workshopsPanel.classList.remove('open');
+      workshopsBtn.classList.remove('active');
+    }
+
+    // Send as chat message
+    inputEl.value = prompt;
+    sendMessage();
+
+    // Reload workshops after a delay to show the new one
+    setTimeout(() => { workshopsData = []; loadWorkshops(); }, 30000);
   }
 
   // --- Chat ---
