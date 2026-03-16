@@ -10,6 +10,7 @@ import asyncio
 import json
 import logging
 import os
+import re
 import uuid
 from pathlib import Path
 
@@ -75,12 +76,56 @@ async def handle_status(request):
     })
 
 
+async def handle_workshops(request):
+    workshops_dir = Path(PROJECT_CWD) / "workshops"
+    workshops = []
+
+    for d in sorted(workshops_dir.iterdir(), reverse=True):
+        if not d.is_dir() or not re.match(r"\d{4}-\d{2}-\d{2}", d.name):
+            continue
+
+        wmd = d / "workshop.md"
+        info = {
+            "slug": d.name,
+            "date": d.name[:10],
+            "title": "",
+            "has_landing_page": (d / "landing-page").is_dir(),
+            "has_presentation": (d / "presentation-plan.md").is_file(),
+            "has_assets": (d / "assets").is_dir(),
+            "files": [f.name for f in d.iterdir() if f.is_file()],
+        }
+
+        if wmd.is_file():
+            text = wmd.read_text(encoding="utf-8", errors="replace")
+            # Extract title from first # heading
+            for line in text.split("\n")[:10]:
+                if line.startswith("# "):
+                    info["title"] = line[2:].strip()
+                    break
+
+            # Extract description - first non-empty paragraph after title
+            lines = text.split("\n")
+            for i, line in enumerate(lines):
+                if line.startswith("# "):
+                    for j in range(i + 1, min(i + 10, len(lines))):
+                        l = lines[j].strip()
+                        if l and not l.startswith("#") and not l.startswith("|") and not l.startswith("-"):
+                            info["description"] = l[:200]
+                            break
+                    break
+
+        workshops.append(info)
+
+    return web.json_response(workshops)
+
+
 def main():
     app = web.Application()
     app.router.add_get("/", handle_index)
     app.router.add_post("/api/chat", handle_chat)
     app.router.add_post("/api/reset", handle_reset)
     app.router.add_get("/api/status", handle_status)
+    app.router.add_get("/api/workshops", handle_workshops)
 
     logger.info(f"Web chat starting on http://localhost:{PORT}")
     logger.info(f"Project: {PROJECT_CWD} | Model: {MODEL}")
