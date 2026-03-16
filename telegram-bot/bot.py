@@ -73,7 +73,7 @@ async def run_claude(prompt: str, session_id: Optional[str] = None) -> dict:
         "--output-format", "json",
         "--model", MODEL,
         "--max-budget-usd", str(MAX_BUDGET_USD),
-        "--permission-mode", "default",
+        "--permission-mode", "acceptEdits",
         "--no-chrome",
     ]
 
