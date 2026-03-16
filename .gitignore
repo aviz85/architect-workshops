@@ -73,5 +73,25 @@ temp/
 .claude/skills/**/scripts/poster_*.jpeg
 .claude/skills/**/scripts/poster_*.png
 
+# Next.js build
+.next/
 
+# Audio/video files (large)
+*.m4a
+*.mp3
+*.mp4
+*.wav
 
+# PDF files (large)
+*.pdf
+
+# Obsidian
+.obsidian/
+
+# Inbox (task processing)
+inbox/
+
+# Transcripts at root level
+uriel-workshop-*.m4a
+uriel-workshop-*.srt
+uriel-workshop-*_transcript.json

@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'קלודוש הסוכן המטורף - סדנה',
-  description: 'הסדנה שיכולה להיות שווה לך המווווון כסף!',
+  title: 'סידרת קלודוש — מאפס לצבא סוכנים | AVIZ',
+  description: '4 מפגשים מעשיים שבהם אתה בונה מערכת סוכני AI שעובדת בשבילך 24/7. בלי לכתוב שורת קוד אחת.',
 }
 
 export default function RootLayout({
@@ -13,6 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="he" dir="rtl">
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+      </head>
       <body>{children}</body>
     </html>
   )

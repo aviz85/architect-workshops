@@ -77,9 +77,18 @@ function wasAlreadyProcessed(email, workshop) {
 }
 
 /**
- * Main function - checks for unprocessed Morning emails
+ * Main function - DISABLED: removes all triggers and stops
  */
 function checkMorningEmails() {
+  // AUTO-DISABLE: Remove all triggers and stop
+  var triggers = ScriptApp.getProjectTriggers();
+  triggers.forEach(function(trigger) {
+    ScriptApp.deleteTrigger(trigger);
+  });
+  Logger.log('DISABLED: All triggers removed. Morning watcher stopped.');
+  return;
+
+  // Original code below (unreachable)
   var query = 'from:' + MORNING_SENDER + ' newer_than:1d';
   var threads = GmailApp.search(query, 0, 10);
 

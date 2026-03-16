@@ -1,9 +1,0 @@
-{
-  "name": "workshop-claude-chrome-2026",
-  "createdAt": "2025-12-25T15:15:28.530Z",
-  "prompt": "Create an EPIC workshop announcement poster for Claude for Chrome.\n\nCRITICAL: ALL text MUST be in Hebrew.\n\nBrand: Aviz - The Architect\nColors: #22C55E primary green, grays #374151, #4B5563, #6B7280\nStyle: Professional but EXCITING and DYNAMIC\n\nWorkshop details:\n- Title: Claude for Chrome - שליטה בדפדפן עם AI\n- Date: יום חמישי, 1 בינואר 2026, 20:00\n- Platform: Zoom\n- Duration: 2 שעות\n\n=== VISUAL HOOK (MOST IMPORTANT) ===\n\nShow the avatar (The Architect) as a POWERFUL PUPPET MASTER or DIGITAL WIZARD:\n- He should be standing/floating with arms raised dramatically\n- GIANT glowing Chrome browser windows swirling around him like he's controlling them with magic\n- Green AI energy/lightning emanating from his hands connecting to the browsers\n- His expression: CONFIDENT, POWERFUL, with a big excited smile - like a tech superhero\n- Dynamic pose - NOT standing still, but in action like he's casting a spell\n- The browsers should look like they're ALIVE and responding to his commands\n- Add some 'wow factor' - sparkles, energy trails, dramatic lighting\n\nMake this poster STOP people from scrolling. It should look like a movie poster for a tech superhero film. The avatar is THE STAR of this image.",
-  "assets": [
-    "avatar",
-    "workshop-claude-app-2025"
-  ]
-}

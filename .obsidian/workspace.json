@@ -11,10 +11,14 @@
             "id": "162cae3a08e02ccc",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "raw input.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "raw input"
             }
           }
         ]
@@ -181,13 +185,46 @@
   },
   "active": "162cae3a08e02ccc",
   "lastOpenFiles": [
+    "workshops/2026-01-06-claudosh-agent/landing-page/public/hero-bg.jpg",
+    "workshops/claudosh-series/assets/hero-bg.jpg",
+    "workshops/claudosh-series/assets/syllabus-v2.pdf",
+    "workshops/claudosh-series/assets/poster-v5-series-combined.jpg",
+    "workshops/claudosh-series/assets/poster-v5-4-swarms.jpg",
+    "workshops/claudosh-series/syllabus-v2.html",
+    "workshops/claudosh-series/assets/poster-v5-3-apps.jpg",
+    "workshops/claudosh-series/landing-page.html",
+    "workshops/claudosh-series/assets/poster-v5-2-skills.jpg",
+    "workshops/claudosh-series/assets/poster-v5-1-launch.jpg",
+    "workshops/claudosh-series/knowledge/security/security-throughout-series.md",
+    "workshops/claudosh-series/knowledge/security",
+    "workshops/claudosh-series/knowledge/_open-questions.md",
+    "workshops/claudosh-series/knowledge/_summary.md",
+    "workshops/claudosh-series/knowledge/marketing.md",
+    "workshops/claudosh-series/knowledge/homework-and-continuity.md",
+    "workshops/claudosh-series/knowledge/narrative-and-metaphors.md",
+    "workshops/claudosh-series/knowledge/session-4/agenda-draft.md",
+    "workshops/claudosh-series/knowledge/session-4/_index.md",
+    "workshops/claudosh-series/knowledge/session-4",
+    "workshops/claudosh-series/knowledge/session-3/agenda-draft.md",
+    "workshops/claudosh-series/knowledge/session-3/_index.md",
+    "workshops/claudosh-series/knowledge/session-3",
+    "workshops/claudosh-series/knowledge/session-2/agenda-draft.md",
+    "workshops/claudosh-series/knowledge/session-2/_index.md",
+    "workshops/claudosh-series/knowledge/session-2",
+    "workshops/claudosh-series/knowledge/session-1/agenda-draft.md",
+    "workshops/claudosh-series/knowledge/session-1/_index.md",
+    "workshops/claudosh-series/knowledge/session-1",
+    "workshops/claudosh-series/knowledge/logistics.md",
+    "workshops/claudosh-series/knowledge/overview.md",
+    "workshops/claudosh-series/knowledge/_interview-index.md",
+    "workshops/claudosh-series/knowledge",
+    "raw input.md",
     "output_577a1e89-394f-4b2f-8530-99b1d7a4bae2_with_images.md",
     "workshop-ideas.md",
     "workshops/2026-01-12-claude-code-business/assets/poster.jpg",
     "workshops/2026-01-12-claude-code-business/workshop.md",
     "SKILL.md",
     "workshops/2026-01-12-claude-code-business/assets",
-    "workshops/2026-01-12-claude-code-business",
     "workshops/2025-01-28-ai-intro/workshop.md"
   ]
 }

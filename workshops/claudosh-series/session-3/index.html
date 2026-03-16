@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>קלודוש — מפגש 3: אפליקציות סוכניות</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #22C55E;
+      --green-dark: #16A34A;
+      --green-glow: rgba(34, 197, 94, 0.3);
+      --black: #0A0A0A;
+      --dark: #111111;
+      --dark-card: #141414;
+      --dark-border: #1e1e1e;
+      --gray-600: #3a3a3a;
+      --gray-400: #888;
+      --gray-300: #aaa;
+      --white: #ffffff;
+      --off-white: #e5e5e5;
+      --amber: #F59E0B;
+      --amber-glow: rgba(245, 158, 11, 0.15);
+      --red: #EF4444;
+      --red-glow: rgba(239, 68, 68, 0.12);
+      --blue: #3B82F6;
+      --blue-glow: rgba(59, 130, 246, 0.12);
+      --purple: #A855F7;
+      --purple-glow: rgba(168, 85, 247, 0.12);
+      --cyan: #06B6D4;
+      --cyan-glow: rgba(6, 182, 212, 0.12);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--black);
+      color: var(--off-white);
+      direction: rtl;
+      text-align: right;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,0.2) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 40% 10%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.15) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.25) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 85% 45%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 15% 70%, rgba(255,255,255,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.15) 0%, transparent 100%);
+      z-index: 0;
+      pointer-events: none;
+      animation: twinkle 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.5; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 60px 0 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(34, 197, 94, 0.07) 0%, transparent 60%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      color: var(--green);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 5px 18px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--green), #4ade80);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-meta {
+      font-size: 1.1rem;
+      color: var(--gray-300);
+      margin-bottom: 8px;
+    }
+
+    .hero-meta strong { color: var(--green); }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--gray-400);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ========== RECAP ========== */
+    .recap {
+      padding: 0 0 40px;
+    }
+
+    .recap-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 16px;
+      padding: 24px 28px;
+    }
+
+    .recap-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .recap-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .recap-item {
+      background: rgba(34, 197, 94, 0.05);
+      border: 1px solid rgba(34, 197, 94, 0.12);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .recap-item-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 2px;
+    }
+
+    .recap-item-desc {
+      font-size: 0.82rem;
+      color: var(--gray-400);
+      line-height: 1.5;
+    }
+
+    /* ========== LEASH PROGRESS ========== */
+    .leash-bar {
+      display: flex;
+      gap: 6px;
+      margin: 20px 0 40px;
+      align-items: stretch;
+    }
+
+    .leash-step {
+      flex: 1;
+      border-radius: 10px;
+      padding: 10px 12px;
+      text-align: center;
+      font-size: 0.78rem;
+    }
+
+    .leash-step .emoji { font-size: 1.2rem; display: block; margin-bottom: 4px; }
+    .leash-step .label { font-weight: 700; display: block; }
+    .leash-step .desc { color: var(--gray-400); font-size: 0.72rem; display: block; margin-top: 2px; }
+
+    .leash-done {
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+    .leash-done .label { color: var(--green); }
+
+    .leash-active {
+      background: rgba(34, 197, 94, 0.15);
+      border: 2px solid var(--green);
+    }
+    .leash-active .label { color: var(--white); }
+
+    .leash-next {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--dark-border);
+    }
+    .leash-next .label { color: var(--gray-400); }
+
+    /* ========== TIMELINE ========== */
+    .timeline { padding: 20px 0 60px; }
+
+    .timeline-item {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .timeline-marker {
+      flex-shrink: 0;
+      width: 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .timeline-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 900;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .timeline-line {
+      width: 2px;
+      flex: 1;
+      min-height: 12px;
+      background: var(--dark-border);
+      margin-top: 4px;
+    }
+
+    .timeline-item:last-child .timeline-line {
+      background: linear-gradient(to bottom, var(--dark-border), transparent);
+    }
+
+    .timeline-card {
+      flex: 1;
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s ease;
+      margin-bottom: 4px;
+    }
+
+    .timeline-card:hover {
+      border-color: rgba(34, 197, 94, 0.25);
+      transform: translateX(-3px);
+    }
+
+    .timeline-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-emoji { font-size: 1.6rem; }
+
+    .timeline-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .timeline-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 100px;
+      margin-left: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .tag-hands-on {
+      background: rgba(34, 197, 94, 0.12);
+      color: var(--green);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+    }
+
+    .tag-discussion {
+      background: var(--amber-glow);
+      color: var(--amber);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+
+    .tag-demo {
+      background: var(--blue-glow);
+      color: var(--blue);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+    }
+
+    .tag-concept {
+      background: var(--purple-glow);
+      color: var(--purple);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+    }
+
+    .tag-homework {
+      background: var(--red-glow);
+      color: var(--red);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    .tag-wow {
+      background: var(--cyan-glow);
+      color: var(--cyan);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+    }
+
+    .timeline-desc {
+      font-size: 0.92rem;
+      color: var(--gray-400);
+      line-height: 1.7;
+      margin-top: 6px;
+    }
+
+    .timeline-desc strong { color: var(--gray-300); }
+
+    .timeline-bullets {
+      list-style: none;
+      margin-top: 10px;
+      padding: 0;
+    }
+
+    .timeline-bullets li {
+      padding: 3px 16px 3px 0;
+      position: relative;
+      font-size: 0.88rem;
+      color: var(--gray-300);
+    }
+
+    .timeline-bullets li::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 11px;
+      width: 5px;
+      height: 5px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    /* Comparison table */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 0.85rem;
+    }
+
+    .compare-table th {
+      padding: 8px 14px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid var(--dark-border);
+    }
+
+    .compare-table th:first-child { color: var(--gray-400); border-radius: 0 8px 0 0; }
+    .compare-table th:nth-child(2) { color: var(--gray-400); }
+    .compare-table th:last-child { color: var(--green); border-radius: 8px 0 0 0; }
+
+    .compare-table td {
+      padding: 7px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--gray-400);
+    }
+
+    .compare-table td:first-child { color: var(--gray-300); font-weight: 600; }
+    .compare-table td:last-child { color: var(--green); }
+
+    .compare-table tr:last-child td { border-bottom: none; }
+
+    /* Code blocks */
+    .code-block {
+      background: #0d1117;
+      border: 1px solid #21262d;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      direction: ltr;
+      text-align: left;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 0.88rem;
+      color: #c9d1d9;
+      position: relative;
+      overflow-x: auto;
+    }
+
+    .code-block .comment { color: #8b949e; }
+    .code-block .cmd { color: #79c0ff; }
+    .code-block .flag { color: #ff7b72; }
+    .code-block .string { color: #a5d6ff; }
+    .code-block .success { color: #3fb950; }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--gray-300);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      font-family: 'Heebo', sans-serif;
+      transition: all 0.2s ease;
+    }
+
+    .copy-btn:hover { background: var(--green); color: var(--black); border-color: var(--green); }
+
+    /* Anatomy diagram */
+    .anatomy-box {
+      background: #0d1117;
+      border: 1px solid #21262d;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 12px 0;
+      direction: ltr;
+      text-align: left;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 0.85rem;
+      line-height: 1.8;
+    }
+
+    .anatomy-box .folder { color: #79c0ff; }
+    .anatomy-box .file { color: #c9d1d9; }
+    .anatomy-box .highlight { color: #3fb950; font-weight: 700; }
+    .anatomy-box .dim { color: #484f58; }
+    .anatomy-box .new { color: #ffa657; font-weight: 700; }
+
+    /* Marker colors */
+    .marker-green {
+      background: rgba(34, 197, 94, 0.12);
+      border: 2px solid var(--green);
+      color: var(--green);
+    }
+
+    .marker-amber {
+      background: var(--amber-glow);
+      border: 2px solid var(--amber);
+      color: var(--amber);
+    }
+
+    .marker-blue {
+      background: var(--blue-glow);
+      border: 2px solid var(--blue);
+      color: var(--blue);
+    }
+
+    .marker-purple {
+      background: var(--purple-glow);
+      border: 2px solid var(--purple);
+      color: var(--purple);
+    }
+
+    .marker-red {
+      background: var(--red-glow);
+      border: 2px solid var(--red);
+      color: var(--red);
+    }
+
+    .marker-cyan {
+      background: var(--cyan-glow);
+      border: 2px solid var(--cyan);
+      color: var(--cyan);
+    }
+
+    /* Capability grid */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .cap-item {
+      background: rgba(6, 182, 212, 0.05);
+      border: 1px solid rgba(6, 182, 212, 0.15);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .cap-item .cap-icon { font-size: 1.4rem; margin-bottom: 4px; }
+    .cap-item .cap-title { font-weight: 700; color: var(--cyan); font-size: 0.88rem; margin-bottom: 2px; }
+    .cap-item .cap-desc { font-size: 0.8rem; color: var(--gray-400); line-height: 1.5; }
+
+    /* ========== FOOTER ========== */
+    footer {
+      border-top: 1px solid var(--dark-border);
+      padding: 28px 24px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-brand {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--gray-600);
+    }
+
+    .footer-link {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-link:hover { text-decoration: underline; }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 600px) {
+      .recap-grid { grid-template-columns: 1fr; }
+      .leash-bar { flex-direction: column; }
+      .cap-grid { grid-template-columns: 1fr; }
+      .timeline-marker { width: 44px; }
+      .timeline-num { width: 38px; height: 38px; font-size: 1.1rem; }
+      .timeline-card { padding: 18px; }
+      .timeline-title { font-size: 1.05rem; }
+      .compare-table { font-size: 0.78rem; }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">CLAUDOSH SERIES — SESSION 3/4</div>
+    <h1>אפליקציות <span>סוכניות</span></h1>
+    <p class="hero-meta">יום שני 09.03.2026 &nbsp;|&nbsp; <strong>21:00</strong> &nbsp;|&nbsp; Zoom</p>
+    <p class="hero-sub">מה שבניתם עד עכשיו — זו כבר אפליקציה. פרדיגמה חדשה, כלי דפדפן, ובניית תהליכים שלמים.</p>
+  </div>
+</section>
+
+<!-- ========== LEASH PROGRESS ========== -->
+<section class="recap" style="padding: 0 0 10px;">
+  <div class="container">
+    <div class="leash-bar fade-in">
+      <div class="leash-step leash-done">
+        <span class="emoji">🚀</span>
+        <span class="label">מפגש 1</span>
+        <span class="desc">הסוכן הכללי</span>
+      </div>
+      <div class="leash-step leash-done">
+        <span class="emoji">🛸</span>
+        <span class="label">מפגש 2</span>
+        <span class="desc">ערימות סקילים</span>
+      </div>
+      <div class="leash-step leash-active">
+        <span class="emoji">🛰️</span>
+        <span class="label">מפגש 3 ← אנחנו כאן</span>
+        <span class="desc">אפליקציות סוכניות</span>
+      </div>
+      <div class="leash-step leash-next">
+        <span class="emoji">🌌</span>
+        <span class="label">מפגש 4</span>
+        <span class="desc">נחילי סוכנים</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== RECAP ========== -->
+<section class="recap">
+  <div class="container">
+    <div class="recap-card fade-in">
+      <div class="recap-title">🔄 מה למדנו במפגש 2</div>
+      <div class="recap-grid">
+        <div class="recap-item">
+          <div class="recap-item-title">אנטומיה של סקיל</div>
+          <div class="recap-item-desc">פרומפט שנטען רק כשצריך. שם, תיאור, הוראות. כלל 100 הטוקנים: רק התיאור נמצא בזיכרון כל הזמן.</div>
+        </div>
+        <div class="recap-item">
+          <div class="recap-item-title">גלובלי מול פרויקטלי</div>
+          <div class="recap-item-desc">סקילים ב-<code style="color: var(--green); font-size: 0.78rem;">~/.claude/skills/</code> זמינים בכל מקום. סקילים ב-<code style="color: var(--green); font-size: 0.78rem;">.claude/skills/</code> — שייכים לפרויקט.</div>
+        </div>
+        <div class="recap-item">
+          <div class="recap-item-title">סקילים צומחים מעבודה</div>
+          <div class="recap-item-desc">לא מתכננים סקיל בבידוד. עובדים על משימה אמיתית, מזהים דפוס, ואומרים "תהפוך את זה לסקיל".</div>
+        </div>
+        <div class="recap-item">
+          <div class="recap-item-title">ערימות = כוח מצטבר</div>
+          <div class="recap-item-desc">סקיל מתאם שקורא לשרשרת של סקילים. פקודה אחת → רצף שלם → תוצאה. כל סקיל חדש מכפיל את הכוח הקיים.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TIMELINE ========== -->
+<section class="timeline">
+  <div class="container">
+
+    <!-- 1. Review -->
+    <div class="timeline-item fade-in">
+      <div class="timeline-marker">
+        <div class="timeline-num marker-green">1</div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-card-header">
+          <span class="timeline-emoji">🔄</span>
+          <span class="timeline-title">סקירה + "אחרי ההפסקה"</span>
+        </div>
+        <span class="timeline-tag tag-discussion">דיון</span>
+        <p class="timeline-desc">מה עשיתם בין המפגשים? מישהו בנה משהו חדש? <strong>הרצועה ממשיכה להתארך</strong> — כל מה שבניתם עד עכשיו עדיין עובד ומצטבר.</p>
+      </div>
+    </div>
+
+    <!-- 2. Intelligence Layer -->
+    <div class="timeline-item fade-in">
+      <div class="timeline-marker">
+        <div class="timeline-num marker-purple">2</div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-card-header">
+          <span class="timeline-emoji">🧠</span>
+          <span class="timeline-title">שכבת האינטליגנציה</span>
+        </div>
+        <span class="timeline-tag tag-concept">קונספט</span>
+        <p class="timeline-desc">Claude Code הוא <strong>שכבת אינטליגנציה שעוטפת את כל מה שאנחנו עושים במחשב.</strong> אחרי שמתקינים אותה — אפשר לגשת אליה דרך הטרמינל, VSCode ועוד.</p>
+        <ul class="timeline-bullets">
+          <li>טרמינל — הדרך הבסיסית, ישירה ועוצמתית</li>
+          <li>VSCode — עורך עם פאנל השיחה בצד, יותר נוח לקבצים</li>
+          <li>ורמז לקדימה: <strong>בהמשך (מפגש 4) נראה שאפשר להפעיל מבחוץ</strong> — בלי לפתוח טרמינל בכלל</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. Skills + CLAUDE.md + dangerously-skip -->
+    <div class="timeline-item fade-in">
+      <div class="timeline-marker">
+        <div class="timeline-num marker-amber">3</div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-card-header">
+          <span class="timeline-emoji">🔧</span>
+          <span class="timeline-title">סקילים, CLAUDE.md וריצה רצופה</span>
+        </div>
+        <span class="timeline-tag tag-concept">קונספט</span>
+        <span class="timeline-tag tag-demo">הדגמה</span>
+        <p class="timeline-desc">תזכורת מהירה על הבסיס — ועוד משהו חדש חשוב.</p>
+        <ul class="timeline-bullets">
+          <li><strong>למה סקילים חשובים?</strong> דיוק מצד אחד, שירשור פעולות מצד שני</li>
+          <li><strong>מה אפשר לארוז בסקיל?</strong> שיטת עבודה, עיטוף כלי, חיבור בין כלים</li>
+          <li><strong>claude-code-guide</strong> — תמיד לבקש ממנו לוודא כתיבה נכונה של סקיל</li>
+          <li><strong>CLAUDE.md</strong> — קובץ הכללים של המשתמש ושל הפרויקט</li>
+        </ul>
+        <div style="background: rgba(255, 166, 87, 0.06); border: 1px solid rgba(255, 166, 87, 0.2); border-radius: 10px; padding: 14px 16px; margin-top: 12px;">
+          <div style="font-size: 0.88rem; font-weight: 700; color: #ffa657; margin-bottom: 6px;">🆕 חדש: ריצה רצופה ללא הפסקות</div>
+          <p style="font-size: 0.85rem; color: var(--gray-300);">הפקודה <code style="color: #ffa657;">--dangerously-skip-permissions</code> מאפשרת לסוכן לרוץ בלי לבקש אישור על כל פעולה. שולחים משימה — הולכים לעשות משהו אחר — חוזרים לתוצאות.</p>
+          <div class="code-block" style="margin: 10px 0 0;">
+            <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+            <span class="cmd">claude</span> <span class="flag">--dangerously-skip-permissions</span>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--gray-400); margin-top: 8px;">⚠️ גם אחרי שמרשים הכל — יש דרכים להגביל פעולות ספציפיות. נגיע לזה בהמשך.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Sub-Agents + Agentic App -->
+    <div class="timeline-item fade-in">
+      <div class="timeline-marker">
+        <div class="timeline-num marker-blue">4</div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-card-header">
+          <span class="timeline-emoji">🏗️</span>
+          <span class="timeline-title">תת-סוכנים + פרדיגמת האפליקציה הסוכנית</span>
+        </div>
+        <span class="timeline-tag tag-concept">קונספט</span>
+        <span class="timeline-tag tag-demo">הדגמה</span>
+        <p class="timeline-desc"><strong>גילוי: מה שבניתם עד עכשיו — זו כבר אפליקציה.</strong> רק שהיא עובדת בלוגיקה שונה מכל מה שהכרתם.</p>
+
+        <div style="margin: 12px 0 8px;">
+          <div style="font-size: 0.88rem; font-weight: 700; color: var(--blue); margin-bottom: 8px;">תת-סוכנים — איך הם עובדים באמת</div>
+          <p class="timeline-desc" style="margin-top: 0; margin-bottom: 10px;">תת-סוכן הוא <strong>סוכן שמופעל ע"י סוכן אחר.</strong> שלושה דברים שחשוב להבין:</p>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+            <div style="background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.2); border-radius: 10px; padding: 12px; text-align: center;">
+              <div style="font-size: 1.3rem; margin-bottom: 4px;">🪟</div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--blue); margin-bottom: 3px;">הקשר נפרד</div>
+              <div style="font-size: 0.75rem; color: var(--gray-400);">כל תת-סוכן מתחיל שיחה נקייה — לא רואה את ההיסטוריה של הסוכן הראשי</div>
+            </div>
+            <div style="background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.2); border-radius: 10px; padding: 12px; text-align: center;">
+              <div style="font-size: 1.3rem; margin-bottom: 4px;">⚡</div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--blue); margin-bottom: 3px;">רץ במקביל</div>
+              <div style="font-size: 0.75rem; color: var(--gray-400);">כמה תת-סוכנים יכולים לעבוד בו-זמנית על חלקים שונים של אותה משימה</div>
+            </div>
+            <div style="background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.2); border-radius: 10px; padding: 12px; text-align: center;">
+              <div style="font-size: 1.3rem; margin-bottom: 4px;">🔒</div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--blue); margin-bottom: 3px;">כלים מוגבלים</div>
+              <div style="font-size: 0.75rem; color: var(--gray-400);">אפשר לתחם בדיוק אילו כלים מותרים לכל תת-סוכן — קריאה בלבד, כתיבה, דפדפן וכו׳</div>
+            </div>
+          </div>
+
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--blue); margin-bottom: 6px;">מבנה קובץ תת-סוכן (<code style="font-weight: 400;">.claude/agents/researcher.md</code>)</div>
+          <div class="anatomy-box">
+<span class="highlight">---</span><br>
+<span class="new">name</span><span class="dim">: </span><span class="file">researcher</span><br>
+<span class="new">description</span><span class="dim">: </span><span class="file">חוקר מידע ברשת על לקוחות וחברות</span><br>
+<span class="new">tools</span><span class="dim">: </span><span class="file">Read, Grep, WebSearch</span>  <span class="highlight">← כלים מותרים בלבד</span><br>
+<span class="new">model</span><span class="dim">: </span><span class="file">sonnet</span><br>
+<span class="highlight">---</span><br>
+<br>
+<span class="dim">אתה חוקר מידע. תמיד מחזיר מידע מסודר ב-Markdown.</span>
+          </div>
+
+          <div style="font-size: 0.82rem; color: var(--gray-400); margin-top: 6px;">
+            <strong style="color: var(--gray-300);">גלובלי:</strong> <code style="color: var(--green);">~/.claude/agents/</code> (זמין בכל פרויקט) &nbsp;|&nbsp;
+            <strong style="color: var(--gray-300);">פרויקטלי:</strong> <code style="color: var(--green);">.claude/agents/</code>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px;">
+          <div style="font-size: 0.88rem; font-weight: 700; color: var(--blue); margin-bottom: 8px;">השוואה: אפליקציה רגילה מול אפליקציה סוכנית</div>
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>רכיב</th>
+                <th>אפליקציה רגילה</th>
+                <th>אפליקציה סוכנית</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Runtime</td><td>Node.js / Python</td><td>Claude Code</td></tr>
+              <tr><td>לוגיקה</td><td>if/else + קוד</td><td>סקילים + כללים</td></tr>
+              <tr><td>מסד נתונים</td><td>PostgreSQL / SQL</td><td>קבצי Markdown</td></tr>
+              <tr><td>ממשק</td><td>React / Web</td><td>שיחה / צ׳אט</td></tr>
+              <tr><td>Deploy</td><td>Docker / Server</td><td><code>cd folder</code></td></tr>
+              <tr><td>זמן בנייה</td><td>שבועות</td><td>שעות</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="timeline-desc" style="margin-top: 10px; font-size: 0.9rem; color: var(--off-white); font-weight: 600;">לא צריך להיות מפתח כדי לבנות אפליקציה.</p>
+      </div>
+    </div>
+
+    <!-- 5. Browser Tool -->
+    <div class="timeline-item fade-in">
+      <div class="timeline-marker">
+        <div class="timeline-num marker-cyan">5</div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-card-header">
+          <span class="timeline-emoji">🌐</span>
+          <span class="timeline-title">כלי הדפדפן — Chrome Extension MCP</span>
+        </div>
+        <span class="timeline-tag tag-concept">קונספט</span>
+        <span class="timeline-tag tag-demo">הדגמה</span>
+        <p class="timeline-desc"><strong>MCP = פרוטוקול חיבור</strong> בין הסוכן לכלים חיצוניים. התוסף לכרום הוא כלי MCP שנותן לסוכן גישה לדפדפן — <strong>הדפדפן שלכם, עם כל החשבונות שלכם.</strong></p>
+
+        <div class="cap-grid">
+          <div class="cap-item">
+            <div class="cap-icon">🔐</div>
+            <div class="cap-title">זוכר סשנים</div>
+            <div class="cap-desc">מחובר לחשבונות שלכם כבר. לא צריך להתחבר מחדש בכל פעם.</div>
+          </div>
+          <div class="cap-item">
+            <div class="cap-icon">🗂️</div>
+            <div class="cap-title">מעבר טאבים</div>
+            <div class="cap-desc">יכול לבצע משימות שדורשות כמה טאבים — למשל אימות מייל תוך כדי הרשמה.</div>
+          </div>
+          <div class="cap-item">
+            <div class="cap-icon">🖼️</div>
+            <div class="cap-title">העלאת תמונות</div>
+            <div class="cap-desc">יכול לפרסם ברשתות חברתיות כולל העלאת תמונה — פוסט שלם, בלי לגעת.</div>
+          </div>
+          <div class="cap-item">
+            <div class="cap-icon">🎬</div>
+            <div class="cap-title">הקלטת GIF</div>
+            <div class="cap-desc">מתעד כל מה שעשה — מה שמאפשר לשתף, לתעד, ולאמת שהכל עבד.</div>
+          </div>
+        </div>
+
+        <div style="background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.2); border-radius: 10px; padding: 14px 16px; margin-top: 14px;">
+          <div style="font-size: 0.88rem; font-weight: 700; color: var(--red); margin-bottom: 6px;">⚠️ הסוכן בדפדפן — איטי, אבל זה לא הנקודה</div>
+          <p style="font-size: 0.85rem; color: var(--gray-300); line-height: 1.7;">עבודה של סוכן בדפדפן לוקחת זמן — פי כמה יותר ממה שהייתם עושים ידנית. <strong>אבל השאלה הנכונה היא לא "כמה זמן זה לוקח?" אלא "האם הוא מסוגל לרוץ מקצה לקצה?"</strong><br>אם כן — הוא יכול לעשות את זה בזמן שאתם לא נוכחים. בלילה. בסוף שבוע.</p>
+        </div>
+
+        <div style="margin-top: 14px;">
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--gray-300); margin-bottom: 8px;">דוגמאות למשימות דפדפן שכדאי לתת לסוכן לילה:</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--dark-border); border-radius: 8px; padding: 10px 12px; font-size: 0.82rem; color: var(--gray-400);">📋 <strong style="color: var(--gray-300);">מילוי טפסים</strong> — הגשת מסמכים, הרשמות, עדכון פרטים במערכות</div>
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--dark-border); border-radius: 8px; padding: 10px 12px; font-size: 0.82rem; color: var(--gray-400);">🔍 <strong style="color: var(--gray-300);">סריקת מידע</strong> — איסוף נתונים מאתרים, השוואת מחירים, מחקר שוק</div>
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--dark-border); border-radius: 8px; padding: 10px 12px; font-size: 0.82rem; color: var(--gray-400);">📱 <strong style="color: var(--gray-300);">פרסום תוכן</strong> — העלאת פוסטים לרשתות חברתיות כולל תמונה וכיתוב</div>
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--dark-border); border-radius: 8px; padding: 10px 12px; font-size: 0.82rem; color: var(--gray-400);">📧 <strong style="color: var(--gray-300);">תהליכי הרשמה</strong> — יצירת חשבונות, אימות מייל, מילוי פרופיל</div>
+          </div>
+        </div>
+
+        <div style="background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.2); border-radius: 10px; padding: 14px 16px; margin-top: 14px;">
+          <div style="font-size: 0.88rem; font-weight: 700; color: var(--green); margin-bottom: 6px;">✅ השיטה: לבחון פעם אחת ואז לתת לרוץ</div>
+          <ol style="padding-right: 18px; font-size: 0.85rem; color: var(--gray-300); line-height: 1.9;">
+            <li>בחרו משימה שחוזרת על עצמה ודורשת דפדפן</li>
+            <li>הפעילו את הסוכן <strong>פעם אחת בפיקוח</strong> — עקבו אחרי כל צעד</li>
+            <li>ראו שהוא מסוגל לרוץ מקצה לקצה</li>
+            <li>ארזו את ההנחיות כ<strong>סקיל שמנחה אותו</strong> בצעדים</li>
+            <li>בפעם הבאה — שולחים ומסיימים. הוא עושה, אתם ממשיכים</li>
+          </ol>
+        </div>
+
+        <div class="code-block" style="margin-top: 12px;">
+          <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+          <span class="comment"># הפעלת Claude Code עם תמיכת כרום:</span><br>
+          <span class="cmd">claude</span> <span class="flag">--chrome</span>
+        </div>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+          <span class="comment"># בדיקת חיבור לאחר התקנת התוסף:</span><br>
+          <span class="string">/chrome</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Demo: Site-Review + Socher HaYam -->
+    <div class="timeline-item fade-in">
+      <div class="timeline-marker">
+        <div class="timeline-num marker-cyan">🎬</div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-card" style="border-color: rgba(6, 182, 212, 0.2); background: linear-gradient(135deg, var(--dark-card), rgba(6, 182, 212, 0.03));">
+        <div class="timeline-card-header">
+          <span class="timeline-emoji">🚀</span>
+          <span class="timeline-title">דמו: site-review + סוחר הים</span>
+        </div>
+        <span class="timeline-tag tag-demo">הדגמה</span>
+        <span class="timeline-tag tag-wow">WOW</span>
+        <p class="timeline-desc">שני דמואים שמראים עד כמה הסוכן יכול לנווט ולהבין ממשק ויזואלי.</p>
+        <ul class="timeline-bullets">
+          <li><strong>site-review:</strong> הסוכן נכנס לאתר, מסתכל עליו, מקליט GIF, כותב סקירה — לבד</li>
+          <li><strong>סוחר הים:</strong> משחק DOS קלאסי בדפדפן — האתגר: האם הסוכן יכול לשחק? הפתרון: כן &nbsp;<a href="https://aviz85.github.io/socher-hayam-skill/" target="_blank" style="color: var(--cyan); font-size: 0.82rem; text-decoration: none; border-bottom: 1px solid rgba(6,182,212,0.4);">← האתר של הסקיל</a></li>
+          <li>נקודת לימוד: <strong>איך מדייקים סקיל תוך כדי תנועה</strong> — רואים שמשהו לא עובד, מתקנים על הדרך</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 7. Skill Refinement -->
+    <div class="timeline-item fade-in">
+      <div class="timeline-marker">
+        <div class="timeline-num marker-green">7</div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-card-header">
+          <span class="timeline-emoji">🔁</span>
+          <span class="timeline-title">עקרון תיקון הסקיל תוך כדי תנועה</span>
+        </div>
+        <span class="timeline-tag tag-concept">קונספט</span>
+        <p class="timeline-desc">סקיל לא נבנה פעם אחת ונשאר כך לנצח. <strong>הוא מתדייק תוך כדי שעובדים איתו.</strong></p>
+        <ul class="timeline-bullets">
+          <li>שיחה → גילוי שהסוכן יכול לעזור → אריזה כסקיל</li>
+          <li>שימוש → גילוי שמשהו לא מדויק → תיקון</li>
+          <li>שוב שימוש → שוב שיפור → הסקיל מתבגר</li>
+        </ul>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+          <span class="comment"># כשמגלים שהסקיל צריך שיפור:</span><br>
+          <span class="string">תעדכן את הסקיל הזה על סמך מה שלמדנו עכשיו</span>
+        </div>
+        <div style="background: rgba(245, 158, 11, 0.06); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 10px; padding: 12px 14px; margin-top: 10px;">
+          <div style="font-size: 0.82rem; font-weight: 700; color: var(--amber); margin-bottom: 4px;">💡 טיפ — קוד קצר ב-CLAUDE.md</div>
+          <p style="font-size: 0.82rem; color: var(--gray-300); line-height: 1.6;">אפשר להגדיר ב-CLAUDE.md שלכם קוד קצר שיעשה את זה אוטומטית. אצל אביץ הוא כתב <code style="color: var(--amber);">TSK</code> — וכשהוא כותב את זה, הסוכן מעדכן את הסקיל הרלוונטי מהשיחה. כל אחד יכול להגדיר קיצור כזה בסגנון שלו.</p>
+        </div>
+
+        <div style="background: rgba(168,85,247,0.06); border: 1px solid rgba(168,85,247,0.2); border-radius: 10px; padding: 14px 16px; margin-top: 12px;">
+          <div style="font-size: 0.88rem; font-weight: 700; color: var(--purple); margin-bottom: 8px;">💡 טיפ — סקיל שנטען בצעדים (Lazy Loading)</div>
+          <p style="font-size: 0.85rem; color: var(--gray-300); line-height: 1.7; margin-bottom: 10px;">כשסקיל גדול — לא כדאי לדחוף הכל לתוך קובץ אחד. הסוכן יטען הכל לזיכרון בבת אחת ויבזבז חלון הקשר יקר. <strong>הפתרון: לפרק לקבצי עזר שנטענים לפי צורך.</strong></p>
+
+          <div style="font-size: 0.8rem; color: var(--gray-400); margin-bottom: 8px;">במקום סקיל ענק אחד:</div>
+          <div class="anatomy-box" style="margin: 0 0 10px;">
+<span class="folder">my-skill/</span><br>
+<span class="dim">├── </span><span class="file highlight">SKILL.md</span>  <span class="dim">← תיאור קצר + הוראות ראשיות</span><br>
+<span class="dim">├── </span><span class="new">step-1-research.md</span>  <span class="dim">← נטען רק בשלב המחקר</span><br>
+<span class="dim">├── </span><span class="new">step-2-write.md</span>  <span class="dim">← נטען רק בשלב הכתיבה</span><br>
+<span class="dim">└── </span><span class="new">examples.md</span>  <span class="dim">← נטען רק אם צריך דוגמאות</span>
+          </div>
+
+          <p style="font-size: 0.82rem; color: var(--gray-400); line-height: 1.6;">ב-SKILL.md כותבים: <em style="color: var(--purple);">"לשלב המחקר — קרא את step-1-research.md"</em>. הסוכן יקרא את הקובץ רק כשהגיע לשלב הזה — לא לפני. <strong style="color: var(--gray-300);">חלון הקשר נשאר נקי עד שצריך.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Hands-On -->
+    <div class="timeline-item fade-in">
+      <div class="timeline-marker">
+        <div class="timeline-num marker-green">🔨</div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-card" style="border-color: rgba(34, 197, 94, 0.25); background: linear-gradient(135deg, var(--dark-card), rgba(34, 197, 94, 0.03));">
+        <div class="timeline-card-header">
+          <span class="timeline-emoji">⚡</span>
+          <span class="timeline-title">תרגיל: התקנה + חיבור + בנייה</span>
+        </div>
+        <span class="timeline-tag tag-hands-on">HANDS-ON</span>
+        <p class="timeline-desc">כולם מתקינים את התוסף ומנסים תהליך אמיתי עם הדפדפן:</p>
+        <ul class="timeline-bullets">
+          <li><strong>שלב 1:</strong> התקנת Chrome Extension &nbsp;<a href="https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn" target="_blank" style="color: var(--green); font-size: 0.82rem; text-decoration: none; border-bottom: 1px solid rgba(34,197,94,0.4);">← להורדה מ-Chrome Web Store</a></li>
+          <li><strong>שלב 2:</strong> חיבור לחשבון Anthropic בתוסף</li>
+          <li><strong>שלב 3:</strong> <code style="color: var(--green);">claude --chrome</code> → הקלידו <code style="color: var(--green);">/chrome</code> לבדיקת חיבור</li>
+          <li><strong>שלב 4:</strong> בחרו תהליך שרציתם לעשות ולא ידעתם איך — תנו לסוכן לעשות אותו</li>
+          <li><strong>שלב 5:</strong> אמרו לסוכן לארוז את מה שעשינו כסקיל</li>
+        </ul>
+        <div class="code-block" style="margin-top: 12px;">
+          <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+          <span class="comment"># אחרי שהסוכן ביצע את התהליך:</span><br>
+          <span class="string">תארוז את מה שעשינו עכשיו כסקיל</span>
+        </div>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+          <span class="comment"># להפעיל תהליך ספציפי:</span><br>
+          <span class="string">תבצע את התהליך הזה: [תיאור] ואז תארוז אותו כסקיל</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Homework -->
+    <div class="timeline-item fade-in">
+      <div class="timeline-marker">
+        <div class="timeline-num marker-red">🏠</div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-card" style="border-color: rgba(239, 68, 68, 0.2); background: linear-gradient(135deg, var(--dark-card), rgba(239, 68, 68, 0.03));">
+        <div class="timeline-card-header">
+          <span class="timeline-emoji">🎯</span>
+          <span class="timeline-title">שיעורי בית</span>
+        </div>
+        <span class="timeline-tag tag-homework">למפגש הבא</span>
+        <p class="timeline-desc" style="font-size: 1rem; color: var(--off-white);">מצאו תהליך אחד שדורש דפדפן ועשו אותו עם הסוכן. ואז — ארזו אותו כסקיל:</p>
+        <ul class="timeline-bullets" style="margin-top: 8px;">
+          <li style="color: var(--off-white);">להתקין את תוסף הכרום אם לא הספקתם במפגש</li>
+          <li style="color: var(--off-white);">לבחור תהליך אחד שחוזר על עצמו ודורש דפדפן</li>
+          <li style="color: var(--off-white);">לתת לסוכן לעשות אותו ואז לאמר: <strong>"תארוז את זה כסקיל"</strong></li>
+          <li style="color: var(--off-white);">לנסות את הסקיל שוב — לדייק אם צריך (TSK)</li>
+        </ul>
+        <div style="margin-top: 14px; padding: 12px 14px; background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.15); border-radius: 10px;">
+          <div style="font-size: 0.82rem; color: var(--green); font-weight: 700; margin-bottom: 4px;">🔭 הצצה למפגש 4</div>
+          <p style="font-size: 0.82rem; color: var(--gray-400);">הפעלה מרחוק, תזמון (הסוכן עובד בלעדיך), Agent SDK, בניית ממשק ויזואלי, ונחילי סוכנים — כולם ביחד.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-brand">AVIZ — THE ARCHITECT</div>
+  <div class="footer-copy">
+    סידרת קלודוש — מפגש 3 מתוך 4 &nbsp;|&nbsp;
+    <a href="https://aviz85.github.io/claudosh-series/" class="footer-link">לעמוד הסדרה המלא</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(function(el) {
+    observer.observe(el);
+  });
+
+  function copyCode(btn) {
+    var block = btn.parentElement;
+    var code = block.textContent.replace('העתק', '').replace('הועתק!', '').trim();
+    code = code.split('\n').filter(function(line) {
+      return !line.trim().startsWith('#');
+    }).join('\n').trim();
+    navigator.clipboard.writeText(code);
+    btn.textContent = 'הועתק!';
+    setTimeout(function() { btn.textContent = 'העתק'; }, 1500);
+  }
+</script>
+
+</body>
+</html>

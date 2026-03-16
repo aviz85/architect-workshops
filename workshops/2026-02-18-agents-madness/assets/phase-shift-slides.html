@@ -5,9 +5,20 @@
 <meta name="viewport" content="width=1920, height=1080">
 <title>Phase Shift Slides</title>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="presentation/slide-01-question.jpg">
+<link rel="preload" as="image" href="presentation/slide-02-research.jpg">
+<link rel="preload" as="image" href="presentation/slide-03-scaling.jpg">
+<link rel="preload" as="image" href="presentation/slide-04-product.jpg">
+<link rel="preload" as="image" href="presentation/slide-05-developer.jpg">
+<link rel="preload" as="image" href="presentation/slide-06-singularity.jpg">
+<link rel="preload" as="image" href="presentation/slide-07-fuel.jpg">
+<link rel="preload" as="image" href="presentation/slide-08-dream.jpg">
+<link rel="preload" as="image" href="presentation/slide-09-environment.jpg">
+<link rel="preload" as="image" href="presentation/slide-10-agent-vs-model.jpg">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; direction: ltr; }
+
 
 .slide {
   width: 1920px;
@@ -40,7 +51,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 /* ====== SLIDE 1: The Question ====== */
 #slide1 {
-  background: radial-gradient(ellipse at center, #0a0a0a 0%, #000 100%);
+  background: radial-gradient(ellipse at center, rgba(10,10,10,0.75) 0%, rgba(0,0,0,0.85) 100%), url('presentation/slide-01-question.jpg') center/110% no-repeat;
 }
 #slide1 .headline {
   font-size: 120px;
@@ -61,7 +72,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 /* ====== SLIDE 2: Phase 1 - Research ====== */
 #slide2 {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+  background: linear-gradient(135deg, rgba(10,10,10,0.7) 0%, rgba(26,26,46,0.7) 100%), url('presentation/slide-02-research.jpg') center/112% no-repeat;
 }
 #slide2 .phase-num {
   font-size: 200px;
@@ -105,7 +116,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 /* ====== SLIDE 3: Phase 2 - Scaling Laws ====== */
 #slide3 {
-  background: linear-gradient(135deg, #0a0a0a 0%, #0a1628 100%);
+  background: linear-gradient(135deg, rgba(10,10,10,0.7) 0%, rgba(10,22,40,0.7) 100%), url('presentation/slide-03-scaling.jpg') center/110% no-repeat;
 }
 #slide3 .phase-num {
   font-size: 200px;
@@ -153,7 +164,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 /* ====== SLIDE 4: Phase 3 - Product ====== */
 #slide4 {
-  background: linear-gradient(135deg, #0a0a0a 0%, #0a2818 100%);
+  background: linear-gradient(135deg, rgba(10,10,10,0.7) 0%, rgba(10,40,24,0.7) 100%), url('presentation/slide-04-product.jpg') center/110% no-repeat;
 }
 #slide4 .phase-num {
   font-size: 200px;
@@ -210,7 +221,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 /* ====== SLIDE 5: Phase 4 - Independent Developer ====== */
 #slide5 {
-  background: radial-gradient(ellipse at center, #1a0a0a 0%, #000 100%);
+  background: radial-gradient(ellipse at center, rgba(26,10,10,0.7) 0%, rgba(0,0,0,0.8) 100%), url('presentation/slide-05-developer.jpg') center/112% no-repeat;
 }
 #slide5::before {
   content: '';
@@ -257,7 +268,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 /* ====== SLIDE 6: Phase 5+6 - Users → Singularity ====== */
 #slide6 {
-  background: radial-gradient(ellipse at center bottom, #1a1a00 0%, #000 100%);
+  background: radial-gradient(ellipse at center bottom, rgba(26,26,0,0.7) 0%, rgba(0,0,0,0.8) 100%), url('presentation/slide-06-singularity.jpg') center/110% no-repeat;
 }
 #slide6 .two-phases {
   display: flex;
@@ -302,7 +313,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 /* ====== SLIDE 7: The Fuel - Chinese Models ====== */
 #slide7 {
-  background: linear-gradient(180deg, #0a0a0a 0%, #1a0a0a 100%);
+  background: linear-gradient(180deg, rgba(10,10,10,0.7) 0%, rgba(26,10,10,0.7) 100%), url('presentation/slide-07-fuel.jpg') center/110% no-repeat;
 }
 #slide7 .headline {
   font-size: 64px;
@@ -379,7 +390,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 /* ====== SLIDE 8: The Dream Metaphor ====== */
 #slide8 {
-  background: radial-gradient(ellipse at center, #0a0a1a 0%, #000 100%);
+  background: radial-gradient(ellipse at center, rgba(10,10,26,0.7) 0%, rgba(0,0,0,0.8) 100%), url('presentation/slide-08-dream.jpg') center/112% no-repeat;
 }
 #slide8 .headline {
   font-size: 72px;
@@ -440,7 +451,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 /* ====== SLIDE 9: AI Lives in Environment ====== */
 #slide9 {
-  background: radial-gradient(ellipse at center, #001a0a 0%, #000 100%);
+  background: radial-gradient(ellipse at center, rgba(0,26,10,0.7) 0%, rgba(0,0,0,0.8) 100%), url('presentation/slide-09-environment.jpg') center/110% no-repeat;
 }
 #slide9::before {
   content: '';
@@ -515,7 +526,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 /* ====== SLIDE 10: Agent vs Model ====== */
 #slide10 {
-  background: #000;
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('presentation/slide-10-agent-vs-model.jpg') center/112% no-repeat;
 }
 #slide10 .headline {
   font-size: 56px;
@@ -578,6 +589,21 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 }
 #slide10 .bottom em { font-style: normal; color: #22C55E; }
 
+/* Video backgrounds */
+.slide-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.25;
+}
+.slide > *:not(.slide-video) {
+  position: relative;
+  z-index: 1;
+}
+
 /* Navigation hint */
 .nav-hint {
   position: fixed;
@@ -594,12 +620,14 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 <!-- SLIDE 1: The Question -->
 <div class="slide active" id="slide1">
+  <video class="slide-video" autoplay muted loop playsinline><source src="presentation/videos/slide-01.mp4" type="video/mp4"></video>
   <div class="headline">מי צריך לפרוץ דרך?</div>
   <div class="subtitle">ההיסטוריה של מי שיכול לשנות את העולם — ולמה זה כבר לא מה שחשבתם</div>
 </div>
 
 <!-- SLIDE 2: Phase 1 - Research -->
 <div class="slide" id="slide2">
+  <video class="slide-video" autoplay muted loop playsinline><source src="presentation/videos/slide-02.mp4" type="video/mp4"></video>
   <div class="phase-num">01</div>
   <div class="icon">🔬</div>
   <div class="headline">מחקר המצאתי</div>
@@ -610,6 +638,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 <!-- SLIDE 3: Phase 2 - Scaling Laws -->
 <div class="slide" id="slide3">
+  <video class="slide-video" autoplay muted loop playsinline><source src="presentation/videos/slide-03.mp4" type="video/mp4"></video>
   <div class="phase-num">02</div>
   <div class="icon">📈</div>
   <div class="headline">Scaling Laws</div>
@@ -620,6 +649,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 <!-- SLIDE 4: Phase 3 - Product -->
 <div class="slide" id="slide4">
+  <video class="slide-video" autoplay muted loop playsinline><source src="presentation/videos/slide-04.mp4" type="video/mp4"></video>
   <div class="phase-num" style="font-size:200px;font-weight:900;color:rgba(34,197,94,0.08);position:absolute;top:-30px;left:80px;line-height:1;">03</div>
   <div class="headline">פריצת דרך דרך מוצר</div>
   <div class="desc">הטכנולוגיה כל כך מפותחת — שפריצת דרך מגיעה דרך צורת שימוש</div>
@@ -642,6 +672,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 <!-- SLIDE 5: Phase 4 - Independent Developer -->
 <div class="slide" id="slide5">
+  <video class="slide-video" autoplay muted loop playsinline><source src="presentation/videos/slide-05.mp4" type="video/mp4"></video>
   <div class="icon">🦞</div>
   <div class="headline">מפתח <span class="highlight">עצמאי אחד</span> בנה ארכיטקטורה חדשה</div>
   <div class="desc">
@@ -654,6 +685,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 <!-- SLIDE 6: Phase 5+6 - Users → Singularity -->
 <div class="slide" id="slide6">
+  <video class="slide-video" autoplay muted loop playsinline><source src="presentation/videos/slide-06.mp4" type="video/mp4"></video>
   <div class="two-phases">
     <div class="phase">
       <div class="phase-icon">👥</div>
@@ -682,6 +714,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 <!-- SLIDE 7: The Fuel - Chinese Models -->
 <div class="slide" id="slide7">
+  <video class="slide-video" autoplay muted loop playsinline><source src="presentation/videos/slide-07.mp4" type="video/mp4"></video>
   <div class="headline">הדלק של הסוכנים</div>
   <div class="models-grid">
     <div class="model-card">
@@ -719,6 +752,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 <!-- SLIDE 8: The Dream Metaphor -->
 <div class="slide" id="slide8">
+  <video class="slide-video" autoplay muted loop playsinline><source src="presentation/videos/slide-08.mp4" type="video/mp4"></video>
   <div class="headline">"המודלים עוד לא שם, הם עדיין טועים"</div>
   <div class="metaphor-row">
     <div class="metaphor-box box-brain">
@@ -748,6 +782,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 <!-- SLIDE 9: AI Lives in Environment -->
 <div class="slide" id="slide9">
+  <video class="slide-video" autoplay muted loop playsinline><source src="presentation/videos/slide-09.mp4" type="video/mp4"></video>
   <div class="headline">לראשונה — AI <em>חי</em> בתוך סביבה</div>
   <div class="sub">לא בחלון צ'אט. לא בסנדבוקס. בעולם אמיתי.</div>
   <div class="environment-strip">
@@ -766,6 +801,7 @@ body { font-family: 'Heebo', sans-serif; background: #000; overflow: hidden; dir
 
 <!-- SLIDE 10: Agent vs Model -->
 <div class="slide" id="slide10">
+  <video class="slide-video" autoplay muted loop playsinline><source src="presentation/videos/slide-10.mp4" type="video/mp4"></video>
   <div class="headline">ההבדל הקריטי</div>
   <div class="comparison">
     <div class="comp-box comp-model">
@@ -819,8 +855,8 @@ function resize() {
 }
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') showSlide(current + 1);
-  else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') showSlide(current - 1);
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') showSlide(current + 1);
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') showSlide(current - 1);
   else if (e.key === 'Home') showSlide(0);
   else if (e.key === 'End') showSlide(slides.length - 1);
 });

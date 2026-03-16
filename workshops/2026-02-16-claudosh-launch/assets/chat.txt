@@ -1,0 +1,240 @@
+21:13:52	 From Dvir Cohen : שאלה טכנית - נקבל את ההקלטה? או סיכום מילולי של השיעור?
+21:14:32	 From Aviram Abitbol : שאלה קצת טכנית נוספת- כמה זמן מתוכנן להיות המפגש הזה (או כל מפגש לצורך העניין)?
+21:15:01	 From Shinobi Productions : כל מפגש אמור להיות שעתיים
+21:15:35	 From Aviram Abitbol : Reacted to "כל מפגש אמור להיות ש..." with 🙏
+21:16:15	 From Guy Ronen : Replying to "שאלה טכנית - נקבל את..."
+
+תקבלו הקלטה
+21:16:31	 From Guy Ronen : Replying to "שאלה קצת טכנית נוספת..."
+
+בערך שעתיים
+21:20:55	 From Guy Ronen : https://claude.ai/new
+21:30:14	 From Avraham Y. Maeir : https://aviz85.github.io/claudosh-session1/
+21:30:45	 From Avraham Y. Maeir : https://code.claude.com/docs/en/quickstart
+21:34:19	 From רועי רזון : ההתקנה נותנת לסוכן גישה לכל הקבצים וההרשאות שבמחשב?
+21:34:23	 From אלעד צור : יצא לי רק לעשות לטרמינל קופי פיסט מ AI
+21:36:32	 From Guy Ronen : https://nodejs.org/en
+21:37:42	 From Guy Ronen : https://git-scm.com/install/windows
+21:37:59	 From Guy Ronen : https://www.python.org/downloads/
+21:41:24	 From Matan J : צריך לעשות את זה גם במאק? Node js ו git?
+21:41:45	 From Guy Ronen : Replying to "צריך לעשות את זה גם ..."
+
+אביץ מיד יענה על זה
+21:45:21	 From Shay Yitzhaki : Replying to "צריך לעשות את זה גם ..."
+
+‼️ Setup notes:  • Native installation exists but C:\Users\shay yitzhaki\.local\bin is not in your PATH. Add it by opening: System  Properties → Environment Variables → Edit User PATH → New → Add the path above. Then restart your terminal.
+21:49:07	 From Avraham Y. Maeir : https://aviz85.github.io/claude-code-windows-guide/he
+21:50:05	 From Shinobi Productions : ברירת מחדל עובד
+21:50:15	 From רועי רזון : שאלה
+21:52:38	 From Guy Ronen : https://code.claude.com/docs/en/setup#platform-specific-setup
+21:53:55	 From אלעד צור : תבקשו מ AI את כל הפקודות התקנה 
+קופי פייסט וזה עובד
+אם יש שגיאה מעתיקים לו והוא מתקן
+21:55:23	 From Guy Ronen : Replying to " ככה נראית תגובה להת..."
+
+כן :)
+21:55:49	 From Dvir Cohen : Replying to " ככה נראית תגובה להת..."
+
+🥳
+21:56:44	 From Guy Ronen : Replying to "לא עושה מתקין כלום"
+
+אם הוא לא מגיב, זה סימן שהוא מוריד כעת את התתקנה
+21:57:36	 From Aviram Abitbol : אפשר להראות רגע שוב איפה נמצאת ההגדרה?
+21:58:01	 From Guy Ronen : Replying to "אפשר להראות רגע שוב ..."
+
+איזו הגדרה?
+21:58:23	 From Aviram Abitbol : Replying to "אפשר להראות רגע שוב ..."
+
+שלא לתת לאנטרופיק להשתמש בסשנים שלי לאימון המודל הבא
+21:59:16	 From חמי בן לביא : Replying to "צריך לעשות את זה גם ..."
+
+@Guy Ronen אני מקפיץ את השאלה הזו
+22:01:06	 From חמי בן לביא : ,תסביר בבקשה איך עושים את זה במק. תודה
+22:02:21	 From Shinobi Productions : אפשר להכניס את הצילומי מסך לצאט שיעזור לכם להתגבר על זה
+22:05:52	 From קרן סדרינס : אני לא מצליחה
+22:05:56	 From Guy Ronen : https://nodejs.org/en
+22:06:14	 From Guy Ronen : claude
+22:06:33	 From שרה קובליק : אפשר תמונה של איך נראה כשההתקנה טובה?
+22:07:18	 From שרה קובליק : Replying to "אפשר תמונה של איך נר..."
+
+מעולה אז עבד לי
+22:07:37	 From Yonatan : עובד תודה!
+22:10:34	 From Yonatan : זאת הפעם הראשונה
+22:10:35	 From רועי רזון : את ההתקנה כבר עשיתי אבל יש שגיאה
+22:10:59	 From Aharoni Carmel : תוכלו לחזור על נושוא ה PATH
+22:11:41	 From Shinobi Productions : Replying to "תוכלו לחזור על נושוא..."
+
+לך לתיקיה שאתה רוצה שבה יהיה הפרויקט שלך, לחצן ימני, OPEN IN TERMINAL
+22:11:50	 From Shay Yitzhaki : ❯ 1. Claude account with subscription · Pro, Max, Team, or Enterprise   2. Anthropic Console account · API usage billing   3. 3rd-party platform · Amazon Bedrock, Microsoft Foundry, or Vertex AI
+22:11:57	 From Guy Ronen : Replying to "תוכלו לחזור על נושוא..."
+
+זו לא השאלה
+22:11:59	 From ליאור סבג : גם לי זה עשה בעיה ומצאתי את הפתרון הזה:פתח CMD חדש כמנהל (חיפוש > Run as administrator):textsetx PATH "%PATH%;C:\Users\User\.local\bin" /M
+22:12:02	 From חמי בן לביא : Replying to "איזה קובץ יש להתקין ..."
+
+@Guy Ronen tאם תוכל רק לענות לי על זה - אשמח
+22:16:17	 From Guy Ronen : Replying to "איזה קובץ יש להתקין ..."
+
+@חמי בן לביא בכל הקשור למק צריך לשאול את אביץ :)
+22:16:47	 From Hila Hayeila | הילה היעילה : Replying to "איזה קובץ יש להתקין ..."
+
+רואים את המסך של גיא..
+22:16:56	 From Hila Hayeila | הילה היעילה : Replying to "איזה קובץ יש להתקין ..."
+
+זה אמור להיות ככה?
+22:17:56	 From Nadav Ben Gal : אני מקבל עוד הודעת שגיאה: Bash(systeminfo 2>/dev/null | head -30)                                                                                 ⎿  Error: No suitable shell found. Claude CLI requires a Posix shell environment. Please ensure you have a valid shell      installed and the SHELL environment variable set.
+22:24:41	 From Guy Ronen : Replying to "מה כדאי לכתוב פה?"
+
+אופציה ראשונה בשלב זה היא בסדר
+22:25:13	 From Dvir Cohen : Replying to "מה כדאי לכתוב פה?"
+
+טנקס
+22:29:23	 From קרן סדרינס : תוכלו לחזור במשפט על הכתיבה בעברית?
+22:32:15	 From אוריאל הרצוג : עדין תקוע בשלב ההתקנה... הוא אמר שהתקנתי בהצלחה אבל אם כותב claude אני מקבל שגיאה. הפעלה כמנהל לא עוזרת... מישהו יכול לעזור?
+22:32:40	 From שרה קובליק : Replying to "עדין תקוע בשלב ההתקנ..."
+
+תשלח מה יש לך עכשיו
+22:32:51	 From אלעד צור : Replying to "עדין תקוע בשלב ההתקנ..."
+
+ניסית לעשות קופי לטרמינל ופייסט בג’מני? פתר לי את כל הבעיות שהיו בדרך
+22:34:21	 From אוריאל הרצוג : Replying to "עדין תקוע בשלב ההתקנ..."
+
+@אלעד צור מה הכוונה קופי מני
+22:34:55	 From Guy Ronen : Replying to "עדין תקוע בשלב ההתקנ..."
+
+מני מציע לך להעתיק את ההודעות מהטרמינל לצ'אט ג'יפיטי או לג'ימיני או לאתר של קלוד ולקבל משם עזרה
+22:35:13	 From שרה קובליק : Replying to "עדין תקוע בשלב ההתקנ..."
+
+תנסה לכתוב - npm install -g @anthropic-ai/claude-code
+22:35:59	 From קרן סדרינס : תודה
+22:36:02	 From אוריאל הרצוג : Replying to "עדין תקוע בשלב ההתקנ..."
+
+@שרה קובליק עובד! תודה!
+22:36:49	 From שרה קובליק : Replying to "עדין תקוע בשלב ההתקנ..."
+
+@אוריאל הרצוג בכיף תעדכן אם תצטרך עוד בהמשך
+22:46:16	 From Dvir Cohen : אפשר לבקש מהסוכן להכניס את הפרטים האלה לקובץ הזה?
+22:46:41	 From Nadav Ben Gal : יש לי עדיין הודעת שגיאה. משהו שקשור ב- pathניסיתי בג'מני, ניסיתי בקלוד קוד עצמו. ידנית ואוטומטית, כלום לא עובדאשמח לעזרה. זוהי הודעת השגיאהError: No suitable shell found. Claude CLI requires a Posix shell environment. Please ensure you have a valid shell      installed and the SHELL environment variable set.
+22:47:00	 From Guy Ronen : Replying to "אפשר לבקש מהסוכן להכ..."
+
+בהחלט
+22:47:11	 From Dvir Cohen : Replying to "אפשר לבקש מהסוכן להכ..."
+
+זהו, נהיינו מפונקים
+22:47:15	 From אוריאל הרצוג : Reacted to "@אוריאל הרצוג בכיף ת..." with 👏
+22:47:19	 From Guy Ronen : Replying to "אפשר לבקש מהסוכן להכ..."
+
+בצדק
+22:47:21	 From Dvir Cohen : Replying to "אפשר לבקש מהסוכן להכ..."
+
+חחח
+22:47:44	 From Matan J : איפה מצאת את המסמך בתוך התיקייה?
+22:47:57	 From Hila Hayeila | הילה היעילה : אין לי את המסמך בתוך התיקייה של קלוד
+22:49:11	 From Aviram Abitbol : איפה יוצרים אותו בווינדוס?
+22:49:19	 From ליאור סבג : אפשר יהיה לשלוח את התיקון עברית לווינדוס?
+22:50:01	 From שרה קובליק : לא הבנתי למה זה משמש בהמשך
+22:50:13	 From אלעד צור : זה לא מעמיס ומשבש את הקונטקסט ושורף טוקנים?
+22:50:52	 From Assaf Sabbah : claude.md הוא כללי או לכל פרויקט?
+22:51:20	 From שרה קובליק : Replying to "claude.md הוא כללי א..."
+
+נראה שזה נתון להחלטתך איך לייצר אותו
+22:51:28	 From Guy Ronen : Replying to "claude.md הוא כללי א..."
+
+הקובץ שנמצא בתיקיית המשתמש הוא כללי עבור כל השיחות עם קלודאפשר בנוסף ליצור קובץ כזה בכל תיקייה בנפרד והוא יהיה רלוונטי רק לעבודה בתוך התיקייה
+22:51:39	 From Guy Ronen : Replying to "זה לא מעמיס ומשבש את..."
+
+הכל במידה
+22:52:08	 From Guy Ronen : Replying to "איפה יוצרים אותו בוו..."
+
+C:\Users\YouUserrName\.claudeזה בשביל הקובץ הכללי
+22:52:25	 From שרה קובליק : Replying to "לא הבנתי למה זה משמש..."
+
+@Guy Ronen אשמח למענה
+22:52:40	 From Guy Ronen : Replying to "לא הבנתי למה זה משמש..."
+
+הסברתי כעת למה זה משמש, תיכף אתן דוגמא נוספת
+22:53:19	 From שרה קובליק : Replying to "לא הבנתי למה זה משמש..."
+
+הקשבתי פשוט לא הבנתי את התועלת בהמשך השימוש לכן שואלת
+22:59:37	 From Guy Ronen : Replying to "לא הבנתי למה זה משמש..."
+
+מקווה שעכשיו זה ברור יותר
+23:00:18	 From Guy Ronen : Ask claude-code-guide how to create the claude.md file in my user folder
+23:02:46	 From שרה קובליק : Replying to "לא הבנתי למה זה משמש..."
+
+כן תודה רבה
+23:03:28	 From Dvir Cohen : קלוד קוד גייד נמצא בתוך הסוכן שאנחנו מדברים איתו מהשורת הפעלה כן?
+23:03:32	 From Dvir Cohen : לא מהאתר של קלוד
+23:03:45	 From Guy Ronen : Replying to "קלוד קוד גייד נמצא ב..."
+
+כן. מובהנה.
+23:03:47	 From Guy Ronen : Replying to "קלוד קוד גייד נמצא ב..."
+
+מובנה
+23:04:30	 From Guy Ronen : create  user-level claude.md with basic instructions for you.Ask claude-code-guide how to create the claude.md file in my user folder
+23:04:52	 From Dvir Cohen : Replying to "קלוד קוד גייד נמצא ב..."
+
+כמו סוג של הוראות יצרן כדי שיהיה לו קל לגשת למה הוא יודע לעשות?
+23:08:34	 From אוריאל הרצוג : פספסתי משהו, את התיקיות כדאי ליצור בתוך תיקיית .claude? או רק את הקובץ claude.md
+23:11:38	 From אלעד צור : שאלה לפני שנסיים, תתייחו מה דומה ושונה בין קלודקוד ו - openclaw
+23:11:50	 From havardi : עדיין הוא מכיר תיקיות כלליות במחשב, לא?
+23:14:49	 From Guy Ronen : Replying to "פספסתי משהו, את התיק..."
+
+לאאת התיקיות השונות אתה פותח בכל מקום שאתה רוצה במחשב
+23:15:02	 From Guy Ronen : Replying to "עדיין הוא מכיר תיקיו..."
+
+כן, אבל אתה צריך להפנות אותו במיוחד ולתת לו הרשאות
+23:15:04	 From אוריאל הרצוג : הבנתי תודה
+23:15:17	 From גיל : יש עדיפות לעבוד על הטרמינל ולא על האפליקציה של קלוד קוד על המחדש
+23:15:17	 From יצחק וולף : ואיך פותחים את הקובץ הזה שנמצא בתוך התיקיה?
+23:15:40	 From havardi : Reacted to "כן, אבל אתה צריך להפ..." with 👍
+23:15:41	 From אלעד צור : מה דומה ושונה בין קלודקוד ו - openclaw
+23:15:48	 From Guy Ronen : Replying to "ואיך פותחים את הקובץ..."
+
+לפתוח לקריאה?כמו שפותחים כל קובץ במחשב,אם זה קובץ וורד או קובץ אקסל
+23:15:53	 From Guy Ronen : Replying to "ואיך פותחים את הקובץ..."
+
+למשל
+23:15:59	 From Guy Ronen : Replying to "יש עדיפות לעבוד על ה..."
+
+איזו אפליקציה
+23:16:10	 From Guy Ronen : Replying to "מה דומה ושונה בין קל..."
+
+לא להיום :)
+23:16:43	 From גיל : Replying to "יש עדיפות לעבוד על ה..."
+
+יש אפליקציה של קלוד להורדה מהאתר שלהם למחשב
+23:17:22	 From גיל : Replying to "יש עדיפות לעבוד על ה..."
+
+זה קובץ על המחשב גם קלוד קוד גם קווורק וגם הצט
+23:17:54	 From אוריאל הרצוג : בעניין הRTL, אני כותב לו בעברית זה נכתב הפוך אבל הוא מבין, ביקשתי שיכתוב לי LTR ואז אני קורא את זה RTL והוא מסתדר
+23:18:06	 From Dvir Cohen : וואלה?
+23:18:09	 From אלעד צור : Replying to "מה דומה ושונה בין קל..."
+
+תדברו על זה בהמשך? אז בינתיים אני לא מנסה להתקין..
+23:18:22	 From Guy Ronen : Replying to "בעניין הRTL, אני כות..."
+
+שלח צילום מסף
+23:18:24	 From Guy Ronen : Replying to "בעניין הRTL, אני כות..."
+
+מסך
+23:20:02	 From גיל : נראה לי שזה יותר נח ל אשנשים שלא אוהבים טרמינל
+23:24:08	 From Hila Hayeila | הילה היעילה : אנחנו נלמדמרק מהטרמינל או שנעבור ל visual studio?
+23:24:35	 From Guy Ronen : Replying to "אנחנו נלמדמרק מהטרמי..."
+
+בעזרת השם אביץ יסכים לי להדגים לכם עבודה עם VS
+23:24:41	 From Hila Hayeila | הילה היעילה : Reacted to "בעזרת השם אביץ יסכים..." with 😂
+23:24:52	 From Shinobi Productions : Replying to "אנחנו נלמדמרק מהטרמי..."
+
+מה לגבי אנטי גרביטי?
+23:25:10	 From Guy Ronen : Replying to "אנחנו נלמדמרק מהטרמי..."
+
+גם אפשר באותה מידה
+23:28:28	 From Matan J : אליפות תודה
+23:28:36	 From קרן סדרינס : ___תודה ולילה טוב
+23:31:05	 From Dvir Cohen : מי שבעניין ללמוד בעזרת VScode או antigravity בשביל העברית שיעשה לייק
+23:31:16	 From Guy Ronen : Reacted to "מי שבעניין ללמוד בעז..." with 🙃
+23:31:19	 From Aviram Abitbol : Reacted to "מי שבעניין ללמוד בעז..." with 👍
+23:34:05	 From חמי בן לביא : חברים, היה תענוג!!
+תודה רבה, יש הרבה מה ללמוד
+23:34:41	 From אלעד צור : היה מדהים, תוך כדי שיעור כבר ניקיתי את המחשב ותייגתי את כל הקבצים
