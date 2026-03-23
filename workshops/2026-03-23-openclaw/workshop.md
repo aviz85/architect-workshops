@@ -13,14 +13,14 @@
 | **Duration** | 2 hours (10:00-12:00) |
 | **Price** | ₪75 |
 | **Platform** | Zoom |
-| **Zoom Link** | [TBD] |
+| **Zoom Link** | https://us06web.zoom.us/j/81568181210?pwd=I3wv4QvqPhyjcJgr2udtWFAkrWTZOo.1 |
 
 ### WhatsApp Group
 
 | Field | Value |
 |-------|-------|
-| **WhatsApp Group Link** | [TBD] |
-| **Green API Group ID** | [TBD] |
+| **WhatsApp Group Link** | https://chat.whatsapp.com/JDjnVXXQtL52ffEkjWFhcY |
+| **Green API Group ID** | 120363408764028844@g.us |
 
 ---
 
