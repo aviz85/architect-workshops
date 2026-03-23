@@ -187,6 +187,7 @@ OpenClaw הוא הטרנד הכי חם - סוכני AI עצמאיים שרצים
 |-------------|-----|
 | [Registration] | [TBD] |
 | [OpenClaw Guide] | https://aviz85.github.io/openclaw-guide/ |
+| **Knowledge Hub (אתר הידע)** | **https://aviz85.github.io/openclaw-knowledge-hub/** |
 
 ---
 
