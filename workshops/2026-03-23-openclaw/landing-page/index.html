@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מי מפחד מ-OpenClaw? | סדנה עם אביץ הארכיטקט</title>
+
+  <meta name="description" content="איך ללכת על בטוח ולהנות במקסימום? סדנת סוכני AI עם OpenClaw - הטרנד הכי חם בטכנולוגיה">
+  <meta property="og:title" content="מי מפחד מ-OpenClaw?">
+  <meta property="og:description" content="איך ללכת על בטוח ולהנות במקסימום? הטרנד הכי חם היום בטכנולוגיה שאתם לא רוצים לפספס">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Secular+One&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      --bg-deep: #080808;
+      --bg-surface: #0f1012;
+      --bg-card: #161819;
+      --bg-elevated: #1e2023;
+
+      --orange: #F97316;
+      --orange-light: #FB923C;
+      --orange-dark: #EA580C;
+      --orange-glow: rgba(249, 115, 22, 0.15);
+      --orange-faint: rgba(249, 115, 22, 0.06);
+
+      --green: #22C55E;
+      --green-light: #4ADE80;
+      --green-dark: #16A34A;
+      --green-glow: rgba(34, 197, 94, 0.12);
+
+      --red-soft: #EF4444;
+      --yellow-soft: #EAB308;
+
+      --text-primary: #f0f0f0;
+      --text-secondary: #a0a0a0;
+      --text-muted: #666;
+
+      --border-subtle: rgba(255,255,255,0.06);
+
+      --font-body: 'Rubik', sans-serif;
+      --font-display: 'Secular One', sans-serif;
+
+      --max-width: 1100px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg-deep);
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      background: var(--bg-deep);
+      line-height: 1.7;
+      overflow-x: hidden;
+      direction: rtl;
+    }
+
+    /* ===== GRAIN OVERLAY ===== */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: linear-gradient(to top, var(--bg-deep), transparent);
+      pointer-events: none;
+    }
+
+    .hero-avatar {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
+      animation: float 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 40px rgba(249,115,22,0.3));
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--orange);
+      color: #000;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      padding: 0.4rem 1.2rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
+      letter-spacing: 0.02em;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      color: var(--text-primary);
+      position: relative;
+      z-index: 2;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span {
+      color: var(--orange);
+    }
+
+    .hero-slogan {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      color: var(--green-light);
+      font-weight: 600;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 0.8rem;
+      font-family: var(--font-display);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-secondary);
+      max-width: 600px;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 2rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 2rem;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    .hero-meta-item .icon {
+      font-size: 1.2rem;
+    }
+
+    .price-badge {
+      background: var(--green);
+      color: #000;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      padding: 0.5rem 1.5rem;
+      border-radius: 100px;
+      position: relative;
+      z-index: 2;
+      display: inline-block;
+      box-shadow: 0 0 30px var(--green-glow);
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--orange);
+      color: #000;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      padding: 1rem 3rem;
+      border-radius: 16px;
+      text-decoration: none;
+      position: relative;
+      z-index: 2;
+      margin-top: 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 30px rgba(249,115,22,0.3);
+    }
+
+    .cta-btn:hover {
+      background: var(--orange-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 40px rgba(249,115,22,0.5);
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      max-width: 700px;
+    }
+
+    /* ===== PROBLEM SECTION ===== */
+    .problem {
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+
+    .problem-quote {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 750px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+
+    .problem-quote strong {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    .problem-punchline {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      color: var(--green-light);
+    }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      height: 1px;
+      background: linear-gradient(to left, transparent, var(--orange-glow), rgba(249,115,22,0.3), var(--orange-glow), transparent);
+    }
+
+    /* ===== ARCHETYPES ===== */
+    .archetypes {
+      text-align: center;
+    }
+
+    .archetype-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .archetype-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      text-align: right;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .archetype-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .archetype-card:nth-child(1)::before { background: var(--green); }
+    .archetype-card:nth-child(2)::before { background: var(--green-light); }
+    .archetype-card:nth-child(3)::before { background: var(--yellow-soft); }
+    .archetype-card:nth-child(4)::before { background: var(--orange-light); }
+    .archetype-card:nth-child(5)::before { background: var(--orange); }
+
+    .archetype-card:hover {
+      border-color: rgba(249,115,22,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+
+    .archetype-emoji {
+      font-size: 2.5rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .archetype-name {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+      color: var(--text-primary);
+    }
+
+    .archetype-role {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .archetype-detail {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .archetype-detail strong {
+      color: var(--text-secondary);
+    }
+
+    .risk-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .risk-zero { background: rgba(34,197,94,0.15); color: var(--green); }
+    .risk-minimal { background: rgba(74,222,128,0.12); color: var(--green-light); }
+    .risk-low { background: rgba(234,179,8,0.12); color: var(--yellow-soft); }
+    .risk-medium { background: rgba(251,146,60,0.12); color: var(--orange-light); }
+    .risk-medium-high { background: rgba(249,115,22,0.12); color: var(--orange); }
+
+    .progression {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 3rem;
+      padding: 1.2rem 2rem;
+      background: var(--bg-card);
+      border-radius: 100px;
+      max-width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      border: 1px solid var(--border-subtle);
+      flex-wrap: wrap;
+    }
+
+    .progression-step {
+      font-size: 0.85rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      font-weight: 600;
+    }
+
+    .progression-arrow {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* ===== LEARN SECTION ===== */
+    .learn-list {
+      list-style: none;
+      display: grid;
+      gap: 1rem;
+      max-width: 700px;
+    }
+
+    .learn-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+    }
+
+    .learn-item:hover {
+      border-color: rgba(34,197,94,0.2);
+      background: var(--bg-elevated);
+    }
+
+    .learn-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .learn-text {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+    }
+
+    .learn-text strong {
+      color: var(--text-primary);
+    }
+
+    /* ===== FOR WHO ===== */
+    .for-who {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .for-who-box {
+      background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated));
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 3rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .for-who-box p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .for-who-box .highlight {
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    /* ===== LOGISTICS / CTA SECTION ===== */
+    .logistics {
+      text-align: center;
+      padding: 6rem 2rem;
+      position: relative;
+    }
+
+    .logistics::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--green-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .logistics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
+      max-width: 700px;
+      margin: 2rem auto 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logistics-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .logistics-item .label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .logistics-item .value {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--text-primary);
+    }
+
+    .logistics-item .value.price-value {
+      color: var(--green);
+      font-size: 1.5rem;
+    }
+
+    .final-cta {
+      position: relative;
+      z-index: 2;
+    }
+
+    .final-cta .cta-btn {
+      font-size: 1.4rem;
+      padding: 1.2rem 4rem;
+      background: var(--green);
+      box-shadow: 0 4px 30px var(--green-glow);
+    }
+
+    .final-cta .cta-btn:hover {
+      background: var(--green-light);
+      box-shadow: 0 8px 50px rgba(34,197,94,0.4);
+    }
+
+    .pentagon-note {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    footer a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 4rem 1.5rem;
+      }
+
+      .hero-avatar {
+        width: 140px;
+        height: 140px;
+      }
+
+      .hero-meta {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .archetype-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .progression {
+        flex-direction: column;
+        border-radius: 16px;
+        gap: 0.3rem;
+      }
+
+      .progression-arrow {
+        transform: rotate(90deg);
+      }
+
+      .logistics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      section {
+        padding: 3rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logistics-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <img src="assets/avatar.png" alt="OpenClaw" class="hero-avatar fade-up">
+    <div class="hero-badge fade-up">250,000+ GitHub Stars</div>
+    <h1 class="fade-up">מי מפחד מ-<span>OpenClaw</span>?</h1>
+    <p class="hero-slogan fade-up">איך ללכת על בטוח ולהנות במקסימום?</p>
+    <p class="hero-subtitle fade-up">הטרנד הכי חם היום בטכנולוגיה שאתם לא רוצים לפספס</p>
+    <div class="hero-meta fade-up">
+      <span class="hero-meta-item"><span class="icon">📅</span> יום חמישי 26.3</span>
+      <span class="hero-meta-item"><span class="icon">🕙</span> 10:00-12:00</span>
+      <span class="hero-meta-item"><span class="icon">💻</span> זום</span>
+    </div>
+    <span class="price-badge fade-up">₪75</span>
+    <a href="https://mrng.to/o0nCmWxLCX" target="_blank" class="cta-btn fade-up">הרשמה לסדנה →</a>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== THE PROBLEM ===== -->
+  <section class="problem">
+    <p class="problem-quote fade-up">
+      כולם מדברים על סוכני AI.<br>
+      רוב האנשים <strong>מפחדים</strong>.<br>
+      חלק קופצים למים העמוקים.<br>
+      <strong>שניהם טועים.</strong>
+    </p>
+    <p class="problem-punchline fade-up">יש דרך שלישית: ליהנות מהטכנולוגיה, עם כללים ברורים.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== AGENT ARCHETYPES ===== -->
+  <section class="archetypes">
+    <h2 class="section-title fade-up">הכירו את הטיפוסים</h2>
+    <p class="section-subtitle fade-up" style="margin-left:auto;margin-right:auto;">לא כל סוכן הוא אותו דבר. כל טיפוס עם גבולות ברורים - מה יודע, מה מורשה, ואיפה חי.</p>
+
+    <div class="archetype-grid">
+      <div class="archetype-card fade-up">
+        <span class="archetype-emoji">👁️</span>
+        <div class="archetype-name">הזקיף</div>
+        <div class="archetype-role">מנטר, מתריע, לא נוגע בכלום</div>
+        <div class="archetype-detail"><strong>יודע:</strong> כללי ניטור שאתה מגדיר</div>
+        <div class="archetype-detail"><strong>מורשה:</strong> קריאה בלבד</div>
+        <div class="archetype-detail"><strong>חי:</strong> קונטיינר על VPS</div>
+        <span class="risk-indicator risk-zero">סיכון אפסי</span>
+      </div>
+
+      <div class="archetype-card fade-up">
+        <span class="archetype-emoji">🔍</span>
+        <div class="archetype-name">החוקר</div>
+        <div class="archetype-role">חוקר, מנתח, מסכם</div>
+        <div class="archetype-detail"><strong>יודע:</strong> רק מה שנותנים לו - אפס הקשר אישי</div>
+        <div class="archetype-detail"><strong>מורשה:</strong> חיפוש, ניתוח, סיכום</div>
+        <div class="archetype-detail"><strong>חי:</strong> VPS מבודד</div>
+        <span class="risk-indicator risk-minimal">סיכון מינימלי</span>
+      </div>
+
+      <div class="archetype-card fade-up">
+        <span class="archetype-emoji">💼</span>
+        <div class="archetype-name">עובד המשרד</div>
+        <div class="archetype-role">משימות יומיומיות על המחשב שלך</div>
+        <div class="archetype-detail"><strong>יודע:</strong> הקבצים והפרויקטים שלך</div>
+        <div class="archetype-detail"><strong>מורשה:</strong> קריאה + כתיבה מוגבלת</div>
+        <div class="archetype-detail"><strong>חי:</strong> מקומית (CLI)</div>
+        <span class="risk-indicator risk-low">סיכון נמוך</span>
+      </div>
+
+      <div class="archetype-card fade-up">
+        <span class="archetype-emoji">🎓</span>
+        <div class="archetype-name">היועץ</div>
+        <div class="archetype-role">מומחה בתחום, זוכר הקשר בין שיחות</div>
+        <div class="archetype-detail"><strong>יודע:</strong> ידע מקצועי + קונטקסט מצטבר</div>
+        <div class="archetype-detail"><strong>מורשה:</strong> קריאה + זיכרון</div>
+        <div class="archetype-detail"><strong>חי:</strong> קונטיינר מקומי / VPS</div>
+        <span class="risk-indicator risk-medium">סיכון בינוני</span>
+      </div>
+
+      <div class="archetype-card fade-up">
+        <span class="archetype-emoji">🎨</span>
+        <div class="archetype-name">היוצר</div>
+        <div class="archetype-role">יוצר תוכן עם מפתחות API</div>
+        <div class="archetype-detail"><strong>יודע:</strong> כלי יצירה, תבניות, סגנון</div>
+        <div class="archetype-detail"><strong>מורשה:</strong> קריאה + כתיבה + API מוגבל</div>
+        <div class="archetype-detail"><strong>חי:</strong> קרוב אליך (מקומי)</div>
+        <span class="risk-indicator risk-medium-high">סיכון בינוני-גבוה</span>
+      </div>
+    </div>
+
+    <div class="progression fade-up">
+      <span class="progression-step risk-zero">הזקיף</span>
+      <span class="progression-arrow">←</span>
+      <span class="progression-step risk-minimal">החוקר</span>
+      <span class="progression-arrow">←</span>
+      <span class="progression-step risk-low">עובד המשרד</span>
+      <span class="progression-arrow">←</span>
+      <span class="progression-step risk-medium">היועץ</span>
+      <span class="progression-arrow">←</span>
+      <span class="progression-step risk-medium-high">היוצר</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== WHAT YOU'LL LEARN ===== -->
+  <section class="learn">
+    <h2 class="section-title fade-up">מה תלמדו?</h2>
+    <ul class="learn-list">
+      <li class="learn-item fade-up">
+        <span class="learn-icon">🌟</span>
+        <span class="learn-text"><strong>מה זה OpenClaw</strong> - ולמה 250,000+ כוכבים בגיטהאב (עבר את React!)</span>
+      </li>
+      <li class="learn-item fade-up">
+        <span class="learn-icon">🦀</span>
+        <span class="learn-text"><strong>5 טיפוסי סוכנים</strong> - כל אחד עם גבולות ברורים ומוגדרים</span>
+      </li>
+      <li class="learn-item fade-up">
+        <span class="learn-icon">🛡️</span>
+        <span class="learn-text"><strong>כללים פשוטים</strong> - אנחנו לא הפנטגון. צריך כללים ברורים, לא אבטחה קיצונית</span>
+      </li>
+      <li class="learn-item fade-up">
+        <span class="learn-icon">🔴</span>
+        <span class="learn-text"><strong>דמו חי</strong> - סוכן אמיתי שרץ 24/7 על שרת, בזמן אמת</span>
+      </li>
+      <li class="learn-item fade-up">
+        <span class="learn-icon">🚀</span>
+        <span class="learn-text"><strong>איך מתחילים בבית</strong> - צעד אחר צעד, מהבטוח ביותר עד המתקדם</span>
+      </li>
+    </ul>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== FOR WHO ===== -->
+  <section class="for-who">
+    <div class="for-who-box fade-up">
+      <h2 class="section-title" style="margin-bottom: 1.5rem;">למי זה מתאים?</h2>
+      <p><span class="highlight">מומלץ:</span> מי שכבר התקין Claude Code או שיש לו היכרות בסיסית עם AI</p>
+      <p>בעלי עסקים שרוצים להבין את עולם הסוכנים העצמאיים</p>
+      <p>בוגרי סדנאות קודמות שרוצים לעלות רמה</p>
+      <p>כל מי שמרגיש שהוא <span class="highlight">"מפספס"</span> אבל חושש להתחיל</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== LOGISTICS / FINAL CTA ===== -->
+  <section class="logistics" id="register">
+    <h2 class="section-title fade-up" style="position:relative;z-index:2;">מוכנים?</h2>
+
+    <div class="logistics-grid">
+      <div class="logistics-item fade-up">
+        <div class="label">תאריך</div>
+        <div class="value">יום חמישי 26.3</div>
+      </div>
+      <div class="logistics-item fade-up">
+        <div class="label">שעה</div>
+        <div class="value">10:00-12:00</div>
+      </div>
+      <div class="logistics-item fade-up">
+        <div class="label">פלטפורמה</div>
+        <div class="value">זום</div>
+      </div>
+      <div class="logistics-item fade-up">
+        <div class="label">מחיר</div>
+        <div class="value price-value">₪75</div>
+      </div>
+    </div>
+
+    <div class="final-cta fade-up">
+      <a href="https://mrng.to/o0nCmWxLCX" target="_blank" class="cta-btn">הרשמה לסדנה →</a>
+    </div>
+    <p class="pentagon-note fade-up">אנחנו לא הפנטגון. אנחנו רק רוצים ליהנות - בחכמה.</p>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>סדנה מבית <a href="https://linktr.ee/aviz85" target="_blank">אביץ הארכיטקט</a></p>
+    <p style="font-size:0.8rem;">AVIZ - The Architect</p>
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.querySelectorAll('.fade-up').forEach((el, i) => {
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 85%',
+        onEnter: () => {
+          el.classList.add('visible');
+          el.style.transitionDelay = `${(i % 5) * 0.08}s`;
+        },
+        once: true
+      });
+    });
+
+    // Stagger archetype cards
+    const cards = document.querySelectorAll('.archetype-card');
+    cards.forEach((card, i) => {
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 85%',
+        onEnter: () => {
+          setTimeout(() => card.classList.add('visible'), i * 120);
+        },
+        once: true
+      });
+    });
+  </script>
+
+</body>
+</html>
