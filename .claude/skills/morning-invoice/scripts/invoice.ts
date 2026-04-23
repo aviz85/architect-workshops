@@ -148,24 +148,26 @@ class MorningInvoiceClient {
   }
 
   /**
-   * Create a single invoice
+   * Build the document request body for create or preview.
+   * Shared between createInvoice() and previewInvoice() so the preview PDF
+   * matches exactly what would be issued.
    */
-  async createInvoice(customer: CustomerData, paymentDate?: string): Promise<InvoiceResult> {
+  private buildInvoicePayload(customer: CustomerData, paymentDate?: string) {
     const paymentType = customer.paymentMethod === "העברה בנקאית" ? 4 : 10;
     const today = new Date().toISOString().split("T")[0];
-    const invoiceDate = today; // Invoice date is always today
-    const actualPaymentDate = paymentDate || customer.paymentDate || today; // Payment date from data
+    const invoiceDate = today;
+    const actualPaymentDate = paymentDate || customer.paymentDate || today;
     const dueDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0];
 
-    const requestBody = {
+    return {
       description: customer.title,
       remarks: `חשבונית עבור ${customer.name}`,
-      type: 320, // חשבונית מס / קבלה
+      type: 320,
       date: invoiceDate,
-      dueDate: dueDate,
+      dueDate,
       lang: "he",
       currency: "ILS",
-      vatType: 0, // VAT included in price
+      vatType: 0,
       rounding: true,
       signed: true,
       attachment: true,
@@ -198,6 +200,74 @@ class MorningInvoiceClient {
         },
       ],
     };
+  }
+
+  /**
+   * Generate a PDF preview of an invoice without issuing it.
+   * Calls /documents/preview which returns the PDF as base64. Saves to /tmp/
+   * and opens it in the default viewer (macOS `open`).
+   * Use this BEFORE createInvoice() to verify the document looks correct.
+   */
+  async previewInvoice(customer: CustomerData, paymentDate?: string): Promise<{ success: boolean; pdfPath?: string; error?: string }> {
+    const requestBody = this.buildInvoicePayload(customer, paymentDate);
+    const invoiceDate = requestBody.date;
+    const actualPaymentDate = requestBody.payment[0].date;
+
+    try {
+      console.log(`Generating preview for ${customer.name} (${customer.amount} NIS, invoice: ${invoiceDate}, payment: ${actualPaymentDate})...`);
+
+      const headers = await this.getAuthHeaders();
+      const response = await fetch(`${this.baseUrl}/documents/preview`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
+      }
+
+      const result = await response.json() as { file?: string };
+      if (!result.file) throw new Error("preview response had no `file` field");
+
+      const pdfPath = `/tmp/morning-preview-${Date.now()}.pdf`;
+      fs.writeFileSync(pdfPath, Buffer.from(result.file, "base64"));
+
+      const grossAmount = customer.amount;
+      const netAmount = (grossAmount / 1.18).toFixed(2);
+      const vatAmount = (grossAmount - parseFloat(netAmount)).toFixed(2);
+
+      console.log(`\n=== PREVIEW (not issued) ===`);
+      console.log(`  Customer: ${customer.name}${customer.taxId ? ` (ח.פ. ${customer.taxId})` : ""}`);
+      console.log(`  Emails:   ${(customer.emails && customer.emails.length > 0 ? customer.emails : [customer.email]).join(", ")}`);
+      console.log(`  Net:      ₪${netAmount}`);
+      console.log(`  VAT 18%:  ₪${vatAmount}`);
+      console.log(`  Gross:    ₪${grossAmount.toFixed(2)}`);
+      console.log(`  Payment:  ${customer.paymentMethod} on ${actualPaymentDate}`);
+      console.log(`\n  PDF: ${pdfPath}`);
+      console.log(`  Run again WITHOUT --preview to issue.\n`);
+
+      try {
+        require("child_process").spawn("open", [pdfPath], { detached: true, stdio: "ignore" }).unref();
+      } catch {
+        // open is macOS-only; on other platforms the user opens manually
+      }
+
+      return { success: true, pdfPath };
+    } catch (error) {
+      console.error(`Preview failed for ${customer.name}: ${(error as Error).message}`);
+      return { success: false, error: (error as Error).message };
+    }
+  }
+
+  /**
+   * Create a single invoice
+   */
+  async createInvoice(customer: CustomerData, paymentDate?: string): Promise<InvoiceResult> {
+    const requestBody = this.buildInvoicePayload(customer, paymentDate);
+    const invoiceDate = requestBody.date;
+    const actualPaymentDate = requestBody.payment[0].date;
 
     try {
       console.log(`Creating invoice for ${customer.name} (${customer.amount} NIS, invoice: ${invoiceDate}, payment: ${actualPaymentDate})...`);
@@ -462,11 +532,15 @@ async function main() {
         };
 
         if (!customer.name || !customer.email || !customer.amount) {
-          console.error("Usage: invoice.ts create-single --name NAME --email EMAIL --phone PHONE --amount AMOUNT [--date YYYY-MM-DD] [--tax-id HP] [--emails a@b.com,c@d.com]");
+          console.error("Usage: invoice.ts create-single --name NAME --email EMAIL --phone PHONE --amount AMOUNT [--date YYYY-MM-DD] [--tax-id HP] [--emails a@b.com,c@d.com] [--preview]");
           process.exit(1);
         }
 
-        await client.createInvoice(customer);
+        if (args.includes("--preview")) {
+          await client.previewInvoice(customer);
+        } else {
+          await client.createInvoice(customer);
+        }
         break;
       }
 
@@ -540,6 +614,7 @@ Options for create-single:
   --description <desc>          Line item description
   --payment <method>            Payment method (ביט / העברה בנקאית)
   --date <YYYY-MM-DD>           Actual payment date (defaults to today)
+  --preview                     Generate PDF preview only (does NOT issue invoice). Always run this first.
 
 Options for batch:
   --file <path>                 Path to customer markdown table

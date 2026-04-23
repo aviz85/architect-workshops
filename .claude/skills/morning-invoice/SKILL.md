@@ -12,8 +12,18 @@ Generate invoices using the Morning (Green Invoice) API for workshop participant
 This skill integrates with Morning (greeninvoice.co.il) to:
 - Create individual invoices (חשבונית מס / קבלה)
 - Batch process invoices from a customer table
-- Dry-run to preview before actual creation
+- **`--preview` flag → real PDF preview via Morning's `/documents/preview` endpoint (does NOT issue)**
 - Track processed customers to avoid duplicates
+
+## Mandatory workflow: preview → confirm → issue
+
+**Every single-invoice issuance MUST be a two-step flow:**
+
+1. Run with `--preview` first → opens real PDF for review (not issued, not in Morning's records)
+2. User confirms the PDF looks right
+3. Re-run with the **exact same args minus `--preview`** → issues the binding tax invoice
+
+A tax invoice (חשבונית מס) is irreversible once issued. Never skip step 1.
 
 ## Setup
 
@@ -61,16 +71,19 @@ npx ts-node invoice.ts test
 # Dry-run: preview invoices without creating
 npx ts-node invoice.ts dry-run
 
-# Create a single test invoice
+# Step 1 — preview PDF (REQUIRED before issuing)
+npx ts-node invoice.ts create-single --name "Test Customer" --email "test@example.com" --phone "0501234567" --amount 500 --description "Workshop" --preview
+
+# Step 2 — issue (run the exact same line WITHOUT --preview after user confirms)
 npx ts-node invoice.ts create-single --name "Test Customer" --email "test@example.com" --phone "0501234567" --amount 500 --description "Workshop"
 
-# Business invoice (company with ח.פ. + multiple recipient emails)
+# Business invoice (company with ח.פ. + multiple recipient emails) — preview first
 npx ts-node invoice.ts create-single \
   --name "Company Ltd" --tax-id "517093746" \
   --emails "contact@company.co.il,dokka@company.co.il" \
   --phone "0501234567" --amount 500 \
   --payment "העברה בנקאית" --date "2026-03-15" \
-  --description "סדנת AI"
+  --description "סדנת AI" --preview
 
 # Batch create from customer table
 npx ts-node invoice.ts batch --file customers.md
@@ -255,7 +268,8 @@ Total: 3 invoices, 1,400 NIS
 
 ## Notes
 
-- Always use `--dry-run` first to preview
+- **MANDATORY:** every `create-single` issuance is preceded by a `--preview` run. The PDF opens for the user to verify, only then re-run without `--preview` to issue.
+- For batch jobs, `--dry-run` shows the customer list as text (no PDFs). Use that before a batch.
 - Production invoices are sent to customer email automatically
 - Use sandbox for testing (different API URL)
 - Keep API credentials secure - never commit .env file
