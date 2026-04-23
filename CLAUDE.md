@@ -6,7 +6,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 # Architect Workshops
 
-This repository manages workshops by **Aviz - The Architect** - educational tech workshops delivered in Hebrew via Zoom.
+This repository manages workshops by **Aviz - The Architect** - educational tech workshops (and lectures) delivered in Hebrew via Zoom.
+
+## Cadence & Pricing (Current)
+
+- **Cadence:** 1-2 workshops per week (target: steady recurring revenue)
+- **Price:** ₪100 per participant (default, as of April 2026)
+- **"Workshop" is a general label** - can also be a lecture. Either way: clear preparation, clear value.
+- **Preferred days:** Monday or Thursday
+- **Time slots:** Morning (e.g. 10:00) or evening (e.g. 20:00) - both valid
+- **⛔ Hard block:** Monday MORNING is unavailable (Dreemz days). Monday evening is fine.
+- **Friday/Saturday:** Never without explicit approval (Shabbat rule)
 
 ## Documentation Language Rule
 

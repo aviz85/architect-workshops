@@ -20,6 +20,7 @@ A collection of potential workshop topics for "Aviz - The Architect".
 | **Agentic Apps לעסקים**         | בניית אפליקציות שלמות עם Claude Code primitives - ללא קוד מסורתי | Advanced     | 3 hours  | Concept   |
 | AI Tools for Architects         | Using AI for floor plans, rendering, client presentations | Intermediate | 3 hours  | Draft     |
 | **סידרת קלודוש - 3 מפגשים**   | Series: Launch→Spaceship→Astronauts. ₪297. New cycle every 9 days. | All Levels   | 3×90 min | **Active** |
+| **לסגור לופ**                   | התנאי הקריטי שהופך את הסוכן לבהמת פרודוקטיביות - Code vs Desktop, 3 loop types | Intermediate | 2 hours  | **Planned 2026-04-30** |
 
 ## How to Use
 

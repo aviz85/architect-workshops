@@ -67,6 +67,10 @@ tmp/
 temp/
 *.tmp
 
+# Python cache
+__pycache__/
+*.pyc
+
 # Claude skills (keep structure but ignore generated content)
 .claude/skills/**/scripts/node_modules/
 .claude/skills/**/scripts/poster_*.jpg
