@@ -171,12 +171,12 @@ The demos are the backbone - participants will remember visuals, not slides.
 
 ## 9. Connection to Broader Product Vision
 
-This workshop is also the **top of the funnel** for the atomic-businesses offering (see `~/aviz-crm/products/VISION.md` + `~/aviz-crm/products/ai-implementation/README.md`).
+Strategic context (funnel, community model, upsell, product tiers) lives in aviz-crm, not here. See:
+- `~/aviz-crm/products/atomic-businesses-concept-evolution.md` — product architecture
+- `~/aviz-crm/products/ai-implementation/README.md` — implementation service
+- `~/aviz-crm/products/consulting/pricing-comparison.md` — pricing ladder
 
-- Workshop ₪100 → Recording purchase → Consulting hours → Spaceship Mode (₪1,500) → Full Implementation (₪10-20K)
-- The loop-closing framework is the natural bridge: once someone understands *why* closed loops matter, they understand *why* they need implementation help, not just a recording.
-
-**Do not sell during the workshop itself.** Preview at the end is enough.
+**Pedagogical rule for this workshop:** Do not sell during the session. Preview at the end is enough — funnel mechanics happen *after* the workshop.
 
 ---
 
