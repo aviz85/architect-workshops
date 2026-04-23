@@ -11,6 +11,8 @@ interface CustomerData {
   name: string;
   phone: string;
   email: string;
+  emails?: string[];
+  taxId?: string;
   amount: number;
   title: string;
   description: string;
@@ -169,8 +171,9 @@ class MorningInvoiceClient {
       attachment: true,
       client: {
         name: customer.name,
-        emails: [customer.email],
+        emails: customer.emails && customer.emails.length > 0 ? customer.emails : [customer.email],
         phone: customer.phone,
+        ...(customer.taxId ? { taxId: customer.taxId } : {}),
         add: true,
         self: false,
       },
@@ -438,10 +441,18 @@ async function main() {
           return idx !== -1 ? args[idx + 1] : "";
         };
 
+        const emailsArg = getArg("emails");
+        const emailsList = emailsArg
+          ? emailsArg.split(",").map((e) => e.trim()).filter(Boolean)
+          : undefined;
+        const primaryEmail = emailsList && emailsList.length > 0 ? emailsList[0] : getArg("email");
+
         const customer: CustomerData = {
           id: 1,
           name: getArg("name"),
-          email: getArg("email"),
+          email: primaryEmail,
+          emails: emailsList,
+          taxId: getArg("tax-id") || getArg("taxId") || undefined,
           phone: getArg("phone"),
           amount: parseInt(getArg("amount")) || 0,
           title: getArg("title") || "Invoice",
@@ -451,7 +462,7 @@ async function main() {
         };
 
         if (!customer.name || !customer.email || !customer.amount) {
-          console.error("Usage: invoice.ts create-single --name NAME --email EMAIL --phone PHONE --amount AMOUNT [--date YYYY-MM-DD]");
+          console.error("Usage: invoice.ts create-single --name NAME --email EMAIL --phone PHONE --amount AMOUNT [--date YYYY-MM-DD] [--tax-id HP] [--emails a@b.com,c@d.com]");
           process.exit(1);
         }
 
@@ -519,13 +530,16 @@ Commands:
   batch --file <path>           Batch create from customer table
 
 Options for create-single:
-  --name <name>                 Customer name
+  --name <name>                 Customer name (company name for business invoice)
   --email <email>               Customer email
+  --emails <a,b,c>              Multiple emails, comma-separated (overrides --email)
+  --tax-id <id>                 Company ח.פ. / tax ID (for business invoices)
   --phone <phone>               Customer phone
-  --amount <number>             Amount in NIS
+  --amount <number>             Amount in NIS (VAT included)
   --title <title>               Invoice title
   --description <desc>          Line item description
-  --payment <method>            Payment method
+  --payment <method>            Payment method (ביט / העברה בנקאית)
+  --date <YYYY-MM-DD>           Actual payment date (defaults to today)
 
 Options for batch:
   --file <path>                 Path to customer markdown table
@@ -538,6 +552,7 @@ Examples:
   npx ts-node invoice.ts test
   npx ts-node invoice.ts dry-run --file ../customers.md
   npx ts-node invoice.ts create-single --name "John Doe" --email "john@example.com" --phone "0501234567" --amount 500
+  npx ts-node invoice.ts create-single --name "Company Ltd" --tax-id "517093746" --emails "a@b.com,dokka@c.il" --phone "0501234567" --amount 500 --payment "העברה בנקאית" --date "2026-03-15" --description "סדנת AI"
   npx ts-node invoice.ts batch --file ../customers.md --start 5 --limit 10
         `);
         break;

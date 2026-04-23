@@ -64,6 +64,14 @@ npx ts-node invoice.ts dry-run
 # Create a single test invoice
 npx ts-node invoice.ts create-single --name "Test Customer" --email "test@example.com" --phone "0501234567" --amount 500 --description "Workshop"
 
+# Business invoice (company with ח.פ. + multiple recipient emails)
+npx ts-node invoice.ts create-single \
+  --name "Company Ltd" --tax-id "517093746" \
+  --emails "contact@company.co.il,dokka@company.co.il" \
+  --phone "0501234567" --amount 500 \
+  --payment "העברה בנקאית" --date "2026-03-15" \
+  --description "סדנת AI"
+
 # Batch create from customer table
 npx ts-node invoice.ts batch --file customers.md
 
@@ -95,6 +103,15 @@ Create a markdown file with this table structure:
 **Payment Methods:**
 - `ביט` / `אפליקציית תשלום` → Type 10 (App payment)
 - `העברה בנקאית` → Type 4 (Bank transfer)
+
+## Business Invoices (Company Clients)
+
+For B2B invoices to companies, `create-single` supports:
+
+- `--tax-id <HP>` — company ח.פ. (tax ID). Required for a valid Israeli tax invoice to a business.
+- `--emails "a@b.com,c@d.com"` — comma-separated list of recipients. Morning sends the PDF to all of them. Use this for companies that have a dedicated doc-intake inbox (e.g. dokka.co.il) alongside the contact person.
+
+VAT is calculated automatically: pass the **gross amount** (VAT included) via `--amount`. Morning splits it using the current rate (18% as of 2025).
 
 ## Invoice Details
 
