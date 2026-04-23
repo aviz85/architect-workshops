@@ -27,12 +27,34 @@ poster_*.png
 !.claude/skills/**/assets/**/*.gif
 !.claude/skills/**/assets/**/*.webp
 
-# And allow workshop assets
+# And allow workshop assets (avatars, references)
 !workshops/**/assets/**/*.jpg
 !workshops/**/assets/**/*.jpeg
 !workshops/**/assets/**/*.png
 !workshops/**/assets/**/*.gif
 !workshops/**/assets/**/*.webp
+
+# BUT block generated workshop artifacts (posters, slides, iterations)
+# Keep avatars and reference materials only; generated content is ephemeral
+workshops/**/assets/poster-*.png
+workshops/**/assets/poster-*.jpg
+workshops/**/assets/poster-*.jpeg
+workshops/**/assets/poster_*.png
+workshops/**/assets/poster_*.jpg
+workshops/**/assets/poster-v*.png
+workshops/**/assets/poster-v*.jpg
+workshops/**/assets/slide-*.png
+workshops/**/assets/slide-*.jpg
+workshops/**/assets/slide-*.jpeg
+
+# Root-level generated logo/poster iterations (design exploration, not references)
+/assets/claude-code-lo*.jpg
+/assets/claude-code-lo*.png
+/assets/recruitment-poster.*
+/assets/poster-*.jpg
+/assets/poster-*.png
+/assets/slide-*.png
+/assets/slide-*.jpg
 
 # OS files
 .DS_Store
