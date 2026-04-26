@@ -21,6 +21,7 @@ A collection of potential workshop topics for "Aviz - The Architect".
 | AI Tools for Architects         | Using AI for floor plans, rendering, client presentations | Intermediate | 3 hours  | Draft     |
 | **סידרת קלודוש - 3 מפגשים**   | Series: Launch→Spaceship→Astronauts. ₪297. New cycle every 9 days. | All Levels   | 3×90 min | **Active** |
 | **לסגור לופ**                   | התנאי הקריטי שהופך את הסוכן לבהמת פרודוקטיביות - Code vs Desktop, 3 loop types | Intermediate | 2 hours  | **Planned 2026-04-30** |
+| **מצב בוס**                     | המיינדסט שהופך אותך מלהכיר כלים ל-להצליח איתם. רוצה→מאמין→סומך. שער כניסה לכל משתמשי AI | All Levels   | 2 hours  | **Planned 2026-05-07** |
 
 ## How to Use
 
