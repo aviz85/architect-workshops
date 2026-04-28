@@ -47,6 +47,6 @@ We just need to give them a soul.
 
 - Published via Ayrshare API at 2026-04-28T20:50:00Z
 - LinkedIn post URN: `urn:li:share:7454995359027675138`
-- ⚠️ **Watermark issue:** Ayrshare free plan auto-prepended "[Sent with Free Plan]" to the post body. This watermark is now visible on the live post.
+- Note: Ayrshare's history log shows a "[Sent with Free Plan]" prefix on the stored `post` field, but this is an internal Ayrshare log marker — the live LinkedIn post is clean (verified by Aviz).
 - Adapted from Hebrew Threads experiment (2026-02-06)
 - Related: [[2026-02-06-agent-overnight-business]]
