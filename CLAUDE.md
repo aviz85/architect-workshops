@@ -94,7 +94,7 @@ Then compare with today's date and alert the user:
 
 ### 1. Ideation (`workshop-ideation` skill)
 - Brainstorm new ideas through guided discussion
-- Add ideas to `workshop-ideas.md` backlog
+- Add ideas to `content/workshop-ideas.md` backlog
 - Topics range from AI tools, coding assistants, automation, to business applications
 
 ### 2. Creation (`workshop-creator` skill)
@@ -104,7 +104,7 @@ Then compare with today's date and alert the user:
 
 ### 3. Marketing (`workshop-marketing-poster` skill)
 - Generate promotional posters with brand consistency
-- Use avatar and brand assets from `image-references/` or skill references
+- Use avatar and brand assets from `brand/` or skill references
 - Post to WhatsApp groups, Facebook communities
 
 ### 4. Presentation (`presentation-architect` skill)
@@ -122,25 +122,22 @@ Then compare with today's date and alert the user:
 ```
 architect-workshops/
 ├── CLAUDE.md                 # This file - project instructions
-├── workshop-ideas.md         # Topic backlog
-├── image-references/         # Global brand assets (avatar, logo)
-├── content/                  # Shared content & inspiration
-│   ├── 30-posts.md           # 30 social media posts for marketing
-│   └── exponential-efficiency.md  # Core concept: exponential efficiency
+├── brand/                    # All brand assets
+│   ├── avatars/              # Character avatars
+│   └── logos/                # Logo variations
+├── content/                  # All content & inspiration
+│   ├── workshop-ideas.md     # Topic backlog
+│   ├── ideas/                # Raw ideas & drafts
+│   ├── posts/                # Published social posts
+│   └── quotes/               # Collected quotes
+├── courses/                  # Multi-session courses
 ├── future-concepts/          # Detailed concepts not yet scheduled
-│   └── concept-name.md       # In-depth workshop concept
-├── workshops/
-│   ├── example/              # Template workshop
-│   └── YYYY-MM-DD-topic/     # Individual workshops
+├── workshops/                # Individual workshops
+│   └── YYYY-MM-DD-topic/
 │       ├── workshop.md
 │       ├── presentation-plan.md
 │       └── assets/
 └── .claude/skills/           # Automation skills
-    ├── workshop-creator/
-    ├── workshop-updates/
-    ├── workshop-marketing-poster/
-    ├── presentation-architect/
-    └── whatsapp-*/
 ```
 
 ### Content Folder - Inspiration & Reference
@@ -157,7 +154,7 @@ The `content/` folder contains reusable content for marketing and presentations:
 ### Future Concepts Folder
 
 The `future-concepts/` folder contains detailed workshop concepts that are:
-- More developed than a single line in `workshop-ideas.md`
+- More developed than a single line in `content/workshop-ideas.md`
 - Not yet scheduled for a specific date
 - Include full agenda, target audience, POC ideas
 - Marked as "Concept" status in the ideas table
@@ -249,6 +246,7 @@ All workshop presentations must follow these rules:
 
 ### Other Assets
 
+- **Logos:** `brand/logos/` (logo variations, recruitment poster)
 - **Gallery:** `.claude/skills/workshop-marketing-poster/assets/gallery/` (reference posters)
 - **Colors:** Green (#22C55E), gray tones, professional tech aesthetic
 

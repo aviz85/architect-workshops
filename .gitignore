@@ -15,12 +15,12 @@ poster_*.jpg
 poster_*.jpeg
 poster_*.png
 
-# But ALLOW image references and gallery
-!image-references/**/*.jpg
-!image-references/**/*.jpeg
-!image-references/**/*.png
-!image-references/**/*.gif
-!image-references/**/*.webp
+# Allow brand assets
+!brand/**/*.jpg
+!brand/**/*.jpeg
+!brand/**/*.png
+!brand/**/*.gif
+!brand/**/*.webp
 !.claude/skills/**/assets/**/*.jpg
 !.claude/skills/**/assets/**/*.jpeg
 !.claude/skills/**/assets/**/*.png
@@ -47,14 +47,8 @@ workshops/**/assets/slide-*.png
 workshops/**/assets/slide-*.jpg
 workshops/**/assets/slide-*.jpeg
 
-# Root-level generated logo/poster iterations (design exploration, not references)
-/assets/claude-code-lo*.jpg
-/assets/claude-code-lo*.png
-/assets/recruitment-poster.*
-/assets/poster-*.jpg
-/assets/poster-*.png
-/assets/slide-*.png
-/assets/slide-*.jpg
+# Archive (legacy code, not part of active project)
+_archive/
 
 # OS files
 .DS_Store
@@ -114,10 +108,7 @@ __pycache__/
 # Obsidian
 .obsidian/
 
-# Inbox (task processing)
-inbox/
-
-# Transcripts at root level
+# Transcript media at root level (moved to workshop folders)
 uriel-workshop-*.m4a
 uriel-workshop-*.srt
 uriel-workshop-*_transcript.json
