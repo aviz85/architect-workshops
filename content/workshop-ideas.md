@@ -22,6 +22,12 @@ A collection of potential workshop topics for "Aviz - The Architect".
 | **סידרת קלודוש - 3 מפגשים**   | Series: Launch→Spaceship→Astronauts. ₪297. New cycle every 9 days. | All Levels   | 3×90 min | **Active** |
 | **לסגור לופ**                   | התנאי הקריטי שהופך את הסוכן לבהמת פרודוקטיביות - Code vs Desktop, 3 loop types | Intermediate | 2 hours  | **Planned 2026-04-30** |
 | **מצב בוס**                     | המיינדסט שהופך אותך מלהכיר כלים ל-להצליח איתם. רוצה→מאמין→סומך. שער כניסה לכל משתמשי AI | All Levels   | 2 hours  | **Planned 2026-05-07** |
+| **הסוכן הראשון שלך**            | סדנת מתחילים מלאה: למה→מה→התקנה→תקייה ראשונה→CLAUDE.md→סקיל ראשון. מבוסס על המתודולוגיה שהוכחה עם אושרי | Beginner     | 2.5 hours | Draft |
+| **ניהול ידע = ניהול סוכנים**    | שני המעגלים (חיצוני=קבצים, פנימי=קונטקסט), "עשרת הדיברות" vs נהלי עבודה, משיכת ידע למשימה. לבעלי עסקים | Intermediate | 2 hours  | Draft |
+| **תרגום לאנושית**               | לוקחים מושג טכני (context window, skills, cron) ומסבירים בשפת העסקים. פורמט: "העסקת עובד" כמטאפורה מרכזית | All Levels   | 90 min   | Draft |
+| **מפרומפט אחד לשרשרת שלמה**    | דמו חי: פרומפט → שרשרת כלים (וואטסאפ→תמלול→תוכן→שליחה). איך בונים end-to-end automation בפועל | Intermediate | 2 hours  | Draft |
+| **נוסחת הקושי + 3 מדדי יעילות** | פרמוורק לבעלי עסקים: 6 פרמטרים להערכת כדאיות סוכן + 3 מדדי הצלחה (קונטקסט, לופ, סנכרון רוטינות) | Advanced     | 90 min   | Draft |
+| **סוכן פידבק אוטומטי**          | בניית סוכן WhatsApp שפונה למשתתפים אחרי סדנה/קורס, שואל שאלות, מבין ערך. case study מעשי | Intermediate | 2 hours  | Draft |
 
 ## How to Use
 
