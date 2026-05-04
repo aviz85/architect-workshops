@@ -63,13 +63,40 @@ The program is a quiet rebellion against:
 - Losing human agency to AI dependency
 - The myth that faster = better
 
+## Mascot: נחום הצב
+
+**Name:** נחום (Nachum) — from the root נ.ח.מ = comfort, consolation (נחמה)
+
+**Character arc:** נחום is exhausted. He's terrified. The AI world is moving too fast and he can't keep up. But then he finds נחמה — comfort — in the slow path. He realizes: being a turtle isn't a bug, it's a feature.
+
+**נחום = the user.** Everyone who joins this program IS Nachum. Overwhelmed, scared, but ready to find their own pace.
+
+**Emotional states:**
+- 😫 מותש — Exhausted from trying to keep up with every new AI tool
+- 😱 נבהל — Scared by the pace, the FOMO, the "you're already behind" messages
+- 😌 שמח שמצא נחמה — Found peace in the slow approach. Relief. Home.
+
+**Visual identity:**
+- Mint green cartoon turtle, lavender/purple shell with circuit-board patterns
+- Big expressive eyes, exaggerated shocked expressions (mouth wide open)
+- Pastel palette: mint, lavender, peach, baby blue
+- Props: stop sign ("האט!"), coffee cup, headphones, phone
+- Style: Pixar-quality 3D cartoon, cute but tech-aware
+
+**Why a turtle:**
+- Naturally slow — it's not a choice, it's who he is
+- Protected (shell = boundaries against the noise)
+- Ancient wisdom — turtles have survived millions of years by being steady
+- "Slow and steady wins the race" — but updated for the AI age
+
 ## Branding Direction
 
 - **Tone:** Calm confidence. Rebellious serenity. Anti-hype.
-- **Colors:** Warm earth tones (terracotta, olive, sand) + electric AI accents
-- **Visual metaphor:** Person at peace in the eye of a technological storm
-- **Typography:** Clean, modern, unhurried
+- **Colors:** Pastel palette (mint, lavender, peach) + subtle tech accents
+- **Visual metaphor:** נחום — a turtle finding peace in the AI storm
+- **Typography:** "היי אתה!" in handwritten style (personal touch), program name in clean modern font
 - **Energy:** Meditation meets technology. Mastery through patience.
+- **Key visual:** נחום holding a stop sign "האט!" with AI chaos rushing behind him
 
 ## Open Questions
 
