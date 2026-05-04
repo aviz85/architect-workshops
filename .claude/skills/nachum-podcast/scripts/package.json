@@ -1,0 +1,17 @@
+{
+  "name": "nachum-podcast-scripts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "upload-ig": "tsx upload-to-instagram.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "minimist": "^1.2.8",
+    "tsx": "^4.19.0"
+  },
+  "devDependencies": {
+    "@types/minimist": "^1.2.5",
+    "@types/node": "^22.0.0"
+  }
+}
