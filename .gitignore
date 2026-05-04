@@ -93,6 +93,19 @@ __pycache__/
 .claude/skills/**/scripts/poster_*.jpeg
 .claude/skills/**/scripts/poster_*.png
 
+# Codex skills mirror (keep instructions/scripts, ignore generated dependencies/content)
+.codex/skills/**/scripts/node_modules/
+.codex/skills/**/scripts/venv/
+.codex/skills/**/scripts/__pycache__/
+.codex/skills/**/scripts/.env
+.codex/skills/**/scripts/*invoices*.json
+.codex/skills/**/scripts/*payments*.json
+.codex/skills/**/scripts/*customers*.json
+.codex/skills/**/scripts/*results*.json
+.codex/skills/**/scripts/poster_*.jpg
+.codex/skills/**/scripts/poster_*.jpeg
+.codex/skills/**/scripts/poster_*.png
+
 # Next.js build
 .next/
 
