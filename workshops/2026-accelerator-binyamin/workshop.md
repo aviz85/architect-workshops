@@ -14,7 +14,7 @@
 | **Goal** | Work with AI agents across all startup processes |
 | **Framework** | 7-Layer Model + Responsibility Loop |
 | **Special track** | Marketing content automation (images, posts, videos, landing pages) |
-| **Prerequisite** | Claude Pro subscription ($17/month) — required before Session 1 |
+| **Prerequisite** | OpenAI subscription (ChatGPT Plus / Pro) — required before Session 1 |
 
 ## Target Audience Profile
 
@@ -32,10 +32,10 @@
 L6 — סקייל              multiply the process
 L5 — תקשורת מרחוק       agent works while you're away
 L4 — סוכנים ורוטינות     sub-agents + scheduled tasks
-L3 — סקילים             training the agent on your knowledge + tools
+L3 — כלים מותאמים             custom tools — training the agent on your knowledge + workflows
 L2 — אינטגרציות וכלים    connecting to real systems
 L1 — פרויקט כבסיס ידע    project as knowledge base (built around YOUR startup)
-L0 — קלוד קוד           foundation on the machine
+L0 — Codex              foundation on the machine
 ```
 
 ### The Responsibility Loop
@@ -63,17 +63,17 @@ At each step: does the agent have the ability to do this? If not — that's what
 - הדגמה: אביץ מראה את המערכת שלו — 30 שניות, לא יותר
 
 #### Block B — Layer 0: התקנה והגדרה (30 דק')
-- התקנת Claude Code (מי שלא מוכן — עוזרים 1-on-1)
-- VS Code Extension + RTL fix (yechielby.claude-code-rtl)
+- התקנת Codex (מי שלא מוכן — עוזרים 1-on-1)
+- Setup and configuration in the terminal / VS Code
 - הגדרות בסיסיות, הרשאות
 - Mental model: מה הסוכן רואה, מה לא
 
 #### Block C — Layer 1: הסטרטאפ שלך כפרויקט (60 דק') ⭐
 - כל משתתף בונה תיקיית פרויקט לסטרטאפ שלו
-- CLAUDE.md — מי אתה, מה החברה, מה המטרה, מה הסטנדרטים
+- AGENTS.md — מי אתה, מה החברה, מה המטרה, מה הסטנדרטים
 - Knowledge base — מסמכים, מתחרים, קהל יעד, pricing
 - The long-term goal: הסוכן מנהל כיוון, לא רק משימות
-- **תרגול:** כל אחד כותב CLAUDE.md לסטרטאפ שלו, מוסיף 3 מסמכי ידע, ובודק שהסוכן "מכיר" אותו
+- **תרגול:** כל אחד כותב AGENTS.md לסטרטאפ שלו, מוסיף 3 מסמכי ידע, ובודק שהסוכן "מכיר" אותו
 
 #### Block D — Layer 2: חיבור לעולם (40 דק')
 - אינטגרציות רלוונטיות לסטרטאפ: email, WhatsApp, calendar, browser
@@ -84,24 +84,24 @@ At each step: does the agent have the ability to do this? If not — that's what
 - Review: הסוכן מכיר אותך? מחובר לכלי אחד? מעגל האחריות עובד?
 - **שיעורי בית:** השבוע — דברו עם הסוכן כל יום. תנו לו משימה אמיתית. צפו, שפטו, שפרו.
 
-**משתתף יוצא עם:** פרויקט + CLAUDE.md + ידע + אינטגרציה ראשונה
+**משתתף יוצא עם:** פרויקט + AGENTS.md + ידע + אינטגרציה ראשונה
 
 ---
 
-### Session 2 — סקילים + אוטומציית שיווק (3 שעות)
+### Session 2 — כלים מותאמים + אוטומציית שיווק (3 שעות)
 
 **Layers 3 + Marketing Automation Track**
 
-**מטרה:** כל משתתף יוצא עם סקילים עובדים ויכולת לייצר חומר שיווקי אוטומטית.
+**מטרה:** כל משתתף יוצא עם כלים מותאמים עובדים ויכולת לייצר חומר שיווקי אוטומטית.
 
 #### Block A — Review שיעורי בית (15 דק')
 - מה עבד? מה לא? איפה הלופ נשבר?
 - 2-3 משתתפים משתפים חוויה
 
-#### Block B — Layer 3: סקילים (45 דק')
-- מה זה סקיל: מפעולה חוזרת ליכולת קבועה
-- The compound effect: סקיל 1 מאפשר סקיל 2
-- **תרגול:** כל אחד מזהה פעולה חוזרת בסטרטאפ → בונה סקיל
+#### Block B — Layer 3: כלים מותאמים (45 דק')
+- מה זה כלי מותאם: מפעולה חוזרת ליכולת קבועה
+- The compound effect: כלי מותאם 1 מאפשר כלי מותאם 2
+- **תרגול:** כל אחד מזהה פעולה חוזרת בסטרטאפ → בונה כלי מותאם
 
 #### Block C — Marketing Track: תמונות ופרסומים (45 דק') ⭐
 - AI image generation: מפרומפט לפוסטר מקצועי
@@ -117,14 +117,14 @@ At each step: does the agent have the ability to do this? If not — that's what
 
 #### Block E — Marketing Track: דפי נחיתה (30 דק')
 - מפרומפט לדף נחיתה עובד
-- Claude Code בונה Next.js / HTML מאפס
+- Codex בונה Next.js / HTML מאפס
 - Deploy to Vercel — באוויר תוך דקות
 - **תרגול:** כל אחד מתחיל דף נחיתה (ממשיכים בשיעורי בית)
 
 #### Block F — סיכום + שיעורי בית (15 דק')
 - **שיעורי בית:** השלימו את דף הנחיתה. צרו 3 פוסטים שיווקיים. הריצו את מעגל האחריות על כל אחד.
 
-**משתתף יוצא עם:** סקיל עובד + פוסטר + פוסט שיווקי + סרטון בתהליך + דף נחיתה בתהליך
+**משתתף יוצא עם:** כלי מותאם עובד + פוסטר + פוסט שיווקי + סרטון בתהליך + דף נחיתה בתהליך
 
 ---
 
@@ -174,7 +174,7 @@ At each step: does the agent have the ability to do this? If not — that's what
 | מפגש | שכבות | דגש מיוחד | משתתף יוצא עם |
 |-------|-------|-----------|----------------|
 | **1** | L0 + L1 + L2 | הבסיס + הרגל | פרויקט + ידע + אינטגרציה |
-| **2** | L3 + שיווק | סקילים + תמונות/סרטונים/דפי נחיתה | סקיל + חומר שיווקי + דף נחיתה |
+| **2** | L3 + שיווק | כלים מותאמים + תמונות/סרטונים/דפי נחיתה | כלי מותאם + חומר שיווקי + דף נחיתה |
 | **3** | L4 + L5 + L6 | אוטונומיה + שרשרת שיווק מלאה | מערכת אוטונומית + תוכנית scale |
 
 ## Key Principles
@@ -183,7 +183,7 @@ At each step: does the agent have the ability to do this? If not — that's what
 - **הסטרטאפ שלך** — כל תרגיל בנוי סביב העסק האמיתי של המשתתף
 - **מעגל האחריות** — חוזר בכל מפגש: פעולה → צפייה → שיפוט → שיפור
 - **שיעורי בית** — בין מפגשים המשתתפים מפעילים את המערכת ביומיום
-- **לא צריך לדעת לתכנת** — Claude Code עובד בשפה טבעית, המשתתפים מנהלים, לא כותבים קוד
+- **לא צריך לדעת לתכנת** — Codex עובד בשפה טבעית, המשתתפים מנהלים, לא כותבים קוד
 
 ## Marketing Automation Deliverables
 
