@@ -14,7 +14,8 @@
 | **Goal** | Work with AI agents across all startup processes |
 | **Framework** | 7-Layer Model + Responsibility Loop |
 | **Special track** | Marketing content automation (images, posts, videos, landing pages) |
-| **Prerequisite** | OpenAI subscription (ChatGPT Plus / Pro) — required before Session 1 |
+| **Platform** | Codex by OpenAI (Desktop App — macOS/Windows, or Web at chatgpt.com/codex) |
+| **Prerequisite** | ChatGPT Plus subscription ($20/month) — required before Session 1 |
 
 ## Target Audience Profile
 
@@ -63,8 +64,9 @@ At each step: does the agent have the ability to do this? If not — that's what
 - הדגמה: אביץ מראה את המערכת שלו — 30 שניות, לא יותר
 
 #### Block B — Layer 0: התקנה והגדרה (30 דק')
-- הגדרת Codex (דרך הדפדפן — chatgpt.com)
-- הכרת הסביבה, הרשאות, אופן העבודה
+- הגדרת Codex (Desktop App / Web — chatgpt.com/codex)
+- הכרת הסביבה: threads, cloud tasks, AGENTS.md
+- הרשאות, אופן העבודה, מה הסוכן רואה ומה לא
 - הגדרות בסיסיות, הרשאות
 - Mental model: מה הסוכן רואה, מה לא
 
@@ -168,6 +170,12 @@ At each step: does the agent have the ability to do this? If not — that's what
 **משתתף יוצא עם:** מערכת L0-L5 עובדת + תוכנית L6 + שרשרת שיווק אוטומטית
 
 ---
+
+## What You Leave With
+
+1. **הבנה עמוקה** איך עסק מבוסס סוכני AI חי ונושם ב-2026
+2. **מכונה לייצור חומר שיווקי בסקייל** — תמונות, פוסטים, סרטונים, דפי נחיתה
+3. **סוכן עובד שילווה אתכם** בכל התהליכים בעסק — שיווק, מחקר, תפעול, תוכן
 
 ## Session Summary
 
