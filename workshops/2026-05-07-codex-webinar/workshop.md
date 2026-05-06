@@ -11,10 +11,12 @@
 | **Title** | Codex: מוח עם גוף |
 | **Date** | 2026-05-07 |
 | **Day** | Thursday |
-| **Time** | TBD - צריך לוודא שעה עם אביץ |
-| **Duration** | 75 minutes |
-| **Platform** | Zoom / TBD |
-| **Zoom Link** | TBD |
+| **Time** | 10:00 |
+| **Duration** | 120 minutes |
+| **Platform** | Zoom |
+| **Zoom Link** | https://us06web.zoom.us/j/87615059041?pwd=e5MadNBMaNZk0YjXG5BTKfpdfTzn3E.1 |
+| **Zoom Password** | 540695 |
+| **Zoom ID** | 876 1505 9041 |
 
 ### WhatsApp Group
 
