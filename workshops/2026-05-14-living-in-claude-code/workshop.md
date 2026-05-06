@@ -129,7 +129,7 @@ At every step, ask: **does the agent actually have the ability to do this?**
 |------|-------------|------------|
 | **Action** | Can the agent act? Does it have the right tools, integrations, permissions? | → Build Layer 2 (integrations) |
 | **Observe** | Can the agent see the results? Can it read the environment? | → Add observation capabilities (logs, screenshots, API responses) |
-| **Judge** | Does the agent have the criteria to evaluate quality? Does it know YOUR standards? | → Strengthen Layer 1 (knowledge, CLAUDE.md) |
+| **Judge** | Does the agent have the criteria to evaluate quality AND the intelligence to distinguish between acceptable and unacceptable? Knowing the standard is not enough — it needs to be smart enough to apply it in context. | → Strengthen Layer 1 (knowledge, CLAUDE.md) + choose a model with sufficient reasoning capability |
 | **Improve** | Can the agent update itself? Can it write to its own skills, knowledge, memory? | → Build Layer 3 (skills that write skills) |
 
 **If any step is missing, the loop is broken.** The most common gap: agents that can act and observe, but cannot improve themselves. They make the same mistake forever. The whole point of living inside Claude Code is closing this loop — the agent gets better every day because it can improve its own knowledge, skills, and behavior.
