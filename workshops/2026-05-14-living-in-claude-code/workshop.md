@@ -89,6 +89,7 @@ The workshop takes people who already know Claude Code and transforms their rela
 The workshop builds a complete agent ecosystem layer by layer. Each layer depends on the ones below it. **The emphasis is on layers 0-2** — that's where people fail, and that's what makes everything else work.
 
 ```
+Layer 6 — סקייל                Scale — take the process, multiply it, make it something else
 Layer 5 — תקשורת מרחוק        Remote communication (agent works while you're away)
 Layer 4 — סוכנים ורוטינות       Sub-agents + cron routines (autonomous operation)
 Layer 3 — סקילים               Skills (training the agent on knowledge + tools)
@@ -97,7 +98,9 @@ Layer 1 — פרויקט כבסיס ידע      Project as knowledge base (built
 Layer 0 — קלוד קוד על המחשב    Claude Code on the machine (foundation)
 ```
 
-**What people get wrong:** They jump to layers 3-5 (skills, agents, automations) without solid 0-2. The base layers + the personal habit of living inside the agent — that's what makes all the difference.
+**Layer 6 — The Multiplier:** Once your system works for you (L0-L5), how do you take that and make it bigger? Train a team on it. Package it as a service. Replicate it across businesses. Build a product around it. This is the layer where personal productivity becomes a business model. Aviz doing this workshop *is* Layer 6.
+
+**What people get wrong:** They jump to layers 3-6 (skills, agents, scale) without solid 0-2. The base layers + the personal habit of living inside the agent — that's what makes all the difference.
 
 ## Agenda
 
@@ -178,25 +181,37 @@ This is the longest and most important block. If this is solid, everything else 
 
 ---
 
-### Layers 4-5 — הצצה + סגירה (15:15-16:00)
+### Layers 4-5 (15:15-15:45)
 
 #### "מה קורה כשהסוכן רץ לבד"
 
-**Layer 4 — Sub-agents and routines (15:15-15:40):**
-- Concept: agents that spawn agents, scheduled tasks (cron)
+**Layer 4 — Sub-agents and routines (15:15-15:30):**
+- Agents that spawn agents, scheduled tasks (cron)
 - Hands-on: each participant sets up a sub-agent or a scheduled routine in their project
 - Live demo: Aviz shows a routine that runs daily, then participants build their own
 
-**Layer 5 — Remote communication (15:40-15:50):**
+**Layer 5 — Remote communication (15:30-15:45):**
 - The agent works while you're away: background agents, remote triggers
 - Hands-on: configure a background agent or remote trigger for their use case
 
-**Closing (15:50-16:00):**
-- Review: does your system meet your success criteria from the morning?
-- 2-3 participants showcase what they built
+---
+
+### Layer 6 — סקייל + סגירה (15:45-16:00)
+
+#### "איך לוקחים את זה ומכפילים"
+
+- You now have a working system (L0-L5). Now what?
+- Scale = taking your process and making it something bigger:
+  - Train your team to work the same way
+  - Package your system as a service for clients
+  - Replicate across multiple businesses / domains
+  - Build a product around your methodology
+- Aviz's own story: built L0-L5 for himself → this workshop IS Layer 6
+- Each participant thinks: what does MY Layer 6 look like?
+- 2-3 participants showcase what they built today
 - The daily habit checklist: morning start, evening close, the rhythm of living inside CC
 
-**Participant leaves with:** A working L0-L5 system they built themselves
+**Participant leaves with:** A working L0-L5 system + a vision for how to multiply it
 
 ---
 
@@ -209,11 +224,12 @@ This is the longest and most important block. If this is solid, everything else 
 | 12:30-13:00 | L2 start | אינטגרציות | First integration identified + started |
 | 13:00-14:00 | — | צהריים | — |
 | 14:00-15:15 | L2+L3 | כלים + סקילים | Integration working + first skill |
-| 15:15-16:00 | L4+L5 | הצצה + סגירה | Vision of full autonomy + showcase |
+| 15:15-15:45 | L4+L5 | סוכנים + מרחוק | Sub-agent + routine working |
+| 15:45-16:00 | **L6** | סקייל | Vision for multiplying + showcase |
 
 **Everything is hands-on.** No block is lecture-only. Every layer: Aviz demos → participants build on their own machine → assistants help 1-on-1. The emphasis on L0-L1 is about depth of practice, not more talking.
 
-**Time allocation:** ~60% on L0-L1 (the base), ~25% on L2-L3 (tools + skills), ~15% on L4-L5 (agents + routines + closing)
+**Time allocation:** ~60% on L0-L1 (the base), ~25% on L2-L3 (tools + skills), ~15% on L4-L6 (agents + scale + closing)
 
 ## Notes
 
