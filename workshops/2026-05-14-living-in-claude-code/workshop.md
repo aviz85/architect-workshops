@@ -102,6 +102,34 @@ Layer 0 — קלוד קוד על המחשב    Claude Code on the machine (found
 
 **What people get wrong:** They jump to layers 3-6 (skills, agents, scale) without solid 0-2. The base layers + the personal habit of living inside the agent — that's what makes all the difference.
 
+## The Responsibility Loop
+
+The engine that runs inside every layer. Without this loop, you're just sending prompts and hoping. With it, you're managing an agent.
+
+```
+     ┌─── Action ───┐
+     │               ↓
+   Judge          Observe
+     ↑               │
+     └───────────────┘
+```
+
+| Step | What happens | Example |
+|------|-------------|---------|
+| **Action** | The agent does something | Sends a WhatsApp message to a client |
+| **Observe** | You see what happened in the environment | Check: was the message sent? Was the tone right? Did the client respond? |
+| **Judge** | You evaluate: is this what I wanted? | "The message was too formal. Next time, more casual." |
+| → **Action** | Corrected action based on judgment | Refine the skill / CLAUDE.md / prompt so next time it's right |
+
+This loop applies at every layer:
+- **L1:** Write CLAUDE.md → observe agent behavior → judge if it understood you → refine
+- **L2:** Connect WhatsApp → observe if messages go out correctly → judge quality → adjust
+- **L3:** Build a skill → observe if it fires when it should → judge output → improve
+- **L4:** Set up a routine → observe daily results → judge if it's doing what you want → tune
+- **L5:** Agent runs remotely → observe outcomes from afar → judge without being there → trust or intervene
+
+The loop is what turns "using a tool" into "managing an employee." You don't tell an employee what to do once and walk away. You watch, evaluate, and correct. That's what living inside Claude Code means — running this loop continuously until the agent is trained on YOUR standards.
+
 ## Agenda
 
 ### Opening (10:00-10:30)
