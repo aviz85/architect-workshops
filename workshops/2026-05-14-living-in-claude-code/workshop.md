@@ -84,46 +84,74 @@ The workshop takes people who already know Claude Code and transforms their rela
 | Workshop delivered | ⬜ | 2026-05-14 |
 | Follow-up | ⬜ | |
 
+## The Layer Model
+
+The workshop builds a complete agent ecosystem layer by layer. Each layer depends on the ones below it. **The emphasis is on layers 0-2** — that's where people fail, and that's what makes everything else work.
+
+```
+Layer 5 — תקשורת מרחוק        Remote communication (agent works while you're away)
+Layer 4 — סוכנים ורוטינות       Sub-agents + cron routines (autonomous operation)
+Layer 3 — סקילים               Skills (training the agent on knowledge + tools)
+Layer 2 — אינטגרציות וכלים      Integrations and tools (connecting to real systems)
+Layer 1 — פרויקט כבסיס ידע      Project as knowledge base (built around a use case)
+Layer 0 — קלוד קוד על המחשב    Claude Code on the machine (foundation)
+```
+
+**What people get wrong:** They jump to layers 3-5 (skills, agents, automations) without solid 0-2. The base layers + the personal habit of living inside the agent — that's what makes all the difference.
+
 ## Agenda
 
-### Morning Session (10:00-13:00)
+### Opening (10:00-10:30)
 
-#### Block 1 — הצתה (10:00-10:15)
+#### הצתה + הגדרת יעד
 **"ההבדל בין לגור בתוך סוכן לבין כל מה שהיה עד היום"**
 
-- The paradigm shift: not a tool, an environment. Not a chat, a team.
+- The paradigm shift: not a tool you open, an environment you live in
 - "ממש כמו לנהל עובדים" — the employee metaphor
 - The dramatic economic meaning: what changes when everything is wrapped
-- Aviz shows his own system briefly — not a demo, a glimpse of what's possible
+- Aviz shows the layer model — where most people are stuck (L0-1 shaky, jumping to L3-5)
+- **Each participant defines their success criteria:** what will you have by 16:00?
+- Assistants help people land on a realistic but ambitious target
 
-#### Block 2 — הגדרת יעד (10:15-10:30)
-**"מתי נדע שהצלחנו?"**
+---
 
-- Each participant defines their personal success criteria for today
-- Clear deliverable: what will you have on your machine by 16:00 that you didn't have at 10:00?
-- The value promise only works if the goal is concrete and verifiable
-- Assistants circulate, help people land on a realistic but ambitious target
+### Layer 0+1 — הבסיס (10:30-12:30) ⭐ Core block — 2 hours
 
-#### Block 3 — פרויקט מבוסס ידע (10:30-12:00)
-**"הסוכן שלך צריך לדעת מי אתה ומה אתה רוצה"**
+#### "הסוכן שלך צריך לדעת מי אתה ומה אתה רוצה"
 
-- Build a real project from scratch: folder → CLAUDE.md → knowledge base
+This is the longest and most important block. If this is solid, everything else flows.
+
+**Layer 0 — Claude Code on the machine:**
+- Verify everyone's setup works, troubleshoot issues
+- The mental model: terminal/VS Code, context window, what the agent sees
+- Settings, permissions, the right way to start a session
+
+**Layer 1 — Project as knowledge base:**
+- Build a real project from scratch: folder → CLAUDE.md → knowledge files
 - The long-term goal concept: the agent manages a direction, not just tasks
 - Each participant builds around their own business/domain — not a toy exercise
-- Live demo: Aviz builds one from scratch, then participants do their own
+- Live demo: Aviz builds one from scratch, then participants do theirs
 - Assistants go 1-on-1 with anyone stuck
 
-**Participant leaves Block 3 with:** A project folder with CLAUDE.md and knowledge that the agent actually uses
+**The habit layer (woven throughout):**
+- How you start your day inside CC
+- How you talk to it — not prompting, directing
+- The difference between "using a tool" and "living in an environment"
 
-#### Block 4 — סקילים (12:00-13:00)
-**"להפוך פעולה חוזרת ליכולת קבועה"**
+**Participant leaves with:** A real project with CLAUDE.md and knowledge base that works. The agent knows who they are, what they do, and what they're building toward.
 
-- What's a skill, why it matters, how it compounds
-- Live demo: build a skill from a real repeated action
-- Each participant identifies one repeated workflow → builds a skill for it
-- The compound effect: skill 1 enables skill 2, which enables skill 3...
+---
 
-**Participant leaves Block 4 with:** At least one working skill in their project
+### Layer 2 — אינטגרציות וכלים (12:30-13:00)
+
+#### "לחבר את הסוכן לעולם האמיתי"
+
+- What integrations exist: WhatsApp, email, calendar, browser, APIs
+- Live demo: wire up an integration that delivers real value
+- Participants identify which integration matters most for their use case
+- Start connecting — continue after lunch
+
+**Participant leaves with:** Understanding of what's possible + first integration started
 
 ---
 
@@ -131,42 +159,60 @@ The workshop takes people who already know Claude Code and transforms their rela
 
 ---
 
-### Afternoon Session (14:00-16:00)
+### Layer 2 continued + Layer 3 — סקילים (14:00-15:15)
 
-#### Block 5 — אינטגרציות (14:00-15:00)
-**"לחבר את הסוכן לעולם האמיתי"**
+#### "לתרגל את הסוכן על הידע והכלים"
 
-- Connecting to real systems: WhatsApp, email, calendar, APIs
-- The difference between "I can do this manually" and "it happens"
-- Live demo: wire up an integration that delivers real value
-- Participants connect at least one external system to their project
+**Layer 2 wrap-up (14:00-14:30):**
+- Complete the integration from before lunch
+- Test it end-to-end: does the agent actually use it?
 
-**Participant leaves Block 5 with:** An agent that talks to the outside world
+**Layer 3 — Skills (14:30-15:15):**
+- What's a skill: turning a repeated action into a permanent capability
+- The key insight: skills complete the missing action paths between knowledge and tools
+- Live demo: Aviz builds a skill that bridges a gap in his system
+- Each participant identifies one gap in their L1+L2 → builds a skill for it
+- The compound effect: skill 1 enables skill 2, which enables skill 3...
 
-#### Block 6 — הכל ביחד + סגירה (15:00-16:00)
-**"עכשיו אתה גר בפנים"**
+**Participant leaves with:** At least one working skill that connects their knowledge to their tools
 
-- Semi-auto mode: send task → do something else → come back
-- Review: does your system meet the success criteria from Block 2?
-- Live showcase: 2-3 participants demo what they built
-- What's next: how to keep building after today
-- The daily habit: how Aviz starts and ends his day inside CC
+---
 
-**Participant leaves Block 6 with:** A working system they can continue building tomorrow
+### Layers 4-5 — הצצה + סגירה (15:15-16:00)
+
+#### "מה קורה כשהסוכן רץ לבד"
+
+**Layer 4 — Sub-agents and routines (15:15-15:40):**
+- Concept: agents that spawn agents, scheduled tasks (cron)
+- Live demo: Aviz shows a routine that runs daily
+- Not hands-on for today — this is what you build next week with solid L0-3
+
+**Layer 5 — Remote communication (15:40-15:50):**
+- The agent works while you're away: background agents, remote triggers
+- Brief glimpse — the horizon of what's possible with solid foundations
+
+**Closing (15:50-16:00):**
+- Review: does your system meet your success criteria from the morning?
+- 2-3 participants showcase what they built
+- The daily habit checklist: morning start, evening close, the rhythm of living inside CC
+- What's next: keep building layers 2-3 this week, L4-5 next
+
+**Participant leaves with:** A working L0-L3 system + clear understanding of where L4-5 fit
 
 ---
 
 ### Flow Summary
 
-| Time | Block | Participant Deliverable |
-|------|-------|------------------------|
-| 10:00-10:15 | הצתה | Motivation + understanding the paradigm |
-| 10:15-10:30 | יעד | Personal success criteria defined |
-| 10:30-12:00 | ידע | Project + CLAUDE.md + knowledge base |
-| 12:00-13:00 | סקילים | First working skill |
-| 13:00-14:00 | הפסקת צהריים | — |
-| 14:00-15:00 | אינטגרציות | Agent connected to real system |
-| 15:00-16:00 | סגירה | Full working system + daily habit |
+| Time | Layer | Focus | Deliverable |
+|------|-------|-------|-------------|
+| 10:00-10:30 | — | הצתה + יעד | Paradigm shift + personal success criteria |
+| 10:30-12:30 | **L0+L1** ⭐ | הבסיס | Project + CLAUDE.md + knowledge + the habit |
+| 12:30-13:00 | L2 start | אינטגרציות | First integration identified + started |
+| 13:00-14:00 | — | צהריים | — |
+| 14:00-15:15 | L2+L3 | כלים + סקילים | Integration working + first skill |
+| 15:15-16:00 | L4+L5 | הצצה + סגירה | Vision of full autonomy + showcase |
+
+**Time allocation:** ~60% on L0-L1 (the base), ~25% on L2-L3 (tools + skills), ~15% on L4-L5 (vision + closing)
 
 ## Notes
 
