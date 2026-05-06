@@ -14,8 +14,8 @@
 | **Goal** | Work with AI agents across all startup processes |
 | **Framework** | 7-Layer Model + Responsibility Loop |
 | **Special track** | Marketing content automation (images, posts, videos, landing pages) |
-| **Platform** | Codex by OpenAI (Desktop App — macOS/Windows, or Web at chatgpt.com/codex) |
-| **Prerequisite** | ChatGPT Plus subscription ($20/month) — required before Session 1 |
+| **Platform** | Codex by OpenAI (Desktop App) |
+| **Prerequisite** | ChatGPT Plus ($20/month) + Codex installed — required before Session 1 |
 
 ## Target Audience Profile
 
@@ -64,8 +64,8 @@ At each step: does the agent have the ability to do this? If not — that's what
 - הדגמה: אביץ מראה את המערכת שלו — 30 שניות, לא יותר
 
 #### Block B — Layer 0: התקנה והגדרה (30 דק')
-- הגדרת Codex (Desktop App / Web — chatgpt.com/codex)
-- הכרת הסביבה: threads, cloud tasks, AGENTS.md
+- התקנת Codex (מי שלא מוכן — עוזרים 1-on-1)
+- הכרת הסביבה: threads, AGENTS.md, אופן העבודה
 - הרשאות, אופן העבודה, מה הסוכן רואה ומה לא
 - הגדרות בסיסיות, הרשאות
 - Mental model: מה הסוכן רואה, מה לא
