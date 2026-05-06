@@ -10,7 +10,7 @@
 | **Time** | 10:00-16:00 (lunch break 13:00-14:00) |
 | **Duration** | 5 hours content + 1 hour lunch |
 | **Location** | Tel Aviv (Yishai finding venue) |
-| **Format** | In-person, frontal + hands-on |
+| **Format** | In-person, 100% hands-on (every participant builds on their laptop) |
 | **Participants** | 20 max |
 | **Price** | ₪2,000 per person |
 | **Revenue potential** | ₪40,000 |
@@ -184,20 +184,19 @@ This is the longest and most important block. If this is solid, everything else 
 
 **Layer 4 — Sub-agents and routines (15:15-15:40):**
 - Concept: agents that spawn agents, scheduled tasks (cron)
-- Live demo: Aviz shows a routine that runs daily
-- Not hands-on for today — this is what you build next week with solid L0-3
+- Hands-on: each participant sets up a sub-agent or a scheduled routine in their project
+- Live demo: Aviz shows a routine that runs daily, then participants build their own
 
 **Layer 5 — Remote communication (15:40-15:50):**
 - The agent works while you're away: background agents, remote triggers
-- Brief glimpse — the horizon of what's possible with solid foundations
+- Hands-on: configure a background agent or remote trigger for their use case
 
 **Closing (15:50-16:00):**
 - Review: does your system meet your success criteria from the morning?
 - 2-3 participants showcase what they built
 - The daily habit checklist: morning start, evening close, the rhythm of living inside CC
-- What's next: keep building layers 2-3 this week, L4-5 next
 
-**Participant leaves with:** A working L0-L3 system + clear understanding of where L4-5 fit
+**Participant leaves with:** A working L0-L5 system they built themselves
 
 ---
 
@@ -212,7 +211,9 @@ This is the longest and most important block. If this is solid, everything else 
 | 14:00-15:15 | L2+L3 | כלים + סקילים | Integration working + first skill |
 | 15:15-16:00 | L4+L5 | הצצה + סגירה | Vision of full autonomy + showcase |
 
-**Time allocation:** ~60% on L0-L1 (the base), ~25% on L2-L3 (tools + skills), ~15% on L4-L5 (vision + closing)
+**Everything is hands-on.** No block is lecture-only. Every layer: Aviz demos → participants build on their own machine → assistants help 1-on-1. The emphasis on L0-L1 is about depth of practice, not more talking.
+
+**Time allocation:** ~60% on L0-L1 (the base), ~25% on L2-L3 (tools + skills), ~15% on L4-L5 (agents + routines + closing)
 
 ## Notes
 
