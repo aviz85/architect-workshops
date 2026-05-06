@@ -6,12 +6,15 @@
 
 | Field | Value |
 |-------|-------|
+| **Dates** | Wednesday 10.06, 17.06, 24.06.2026 |
+| **Time** | 18:00-21:00 |
 | **Format** | 3 sessions × 3 hours |
 | **Total** | 9 hours |
 | **Target audience** | Startup founders (mostly non-technical) |
 | **Goal** | Work with AI agents across all startup processes |
 | **Framework** | 7-Layer Model + Responsibility Loop |
 | **Special track** | Marketing content automation (images, posts, videos, landing pages) |
+| **Prerequisite** | Claude Pro subscription ($17/month) — required before Session 1 |
 
 ## Target Audience Profile
 
