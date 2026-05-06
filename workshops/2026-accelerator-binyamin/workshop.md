@@ -32,7 +32,7 @@
 L6 — סקייל              multiply the process
 L5 — תקשורת מרחוק       agent works while you're away
 L4 — סוכנים ורוטינות     sub-agents + scheduled tasks
-L3 — כלים מותאמים             custom tools — training the agent on your knowledge + workflows
+L3 — סקילים             skills — training the agent on your knowledge + workflows
 L2 — אינטגרציות וכלים    connecting to real systems
 L1 — פרויקט כבסיס ידע    project as knowledge base (built around YOUR startup)
 L0 — Codex              foundation on the machine
@@ -63,8 +63,8 @@ At each step: does the agent have the ability to do this? If not — that's what
 - הדגמה: אביץ מראה את המערכת שלו — 30 שניות, לא יותר
 
 #### Block B — Layer 0: התקנה והגדרה (30 דק')
-- התקנת Codex (מי שלא מוכן — עוזרים 1-on-1)
-- Setup and configuration in the terminal / VS Code
+- הגדרת Codex (דרך הדפדפן — chatgpt.com)
+- הכרת הסביבה, הרשאות, אופן העבודה
 - הגדרות בסיסיות, הרשאות
 - Mental model: מה הסוכן רואה, מה לא
 
@@ -88,20 +88,20 @@ At each step: does the agent have the ability to do this? If not — that's what
 
 ---
 
-### Session 2 — כלים מותאמים + אוטומציית שיווק (3 שעות)
+### Session 2 — סקילים + אוטומציית שיווק (3 שעות)
 
 **Layers 3 + Marketing Automation Track**
 
-**מטרה:** כל משתתף יוצא עם כלים מותאמים עובדים ויכולת לייצר חומר שיווקי אוטומטית.
+**מטרה:** כל משתתף יוצא עם סקילים עובדים ויכולת לייצר חומר שיווקי אוטומטית.
 
 #### Block A — Review שיעורי בית (15 דק')
 - מה עבד? מה לא? איפה הלופ נשבר?
 - 2-3 משתתפים משתפים חוויה
 
-#### Block B — Layer 3: כלים מותאמים (45 דק')
-- מה זה כלי מותאם: מפעולה חוזרת ליכולת קבועה
-- The compound effect: כלי מותאם 1 מאפשר כלי מותאם 2
-- **תרגול:** כל אחד מזהה פעולה חוזרת בסטרטאפ → בונה כלי מותאם
+#### Block B — Layer 3: סקילים (45 דק')
+- מה זה סקיל: מפעולה חוזרת ליכולת קבועה
+- The compound effect: סקיל 1 מאפשר סקיל 2
+- **תרגול:** כל אחד מזהה פעולה חוזרת בסטרטאפ → בונה סקיל
 
 #### Block C — Marketing Track: תמונות ופרסומים (45 דק') ⭐
 - AI image generation: מפרומפט לפוסטר מקצועי
@@ -124,7 +124,7 @@ At each step: does the agent have the ability to do this? If not — that's what
 #### Block F — סיכום + שיעורי בית (15 דק')
 - **שיעורי בית:** השלימו את דף הנחיתה. צרו 3 פוסטים שיווקיים. הריצו את מעגל האחריות על כל אחד.
 
-**משתתף יוצא עם:** כלי מותאם עובד + פוסטר + פוסט שיווקי + סרטון בתהליך + דף נחיתה בתהליך
+**משתתף יוצא עם:** סקיל עובד + פוסטר + פוסט שיווקי + סרטון בתהליך + דף נחיתה בתהליך
 
 ---
 
@@ -174,7 +174,7 @@ At each step: does the agent have the ability to do this? If not — that's what
 | מפגש | שכבות | דגש מיוחד | משתתף יוצא עם |
 |-------|-------|-----------|----------------|
 | **1** | L0 + L1 + L2 | הבסיס + הרגל | פרויקט + ידע + אינטגרציה |
-| **2** | L3 + שיווק | כלים מותאמים + תמונות/סרטונים/דפי נחיתה | כלי מותאם + חומר שיווקי + דף נחיתה |
+| **2** | L3 + שיווק | סקילים + תמונות/סרטונים/דפי נחיתה | סקיל + חומר שיווקי + דף נחיתה |
 | **3** | L4 + L5 + L6 | אוטונומיה + שרשרת שיווק מלאה | מערכת אוטונומית + תוכנית scale |
 
 ## Key Principles
