@@ -29,3 +29,25 @@ Open http://localhost:3017.
 - `PUT /api/workshops/:slug`
 - `POST /api/materials`
 - `GET /api/brand/:file`
+
+## Workshop Videos
+
+Render a Remotion promo video into every workshop folder:
+
+```bash
+npm run render:videos
+```
+
+Useful options:
+
+```bash
+npm run render:videos -- --limit=1
+npm run render:videos -- --only=2026-05-14-living-in-claude-code
+npm run render:videos -- --overwrite
+```
+
+Output path:
+
+```text
+../workshops/<workshop-slug>/assets/workshop-promo.mp4
+```
