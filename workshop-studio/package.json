@@ -1,0 +1,18 @@
+{
+  "name": "aviz-workshop-studio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3017",
+    "build": "next build",
+    "start": "next start -p 3017",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "16.3.0-canary.14",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "lucide-react": "^0.468.0"
+  },
+  "devDependencies": {}
+}
