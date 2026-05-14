@@ -125,3 +125,4 @@ __pycache__/
 uriel-workshop-*.m4a
 uriel-workshop-*.srt
 uriel-workshop-*_transcript.json
+.claude/skills/morning-payments/scripts/.env
