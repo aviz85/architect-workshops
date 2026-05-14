@@ -1,4 +1,4 @@
-# סדנת הליבה — הפוך את העסק שלך לעסק אטומי
+# יום שכולו עסק אטומי — סדנת הליבה
 
 > סדנה פיזית | יום שלם | תל אביב | הדרכה צמודה 1:5
 
@@ -17,7 +17,15 @@
 | **Participants** | 25 (max) |
 | **Staff** | אביץ (lead) + ישי + 2 אסיסטנטים = 4 מדריכים |
 | **Ratio** | ~1:6 (מדריך לכל 6 משתתפים) |
+| **Consultant** | אוריאל הרצוג (יועץ עסקי) |
+| **Dev Group (WA)** | `120363410036780737@g.us` |
 | **Status** | 🔧 Building content |
+
+## Meetings Log
+
+| Date | Type | Summary |
+|------|------|---------|
+| 14.05.2026 | ייעוץ (2h) | פגישה עם אוריאל הרצוג — תכנון הסדנה. תמלול: `../../aviz-crm/finance/meetings/uriel/2026-05-14-transcript.md` |
 
 ## Schedule Overview
 
@@ -119,4 +127,5 @@
 - [ ] Marketing poster
 - [ ] Registration method
 - [ ] Presentation ready
-- [ ] WhatsApp group
+- [x] WhatsApp group — `120363410036780737@g.us`
+- [x] Consultant — אוריאל הרצוג (פגישת תכנון 14.05)
