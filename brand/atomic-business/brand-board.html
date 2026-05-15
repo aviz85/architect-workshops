@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1400px;
+    background: #FFFFFF;
+    font-family: 'Heebo', sans-serif;
+    color: #22262D;
+    padding: 80px;
+  }
+
+  h1 {
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 60px;
+    direction: ltr;
+    text-align: left;
+  }
+
+  /* Logo section */
+  .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    margin-bottom: 80px;
+    padding-bottom: 80px;
+    border-bottom: 1px solid #F0F0F0;
+  }
+
+  .logo-dark, .logo-light {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 60px;
+    border-radius: 16px;
+  }
+
+  .logo-dark {
+    background: #FAFAFA;
+  }
+
+  .logo-light {
+    background: #22262D;
+  }
+
+  .logo-dark svg, .logo-light svg {
+    width: 220px;
+    height: auto;
+  }
+
+  .logo-label {
+    font-size: 12px;
+    font-weight: 400;
+    color: #AAA;
+    text-align: center;
+    margin-top: 12px;
+    direction: ltr;
+  }
+
+  /* Color palette */
+  .palette-section {
+    margin-bottom: 80px;
+    padding-bottom: 80px;
+    border-bottom: 1px solid #F0F0F0;
+  }
+
+  .section-title {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #BBB;
+    margin-bottom: 30px;
+    direction: ltr;
+  }
+
+  .colors {
+    display: flex;
+    gap: 24px;
+    direction: ltr;
+  }
+
+  .color-card {
+    flex: 1;
+  }
+
+  .color-swatch {
+    height: 120px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+
+  .color-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #22262D;
+  }
+
+  .color-hex {
+    font-size: 12px;
+    font-weight: 300;
+    color: #999;
+    font-family: monospace;
+  }
+
+  .color-role {
+    font-size: 11px;
+    font-weight: 300;
+    color: #BBB;
+    margin-top: 4px;
+  }
+
+  /* The Atomic Dot */
+  .atomic-dot-section {
+    margin-bottom: 80px;
+    padding-bottom: 80px;
+    border-bottom: 1px solid #F0F0F0;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+
+  .dot-visual {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .dot-visual .nucleus {
+    width: 28px;
+    height: 28px;
+    background: #B91C1C;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .dot-visual .ring {
+    position: absolute;
+    border: 1px solid #E8E8E8;
+    border-radius: 50%;
+  }
+
+  .dot-visual .ring:nth-child(2) { width: 70px; height: 70px; opacity: 0.7; }
+  .dot-visual .ring:nth-child(3) { width: 110px; height: 110px; opacity: 0.5; }
+  .dot-visual .ring:nth-child(4) { width: 150px; height: 150px; opacity: 0.3; }
+  .dot-visual .ring:nth-child(5) { width: 190px; height: 190px; opacity: 0.15; }
+
+  .dot-explain {
+    flex: 1;
+  }
+
+  .dot-explain h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    direction: rtl;
+  }
+
+  .dot-explain p {
+    font-size: 16px;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.8;
+    direction: rtl;
+  }
+
+  /* Typography */
+  .type-section {
+    margin-bottom: 80px;
+    padding-bottom: 80px;
+    border-bottom: 1px solid #F0F0F0;
+  }
+
+  .type-samples {
+    direction: rtl;
+  }
+
+  .type-row {
+    margin-bottom: 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 30px;
+  }
+
+  .type-label {
+    font-size: 11px;
+    font-weight: 300;
+    color: #BBB;
+    width: 100px;
+    flex-shrink: 0;
+    direction: ltr;
+    text-align: right;
+  }
+
+  .type-900 { font-size: 64px; font-weight: 900; line-height: 1.1; }
+  .type-700 { font-size: 36px; font-weight: 700; }
+  .type-400 { font-size: 22px; font-weight: 400; color: #555; }
+  .type-300 { font-size: 18px; font-weight: 300; color: #888; }
+
+  .atomic-dot-inline {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #B91C1C;
+    border-radius: 50%;
+    margin-right: 2px;
+    vertical-align: baseline;
+    position: relative;
+    top: -2px;
+  }
+
+  /* Usage examples */
+  .usage-section {
+    margin-bottom: 40px;
+  }
+
+  .usage-grid {
+    display: flex;
+    gap: 30px;
+  }
+
+  .usage-card {
+    flex: 1;
+    background: #FAFAFA;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    direction: rtl;
+  }
+
+  .usage-card.dark {
+    background: #22262D;
+    color: #FFFFFF;
+  }
+
+  .usage-card .card-title {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .usage-card .card-sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: #888;
+  }
+
+  .usage-card.dark .card-sub {
+    color: #777;
+  }
+
+  .usage-card .card-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #B91C1C;
+    border-radius: 50%;
+  }
+
+  /* Brand hierarchy */
+  .hierarchy {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 8px;
+    direction: ltr;
+  }
+
+  .hierarchy .arrow {
+    color: #DDD;
+    font-size: 18px;
+  }
+
+  .hierarchy .brand-main {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .hierarchy .brand-sub {
+    font-size: 20px;
+    font-weight: 300;
+    color: #888;
+  }
+</style>
+</head>
+<body>
+
+<h1>AVIZ — Brand Identity System</h1>
+
+<!-- Logo -->
+<div class="logo-section">
+  <div>
+    <div class="logo-dark">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 440 1000 340" role="img">
+        <defs><style>
+          .dk { fill: none; stroke: #22262D; stroke-width: 30; stroke-linecap: round; stroke-linejoin: round; }
+          .cy { fill: none; stroke: #11CFD0; stroke-width: 28; stroke-linecap: round; stroke-linejoin: round; }
+          .dt { fill: #11CFD0; }
+        </style></defs>
+        <path class="dk" d="M211 711 L318 553 Q348 512 381 553 L478 710" />
+        <path class="cy" d="M337 623 L393 710" />
+        <path class="dk" d="M464 537 L572 699 Q589 725 608 699 L713 537" />
+        <path class="dk" d="M769 538 L769 710" />
+        <circle class="dt" cx="769" cy="492" r="16" />
+        <path class="dk" d="M835 537 L1023 537 Q1044 537 1027 552 L855 699 Q839 712 862 713 L1030 713" />
+      </svg>
+    </div>
+    <div class="logo-label">Light background</div>
+  </div>
+  <div>
+    <div class="logo-light">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 440 1000 340" role="img">
+        <defs><style>
+          .lt { fill: none; stroke: #FFFFFF; stroke-width: 30; stroke-linecap: round; stroke-linejoin: round; }
+          .cy2 { fill: none; stroke: #11CFD0; stroke-width: 28; stroke-linecap: round; stroke-linejoin: round; }
+          .dt2 { fill: #11CFD0; }
+        </style></defs>
+        <path class="lt" d="M211 711 L318 553 Q348 512 381 553 L478 710" />
+        <path class="cy2" d="M337 623 L393 710" />
+        <path class="lt" d="M464 537 L572 699 Q589 725 608 699 L713 537" />
+        <path class="lt" d="M769 538 L769 710" />
+        <circle class="dt2" cx="769" cy="492" r="16" />
+        <path class="lt" d="M835 537 L1023 537 Q1044 537 1027 552 L855 699 Q839 712 862 713 L1030 713" />
+      </svg>
+    </div>
+    <div class="logo-label">Dark background</div>
+  </div>
+  <div style="flex: 1; padding-right: 40px;">
+    <div class="hierarchy">
+      <span class="brand-main">AVIZ</span>
+      <span class="arrow">→</span>
+      <span class="brand-sub">עסק אטומי</span>
+    </div>
+    <p style="font-size: 14px; font-weight: 300; color: #999; direction: ltr; margin-top: 8px; line-height: 1.6;">
+      AVIZ is the parent brand.<br>
+      "Atomic Business" is a product line / workshop format.<br>
+      Logo always appears as AVIZ, never as "עסק אטומי" alone.
+    </p>
+  </div>
+</div>
+
+<!-- Colors -->
+<div class="palette-section">
+  <div class="section-title">Color Palette</div>
+  <div class="colors">
+    <div class="color-card">
+      <div class="color-swatch" style="background: #22262D;"></div>
+      <div class="color-name">Ink</div>
+      <div class="color-hex">#22262D</div>
+      <div class="color-role">Primary text, structure</div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: #11CFD0;"></div>
+      <div class="color-name">Cyan</div>
+      <div class="color-hex">#11CFD0</div>
+      <div class="color-role">Brand accent, logo element</div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: #B91C1C;"></div>
+      <div class="color-name">Crimson</div>
+      <div class="color-hex">#B91C1C</div>
+      <div class="color-role">The Atomic Dot — nucleus</div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: #FAFAFA; border: 1px solid #EEE;"></div>
+      <div class="color-name">Canvas</div>
+      <div class="color-hex">#FAFAFA</div>
+      <div class="color-role">Background, breathing room</div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: #E8E8E8;"></div>
+      <div class="color-name">Mist</div>
+      <div class="color-hex">#E8E8E8</div>
+      <div class="color-role">Subtle lines, dividers</div>
+    </div>
+  </div>
+</div>
+
+<!-- The Atomic Dot -->
+<div class="atomic-dot-section">
+  <div class="dot-visual">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="nucleus"></div>
+  </div>
+  <div class="dot-explain">
+    <h3>The Atomic Dot<span style="display:inline-block; width:10px; height:10px; background:#B91C1C; border-radius:50%; margin-right:8px; vertical-align: middle;"></span></h3>
+    <p>
+      הנקודה האטומית - אלמנט המיתוג החוזר.
+      <br>גרעין קטן שמכיל אנרגיה עצומה.
+      <br><br>
+      מופיעה כנקודה בסוף כותרות, כמפריד בין אלמנטים, או כאלמנט גרפי עצמאי.
+      <br>
+      תמיד בצבע crimson (#B91C1C). תמיד עגולה. תמיד אחת.
+      <br><br>
+      <span style="color: #BBB; font-size: 14px;">
+        המקבילה ללוגו: הנקודה הציאנית על ה-I = הזהות של AVIZ.
+        <br>הנקודה האדומה = האנרגיה של העסק האטומי.
+      </span>
+    </p>
+  </div>
+</div>
+
+<!-- Typography -->
+<div class="type-section">
+  <div class="section-title">Typography — Heebo</div>
+  <div class="type-samples">
+    <div class="type-row">
+      <span class="type-label">Black 900</span>
+      <span class="type-900">עסק אטומי<span class="atomic-dot-inline"></span></span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Bold 700</span>
+      <span class="type-700">גרעין קטן · פוטנציאל אינסופי</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Regular 400</span>
+      <span class="type-400">איך אדם אחד מתפקד כארגון שלם באמצעות סוכני AI</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Light 300</span>
+      <span class="type-300">סדנת יום שלם | 20 מקומות | תל אביב | ₪3,000</span>
+    </div>
+  </div>
+</div>
+
+<!-- Usage examples -->
+<div class="usage-section">
+  <div class="section-title">Usage Examples</div>
+  <div class="usage-grid">
+    <div class="usage-card">
+      <div class="card-title">יום שכולו עסק אטומי<span class="card-dot" style="margin-right: 4px;"></span></div>
+      <div class="card-sub">חופש · פריון · עוצמה</div>
+    </div>
+    <div class="usage-card dark">
+      <div class="card-title">עסק אטומי<span class="card-dot" style="margin-right: 4px;"></span></div>
+      <div class="card-sub">by AVIZ</div>
+    </div>
+    <div class="usage-card" style="background: white; border: 1px solid #F0F0F0;">
+      <div style="font-size: 48px; font-weight: 900; margin-bottom: 16px;">
+        גרעין קטן<span class="card-dot" style="margin-right: 4px;"></span>
+        <br><span style="font-weight: 300; font-size: 36px; color: #888;">פוטנציאל אינסופי</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

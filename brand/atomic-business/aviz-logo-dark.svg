@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254" width="1254" height="1254" role="img" aria-label="AVIZ logo">
+  <defs>
+    <style>
+      .dark {
+        fill: none;
+        stroke: #22262D;
+        stroke-width: 30;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .cyan {
+        fill: none;
+        stroke: #11CFD0;
+        stroke-width: 28;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .dot {
+        fill: #11CFD0;
+      }
+    </style>
+  </defs>
+
+  <!-- A -->
+  <path class="dark" d="M211 711 L318 553 Q348 512 381 553 L478 710" />
+  <path class="cyan" d="M337 623 L393 710" />
+
+  <!-- V -->
+  <path class="dark" d="M464 537 L572 699 Q589 725 608 699 L713 537" />
+
+  <!-- I -->
+  <path class="dark" d="M769 538 L769 710" />
+  <circle class="dot" cx="769" cy="492" r="16" />
+
+  <!-- Z -->
+  <path class="dark" d="M835 537 L1023 537 Q1044 537 1027 552 L855 699 Q839 712 862 713 L1030 713" />
+</svg>
