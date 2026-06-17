@@ -10,10 +10,12 @@ Create branded Hebrew contract PDFs for Aviz - The Architect.
 This skill captures the workflow proven in the example contract:
 
 1. Draft a Hebrew RTL contract.
-2. Apply AVIZ branding.
-3. Render from HTML to PDF.
-4. Create a preview image.
-5. Visually verify the preview before giving the user the file.
+2. Prefer structured contract data when details are known.
+3. Validate dates, demo status, and critical missing fields.
+4. Apply AVIZ branding.
+5. Render from HTML to PDF.
+6. Create a preview image.
+7. Visually verify the preview before giving the user the file.
 
 ## When to Use
 
@@ -48,6 +50,53 @@ For a real contract, collect or derive:
 - Signature names and dates.
 
 If the user gives partial details, proceed only for non-critical gaps. Use reasonable placeholders such as `__________` for missing signature fields, but do not invent real client identifiers unless the user requested a demo.
+
+## Preferred Data-First Workflow
+
+When the user gives enough details, create a contract data JSON first, then generate the HTML/PDF from it. This keeps recurring fields consistent and lets code catch common mistakes before the PDF exists.
+
+Use the example as a starting point:
+
+```bash
+cp /Users/aviz/architect-workshops/.codex/skills/contract-pdf/examples/workshop-demo-contract.json \
+  /Users/aviz/Documents/contracts/my-contract.json
+```
+
+Then edit the JSON fields for the client and deal. Important fields:
+
+- `meta.slug`: output filename base.
+- `meta.isDemo`: `true` for invented/example details; `false` for real contracts.
+- `meta.documentDate`: `YYYY-MM-DD`.
+- `client`: client/company identity and contact details.
+- `service`: summary, deliverables, exclusions.
+- `logistics`: date, weekday, time, duration, location, participants.
+- `payment`: amount, VAT, deposit, balance, invoice terms.
+- `cancellation`, `rights`, `confidentiality`, `additionalTerms`.
+
+Generate HTML plus validation:
+
+```bash
+node /Users/aviz/architect-workshops/.codex/skills/contract-pdf/scripts/create-contract.mjs \
+  --data /Users/aviz/Documents/contracts/my-contract.json
+```
+
+Generate HTML, PDF, and preview in one command:
+
+```bash
+NODE_PATH=/Users/aviz/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules \
+/Users/aviz/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node \
+/Users/aviz/architect-workshops/.codex/skills/contract-pdf/scripts/create-contract.mjs \
+  --data /Users/aviz/Documents/contracts/my-contract.json \
+  --render
+```
+
+The generator writes:
+
+- `<slug>.html`
+- `<slug>.validation.json`
+- With `--render`: `<slug>.pdf` and `<slug>-preview.png`
+
+If validation fails, fix the JSON. Use `--force` only for drafts where the validation error is intentionally unresolved and you will call it out to the user.
 
 ## Date Safety
 
@@ -120,7 +169,9 @@ Keep clauses clear and practical. Aviz's client-facing tone is warm, professiona
 
 ## Render Workflow
 
-1. Create the HTML in `~/Documents/contracts/`.
+Use this lower-level renderer when you already have an HTML contract and only need PDF/preview.
+
+1. Create or locate the HTML in `~/Documents/contracts/`.
 2. Render it with the bundled script:
 
 ```bash
@@ -183,4 +234,3 @@ Final response should include:
 - Link to the editable HTML source.
 - Short note that visual/PDF sanity checks passed.
 - Open loops: missing real client details, legal review needed, or user approval needed before sending.
-
