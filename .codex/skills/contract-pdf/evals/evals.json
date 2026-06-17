@@ -1,0 +1,20 @@
+{
+  "skill_name": "contract-pdf",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "צור לי חוזה PDF לדוגמה לסדנת AI בזום מול חברת דוגמה בע״מ. תמציא פרטים סבירים רק לשם הדוגמה, ותשתמש במיתוג שלי.",
+      "expected_output": "Creates a Hebrew RTL branded contract PDF and editable HTML in ~/Documents/contracts, marked clearly as a demo, with AVIZ logo and green branding."
+    },
+    {
+      "id": 2,
+      "prompt": "יש לי לקוח אמיתי בשם אורן מערכות בע״מ, ח.פ. 516000001. הם מזמינים הרצאה של שעה וחצי בזום על סוכני AI ב-15.07.2026 ב-20:00, מחיר 3500 ש״ח + מע״מ. תכין חוזה ממותג אבל תשאיר חתימות ריקות.",
+      "expected_output": "Verifies the weekday for the specific date, creates a real-client Hebrew RTL branded contract PDF without inventing missing sensitive details, and leaves signature fields blank."
+    },
+    {
+      "id": 3,
+      "prompt": "קח את החוזה HTML שיצרנו קודם ותהפוך אותו ל-PDF ממותג מחדש, כולל preview לבדיקה.",
+      "expected_output": "Uses the render script on an existing HTML contract, outputs PDF and preview PNG, then visually verifies the preview before returning file links."
+    }
+  ]
+}
