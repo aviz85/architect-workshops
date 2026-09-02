@@ -19,7 +19,7 @@
 | **Language** | Hebrew, RTL |
 | **Price** | ₪100 per participant |
 | **Zoom Link** | [TBD] |
-| **Status** | 🔧 Just created — content drafted, marketing not started |
+| **Status** | ⏩ Not delivered — rescheduled as two 1-hour webinars: `2026-09-16-grok-bot-webinar` and `2026-09-23-grok-bot-webinar` |
 
 ### WhatsApp Group
 
