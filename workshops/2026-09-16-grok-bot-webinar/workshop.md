@@ -221,7 +221,8 @@ One hour means **one primary demo, pre-built and rehearsed**, no live setup from
 | `assets/references/` | Official Grok Bot graphics and UI screenshots, for poster and slides |
 | `assets/avatar.jpg` | Workshop character sheet — Boss presenting Grok Bot on a phone (created 2026-09-03, Gemini) |
 | `assets/avatar-hero.jpg` | Single hero shot of the same scene, for poster/thumbnail use |
-| `assets/poster.jpg` | Promotional poster (TBD) — one poster can serve both sessions |
+| `assets/poster.jpg` | Final poster (TBD — Aviz picks from the variations) |
+| `assets/poster-variations/` | Round 1: 10 concepts, classic composition. `round2-phone-forward/`: same 10 with the phone thrust at the camera. Contact sheets in each folder |
 | `presentation-plan.md` | Presentation blueprint, Hebrew + RTL (TBD) |
 | `assets/slides.pdf` | Final slides (TBD) |
 
@@ -243,7 +244,7 @@ One hour means **one primary demo, pre-built and rehearsed**, no live setup from
 
 ### Poster & Marketing
 - [x] Avatar created (2026-09-03)
-- [ ] Poster created
+- [ ] Poster created (20 variations generated 2026-09-03, awaiting Aviz's pick)
 - [ ] Marketing copy written
 - [ ] Facebook groups
 - [ ] WhatsApp broadcast + groups
