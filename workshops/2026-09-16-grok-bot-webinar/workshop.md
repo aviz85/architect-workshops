@@ -59,6 +59,7 @@ Full 2-hour background plan: `workshops/2026-08-23-grok-bot/workshop.md`.
 כל מי שעובד עם AI מכיר את התקרה: הסוכן מגיע ל-90% ואז נעצר, כי הוא יושב בתוך חלון צ'אט על המחשב שלך.
 גרוק בוט הוא הצצה לדור הבא: כל בוט מקבל **מחשב משלו בענן**, זהות משלו, זיכרון משלו, ורץ תמיד — גם כשאתה ישן.
 
+בינואר הבשורה היתה מצב חללית — ניהול סשנים במקביל. הפעם זה לא ניהול סשנים: זה סוכנים שמנהלים את העבודה בלעדיך.
 בשעה אחת נענה על חמש שאלות: מה זה בכלל, מה כל כך עתידני בו, אילו טריקים הופכים אותו ליעיל במיוחד,
 איך לא לשרוף את כל הטוקנים בשעתיים הראשונות, ואיפה בעבודה שלך הוא מביא את התועלת הכי איכותית.
 
@@ -66,17 +67,35 @@ Full 2-hour background plan: `workshops/2026-08-23-grok-bot/workshop.md`.
 
 ---
 
-## Core Thesis
+## Core Thesis — למה "מהעתיד"
 
-The bottleneck was never intelligence. It was **environment**. An agent with its own computer, its own
-logins, its own memory and an always-on runtime can actually finish the swing — the work lands in the real tool.
+<div dir="rtl">
 
-"סוכן מהעתיד" is not hype. It is the first product where four things we used to build by hand (see the fleet,
-OpenClaw, tmux agents) come in the box:
+**הבשורה של ינואר:** מצב חללית — ניהול סשנים במקביל. אתה הטייס, פותח כמה סשנים, מנהל אותם, וחוזר לכל אחד.
+עדיין אתה במרכז: אתה מתחיל, אתה עוקב, אתה סוגר.
+
+**הבשורה של ספטמבר:** לא ניהול סשנים. **סוכנים שמנהלים את העבודה בלעדיך.**
+בוט עם תפקיד, זיכרון, מחשב משלו ורוטינות — מתחיל לבד, ממשיך לבד, ופונה אליך רק להחלטה.
+בוט מנהל שמחלק עבודה לבוטים אחרים. אתה לא בלולאה — אתה מעל הלולאה.
+
+זה לא שיפור של אותו דבר. זה שינוי מהותי במי מחזיק את ההגה. לכן זה עתידי.
+
+</div>
+
+| ינואר — מצב חללית | ספטמבר — סוכן מהעתיד |
+|---|---|
+| אתה מנהל סשנים במקביל | בוטים מנהלים לֵיינים של עבודה |
+| כל סשן מתחיל כשאתה פותח אותו | הבוט מתחיל לבד (רוטינה, טריגר) |
+| הקונטקסט נגמר עם הסשן | זיכרון וזהות נשארים |
+| אתה מחלק את העבודה | בוט מנהל מחלק את העבודה |
+| אתה בלולאה | אתה מעל הלולאה — רק להחלטות |
+
+The bottleneck was never intelligence. It was **environment** and **who holds the wheel**. What we built by hand
+(the fleet, OpenClaw, tmux agents, Telegram bridge) now comes in the box:
 
 | What we build by hand today | Grok Bot in the box |
 |---|---|
-| A VPS + tmux + Claude Code per agent | A cloud computer per bot, one click |
+| A VPS + tmux + Claude Code per agent | A cloud computer, one click (one per account, shared by all bots) |
 | CLAUDE.md + knowledge files | Persistent per-bot memory that learns your voice and edge cases |
 | Skills written as text | `Teach a task` — record once, the bot repeats it |
 | Cron + scripts | Routines the bot builds for itself |
@@ -102,6 +121,7 @@ OpenClaw, tmux agents) come in the box:
 ### 1. מה זה גרוק בוט (21:00–21:08)
 
 - מה xAI שיחררו ב-11 באוגוסט, ולמה זה לא עוד צ'אט
+- בינואר דיברנו על מצב חללית: ניהול סשנים במקביל. הפעם — סוכנים שמנהלים את העבודה בלעדיך
 - ההבדל בין 90% ל-100%: איפה כל סוכן שהכרתם נעצר
 - תמונה אחת: בוט = מחשב בענן + זהות + זיכרון + רץ תמיד
 
@@ -112,6 +132,7 @@ OpenClaw, tmux agents) come in the box:
 - הערת אמת: השיווק אומר "מחשב לכל בוט", התיעוד אומר מחשב אחד לחשבון שכל הבוטים חולקים
 - זיכרון מתמשך: לומד את הקול שלך, את מקרי הקצה, ומתי לפנות אליך
 - צוות: כמה בוטים, קבוצת צ'אט ביניהם, בוט מנהל
+- מי מחזיק את ההגה: מטייס של סשנים למי שיושב מעל הלולאה
 - השוואה קצרה: מה שבנינו ביד (צי, OpenClaw, tmux) מגיע כאן בקופסה
 
 ### 3. דמו חי + טריקים שהופכים אותו ליעיל במיוחד (21:20–21:35) ⭐
