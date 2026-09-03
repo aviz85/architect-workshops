@@ -1,4 +1,4 @@
-# Grok Bot — Research Brief for "גרוק בוט — קפיצה לעתיד"
+# Grok Bot — Research Brief for "בוט מהעתיד!"
 
 Compiled 2026-09-03 by a background research agent (web search + fetch). Shared by both sessions (16.9 and 23.9).
 

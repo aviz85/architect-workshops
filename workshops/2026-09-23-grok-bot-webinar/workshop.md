@@ -1,6 +1,6 @@
 <div dir="rtl">
 
-# גרוק בוט — קפיצה לעתיד (וובינר, שעה)
+# בוט מהעתיד! (וובינר, שעה)
 
 > לא צ'אט. לא כלי. **עובד.** לכל בוט מחשב משלו בענן, סיסמאות משלו, זיכרון משלו — והוא ממשיך לעבוד גם כשסגרת את הלפטופ.
 
@@ -10,8 +10,9 @@
 
 | Field | Value |
 |-------|-------|
-| **Title** | גרוק בוט — קפיצה לעתיד |
-| **Working titles** | "סוכן מהעתיד" (2026-09-03 AM) ← "קפיצה לעתיד" (2026-09-03, current) |
+| **Title** | בוט מהעתיד! |
+| **Subtitle** | גרוק בוט — הסוכן שמנהל את העבודה בלעדיך |
+| **Working titles** | "סוכן מהעתיד" ← "קפיצה לעתיד" ← "בוט מהעתיד!" (all 2026-09-03; last is current) |
 | **Format** | Webinar, 1 hour |
 | **Session** | 2 of 2 — repeat of the 2026-09-16 session |
 | **Date** | 2026-09-23 |
@@ -38,7 +39,7 @@
 
 ## The Angle (set by Aviz, 2026-09-03)
 
-**גרוק בוט — קפיצה לעתיד.** Grok Bot is the agent from the future; the webinar is the leap. The webinar answers five questions, in this order:
+**בוט מהעתיד!** Grok Bot is the bot from the future. Tone (Aviz, 2026-09-03): extreme, high-energy, cool, cartoony, edgy. The webinar answers five questions, in this order:
 
 1. **מה זה גרוק בוט** — what it actually is, in one picture
 2. **מה כל כך עתידני בו** — what is genuinely new here vs. every agent we already know
