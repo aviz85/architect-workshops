@@ -1,6 +1,6 @@
 <div dir="rtl">
 
-# גרוק בוט — סוכן מהעתיד (וובינר, שעה)
+# גרוק בוט — קפיצה לעתיד (וובינר, שעה)
 
 > לא צ'אט. לא כלי. **עובד.** לכל בוט מחשב משלו בענן, סיסמאות משלו, זיכרון משלו — והוא ממשיך לעבוד גם כשסגרת את הלפטופ.
 
@@ -10,7 +10,8 @@
 
 | Field | Value |
 |-------|-------|
-| **Title** | גרוק בוט — סוכן מהעתיד |
+| **Title** | גרוק בוט — קפיצה לעתיד |
+| **Working titles** | "סוכן מהעתיד" (2026-09-03 AM) ← "קפיצה לעתיד" (2026-09-03, current) |
 | **Format** | Webinar, 1 hour |
 | **Session** | 1 of 2 — repeated one week later on 2026-09-23 |
 | **Date** | 2026-09-16 |
@@ -37,7 +38,7 @@
 
 ## The Angle (set by Aviz, 2026-09-03)
 
-**גרוק בוט, סוכן מהעתיד.** The webinar answers five questions, in this order:
+**גרוק בוט — קפיצה לעתיד.** Grok Bot is the agent from the future; the webinar is the leap. The webinar answers five questions, in this order:
 
 1. **מה זה גרוק בוט** — what it actually is, in one picture
 2. **מה כל כך עתידני בו** — what is genuinely new here vs. every agent we already know
@@ -196,7 +197,7 @@ One hour means **one primary demo, pre-built and rehearsed**, no live setup from
 - [ ] Price confirmed at ₪100?
 - [ ] WhatsApp group created (shared between both sessions, or one per session?)
 - [ ] Wednesday 21:00 is not one of the usual slots (Mon/Thu) — accepted as-is
-- [ ] Avatar — reuse Boss avatar, or new "agent from the future" character with an xAI/Grok accent?
+- [x] Avatar — Boss holding a phone with the Grok Bot icon (done 2026-09-03)
 
 ---
 
@@ -217,7 +218,8 @@ One hour means **one primary demo, pre-built and rehearsed**, no live setup from
 |------|-------------|
 | `research.md` | Sourced facts per pillar (limits, tricks, use cases, what is new) |
 | `assets/references/` | Official Grok Bot graphics and UI screenshots, for poster and slides |
-| `assets/avatar.jpg` | Workshop character sheet (TBD) |
+| `assets/avatar.jpg` | Workshop character sheet — Boss presenting Grok Bot on a phone (created 2026-09-03, Gemini) |
+| `assets/avatar-hero.jpg` | Single hero shot of the same scene, for poster/thumbnail use |
 | `assets/poster.jpg` | Promotional poster (TBD) — one poster can serve both sessions |
 | `presentation-plan.md` | Presentation blueprint, Hebrew + RTL (TBD) |
 | `assets/slides.pdf` | Final slides (TBD) |
@@ -239,7 +241,7 @@ One hour means **one primary demo, pre-built and rehearsed**, no live setup from
 - [ ] Slides created via NotebookLM Studio
 
 ### Poster & Marketing
-- [ ] Avatar chosen / created
+- [x] Avatar created (2026-09-03)
 - [ ] Poster created
 - [ ] Marketing copy written
 - [ ] Facebook groups
