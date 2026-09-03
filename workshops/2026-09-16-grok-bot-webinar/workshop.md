@@ -1,8 +1,8 @@
 <div dir="rtl">
 
-# גרוק בוט — צוות הסוכנים הראשון שלך (וובינר, שעה)
+# גרוק בוט — סוכן מהעתיד (וובינר, שעה)
 
-> לא צ'אט. לא כלי. **עובדים.** לכל בוט מחשב משלו בענן, סיסמאות משלו, והוא ממשיך לעבוד גם כשסגרת את הלפטופ.
+> לא צ'אט. לא כלי. **עובד.** לכל בוט מחשב משלו בענן, סיסמאות משלו, זיכרון משלו — והוא ממשיך לעבוד גם כשסגרת את הלפטופ.
 
 </div>
 
@@ -10,8 +10,8 @@
 
 | Field | Value |
 |-------|-------|
-| **Title** | גרוק בוט — צוות הסוכנים הראשון שלך |
-| **Format** | Webinar, 1 hour (compact version of the 2-hour workshop) |
+| **Title** | גרוק בוט — סוכן מהעתיד |
+| **Format** | Webinar, 1 hour |
 | **Session** | 1 of 2 — repeated one week later on 2026-09-23 |
 | **Date** | 2026-09-16 |
 | **Day** | Wednesday (verified with `date`) |
@@ -23,8 +23,8 @@
 | **Zoom Link** | https://us06web.zoom.us/j/89763444555?pwd=7ZQivzBGGbaAhbgZbvgupkfbpBfR5N.1 |
 | **Zoom Meeting ID** | 897 6344 4555 |
 | **Zoom Password** | 479791 |
-| **Calendar** | Event created 2026-09-02 (Google Calendar, with Zoom link) |
-| **Status** | 🔧 Scheduled — Zoom + calendar done, marketing not started |
+| **Calendar** | Google Calendar event with Zoom link (created 2026-09-02) |
+| **Status** | 🔧 Scheduled — Zoom + calendar done, content angle set 2026-09-03, marketing not started |
 
 ### WhatsApp Group
 
@@ -35,13 +35,20 @@
 
 ---
 
-## Origin
+## The Angle (set by Aviz, 2026-09-03)
 
-This is the rescheduled, compacted version of `workshops/2026-08-23-grok-bot/` (2-hour plan, never delivered).
-Full research, thesis, demo candidates and links live there. This file holds only what changed for the 1-hour format.
+**גרוק בוט, סוכן מהעתיד.** The webinar answers five questions, in this order:
 
-**Timing hook still holds:** Grok Bot launched on August 11, 2026 — about five weeks before this session.
-Still the first Hebrew deep-dive. Angle: "יצא לפני חודש — בואו נבדוק ביחד אם זה באמת עובד."
+1. **מה זה גרוק בוט** — what it actually is, in one picture
+2. **מה כל כך עתידני בו** — what is genuinely new here vs. every agent we already know
+3. **טריקים שהופכים אותו ליעיל במיוחד** — the patterns that make it work well
+4. **איך לא לגמור את כל הטוקנים בשעתיים** — the cost discipline
+5. **איפה הוא מביא את התועלת האיכותית ביותר בעבודה** — where to point it first
+
+Research backing each pillar: see `research.md` in this folder (facts, sources, official vs. user-reported).
+Full 2-hour background plan: `workshops/2026-08-23-grok-bot/workshop.md`.
+
+**Timing hook:** launched August 11, 2026. Still the first Hebrew deep-dive. "יצא לפני חודש — בואו נבדוק ביחד."
 
 ---
 
@@ -50,10 +57,10 @@ Still the first Hebrew deep-dive. Angle: "יצא לפני חודש — בואו 
 <div dir="rtl">
 
 כל מי שעובד עם AI מכיר את התקרה: הסוכן מגיע ל-90% ואז נעצר, כי הוא יושב בתוך חלון צ'אט על המחשב שלך.
-גרוק בוט נותן לכל בוט **מחשב משלו בענן** — דפדפן אמיתי, קבצים, טרמינל, וחיבורים משלו לכלים שאתה עובד איתם.
+גרוק בוט הוא הצצה לדור הבא: כל בוט מקבל **מחשב משלו בענן**, זהות משלו, זיכרון משלו, ורץ תמיד — גם כשאתה ישן.
 
-בשעה אחת: נבין את המודל, נראה בוט ראשון נבנה חי על המסך, נלמד אותו תהליך בהדגמה אחת (בלי קוד),
-ונראה מה קורה כשמפעילים כמה בוטים במקביל. ובאותה נשימה — מה לא עובד: המחיר, היעדר בחירת מודל, והסיכון.
+בשעה אחת נענה על חמש שאלות: מה זה בכלל, מה כל כך עתידני בו, אילו טריקים הופכים אותו ליעיל במיוחד,
+איך לא לשרוף את כל הטוקנים בשעתיים הראשונות, ואיפה בעבודה שלך הוא מביא את התועלת הכי איכותית.
 
 </div>
 
@@ -62,14 +69,20 @@ Still the first Hebrew deep-dive. Angle: "יצא לפני חודש — בואו 
 ## Core Thesis
 
 The bottleneck was never intelligence. It was **environment**. An agent with its own computer, its own
-logins and an always-on runtime can actually finish the swing — the work lands in the real tool.
+logins, its own memory and an always-on runtime can actually finish the swing — the work lands in the real tool.
 
-| Aviz's framework | Grok Bot's version of it |
+"סוכן מהעתיד" is not hype. It is the first product where four things we used to build by hand (see the fleet,
+OpenClaw, tmux agents) come in the box:
+
+| What we build by hand today | Grok Bot in the box |
 |---|---|
-| **חצי-אוטומאט** | Message a bot like a colleague, it pings you only for judgment calls |
-| **Single Player → Multi Player** | Multiple bots, group chats, a "chief of staff" bot managing specialists |
-| **לסגור לופ** | "Teach a task" recording + routines = the improve step, without code |
-| **קונטקסט > אינטליגנציה** | Persistent memory per bot: learns your voice, edge cases, when to ping you |
+| A VPS + tmux + Claude Code per agent | A cloud computer per bot, one click |
+| CLAUDE.md + knowledge files | Persistent per-bot memory that learns your voice and edge cases |
+| Skills written as text | `Teach a task` — record once, the bot repeats it |
+| Cron + scripts | Routines the bot builds for itself |
+| Telegram bridge + prefixes to route to agents | Group chats between bots, a chief-of-staff bot that routes |
+
+**The promise:** אתה נכנס עם סוכן אחד בצ'אט. אתה יוצא עם מודל מנטלי של עובד מהעתיד — ועם משמעת של מנהל.
 
 ---
 
@@ -86,37 +99,45 @@ logins and an always-on runtime can actually finish the swing — the work lands
 
 <div dir="rtl">
 
-### 1. פתיחה — מה קרה ב-11 באוגוסט (21:00–21:08)
+### 1. מה זה גרוק בוט (21:00–21:08)
 
-- xAI שיחררו גרוק בוט. למה זה לא עוד צ'אט
+- מה xAI שיחררו ב-11 באוגוסט, ולמה זה לא עוד צ'אט
 - ההבדל בין 90% ל-100%: איפה כל סוכן שהכרתם נעצר
-- הכלל: **סוכן שווה בדיוק כמו הסביבה שנתת לו**
+- תמונה אחת: בוט = מחשב בענן + זהות + זיכרון + רץ תמיד
 
-### 2. המודל — סוכן עם מחשב משלו (21:08–21:20)
+### 2. מה כל כך עתידני בו (21:08–21:20)
 
-- מה מקבל כל בוט: מחשב בענן, דפדפן, קבצים, טרמינל, לוגינים משלו
-- למה זה עובד גם על אתרים בלי API
-- מודל האמון: הבוט מגיע למסך התחברות ומחזיר לך את ההגה לרגע
-- תפקיד במקום משימה: "אתה אחראי על תחום X"
+- מחשב משלו: דפדפן, קבצים, טרמינל, לוגינים — עובד גם על אתרים בלי API
+- זהות ותפקיד במקום משימה: "אתה אחראי על תחום X", לא "תסכם לי"
+- זיכרון מתמשך: לומד את הקול שלך, את מקרי הקצה, ומתי לפנות אליך
+- צוות: כמה בוטים, קבוצת צ'אט ביניהם, בוט מנהל
+- השוואה קצרה: מה שבנינו ביד (צי, OpenClaw, tmux) מגיע כאן בקופסה
 
-### 3. דמו חי — בונים בוט ראשון + מלמדים אותו תהליך (21:20–21:40) ⭐
+### 3. דמו חי + טריקים שהופכים אותו ליעיל במיוחד (21:20–21:35) ⭐
 
-- מתארים בשפה חופשית מה צריך — הבוט שואל, מציע תוכנית, מתחיל לעבוד
-- מחברים אינטגרציה אחת אמיתית (Gmail / Notion / Drive)
-- `Teach a task` — מקליטים תהליך פעם אחת, הבוט חוזר עליו. זה ה"סקיל" של מי שלא כותב קוד
-- רוטינה: אותו תהליך על לוח זמנים, בלי שתבקש
+- בוט חי על המסך: תפקיד, אינטגרציה אחת, משימה ראשונה
+- טריק א: איך כותבים בריף לבוט (תפקיד, גבולות, מתי לשאול)
+- טריק ב: `Teach a task` — מקליטים פעם אחת במקום להסביר עשר פעמים
+- טריק ג: רוטינות — הבוט בונה לעצמו בדיקה מחזורית
+- טריק ד: מסירת ההגה — הבוט מגיע למסך התחברות ומחזיר לך שליטה לרגע
 
-### 4. צוות בוטים — מ-Single Player ל-Multi Player (21:40–21:50)
+### 4. איך לא לגמור את כל הטוקנים בשעתיים (21:35–21:45)
 
-- כמה בוטים במקביל, כל אחד עם לֵיין: מייל, הוצאות, גיוס, תפעול
-- בוט `chief of staff` שמנהל את השאר ומושך אותך רק להחלטות
+- איך גרוק בוט מודד שימוש, ומה באמת שורף את המכסה
+- הטעויות שכולם עושים ביום הראשון (בוט שמסתובב בדפדפן בלי גבול, תפקיד מעורפל, כמה בוטים בבת אחת)
+- משמעת של מנהל: משימות מוגדרות, נקודות עצירה, בדיקה לפני הרחבה
+- מה עולה כמה: התוכניות, ומה מקבלים בכל אחת
 
-### 5. הצד השני של המטבע + Q&A (21:50–22:00)
+### 5. איפה הוא מביא את התועלת האיכותית ביותר בעבודה (21:45–21:55)
 
-- **המחיר:** אין חינמי. SuperGrok Heavy (~$300/חודש), Cursor Ultra ($200), Cursor Teams Premium ($120 למשתמש)
-- **אין בחירת מודל**, אין קול חי, אנדרואיד עוד לא, וזו בטא
+- לא "מה הוא יכול" אלא "איפה כדאי להתחיל": מייל, CRM, מעקב אחרי מקורות, דוחות, אתרים בלי API
+- מבחן ההתאמה: תהליך חוזר + מערכות קיימות + החלטות קטנות = הבוט הראשון שלך
+- מה לא לתת לו (עדיין): החלטות בלתי הפיכות, כסף, לקוחות בלי בקרה
+
+### 6. שאלות (21:55–22:00)
+
+- המגבלות הכנות: אין בחירת מודל, בטא, מחיר, אנדרואיד עוד לא, אבטחה של לוגינים
 - מה אפשר לעשות **מחר בבוקר** גם בלי לשלם: העקרונות עוברים לכל כלי סוכני
-- שאלות
 
 </div>
 
@@ -124,11 +145,12 @@ logins and an always-on runtime can actually finish the swing — the work lands
 
 | Time | Block | Deliverable for the participant |
 |------|-------|--------------------------------|
-| 21:00–21:08 | Why now | Understands the 90%→100% gap |
-| 21:08–21:20 | The model | Understands "agent = its environment" |
-| 21:20–21:40 | Live demo ⭐ | Sees a bot built, connected, and taught a task |
-| 21:40–21:50 | Bot team | Has a mental model for Multi Player |
-| 21:50–22:00 | Reality check + Q&A | Knows the real cost and the real limits |
+| 21:00–21:08 | What it is | One clear picture of the product |
+| 21:08–21:20 | What is futuristic | Understands "agent = its environment" and what is new |
+| 21:20–21:35 | Demo + tricks ⭐ | Sees a bot built, and leaves with 4 concrete patterns |
+| 21:35–21:45 | Token discipline | Knows how usage is metered and how to not burn it |
+| 21:45–21:55 | Highest-value work | Can pick their own first bot |
+| 21:55–22:00 | Q&A | Knows the real cost and the real limits |
 
 ---
 
@@ -140,7 +162,7 @@ One hour means **one primary demo, pre-built and rehearsed**, no live setup from
 |---|---|---|
 | Primary | `Teach a task` recording of a real flow, then the bot repeats it | Strongest no-code moment; record before the session, replay live |
 | Backup | Bot triages Gmail and summarizes | Relatable, low risk |
-| Stretch | Two bots in a group chat handing work to each other | Only if time allows in block 4 |
+| Stretch | Two bots in a group chat handing work to each other | Only if time allows in block 2 |
 
 ---
 
@@ -150,7 +172,7 @@ One hour means **one primary demo, pre-built and rehearsed**, no live setup from
 - [ ] Price confirmed at ₪100?
 - [ ] WhatsApp group created (shared between both sessions, or one per session?)
 - [ ] Wednesday 21:00 is not one of the usual slots (Mon/Thu) — accepted as-is
-- [ ] Avatar — reuse Boss avatar, or new character with an xAI/Grok accent?
+- [ ] Avatar — reuse Boss avatar, or new "agent from the future" character with an xAI/Grok accent?
 
 ---
 
@@ -169,6 +191,8 @@ One hour means **one primary demo, pre-built and rehearsed**, no live setup from
 
 | File | Description |
 |------|-------------|
+| `research.md` | Sourced facts per pillar (limits, tricks, use cases, what is new) |
+| `assets/references/` | Official Grok Bot graphics and UI screenshots, for poster and slides |
 | `assets/avatar.jpg` | Workshop character sheet (TBD) |
 | `assets/poster.jpg` | Promotional poster (TBD) — one poster can serve both sessions |
 | `presentation-plan.md` | Presentation blueprint, Hebrew + RTL (TBD) |
@@ -180,6 +204,7 @@ One hour means **one primary demo, pre-built and rehearsed**, no live setup from
 
 ### POC
 - [x] Research done (launch, features, pricing, limits)
+- [x] Reference graphics collected
 - [ ] Subscription access secured
 - [ ] Primary demo pre-built and rehearsed
 - [ ] Wow effect confirmed
